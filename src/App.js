@@ -11,7 +11,7 @@ import { AppRouter } from "./components/AppRouter";
 import { AppProvider } from "./contexts/AppProvider";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+  uri: process.env.REACT_APP_GRAPHQL_URL || "http://localhost:4000",
   credentials: "same-origin",
 });
 

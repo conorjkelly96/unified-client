@@ -1,11 +1,11 @@
 import Container from "@mui/material/Container";
 
-import { LoginForm } from "../components/LoginForm";
+import { StaffLoginForm } from "../components/StaffLoginForm";
 
 export const LoginPage = () => {
   return (
     <Container component="main" maxWidth="xs">
-      <LoginForm />
+      <StaffLoginForm />
     </Container>
   );
 };

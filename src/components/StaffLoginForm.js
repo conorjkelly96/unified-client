@@ -12,7 +12,7 @@ import Divider from "@mui/material/Divider";
 import { LOGIN_STAFF } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
 
-export const LoginForm = () => {
+export const StaffLoginForm = () => {
   const { setIsLoggedIn, setUser } = useAuth();
   const [executeLogin, { loading, error }] = useMutation(LOGIN_STAFF);
 
@@ -35,18 +35,20 @@ export const LoginForm = () => {
     });
 
     if (data) {
-      const { token, user } = data.login;
+      const { token, staff } = data.loginStaff;
 
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("staff", JSON.stringify(staff));
 
       setIsLoggedIn(true);
       setUser({
-        id: user.id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        username: user.username,
+        id: staff.id,
+        firstName: staff.firstName,
+        lastName: staff.lastName,
+        email: staff.email,
+        username: staff.username,
+        university: staff.university,
+        college: staff.college,
       });
 
       navigate("/dashboard", { replace: true });
