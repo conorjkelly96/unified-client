@@ -6,13 +6,13 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-import ErrorIcon from "@mui/icons-material/Error";
+// import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
 
-import { SIGNUP } from "../mutations";
+import { SIGNUP_STAFF } from "../mutations";
 
 export const SignUpForm = () => {
-  const [executeSignUp, { loading, error }] = useMutation(SIGNUP);
+  const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
 
   const {
     register,
@@ -148,7 +148,7 @@ export const SignUpForm = () => {
           fullWidth
           type="submit"
           sx={styles.loadingButton}
-          startIcon={error && <ErrorIcon />}
+          // startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >
           Sign Up

@@ -1,3 +1,11 @@
+import Container from "@mui/material/Container";
+
+import { SignUpForm } from "../components/SignUpForm";
+
 export const SignUpPage = () => {
-  return <h1>SignupPage</h1>;
+  return (
+    <Container component="main" maxWidth="xs">
+      <SignUpForm />
+    </Container>
+  );
 };

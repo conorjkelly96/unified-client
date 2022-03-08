@@ -6,15 +6,15 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-import ErrorIcon from "@mui/icons-material/Error";
+// import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
 
-import { LOGIN } from "../mutations";
+import { LOGIN_STAFF } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
 
 export const LoginForm = () => {
   const { setIsLoggedIn, setUser } = useAuth();
-  const [executeLogin, { loading, error }] = useMutation(LOGIN);
+  const [executeLogin, { loading, error }] = useMutation(LOGIN_STAFF);
 
   const {
     register,
@@ -118,7 +118,7 @@ export const LoginForm = () => {
           fullWidth
           type="submit"
           sx={styles.loadingButton}
-          startIcon={error && <ErrorIcon />}
+          // startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >
           Login
