@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -8,11 +8,21 @@ import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
+import { MenuItem, Select } from "@mui/material";
 
 import { SIGNUP_STAFF } from "../mutations";
+import { COLLEGES } from "../queries";
 
 export const StaffSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
+  const {
+    data: colleges,
+    loading: collegesLoading,
+    error: collegesError,
+  } = useQuery(COLLEGES, {
+    variables: {},
+  });
+  console.log(colleges);
 
   const {
     register,
@@ -156,8 +166,7 @@ export const StaffSignUpForm = () => {
           error={!!errors.university}
           disabled={loading}
         />
-        <TextField
-          margin="normal"
+        <Select
           id="college"
           label="College"
           name="college"
@@ -166,7 +175,10 @@ export const StaffSignUpForm = () => {
           {...register("college", { required: true })}
           error={!!errors.college}
           disabled={loading}
-        />
+        >
+          <MenuItem value={10}>Computer Science College</MenuItem>
+          <MenuItem value={20}>Arts College</MenuItem>
+        </Select>
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."
