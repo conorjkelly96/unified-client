@@ -11,7 +11,7 @@ import Divider from "@mui/material/Divider";
 
 import { SIGNUP_STAFF } from "../mutations";
 
-export const SignUpForm = () => {
+export const StaffSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
 
   const {
@@ -28,6 +28,8 @@ export const SignUpForm = () => {
     username,
     email,
     password,
+    university,
+    college,
   }) => {
     try {
       const { data } = await executeSignUp({
@@ -38,6 +40,8 @@ export const SignUpForm = () => {
             username: username.toLowerCase().trim(),
             email: email.toLowerCase().trim(),
             password,
+            university: university.toLowerCase().trim(),
+            college: college.toLowerCase().trim(),
           },
         },
       });
@@ -139,6 +143,28 @@ export const SignUpForm = () => {
           fullWidth
           {...register("password", { required: true })}
           error={!!errors.password}
+          disabled={loading}
+        />
+        <TextField
+          margin="normal"
+          id="university"
+          label="University"
+          name="university"
+          variant="outlined"
+          fullWidth
+          {...register("university", { required: true })}
+          error={!!errors.university}
+          disabled={loading}
+        />
+        <TextField
+          margin="normal"
+          id="college"
+          label="College"
+          name="college"
+          variant="outlined"
+          fullWidth
+          {...register("college", { required: true })}
+          error={!!errors.college}
           disabled={loading}
         />
         <LoadingButton
