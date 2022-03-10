@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -11,24 +11,31 @@ import Divider from "@mui/material/Divider";
 import { MenuItem, Select } from "@mui/material";
 
 import { SIGNUP_STAFF } from "../mutations";
-import { COLLEGES } from "../queries";
+import { COLLEGES, UNIVERSITIES } from "../queries";
 
 export const StaffSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
+
   const {
-    data: colleges,
-    loading: collegesLoading,
-    error: collegesError,
-  } = useQuery(COLLEGES, {
-    variables: {},
-  });
-  console.log(colleges);
+    data: universities,
+    loading: universitiesLoading,
+    error: universitiesError,
+  } = useQuery(UNIVERSITIES);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [
+    executeGetColleges,
+    {
+      data: universityData,
+      loading: universityLoading,
+      error: universityError,
+    },
+  ] = useLazyQuery(COLLEGES);
 
   const navigate = useNavigate();
 
@@ -155,8 +162,7 @@ export const StaffSignUpForm = () => {
           error={!!errors.password}
           disabled={loading}
         />
-        <TextField
-          margin="normal"
+        <Select
           id="university"
           label="University"
           name="university"
@@ -165,7 +171,21 @@ export const StaffSignUpForm = () => {
           {...register("university", { required: true })}
           error={!!errors.university}
           disabled={loading}
-        />
+          onChange={(event) =>
+            executeGetColleges({
+              variables: {
+                id: event.target.value,
+              },
+            })
+          }
+        >
+          {universities &&
+            universities.universities.map((university) => (
+              <MenuItem key={university.id} value={university.id}>
+                {university.name}
+              </MenuItem>
+            ))}
+        </Select>
         <Select
           id="college"
           label="College"
@@ -176,8 +196,12 @@ export const StaffSignUpForm = () => {
           error={!!errors.college}
           disabled={loading}
         >
-          <MenuItem value={10}>Computer Science College</MenuItem>
-          <MenuItem value={20}>Arts College</MenuItem>
+          {universityData &&
+            universityData.colleges.colleges.map((college) => (
+              <MenuItem key={college} value={college}>
+                {college}
+              </MenuItem>
+            ))}
         </Select>
         <LoadingButton
           loading={loading}
