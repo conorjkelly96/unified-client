@@ -165,8 +165,19 @@ export const StaffSignUpForm = () => {
           name="password"
           variant="outlined"
           fullWidth
-          {...register("password", { required: true })}
           error={!!errors.password}
+          disabled={loading}
+        />
+        <TextField
+          type="password"
+          margin="normal"
+          id="confirmPassword"
+          label="Confirm Password"
+          name="password"
+          variant="outlined"
+          fullWidth
+          {...register("password", { required: true })}
+          error={!!errors.confirmPassword}
           disabled={loading}
         />
         <Select
