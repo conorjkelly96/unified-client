@@ -12,6 +12,7 @@ import { MenuItem, Select } from "@mui/material";
 
 import { SIGNUP_STAFF } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
+import { Spinner } from "./Spinner";
 
 export const StaffSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
@@ -99,6 +100,8 @@ export const StaffSignUpForm = () => {
 
   return (
     <Box sx={styles.container}>
+      {universitiesLoading && <Spinner />}
+      {universityLoading && <Spinner />}
       <Typography
         variant="h4"
         gutterBottom
