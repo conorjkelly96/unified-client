@@ -13,6 +13,7 @@ import { MenuItem, Select } from "@mui/material";
 import { SIGNUP_STAFF } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
 import { Spinner } from "./Spinner";
+import { useRef } from "react";
 
 export const StaffSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
@@ -27,7 +28,11 @@ export const StaffSignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
+
+  const password = useRef({});
+  password.current = watch("password", "");
 
   const [
     executeGetColleges,
@@ -173,10 +178,14 @@ export const StaffSignUpForm = () => {
           margin="normal"
           id="confirmPassword"
           label="Confirm Password"
-          name="password"
+          name="confirmPassword"
           variant="outlined"
           fullWidth
-          {...register("password", { required: true })}
+          // {...register("confirmPassword", {
+          //   required: true,
+          //   validate: (value) =>
+          //     value === password.current || "Passwords do not match",
+          // })}
           error={!!errors.confirmPassword}
           disabled={loading}
         />
