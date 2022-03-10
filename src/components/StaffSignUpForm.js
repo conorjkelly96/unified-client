@@ -27,6 +27,7 @@ export const StaffSignUpForm = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
     watch,
   } = useForm();
@@ -170,6 +171,7 @@ export const StaffSignUpForm = () => {
           name="password"
           variant="outlined"
           fullWidth
+          {...register("password", { required: true })}
           error={!!errors.password}
           disabled={loading}
         />
@@ -181,11 +183,13 @@ export const StaffSignUpForm = () => {
           name="confirmPassword"
           variant="outlined"
           fullWidth
-          // {...register("confirmPassword", {
-          //   required: true,
-          //   validate: (value) =>
-          //     value === password.current || "Passwords do not match",
-          // })}
+          {...register("confirmPassword", {
+            required: true,
+            validate: (value) => {
+              const { password } = getValues();
+              return password === value || "Passwords should match!";
+            },
+          })}
           error={!!errors.confirmPassword}
           disabled={loading}
         />
