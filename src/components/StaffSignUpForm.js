@@ -178,6 +178,7 @@ export const StaffSignUpForm = () => {
           {...register("university", { required: true })}
           error={!!errors.university}
           disabled={loading}
+          sx={{ margin: "16px" }}
           onChange={(event) =>
             executeGetColleges({
               variables: {
@@ -202,6 +203,7 @@ export const StaffSignUpForm = () => {
           {...register("college", { required: true })}
           error={!!errors.college}
           disabled={loading}
+          sx={{ marginTop: "12px" }}
         >
           {universityData &&
             universityData.colleges.colleges.map((college) => (
