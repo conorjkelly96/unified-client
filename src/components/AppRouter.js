@@ -4,6 +4,7 @@ import { LoginPage } from "../pages/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { useAuth } from "../contexts/AppProvider";
+import { Error } from "../pages/Error";
 
 export const AppRouter = () => {
   const { isLoggedIn } = useAuth();
@@ -12,6 +13,7 @@ export const AppRouter = () => {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/sign-up" element={<SignUpPage />} />
+      <Route path="/error" element={<Error />} />
       {isLoggedIn ? (
         <>
           <Route path="/dashboard" element={<DashboardPage />} />
