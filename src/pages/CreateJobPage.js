@@ -11,6 +11,7 @@ import Divider from "@mui/material/Divider";
 import { CREATE_JOB } from "../mutations";
 import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
+import { JobCard } from "../components/JobCard";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);
@@ -18,10 +19,13 @@ export const CreateJobPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
     setValue,
     getValues,
+    watch,
   } = useForm();
+
+  const title = watch("title", "");
 
   const [closingDate, setClosingDate] = useState();
   const value = getValues("closingDate");
@@ -176,7 +180,7 @@ export const CreateJobPage = () => {
         </Box>
       </Grid>
       <Grid item xs={12} lg={6} sx={{ border: "1px solid black" }}>
-        Preview
+        <JobCard title={title} />
       </Grid>
     </Grid>
   );
