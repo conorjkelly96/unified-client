@@ -106,8 +106,7 @@ export const StaffSignUpForm = () => {
 
   return (
     <Box sx={styles.container}>
-      {universitiesLoading && <Spinner />}
-      {universityLoading && <Spinner />}
+      {(universitiesLoading || universityLoading) && <Spinner />}
       <Typography
         variant="h4"
         gutterBottom
