@@ -5,22 +5,26 @@ import { SignUpPage } from "../pages/SignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
+import { Navbar } from "./Navbar/index";
 
 export const AppRouter = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/sign-up" element={<SignUpPage />} />
-      <Route path="/error" element={<Error />} />
-      {isLoggedIn ? (
-        <>
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </>
-      ) : (
-        <Route path="*" element={<Navigate to="/login" />} />
-      )}
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/error" element={<Error />} />
+        {isLoggedIn ? (
+          <>
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </>
+        ) : (
+          <Route path="*" element={<Navigate to="/login" />} />
+        )}
+      </Routes>
+    </>
   );
 };
