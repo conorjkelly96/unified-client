@@ -5,7 +5,7 @@ import { SignUpPage } from "../pages/SignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
-import { Navbar } from "./Navbar/Navbar";
+import { Navbar } from "./Navbar";
 
 export const AppRouter = () => {
   const { isLoggedIn } = useAuth();
