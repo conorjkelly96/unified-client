@@ -36,6 +36,7 @@ export const CreateJobPage = () => {
 
   const onSubmit = (formData) => {
     console.log(formData);
+    executeCreateJob(formData);
   };
 
   const styles = {
@@ -127,7 +128,6 @@ export const CreateJobPage = () => {
               disabled={loading}
             />
             <TextField
-              //   inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               type="number"
               margin="normal"
               id="salary"

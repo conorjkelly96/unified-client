@@ -28,20 +28,16 @@ export const LOGIN_STAFF = gql`
 `;
 
 export const CREATE_JOB = gql`
-  mutation LoginStaff($input: LoginInput!) {
-    loginStaff(input: $input) {
-      token
-      staff {
-        id
-        firstName
-        lastName
-        username
-        email
-        university {
-          name
-        }
-        college
-      }
+  mutation Mutation($newJobInput: CreateJobInput!) {
+    createJob(newJobInput: $newJobInput) {
+      id
+      title
+      description
+      type
+      url
+      createdAt
+      salary
+      closingDate
     }
   }
 `;
