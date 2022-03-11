@@ -7,11 +7,10 @@ import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+
 import { CREATE_JOB } from "../mutations";
 import { useEffect, useState } from "react";
+import { DatePicker } from "../components/DatePicker";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);
@@ -140,33 +139,16 @@ export const CreateJobPage = () => {
               error={!!errors.salary}
               disabled={loading}
             />
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DesktopDatePicker
-                label="Closing Date"
-                inputFormat="MM/dd/yyyy"
-                value={closingDate}
-                onChange={(value) => {
-                  setClosingDate(value);
-                  setValue("closingDate", value, {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                  });
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    margin="normal"
-                    id="closingDate"
-                    name="closingDate"
-                    variant="outlined"
-                    fullWidth
-                    disabled={loading}
-                    {...register("closingDate", { required: true })}
-                    error={!!errors.closingDate}
-                  />
-                )}
-              />
-            </LocalizationProvider>
+            <DatePicker
+              date={closingDate}
+              setDate={setClosingDate}
+              setValue={setValue}
+              loading={loading}
+              register={register}
+              errors={errors}
+              name="closingDate"
+              label="Closing Date"
+            />
             <LoadingButton
               loading={loading}
               loadingIndicator="Loading..."
