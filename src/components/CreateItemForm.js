@@ -157,7 +157,7 @@ export const CreateItemForm = () => {
           error={!!errors.quantity}
           //   disabled={loading}
         />
-        <TextField
+        {/* <TextField
           id="images"
           label="Images"
           name="images"
@@ -167,7 +167,7 @@ export const CreateItemForm = () => {
           error={!!errors.images}
           //   disabled={loading}
           sx={{ margin: "16px" }}
-        />
+        /> */}
 
         <LoadingButton
           loading={loading}
