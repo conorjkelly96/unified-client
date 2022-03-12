@@ -26,3 +26,18 @@ export const LOGIN_STAFF = gql`
     }
   }
 `;
+
+export const CREATE_ITEM = gql`
+  mutation CreateItem($input: CreateItemInput!) {
+    createItem(input: $input) {
+      itemName
+      itemDescription
+      category
+      status
+      condition
+      price
+      quantity
+      images
+    }
+  }
+`;

@@ -1,6 +1,19 @@
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useForm } from "react-hook-form";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
+import ErrorIcon from "@mui/icons-material/Error";
+import Divider from "@mui/material/Divider";
+import { Select } from "@mui/material";
+
+// import { Spinner } from "./Spinner";
+import { CREATE_ITEM } from "../mutations";
+
 export const CreateItemForm = () => {
-  const { setIsLoggedIn, setUser } = useAuth();
-  const [executeLogin, { loading, error }] = useMutation(LOGIN_STAFF);
+  const [executeCreateItem, { loading, error }] = useMutation(CREATE_ITEM);
 
   const {
     register,
@@ -8,36 +21,35 @@ export const CreateItemForm = () => {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
-
-  const onSubmit = async ({ email, password }) => {
-    const { data } = await executeLogin({
-      variables: {
-        input: {
-          email: email.toLowerCase().trim(),
-          password,
+  const onSubmit = async ({
+    itemName,
+    itemDescription,
+    category,
+    condition,
+    price,
+    quantity,
+    images,
+  }) => {
+    try {
+      const { data } = await executeCreateItem({
+        variables: {
+          input: {
+            itemName: itemName.trim(),
+            itemDescription: itemDescription.trim(),
+            category: category.trim(),
+            condition: condition.trim(),
+            price: price.trim(),
+            quantity: quantity.trim(),
+            images: images.trim(),
+          },
         },
-      },
-    });
-
-    if (data) {
-      const { token, staff } = data.loginStaff;
-
-      localStorage.setItem("token", token);
-      localStorage.setItem("staff", JSON.stringify(staff));
-
-      setIsLoggedIn(true);
-      setUser({
-        id: staff.id,
-        firstName: staff.firstName,
-        lastName: staff.lastName,
-        email: staff.email,
-        username: staff.username,
-        university: staff.university,
-        college: staff.college,
       });
 
-      navigate("/dashboard", { replace: true });
+      if (data) {
+        console.log("success");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -63,18 +75,9 @@ export const CreateItemForm = () => {
     },
   };
 
-  //   input CreateItemInput {
-  //     itemName: String!
-  //     itemDescription: String!
-  //     category: String!
-  //     condition: String!
-  //     price: Int!
-  //     quantity: Int
-  //     images: [String]
-  //   }
-
   return (
     <Box sx={styles.container}>
+      {/* {(universitiesLoading || universityLoading) && <Spinner />} */}
       <Typography
         variant="h4"
         gutterBottom
@@ -82,33 +85,90 @@ export const CreateItemForm = () => {
         align="center"
         sx={styles.header}
       >
-        Login
+        Sign Up
       </Typography>
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <TextField
           margin="normal"
-          id="email"
-          label="Email"
-          name="email"
+          id="itemName"
+          label="Item Name"
+          name="itemName"
           variant="outlined"
           fullWidth
-          {...register("email", { required: true })}
-          error={!!errors.email}
-          disabled={loading}
+          {...register("itemName", { required: true })}
+          error={!!errors.itemName}
+          //   disabled={loading}
         />
         <TextField
-          type="password"
           margin="normal"
-          id="password"
-          label="Password"
-          name="password"
+          id="itemDescription"
+          label="Item Description"
+          name="itemDescription"
           variant="outlined"
           fullWidth
-          {...register("password", { required: true })}
-          error={!!errors.password}
-          disabled={loading}
+          {...register("itemDescription", { required: true })}
+          error={!!errors.itemDescription}
+          //   disabled={loading}
         />
+        <TextField
+          margin="normal"
+          id="category"
+          label="Category"
+          name="category"
+          variant="outlined"
+          fullWidth
+          {...register("category", { required: true })}
+          error={!!errors.category}
+          //   disabled={loading}
+        />
+        <TextField
+          margin="normal"
+          id="condition"
+          label="Condition"
+          name="condition"
+          variant="outlined"
+          fullWidth
+          {...register("condition", { required: true })}
+          error={!!errors.condition}
+          //   disabled={loading}
+        />
+        <TextField
+          margin="normal"
+          id="price"
+          label="Item Price"
+          name="price"
+          variant="outlined"
+          fullWidth
+          {...register("price", { required: true })}
+          error={!!errors.price}
+          //   disabled={loading}
+        />
+        <TextField
+          margin="normal"
+          id="quantity"
+          label="Quantity"
+          name="quantity"
+          variant="outlined"
+          fullWidth
+          {...register("quantity", {
+            required: true,
+          })}
+          error={!!errors.quantity}
+          //   disabled={loading}
+        />
+        <Select
+          id="images"
+          label="Images"
+          name="images"
+          variant="outlined"
+          fullWidth
+          {...register("images", { required: true })}
+          error={!!errors.images}
+          //   disabled={loading}
+          sx={{ margin: "16px" }}
+        />
+
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."
@@ -119,26 +179,8 @@ export const CreateItemForm = () => {
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >
-          Login
+          Create Item
         </LoadingButton>
-        <Link
-          component={RouterLink}
-          to="/sign-up"
-          variant="body2"
-          underline="none"
-        >
-          Don't have an account? Sign Up
-        </Link>
-        {error && (
-          <Typography
-            variant="subtitle2"
-            gutterBottom
-            component="div"
-            sx={styles.errorContainer}
-          >
-            Failed to login, please enter valid email address and/or password.
-          </Typography>
-        )}
       </Box>
     </Box>
   );
