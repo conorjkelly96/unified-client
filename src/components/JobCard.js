@@ -25,7 +25,6 @@ export const JobCard = ({ title, description, company, url, salary, date }) => {
           <Typography variant="body2">
             {description || "DESCRIPTION"}
           </Typography>
-
           <Typography color="text.secondary">
             {date ? format(date, "MM/dd/yyyy") : "CLOSING DATE"}
           </Typography>

@@ -22,7 +22,7 @@ export const CreateJobPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, dirtyFields },
+    formState: { errors },
     setValue,
     getValues,
     watch,
