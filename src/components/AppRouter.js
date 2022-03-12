@@ -14,10 +14,12 @@ export const AppRouter = () => {
   return (
     <>
       <Navbar />
+
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/error" element={<Error />} />
+        <Route path="/create-job" element={<CreateJobPage />} />
         {isLoggedIn ? (
           <>
             <Route path="/dashboard" element={<DashboardPage />} />
@@ -27,18 +29,5 @@ export const AppRouter = () => {
         )}
       </Routes>
     </>
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/sign-up" element={<SignUpPage />} />
-      <Route path="/error" element={<Error />} />
-      <Route path="/create-job" element={<CreateJobPage />} />
-      {isLoggedIn ? (
-        <>
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </>
-      ) : (
-        <Route path="*" element={<Navigate to="/login" />} />
-      )}
-    </Routes>
   );
 };
