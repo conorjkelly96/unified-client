@@ -151,6 +151,7 @@ export const CreateJobPage = () => {
               multiline
               minRows={5}
               fullWidth
+              helperText={"Limit 2000 characters"}
               {...register("description", { required: true })}
               error={!!errors.description}
               disabled={loading}
@@ -158,7 +159,7 @@ export const CreateJobPage = () => {
             <TextField
               margin="normal"
               id="url"
-              label="Link"
+              label="Link to Full Post"
               name="url"
               variant="outlined"
               fullWidth
@@ -167,7 +168,8 @@ export const CreateJobPage = () => {
               disabled={loading}
             />
             <TextField
-              type="number"
+              type="text"
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               margin="normal"
               id="salary"
               label="Salary"
@@ -187,6 +189,8 @@ export const CreateJobPage = () => {
               errors={errors}
               name="closingDate"
               label="Closing Date"
+              // TODO: minDate prop to restrict selection to only future dates isn't working
+              minDate={new Date()}
             />
             <LoadingButton
               loading={loading}
