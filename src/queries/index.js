@@ -16,3 +16,22 @@ export const UNIVERSITIES = gql`
     }
   }
 `;
+
+export const JOBS = gql`
+  query Query {
+    jobs {
+      id
+      title
+      company
+      description
+      url
+      createdAt
+      salary
+      closingDate
+      postedBy {
+        firstName
+        lastName
+      }
+    }
+  }
+`;

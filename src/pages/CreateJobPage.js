@@ -58,9 +58,9 @@ export const CreateJobPage = () => {
       const { data } = await executeCreateJob({
         variables: {
           newJobInput: {
-            title: title.toLowerCase().trim(),
-            company: company.toLowerCase().trim(),
-            description: description.toLowerCase().trim(),
+            title: title,
+            company: company,
+            description: description,
             url: url.toLowerCase(),
             salary,
             closingDate,
@@ -69,6 +69,7 @@ export const CreateJobPage = () => {
       });
 
       if (data) {
+        // TODO: change this to navigate to a list of all the Staff's created jobs
         navigate("/dashboard", { replace: true });
       }
     } catch (error) {
@@ -89,6 +90,7 @@ export const CreateJobPage = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      paddingTop: 3,
     },
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
@@ -99,9 +101,9 @@ export const CreateJobPage = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} lg={6} sx={{ border: "1px solid black" }}>
-        <Box sx={styles.container}>
+    <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+      <Grid item xs={12} lg={6}>
+        <Box>
           <Typography
             variant="h4"
             gutterBottom
@@ -111,7 +113,7 @@ export const CreateJobPage = () => {
           >
             New Job Listing
           </Typography>
-          <Divider />
+          <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
           <Box
             component="form"
             sx={styles.form}
@@ -139,7 +141,7 @@ export const CreateJobPage = () => {
               {...register("company", { required: true })}
               error={!!errors.company}
               disabled={loading}
-            />{" "}
+            />
             <TextField
               margin="normal"
               id="description"
@@ -149,6 +151,7 @@ export const CreateJobPage = () => {
               multiline
               minRows={5}
               fullWidth
+              helperText={"Limit 2000 characters"}
               {...register("description", { required: true })}
               error={!!errors.description}
               disabled={loading}
@@ -156,7 +159,7 @@ export const CreateJobPage = () => {
             <TextField
               margin="normal"
               id="url"
-              label="Link"
+              label="Link to Full Post"
               name="url"
               variant="outlined"
               fullWidth
@@ -165,7 +168,8 @@ export const CreateJobPage = () => {
               disabled={loading}
             />
             <TextField
-              type="number"
+              type="text"
+              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               margin="normal"
               id="salary"
               label="Salary"
@@ -185,6 +189,8 @@ export const CreateJobPage = () => {
               errors={errors}
               name="closingDate"
               label="Closing Date"
+              // TODO: minDate prop to restrict selection to only future dates isn't working
+              minDate={new Date()}
             />
             <LoadingButton
               loading={loading}
@@ -211,15 +217,27 @@ export const CreateJobPage = () => {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs={12} lg={6} sx={{ border: "1px solid black" }}>
-        <JobCard
-          title={title}
-          description={description}
-          company={company}
-          url={url}
-          salary={salary}
-          date={date}
-        />
+      <Grid item xs={12} lg={6}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          component="h1"
+          align="center"
+          sx={styles.header}
+        >
+          Preview
+        </Typography>
+        <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+        <Box sx={{ px: "32px", paddingTop: "40px" }}>
+          <JobCard
+            title={title}
+            description={description}
+            company={company}
+            url={url}
+            salary={salary}
+            date={date}
+          />
+        </Box>
       </Grid>
     </Grid>
   );

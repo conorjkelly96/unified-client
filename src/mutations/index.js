@@ -32,6 +32,7 @@ export const CREATE_JOB = gql`
     createJob(newJobInput: $newJobInput) {
       id
       title
+      company
       description
       url
       createdAt
