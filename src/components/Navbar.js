@@ -2,13 +2,13 @@ import { AppBar } from "@mui/material";
 import { Toolbar } from "@mui/material";
 import { CssBaseline } from "@mui/material";
 import { Typography } from "@mui/material";
-import { makeStyles } from "@mui/material";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
 
 //css style navbar
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   navlinks: {
-    marginLeft: theme.spacing(10),
+    marginLeft: 10,
     display: "flex",
   },
   logo: {
@@ -19,17 +19,16 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "white",
     fontSize: "20px",
-    marginLeft: theme.spacing(20),
+    marginLeft: 20,
     "&:hover": {
       color: "yellow",
       borderBottom: "1px solid white",
     },
   },
-}));
+});
 
 export const Navbar = () => {
   const classes = useStyles();
-
   return (
     <AppBar position="static">
       <CssBaseline />
