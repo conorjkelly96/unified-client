@@ -20,17 +20,37 @@ export const DrawerComponent = () => {
           </ListItem>
           <ListItem>
             <ListItemText>
-              <Link to="/about">About</Link>
+              <Link to="/about">About Us</Link>
             </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText>
-              <Link to="/contact">Contact</Link>
+              <Link to="/sign-up">Sign Up</Link>
             </ListItemText>
           </ListItem>
           <ListItem>
             <ListItemText>
-              <Link to="/about">Faq</Link>
+              <Link to="/dashboard">Dashboard</Link>
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>
+              <Link to="/job-board">Job Board</Link>
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>
+              <Link to="/buy-sell">Buy/Sell</Link>
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>
+              <Link to="/forum-board">Forum Board</Link>
+            </ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>
+              <Link to="/edit-profile">Edit Profile</Link>
             </ListItemText>
           </ListItem>
         </List>
