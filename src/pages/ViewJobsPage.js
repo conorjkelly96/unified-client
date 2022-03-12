@@ -6,7 +6,7 @@ import { JOBS } from "../queries";
 
 export const ViewJobsPage = () => {
   const { data, loading, error } = useQuery(JOBS);
-
+  console.log(data);
   const navigate = useNavigate();
 
   if (error) {
@@ -14,9 +14,25 @@ export const ViewJobsPage = () => {
     navigate("/error", { replace: true });
   }
 
+  const styles = {
+    header: {
+      paddingTop: 2,
+      paddingBottom: 2,
+    },
+  };
+
   return (
     <>
-      <Typography>Open Jobs</Typography>
+      {/* <NavBar /> */}
+      <Typography
+        variant="h4"
+        gutterBottom
+        component="h1"
+        align="center"
+        sx={styles.header}
+      >
+        Open Jobs
+      </Typography>
 
       {data &&
         data.jobs.map((job) => (
@@ -26,7 +42,7 @@ export const ViewJobsPage = () => {
             company={job.company}
             url={job.url}
             salary={job.salary}
-            date={job.closingDate}
+            date={new Date(job.closingDate)}
             key={job.id}
           />
         ))}

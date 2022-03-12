@@ -3,7 +3,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-// import { format } from "date-fns";
+import { format } from "date-fns";
 
 export const JobCard = ({ title, description, company, url, salary, date }) => {
   return (
@@ -22,9 +22,9 @@ export const JobCard = ({ title, description, company, url, salary, date }) => {
           {description || "DESCRIPTION"}
         </Typography>
         <Typography>
-          {/* {date ? format(date, "MM/dd/yyyy") : "CLOSING DATE"} */}
           {"Closing Date: "}
-          {date || "CLOSING DATE"}
+          {date ? format(date, "MM/dd/yyyy") : "CLOSING DATE"}
+          {/* {date && (date || format(date, "MM/dd/yyyy"))} */}
         </Typography>
       </CardContent>
       <CardActions>
