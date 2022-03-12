@@ -4,8 +4,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
-import IconButton from "@mui/icons-material/IconButton";
-import MenuIcon from "@mui/icons-material/MenuIcon";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export const DrawerComponent = () => {
   //hook to display drawer component
