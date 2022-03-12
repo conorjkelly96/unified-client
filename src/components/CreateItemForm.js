@@ -85,7 +85,7 @@ export const CreateItemForm = () => {
         align="center"
         sx={styles.header}
       >
-        Sign Up
+        Sell your item today!
       </Typography>
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -157,7 +157,7 @@ export const CreateItemForm = () => {
           error={!!errors.quantity}
           //   disabled={loading}
         />
-        <Select
+        <TextField
           id="images"
           label="Images"
           name="images"

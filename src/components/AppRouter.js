@@ -15,7 +15,7 @@ export const AppRouter = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/error" element={<Error />} />
-      <Route path="/new-item" element={<CreateItemPage />} />
+      <Route path="/create-item" element={<CreateItemPage />} />
       {isLoggedIn ? (
         <>
           <Route path="/dashboard" element={<DashboardPage />} />
