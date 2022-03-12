@@ -11,7 +11,7 @@ import { makeStyles } from "@mui/styles";
 //css styling
 const useStyles = makeStyles(() => ({
   drawer: {
-    backgroundColor: "blue",
+    backgroundColor: "#1976d2",
   },
   link: {
     textDecoration: "none",
@@ -55,6 +55,13 @@ export const DrawerComponent = () => {
             <ListItemText>
               <Link to="/sign-up" className={classes.link}>
                 Sign Up
+              </Link>
+            </ListItemText>
+          </ListItem>
+          <ListItem onClick={() => setOpenDrawer(false)}>
+            <ListItemText>
+              <Link to="/login" className={classes.link}>
+                Login
               </Link>
             </ListItemText>
           </ListItem>

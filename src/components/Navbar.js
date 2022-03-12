@@ -12,7 +12,7 @@ import { DrawerComponent } from "./Drawer";
 //css style navbar
 const useStyles = makeStyles({
   navlinks: {
-    marginLeft: 10,
+    marginLeft: 15,
     display: "flex",
   },
   logo: {
@@ -25,7 +25,6 @@ const useStyles = makeStyles({
     fontSize: "20px",
     marginLeft: 20,
     "&:hover": {
-      color: "yellow",
       borderBottom: "1px solid white",
     },
   },
