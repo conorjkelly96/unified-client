@@ -46,9 +46,9 @@ export const StaffSignUpForm = () => {
 
   const navigate = useNavigate();
 
-  if (universitiesError || universityError) {
-    navigate("/error", { replace: true });
-  }
+  // if (universitiesError || universityError) {
+  //   navigate("/error", { replace: true });
+  // }
 
   const onSubmit = async ({
     firstName,
