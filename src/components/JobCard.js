@@ -12,19 +12,22 @@ export const JobCard = ({ title, description, company, url, salary, date }) => {
         <Typography variant="h5" component="div">
           {title || "JOB TITLE"}
         </Typography>
+
         <Typography color="text.secondary">{company || "COMPANY"}</Typography>
+
         <Typography sx={{ mb: 1.5 }}>
           {"Starting salary: £"}
           {salary}
           {"/hr"}
         </Typography>
+
         <Typography variant="body2" sx={{ mb: "15px" }}>
           {description || "DESCRIPTION"}
         </Typography>
+
         <Typography>
           {"Closing Date: "}
           {date ? format(date, "MM/dd/yyyy") : "CLOSING DATE"}
-          {/* {date && (date || format(date, "MM/dd/yyyy"))} */}
         </Typography>
       </CardContent>
       <CardActions>

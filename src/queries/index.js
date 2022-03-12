@@ -22,6 +22,7 @@ export const JOBS = gql`
     jobs {
       id
       title
+      company
       description
       url
       createdAt

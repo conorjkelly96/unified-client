@@ -61,7 +61,7 @@ export const Navbar = () => {
             <Link to="/dashboard" className={classes.link}>
               Dashboard
             </Link>
-            <Link to="/job-board" className={classes.link}>
+            <Link to="/jobs" className={classes.link}>
               Job Board
             </Link>
             <Link to="/buy-sell" className={classes.link}>

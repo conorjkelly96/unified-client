@@ -6,7 +6,7 @@ import { JOBS } from "../queries";
 
 export const ViewJobsPage = () => {
   const { data, loading, error } = useQuery(JOBS);
-  console.log(data);
+
   const navigate = useNavigate();
 
   if (error) {
@@ -23,7 +23,6 @@ export const ViewJobsPage = () => {
 
   return (
     <>
-      {/* <NavBar /> */}
       <Typography
         variant="h4"
         gutterBottom

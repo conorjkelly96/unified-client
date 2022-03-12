@@ -21,13 +21,8 @@ export const AppRouter = () => {
         <Route path="/error" element={<Error />} />
         <Route path="/create-job" element={<CreateJobPage />} />
         <Route path="/jobs" element={<ViewJobsPage />} />
-        {isLoggedIn ? (
-          <>
-            <Route path="/dashboard" element={<DashboardPage />} />
-          </>
-        ) : (
-          <Route path="*" element={<Navigate to="/login" />} />
-        )}
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </>
   );

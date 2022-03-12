@@ -59,8 +59,8 @@ export const CreateJobPage = () => {
         variables: {
           newJobInput: {
             title: title,
-            company: company.toLowerCase().trim(),
-            description: description.toLowerCase().trim(),
+            company: company,
+            description: description,
             url: url.toLowerCase(),
             salary,
             closingDate,
@@ -98,8 +98,6 @@ export const CreateJobPage = () => {
       textAlign: "center",
     },
   };
-
-  console.log(closingDate);
 
   return (
     <Grid container spacing={2}>
@@ -142,7 +140,7 @@ export const CreateJobPage = () => {
               {...register("company", { required: true })}
               error={!!errors.company}
               disabled={loading}
-            />{" "}
+            />
             <TextField
               margin="normal"
               id="description"
