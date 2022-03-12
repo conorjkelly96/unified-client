@@ -12,7 +12,7 @@ import { CREATE_JOB } from "../mutations";
 import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { JobCard } from "../components/JobCard";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);
@@ -29,8 +29,13 @@ export const CreateJobPage = () => {
   } = useForm();
 
   const title = watch("title", "");
+  const description = watch("description", "");
+  const company = watch("company", "");
+  const url = watch("url", "");
+  const salary = watch("salary", "");
+  const date = watch("closingDate", "");
 
-  const [closingDate, setClosingDate] = useState();
+  const [closingDate, setClosingDate] = useState("");
   const value = getValues("closingDate");
 
   useEffect(() => {
@@ -200,14 +205,21 @@ export const CreateJobPage = () => {
                 component="div"
                 sx={styles.errorContainer}
               >
-                Failed to create a job. Please try again.
+                Failed to create a job.
               </Typography>
             )}
           </Box>
         </Box>
       </Grid>
       <Grid item xs={12} lg={6} sx={{ border: "1px solid black" }}>
-        <JobCard title={title} />
+        <JobCard
+          title={title}
+          description={description}
+          company={company}
+          url={url}
+          salary={salary}
+          date={date}
+        />
       </Grid>
     </Grid>
   );
