@@ -1,48 +1,57 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import { AppBar } from "@mui/material";
+import { Toolbar } from "@mui/material";
+import { CssBaseline } from "@mui/material";
+import { Typography } from "@mui/material";
+import { makeStyles } from "@mui/material";
+import { Link } from "react-router-dom";
 
-function LinkTab(props) {
+//css style navbar
+const useStyles = makeStyles((theme) => ({
+  navlinks: {
+    marginLeft: theme.spacing(10),
+    display: "flex",
+  },
+  logo: {
+    flexGrow: "1",
+    cursor: "pointer",
+  },
+  link: {
+    textDecoration: "none",
+    color: "white",
+    fontSize: "20px",
+    marginLeft: theme.spacing(20),
+    "&:hover": {
+      color: "yellow",
+      borderBottom: "1px solid white",
+    },
+  },
+}));
+
+export const NavbarFinal = () => {
+  const classes = useStyles();
+
   return (
-    <Tab
-      component="a"
-      onClick={(event) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
-}
-
-export const Navbar = () => {
-  const [value, setValue] = useState(0);
-
-  const navigate = useNavigate();
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    navigate(newValue);
-  };
-
-  return (
-    <Box sx={{ width: "100%" }}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="basic tabs example"
-      >
-        <Tab value="login" label="Login" />
-        <Tab value="sign-up" label="SignUp" />
-        <Tab value="dashboard" label="Dashboard" />
-        <Tab value="about-us" label="About Us" />
-        <Tab value="job-board" label="Job Board" />
-        <Tab value="home" label="Home" />
-        <Tab value="buy-sell" label="Buy/Sell" />
-        <Tab value="forum-board" label="Forum Board" />
-        <Tab value="edit-profile" label="Edit Profile" />
-      </Tabs>
-    </Box>
+    <AppBar position="static">
+      <CssBaseline />
+      <Toolbar>
+        <Typography variant="h4" className={classes.logo}>
+          Unified Logo
+        </Typography>
+        <div className={classes.navlinks}>
+          <Link to="/" className={classes.link}>
+            Home
+          </Link>
+          <Link to="/about" className={classes.link}>
+            About
+          </Link>
+          <Link to="/contact" className={classes.link}>
+            Contact
+          </Link>
+          <Link to="/faq" className={classes.link}>
+            FAQ
+          </Link>
+        </div>
+      </Toolbar>
+    </AppBar>
   );
 };
