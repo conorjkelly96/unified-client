@@ -6,6 +6,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
 import { Navbar } from "./Navbar";
+import { CreateJobPage } from "../pages/CreateJobPage";
 
 export const AppRouter = () => {
   const { isLoggedIn } = useAuth();
@@ -26,5 +27,18 @@ export const AppRouter = () => {
         )}
       </Routes>
     </>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/sign-up" element={<SignUpPage />} />
+      <Route path="/error" element={<Error />} />
+      <Route path="/create-job" element={<CreateJobPage />} />
+      {isLoggedIn ? (
+        <>
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </>
+      ) : (
+        <Route path="*" element={<Navigate to="/login" />} />
+      )}
+    </Routes>
   );
 };
