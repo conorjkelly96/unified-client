@@ -6,6 +6,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
 import { CreateJobPage } from "../pages/CreateJobPage";
+import { ViewJobsPage } from "../pages/ViewJobsPage";
 
 export const AppRouter = () => {
   const { isLoggedIn } = useAuth();
@@ -16,6 +17,7 @@ export const AppRouter = () => {
       <Route path="/sign-up" element={<SignUpPage />} />
       <Route path="/error" element={<Error />} />
       <Route path="/create-job" element={<CreateJobPage />} />
+      <Route path="/jobs" element={<ViewJobsPage />} />
       {isLoggedIn ? (
         <>
           <Route path="/dashboard" element={<DashboardPage />} />

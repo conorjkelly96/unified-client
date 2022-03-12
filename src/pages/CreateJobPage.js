@@ -58,7 +58,7 @@ export const CreateJobPage = () => {
       const { data } = await executeCreateJob({
         variables: {
           newJobInput: {
-            title: title.toLowerCase().trim(),
+            title: title,
             company: company.toLowerCase().trim(),
             description: description.toLowerCase().trim(),
             url: url.toLowerCase(),
@@ -97,6 +97,8 @@ export const CreateJobPage = () => {
       textAlign: "center",
     },
   };
+
+  console.log(closingDate);
 
   return (
     <Grid container spacing={2}>
@@ -212,6 +214,9 @@ export const CreateJobPage = () => {
         </Box>
       </Grid>
       <Grid item xs={12} lg={6} sx={{ border: "1px solid black" }}>
+        <Typography variant="h4" gutterBottom component="h1" align="center">
+          Preview
+        </Typography>
         <JobCard
           title={title}
           description={description}
