@@ -69,6 +69,7 @@ export const CreateJobPage = () => {
       });
 
       if (data) {
+        // TODO: change this to navigate to a list of all the Staff's created jobs
         navigate("/dashboard", { replace: true });
       }
     } catch (error) {

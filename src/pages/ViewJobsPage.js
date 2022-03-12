@@ -1,17 +1,17 @@
 import { useQuery } from "@apollo/client";
 import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { JobCard } from "../components/JobCard";
 import { JOBS } from "../queries";
 
 export const ViewJobsPage = () => {
-  // query all jobs
-  // map through data to render JobCards
-
   const { data, loading, error } = useQuery(JOBS);
-  console.log(data);
+
+  const navigate = useNavigate();
 
   if (error) {
-    return <h1>Error</h1>;
+    //   TODO: navigate to 404 page if error
+    navigate("/error", { replace: true });
   }
 
   return (
@@ -27,6 +27,7 @@ export const ViewJobsPage = () => {
             url={job.url}
             salary={job.salary}
             date={job.closingDate}
+            key={job.id}
           />
         ))}
     </>
