@@ -4,7 +4,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
-import IconButton from "@mui/icons-material";
+import IconButton from "@mui/icons-material/IconButton";
+import MenuIcon from "@mui/icons-material/MenuIcon";
 
 export const DrawerComponent = () => {
   //hook to display drawer component
@@ -56,6 +57,9 @@ export const DrawerComponent = () => {
           </ListItem>
         </List>
       </Drawer>
+      <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
+        <MenuIcon />
+      </IconButton>
     </>
   );
 };

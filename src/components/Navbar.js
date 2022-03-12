@@ -31,7 +31,7 @@ export const Navbar = () => {
   const classes = useStyles();
   return (
     <AppBar position="static">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Toolbar>
         <Typography variant="h4" className={classes.logo}>
           Unified Logo
