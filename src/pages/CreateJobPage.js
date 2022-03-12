@@ -90,6 +90,7 @@ export const CreateJobPage = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      paddingTop: 3,
     },
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
@@ -100,9 +101,9 @@ export const CreateJobPage = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} lg={6} sx={{ border: "1px solid black" }}>
-        <Box sx={styles.container}>
+    <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+      <Grid item xs={12} lg={6}>
+        <Box>
           <Typography
             variant="h4"
             gutterBottom
@@ -112,7 +113,7 @@ export const CreateJobPage = () => {
           >
             New Job Listing
           </Typography>
-          <Divider />
+          <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
           <Box
             component="form"
             sx={styles.form}
@@ -212,18 +213,27 @@ export const CreateJobPage = () => {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs={12} lg={6} sx={{ border: "1px solid black" }}>
-        <Typography variant="h4" gutterBottom component="h1" align="center">
+      <Grid item xs={12} lg={6}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          component="h1"
+          align="center"
+          sx={styles.header}
+        >
           Preview
         </Typography>
-        <JobCard
-          title={title}
-          description={description}
-          company={company}
-          url={url}
-          salary={salary}
-          date={date}
-        />
+        <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+        <Box sx={{ px: "32px", paddingTop: "40px" }}>
+          <JobCard
+            title={title}
+            description={description}
+            company={company}
+            url={url}
+            salary={salary}
+            date={date}
+          />
+        </Box>
       </Grid>
     </Grid>
   );

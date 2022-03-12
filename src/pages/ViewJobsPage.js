@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import { JobCard } from "../components/JobCard";
 import { JOBS } from "../queries";
@@ -19,10 +20,16 @@ export const ViewJobsPage = () => {
       paddingTop: 2,
       paddingBottom: 2,
     },
+    container: {
+      display: "flex",
+      flexDirection: "column",
+      maxWidth: 750,
+      margin: "auto",
+    },
   };
 
   return (
-    <>
+    <Box>
       <Typography
         variant="h4"
         gutterBottom
@@ -33,18 +40,20 @@ export const ViewJobsPage = () => {
         Open Jobs
       </Typography>
 
-      {data &&
-        data.jobs.map((job) => (
-          <JobCard
-            title={job.title}
-            description={job.description}
-            company={job.company}
-            url={job.url}
-            salary={job.salary}
-            date={new Date(job.closingDate)}
-            key={job.id}
-          />
-        ))}
-    </>
+      <Box sx={styles.container}>
+        {data &&
+          data.jobs.map((job) => (
+            <JobCard
+              title={job.title}
+              description={job.description}
+              company={job.company}
+              url={job.url}
+              salary={job.salary}
+              date={new Date(job.closingDate)}
+              key={job.id}
+            />
+          ))}
+      </Box>
+    </Box>
   );
 };
