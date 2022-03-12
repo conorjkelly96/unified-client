@@ -26,3 +26,17 @@ export const LOGIN_STAFF = gql`
     }
   }
 `;
+
+export const CREATE_JOB = gql`
+  mutation Mutation($newJobInput: CreateJobInput!) {
+    createJob(newJobInput: $newJobInput) {
+      id
+      title
+      description
+      url
+      createdAt
+      salary
+      closingDate
+    }
+  }
+`;
