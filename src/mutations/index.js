@@ -33,7 +33,6 @@ export const CREATE_JOB = gql`
       id
       title
       description
-      type
       url
       createdAt
       salary

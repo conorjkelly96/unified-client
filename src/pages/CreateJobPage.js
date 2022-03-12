@@ -12,9 +12,12 @@ import { CREATE_JOB } from "../mutations";
 import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { JobCard } from "../components/JobCard";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -38,9 +41,34 @@ export const CreateJobPage = () => {
     setClosingDate(value || null);
   }, [setClosingDate, value]);
 
-  const onSubmit = (formData) => {
-    console.log(formData);
-    executeCreateJob(formData);
+  const onSubmit = async ({
+    title,
+    company,
+    description,
+    url,
+    salary,
+    closingDate,
+  }) => {
+    try {
+      const { data } = await executeCreateJob({
+        variables: {
+          newJobInput: {
+            title: title.toLowerCase().trim(),
+            company: company.toLowerCase().trim(),
+            description: description.toLowerCase().trim(),
+            url: url.toLowerCase(),
+            salary,
+            closingDate,
+          },
+        },
+      });
+
+      if (data) {
+        navigate("/dashboard", { replace: true });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const styles = {
@@ -76,7 +104,7 @@ export const CreateJobPage = () => {
             align="center"
             sx={styles.header}
           >
-            Login
+            New Job Listing
           </Typography>
           <Divider />
           <Box
@@ -163,7 +191,7 @@ export const CreateJobPage = () => {
               startIcon={error && <ErrorIcon />}
               color={error ? "error" : "primary"}
             >
-              Login
+              Save
             </LoadingButton>
             {error && (
               <Typography
@@ -172,8 +200,7 @@ export const CreateJobPage = () => {
                 component="div"
                 sx={styles.errorContainer}
               >
-                Failed to login, please enter valid email address and/or
-                password.
+                Failed to create a job. Please try again.
               </Typography>
             )}
           </Box>
