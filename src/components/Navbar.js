@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const NavbarFinal = () => {
+export const Navbar = () => {
   const classes = useStyles();
 
   return (
@@ -42,13 +42,28 @@ export const NavbarFinal = () => {
             Home
           </Link>
           <Link to="/about" className={classes.link}>
-            About
+            About Us
           </Link>
-          <Link to="/contact" className={classes.link}>
-            Contact
+          <Link to="/login" className={classes.link}>
+            Login
           </Link>
-          <Link to="/faq" className={classes.link}>
-            FAQ
+          <Link to="/sign-up" className={classes.link}>
+            Sign Up
+          </Link>
+          <Link to="/dashboard" className={classes.link}>
+            Dashboard
+          </Link>
+          <Link to="/job-board" className={classes.link}>
+            Job Board
+          </Link>
+          <Link to="/buy-sell" className={classes.link}>
+            Buy/Sell
+          </Link>
+          <Link to="/forum-board" className={classes.link}>
+            Forum Board
+          </Link>
+          <Link to="/edit-profile" className={classes.link}>
+            Edit Profile
           </Link>
         </div>
       </Toolbar>
