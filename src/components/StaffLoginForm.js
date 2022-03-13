@@ -36,10 +36,9 @@ export const StaffLoginForm = () => {
 
     if (data) {
       const { token, user } = data.loginStaff;
-      console.log(data);
 
       localStorage.setItem("token", token);
-      localStorage.setItem("staff", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
 
       setIsLoggedIn(true);
       setUser({

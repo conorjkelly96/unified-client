@@ -56,11 +56,6 @@ export const Navbar = () => {
           <DrawerComponent />
         ) : (
           <div className={classes.navlinks}>
-            {/* Let's link the about in a footer instead */}
-            {/* <Link to="/about" className={classes.link}>
-              About Us
-            </Link> */}
-
             {!isLoggedIn && (
               <>
                 <Link to="/login" className={classes.link}>
@@ -77,14 +72,14 @@ export const Navbar = () => {
                 <Link to="/dashboard" className={classes.link}>
                   Dashboard
                 </Link>
+                <Link to="/forum" className={classes.link}>
+                  Forum
+                </Link>
                 <Link to="/jobs" className={classes.link}>
                   Jobs
                 </Link>
                 <Link to="/marketplace" className={classes.link}>
                   Marketplace
-                </Link>
-                <Link to="/forum" className={classes.link}>
-                  Forum
                 </Link>
               </>
             )}
