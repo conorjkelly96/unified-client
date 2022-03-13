@@ -8,6 +8,8 @@ import { Error } from "../pages/Error";
 import { Navbar } from "./Navbar";
 import { CreateJobPage } from "../pages/CreateJobPage";
 import { ViewJobsPage } from "../pages/ViewJobsPage";
+import { Footer } from "../components/Footer";
+import { AboutPage } from "../pages/AboutPage";
 
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
@@ -17,6 +19,7 @@ export const AppRouter = () => {
     <>
       <Navbar />
       <Routes>
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/error" element={<Error />} />
@@ -25,6 +28,7 @@ export const AppRouter = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="*" element={<Navigate to="/error" />} />
       </Routes>
+      <Footer />
     </>
   );
 };
