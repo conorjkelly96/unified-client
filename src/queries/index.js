@@ -36,7 +36,7 @@ export const JOBS = gql`
   }
 `;
 
-export const STAFFJOBS = gql`
+export const STAFF_JOBS = gql`
   query Query($staffId: ID!) {
     staffJobs(staffId: $staffId) {
       id

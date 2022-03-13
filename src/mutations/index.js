@@ -41,3 +41,11 @@ export const CREATE_JOB = gql`
     }
   }
 `;
+
+export const DELETE_JOB_LISTING = gql`
+  mutation Mutation($jobId: ID!) {
+    deleteJob(jobId: $jobId) {
+      id
+    }
+  }
+`;
