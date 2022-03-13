@@ -35,3 +35,18 @@ export const JOBS = gql`
     }
   }
 `;
+
+export const STAFFJOBS = gql`
+  query Query($staffId: ID!) {
+    staffJobs(staffId: $staffId) {
+      id
+      title
+      company
+      description
+      url
+      createdAt
+      salary
+      closingDate
+    }
+  }
+`;
