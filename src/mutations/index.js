@@ -12,7 +12,7 @@ export const LOGIN_STAFF = gql`
   mutation LoginStaff($input: LoginInput!) {
     loginStaff(input: $input) {
       token
-      staff {
+      user {
         id
         firstName
         lastName

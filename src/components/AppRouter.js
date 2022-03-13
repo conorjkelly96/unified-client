@@ -10,19 +10,23 @@ import { CreateJobPage } from "../pages/CreateJobPage";
 import { ViewJobsPage } from "../pages/ViewJobsPage";
 
 export const AppRouter = () => {
-  const { isLoggedIn } = useAuth();
+  // TODO: wrap routes with isLoggedIn and user type
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <>
       <Navbar />
       <Routes>
+        <Route
+          path="/sign-up"
+          element={user ? <DashboardPage /> : <SignUpPage />}
+        />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/error" element={<Error />} />
         <Route path="/create-job" element={<CreateJobPage />} />
         <Route path="/jobs" element={<ViewJobsPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/error" />} />
       </Routes>
     </>
   );

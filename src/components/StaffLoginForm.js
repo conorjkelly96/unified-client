@@ -35,20 +35,21 @@ export const StaffLoginForm = () => {
     });
 
     if (data) {
-      const { token, staff } = data.loginStaff;
+      const { token, user } = data.loginStaff;
+      console.log(data);
 
       localStorage.setItem("token", token);
-      localStorage.setItem("staff", JSON.stringify(staff));
+      localStorage.setItem("staff", JSON.stringify(user));
 
       setIsLoggedIn(true);
       setUser({
-        id: staff.id,
-        firstName: staff.firstName,
-        lastName: staff.lastName,
-        email: staff.email,
-        username: staff.username,
-        university: staff.university,
-        college: staff.college,
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+        university: user.university,
+        college: user.college,
       });
 
       navigate("/dashboard", { replace: true });
