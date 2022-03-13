@@ -17,10 +17,7 @@ export const AppRouter = () => {
     <>
       <Navbar />
       <Routes>
-        <Route
-          path="/sign-up"
-          element={user ? <DashboardPage /> : <SignUpPage />}
-        />
+        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/error" element={<Error />} />
         <Route path="/create-job" element={<CreateJobPage />} />
