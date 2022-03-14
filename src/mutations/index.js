@@ -12,7 +12,7 @@ export const LOGIN_STAFF = gql`
   mutation LoginStaff($input: LoginInput!) {
     loginStaff(input: $input) {
       token
-      staff {
+      user {
         id
         firstName
         lastName
@@ -38,6 +38,29 @@ export const CREATE_ITEM = gql`
       price
       quantity
       images
+    }
+  }
+`;
+
+export const CREATE_JOB = gql`
+  mutation Mutation($newJobInput: CreateJobInput!) {
+    createJob(newJobInput: $newJobInput) {
+      id
+      title
+      company
+      description
+      url
+      createdAt
+      salary
+      closingDate
+    }
+  }
+`;
+
+export const DELETE_JOB_LISTING = gql`
+  mutation Mutation($jobId: ID!) {
+    deleteJob(jobId: $jobId) {
+      id
     }
   }
 `;
