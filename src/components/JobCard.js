@@ -2,9 +2,11 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { format } from "date-fns";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { useAuth } from "../contexts/AppProvider";
 
 export const JobCard = ({ title, description, company, url, salary, date }) => {
@@ -34,27 +36,41 @@ export const JobCard = ({ title, description, company, url, salary, date }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
-          variant="contained"
-          size="small"
-          component="a"
-          target="_blank"
-          href={url}
-        >
-          Learn More & Apply
-        </Button>
-        {user?.__typename === "Staff" && (
+        <Box>
           <Button
-            variant="contained"
             size="small"
+            component="a"
+            target="_blank"
             href={url}
-            endIcon={<DeleteIcon />}
-            color="error"
-            onClick={}
+            sx={{ marginBottom: "16px" }}
           >
-            Delete
+            {user?.__typename === "Staff" ? "Link" : "Learn More & Apply"}
           </Button>
-        )}
+          {user?.__typename === "Staff" && (
+            <Box sx={{ marginBottom: "10px" }}>
+              <Button
+                variant="contained"
+                size="small"
+                endIcon={<EditIcon />}
+                color="info"
+                sx={{ marginLeft: "8px" }}
+                // onClick={}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                endIcon={<DeleteIcon />}
+                color="error"
+                sx={{ marginLeft: "8px" }}
+                // onClick={}
+              >
+                Delete
+              </Button>
+            </Box>
+          )}
+        </Box>
       </CardActions>
     </Card>
   );

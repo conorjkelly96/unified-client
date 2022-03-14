@@ -1,17 +1,20 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
-import { Box } from "@mui/system";
+import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
+import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
 
 export const ViewCreatedJobs = () => {
   const { data, loading, error } = useQuery(GET_STAFF_JOBS);
 
+  // const [executeDeleteJob, { loading: jobLoading, error: jobError }] =
+  // useMutation(DELETE_JOB_LISTING);
+
   const navigate = useNavigate();
 
-  // render JobCards with delete button & edit button
   // onDelete delete the job and re-render list
   // onEdit button direct to edit-job path/page
   // error handling
