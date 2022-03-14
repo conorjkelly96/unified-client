@@ -9,14 +9,17 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
 import { MenuItem, Select } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 import { SIGNUP_STUDENT } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
 import { Spinner } from "./Spinner";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export const StudentSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STUDENT);
+  const [showColleges, setShowColleges] = useState(false);
 
   const {
     data: universities,
@@ -107,7 +110,7 @@ export const StudentSignUpForm = () => {
       textAlign: "center",
     },
   };
-
+  console.log(universityData);
   return (
     <Box sx={styles.container}>
       {(universitiesLoading || universityLoading) && <Spinner />}
@@ -207,86 +210,106 @@ export const StudentSignUpForm = () => {
           error={!!errors.bio}
           disabled={loading}
         />
-        <Select
-          id="interests"
-          label="Interests"
-          name="interests"
-          variant="outlined"
-          fullWidth
-          {...register("interests", { required: true })}
-          error={!!errors.interests}
-          disabled={loading}
-          sx={{ margin: "16px" }}
-        >
-          <MenuItem key={"travelling"} value={"travelling"}>
-            {"travelling"}
-          </MenuItem>
-          <MenuItem key={"exercise"} value={"exercise"}>
-            {"exercise"}
-          </MenuItem>
-          <MenuItem key={"movies"} value={"movies"}>
-            {"movies"}
-          </MenuItem>
-          <MenuItem key={"dancing"} value={"dancing"}>
-            {"dancing"}
-          </MenuItem>
-          <MenuItem key={"cooking"} value={"cooking"}>
-            {"cooking"}
-          </MenuItem>
-          <MenuItem key={"outdoors"} value={"outdoors"}>
-            {"outdoors"}
-          </MenuItem>
-          <MenuItem key={"politics"} value={"politics"}>
-            {"politics"}
-          </MenuItem>
-          <MenuItem key={"pets"} value={"pets"}>
-            {"pets"}
-          </MenuItem>
-        </Select>
+        <FormControl fullWidth>
+          <InputLabel id="interests" sx={{ margin: "16px 0px" }}>
+            Interests
+          </InputLabel>
+          <Select
+            id="interests"
+            label="Interests"
+            name="interests"
+            variant="outlined"
+            fullWidth
+            {...register("interests", { required: true })}
+            error={!!errors.interests}
+            disabled={loading}
+            sx={{ margin: "16px 0px" }}
+          >
+            <MenuItem key={"travelling"} value={"travelling"}>
+              {"travelling"}
+            </MenuItem>
+            <MenuItem key={"exercise"} value={"exercise"}>
+              {"exercise"}
+            </MenuItem>
+            <MenuItem key={"movies"} value={"movies"}>
+              {"movies"}
+            </MenuItem>
+            <MenuItem key={"dancing"} value={"dancing"}>
+              {"dancing"}
+            </MenuItem>
+            <MenuItem key={"cooking"} value={"cooking"}>
+              {"cooking"}
+            </MenuItem>
+            <MenuItem key={"outdoors"} value={"outdoors"}>
+              {"outdoors"}
+            </MenuItem>
+            <MenuItem key={"politics"} value={"politics"}>
+              {"politics"}
+            </MenuItem>
+            <MenuItem key={"pets"} value={"pets"}>
+              {"pets"}
+            </MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="university" sx={{ margin: "16px 0px" }}>
+            University
+          </InputLabel>
+          <Select
+            id="university"
+            label="University"
+            name="university"
+            variant="outlined"
+            fullWidth
+            {...register("university", { required: true })}
+            error={!!errors.university}
+            disabled={loading}
+            sx={{ margin: "16px 0px" }}
+            onChange={async (event) => {
+              await executeGetColleges({
+                variables: {
+                  id: event.target.value,
+                },
+              });
 
-        <Select
-          id="university"
-          label="University"
-          name="university"
-          variant="outlined"
-          fullWidth
-          {...register("university", { required: true })}
-          error={!!errors.university}
-          disabled={loading}
-          sx={{ margin: "16px" }}
-          onChange={(event) =>
-            executeGetColleges({
-              variables: {
-                id: event.target.value,
-              },
-            })
-          }
-        >
-          {universities &&
-            universities.universities.map((university) => (
-              <MenuItem key={university.id} value={university.id}>
-                {university.name}
-              </MenuItem>
-            ))}
-        </Select>
-        <Select
-          id="college"
-          label="College"
-          name="college"
-          variant="outlined"
-          fullWidth
-          {...register("college", { required: true })}
-          error={!!errors.college}
-          disabled={loading}
-          sx={{ marginTop: "12px" }}
-        >
-          {universityData &&
-            universityData.colleges.colleges.map((college) => (
-              <MenuItem key={college} value={college}>
-                {college}
-              </MenuItem>
-            ))}
-        </Select>
+              setShowColleges(true);
+            }}
+          >
+            {universities &&
+              universities.universities.map((university) => (
+                <MenuItem key={university.id} value={university.id}>
+                  {university.name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        {showColleges &&
+          !universityLoading &&
+          universityData?.colleges?.colleges && (
+            <FormControl fullWidth>
+              <InputLabel id="college" sx={{ margin: "16px 0px" }}>
+                College
+              </InputLabel>
+              <Select
+                id="college"
+                label="College"
+                name="college"
+                variant="outlined"
+                fullWidth
+                {...register("college", { required: true })}
+                error={!!errors.college}
+                disabled={loading}
+                sx={{ margin: "16px 0px" }}
+              >
+                {universityData &&
+                  universityData.colleges.colleges.map((college) => (
+                    <MenuItem key={college} value={college}>
+                      {college}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          )}
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."
