@@ -24,16 +24,15 @@ export const AppRouter = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/error" element={<Error />} />
         <Route path="/create-job" element={<CreateJobPage />} />
 
-        {user.__typename === "Staff" && (
+        {user?.__typename === "Staff" && (
           <Route path={`/${user.id}/jobs`} element={<ViewCreatedJobs />} />
         )}
 
         <Route path="/jobs" element={<ViewJobsPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="*" element={<Navigate to="/error" />} />
+        <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
     </>
