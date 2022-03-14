@@ -38,8 +38,8 @@ export const CreateItemForm = () => {
             itemDescription: itemDescription.trim(),
             category: category.trim(),
             condition: condition.trim(),
-            price: price.trim(),
-            quantity: quantity.trim(),
+            price: parseFloat(price),
+            quantity: parseInt(quantity.trim(), 10),
             // images: images.trim(),
           },
         },
@@ -140,11 +140,18 @@ export const CreateItemForm = () => {
           name="price"
           variant="outlined"
           fullWidth
-          {...register("price", { required: true })}
+          {...register("price", {
+            required: true,
+            validate: (value) => {
+              const regex = new RegExp(/^\d*\.?\d*$/);
+              return regex.test(value);
+            },
+          })}
           error={!!errors.price}
           //   disabled={loading}
         />
         <TextField
+          type="number"
           margin="normal"
           id="quantity"
           label="Quantity"
@@ -154,6 +161,7 @@ export const CreateItemForm = () => {
           {...register("quantity", {
             required: true,
           })}
+          defaultValue={1}
           error={!!errors.quantity}
           //   disabled={loading}
         />
