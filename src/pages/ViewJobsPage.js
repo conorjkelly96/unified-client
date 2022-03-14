@@ -12,7 +12,7 @@ export const ViewJobsPage = () => {
 
   if (error) {
     //   TODO: navigate to 404 page if error
-    navigate("/error", { replace: true });
+    navigate("/*", { replace: true });
   }
 
   const styles = {

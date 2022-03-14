@@ -4,8 +4,12 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { format } from "date-fns";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useAuth } from "../contexts/AppProvider";
 
 export const JobCard = ({ title, description, company, url, salary, date }) => {
+  const { user } = useAuth();
+
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
@@ -18,7 +22,6 @@ export const JobCard = ({ title, description, company, url, salary, date }) => {
         <Typography sx={{ mb: 1.5 }}>
           {"Starting salary: £"}
           {salary}
-          {"/hr"}
         </Typography>
 
         <Typography variant="body2" sx={{ mb: "15px" }}>
@@ -31,9 +34,27 @@ export const JobCard = ({ title, description, company, url, salary, date }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" component="a" target="_blank" href={url}>
+        <Button
+          variant="contained"
+          size="small"
+          component="a"
+          target="_blank"
+          href={url}
+        >
           Learn More & Apply
         </Button>
+        {user?.__typename === "Staff" && (
+          <Button
+            variant="contained"
+            size="small"
+            href={url}
+            endIcon={<DeleteIcon />}
+            color="error"
+            onClick={}
+          >
+            Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

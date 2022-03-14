@@ -15,7 +15,6 @@ import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
   const { isLoggedIn, user } = useAuth();
-  console.log("user in context:", user);
 
   return (
     <>
