@@ -8,6 +8,14 @@ export const SIGNUP_STAFF = gql`
   }
 `;
 
+export const SIGNUP_STUDENT = gql`
+  mutation Mutation($input: SignupStudentInput!) {
+    signupStudent(input: $input) {
+      success
+    }
+  }
+`;
+
 export const LOGIN_STAFF = gql`
   mutation LoginStaff($input: LoginInput!) {
     loginStaff(input: $input) {

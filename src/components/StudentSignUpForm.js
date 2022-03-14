@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -7,18 +8,36 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
-import { MenuItem, Select } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Autocomplete from "@mui/material/Autocomplete";
+import LoadingButton from "@mui/lab/LoadingButton";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-import { SIGNUP_STAFF } from "../mutations";
+import { SIGNUP_STUDENT } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
 import { Spinner } from "./Spinner";
-import { useState } from "react";
 
-export const StaffSignUpForm = () => {
-  const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+const options = [
+  "Travelling",
+  "Exercise",
+  "Movies",
+  "Dancing",
+  "Cooking",
+  "Outdoors",
+  "Politics",
+  "Pets",
+];
+
+export const StudentSignUpForm = () => {
+  const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STUDENT);
   const [showColleges, setShowColleges] = useState(false);
 
   const {
@@ -33,6 +52,7 @@ export const StaffSignUpForm = () => {
     getValues,
     formState: { errors },
     watch,
+    control,
   } = useForm();
 
   const [
@@ -58,6 +78,8 @@ export const StaffSignUpForm = () => {
     password,
     university,
     college,
+    interests,
+    bio,
   }) => {
     try {
       const { data } = await executeSignUp({
@@ -68,7 +90,9 @@ export const StaffSignUpForm = () => {
             username: username.toLowerCase().trim(),
             email: email.toLowerCase().trim(),
             password,
+            interests: interests,
             university: university.toLowerCase().trim(),
+            bio: bio.trim(),
             college: college.toLowerCase().trim(),
           },
         },
@@ -114,7 +138,7 @@ export const StaffSignUpForm = () => {
         align="center"
         sx={styles.header}
       >
-        Staff Sign Up
+        Student Sign Up
       </Typography>
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -249,6 +273,104 @@ export const StaffSignUpForm = () => {
               </Select>
             </FormControl>
           )}
+        <TextField
+          multiline
+          rows={5}
+          margin="normal"
+          id="bio"
+          label="Bio"
+          name="bio"
+          variant="outlined"
+          fullWidth
+          {...register("bio", { required: true })}
+          error={!!errors.bio}
+          disabled={loading}
+        />
+        <Controller
+          control={control}
+          name="interests"
+          render={({ field: { onChange, value } }) => (
+            <Autocomplete
+              multiple
+              fullWidth
+              options={options}
+              disableCloseOnSelect
+              getOptionLabel={(option) => option}
+              renderOption={(props, option, { selected }) => (
+                <li {...props}>
+                  <Checkbox
+                    icon={icon}
+                    checkedIcon={checkedIcon}
+                    style={{ marginRight: 8 }}
+                    checked={selected}
+                  />
+                  {option}
+                </li>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Interests"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={onChange}
+                  value={value}
+                />
+              )}
+              onChange={(event, values, reason) => onChange(values)}
+              value={value || []}
+            />
+          )}
+        />
+        {/* <Controller
+          onChange={([event, data]) => {
+            return data;
+          }}
+          name="interests"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Autocomplete
+              multiple
+              fullWidth
+              id="interests-multi-select"
+              options={options}
+              disableCloseOnSelect
+              getOptionLabel={(option) => option}
+              renderOption={(props, option, { selected }) => (
+                <li {...props}>
+                  <Checkbox
+                    icon={icon}
+                    checkedIcon={checkedIcon}
+                    style={{ marginRight: 8 }}
+                    checked={selected}
+                  />
+                  {option}
+                </li>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  margin="normal"
+                  id="interests"
+                  label="Interests"
+                  name="interests"
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    ...params.inputProps,
+                    autoComplete: "disabled",
+                  }}
+                  onChange={onChange}
+                  // {...register("interests", { required: true })}
+                  // error={!!errors.interests}
+                  // disabled={loading}
+                />
+              )}
+              onChange={(event, values, reason) => onChange(values)}
+              value={value}
+            />
+          )}
+        /> */}
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."
