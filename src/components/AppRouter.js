@@ -16,26 +16,28 @@ import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
   const { isLoggedIn, user } = useAuth();
-  console.log("user in context:", user);
 
   return (
     <>
       <Navbar />
+
       <Routes>
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/create-job" element={<CreateJobPage />} />
-        <Route path="/create-item" element={<CreateItemPage />} />
-
-        {user?.__typename === "Staff" && (
-          <Route path={`/${user.id}/jobs`} element={<ViewCreatedJobs />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        {isLoggedIn ? (
+          <>
+            {user?.__typename === "Staff" && (
+              <Route path={`/${user.id}/jobs`} element={<ViewCreatedJobs />} />
+            )}
+            <Route path="/create-job" element={<CreateJobPage />} />
+            <Route path="/create-item" element={<CreateItemPage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </>
+        ) : (
+          <Route path="*" element={<Navigate to="/login" />} />
         )}
-
-        <Route path="/jobs" element={<ViewJobsPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="*" element={<Error />} />
       </Routes>
+
       <Footer />
     </>
   );
