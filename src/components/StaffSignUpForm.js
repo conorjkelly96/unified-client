@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
@@ -13,10 +15,11 @@ import { MenuItem, Select } from "@mui/material";
 import { SIGNUP_STAFF } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
 import { Spinner } from "./Spinner";
-import { useRef } from "react";
+import { useState } from "react";
 
 export const StaffSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
+  const [showColleges, setShowColleges] = useState(false);
 
   const {
     data: universities,
@@ -31,9 +34,6 @@ export const StaffSignUpForm = () => {
     formState: { errors },
     watch,
   } = useForm();
-
-  const password = useRef({});
-  password.current = watch("password", "");
 
   const [
     executeGetColleges,
@@ -184,57 +184,71 @@ export const StaffSignUpForm = () => {
           fullWidth
           {...register("confirmPassword", {
             required: true,
-            validate: (value) => {
-              const { password } = getValues();
-              return password === value || "Passwords should match!";
-            },
+            validate: (value) => getValues("password") === value,
           })}
           error={!!errors.confirmPassword}
           disabled={loading}
+          helperText={errors.confirmPassword ? "Passwords do not match" : ""}
         />
-        <Select
-          id="university"
-          label="University"
-          name="university"
-          variant="outlined"
-          fullWidth
-          {...register("university", { required: true })}
-          error={!!errors.university}
-          disabled={loading}
-          sx={{ margin: "16px" }}
-          onChange={(event) =>
-            executeGetColleges({
-              variables: {
-                id: event.target.value,
-              },
-            })
-          }
-        >
-          {universities &&
-            universities.universities.map((university) => (
-              <MenuItem key={university.id} value={university.id}>
-                {university.name}
-              </MenuItem>
-            ))}
-        </Select>
-        <Select
-          id="college"
-          label="College"
-          name="college"
-          variant="outlined"
-          fullWidth
-          {...register("college", { required: true })}
-          error={!!errors.college}
-          disabled={loading}
-          sx={{ marginTop: "12px" }}
-        >
-          {universityData &&
-            universityData.colleges.colleges.map((college) => (
-              <MenuItem key={college} value={college}>
-                {college}
-              </MenuItem>
-            ))}
-        </Select>
+        <FormControl fullWidth>
+          <InputLabel id="university" sx={{ margin: "16px 0px" }}>
+            University
+          </InputLabel>
+          <Select
+            id="university"
+            label="University"
+            name="university"
+            variant="outlined"
+            fullWidth
+            {...register("university", { required: true })}
+            error={!!errors.university}
+            disabled={loading}
+            sx={{ margin: "16px 0px" }}
+            onChange={async (event) => {
+              await executeGetColleges({
+                variables: {
+                  id: event.target.value,
+                },
+              });
+
+              setShowColleges(true);
+            }}
+          >
+            {universities &&
+              universities.universities.map((university) => (
+                <MenuItem key={university.id} value={university.id}>
+                  {university.name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        {showColleges &&
+          !universityLoading &&
+          universityData?.colleges?.colleges && (
+            <FormControl fullWidth>
+              <InputLabel id="college" sx={{ margin: "16px 0px" }}>
+                College
+              </InputLabel>
+              <Select
+                id="college"
+                label="College"
+                name="college"
+                variant="outlined"
+                fullWidth
+                {...register("college", { required: true })}
+                error={!!errors.college}
+                disabled={loading}
+                sx={{ margin: "16px 0px" }}
+              >
+                {universityData &&
+                  universityData.colleges.colleges.map((college) => (
+                    <MenuItem key={college} value={college}>
+                      {college}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          )}
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."

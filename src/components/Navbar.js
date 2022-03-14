@@ -8,6 +8,7 @@ import { useTheme } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 
 import { DrawerComponent } from "./Drawer";
+import { useAuth } from "../contexts/AppProvider";
 
 //css style navbar
 const useStyles = makeStyles({
@@ -18,6 +19,8 @@ const useStyles = makeStyles({
   logo: {
     flexGrow: "1",
     cursor: "pointer",
+    textDecoration: "none",
+    color: "white",
   },
   link: {
     textDecoration: "none",
@@ -35,44 +38,51 @@ export const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const { isLoggedIn, user } = useAuth();
+
   return (
     <AppBar position="static">
       <CssBaseline />
       <Toolbar>
-        <Typography variant="h4" className={classes.logo}>
+        <Typography
+          variant="h4"
+          component="a"
+          href="/login"
+          className={classes.logo}
+        >
           Unified Logo
         </Typography>
         {isMobile ? (
           <DrawerComponent />
         ) : (
           <div className={classes.navlinks}>
-            <Link to="/" className={classes.link}>
-              Home
-            </Link>
-            <Link to="/about" className={classes.link}>
-              About Us
-            </Link>
-            <Link to="/login" className={classes.link}>
-              Login
-            </Link>
-            <Link to="/sign-up" className={classes.link}>
-              Sign Up
-            </Link>
-            <Link to="/dashboard" className={classes.link}>
-              Dashboard
-            </Link>
-            <Link to="/job-board" className={classes.link}>
-              Job Board
-            </Link>
-            <Link to="/buy-sell" className={classes.link}>
-              Buy/Sell
-            </Link>
-            <Link to="/forum-board" className={classes.link}>
-              Forum Board
-            </Link>
-            <Link to="/edit-profile" className={classes.link}>
-              Edit Profile
-            </Link>
+            {!isLoggedIn && (
+              <>
+                <Link to="/login" className={classes.link}>
+                  Login
+                </Link>
+                <Link to="/sign-up" className={classes.link}>
+                  Sign Up
+                </Link>
+              </>
+            )}
+
+            {isLoggedIn && (
+              <>
+                <Link to="/dashboard" className={classes.link}>
+                  Dashboard
+                </Link>
+                <Link to="/forum" className={classes.link}>
+                  Forum
+                </Link>
+                <Link to="/jobs" className={classes.link}>
+                  Jobs
+                </Link>
+                <Link to="/marketplace" className={classes.link}>
+                  Marketplace
+                </Link>
+              </>
+            )}
           </div>
         )}
       </Toolbar>
