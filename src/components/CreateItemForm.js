@@ -28,7 +28,7 @@ export const CreateItemForm = () => {
     condition,
     price,
     quantity,
-    images,
+    // images,
   }) => {
     try {
       const { data } = await executeCreateItem({
@@ -40,7 +40,7 @@ export const CreateItemForm = () => {
             condition: condition.trim(),
             price: price.trim(),
             quantity: quantity.trim(),
-            images: images.trim(),
+            // images: images.trim(),
           },
         },
       });
