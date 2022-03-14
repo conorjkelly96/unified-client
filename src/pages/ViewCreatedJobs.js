@@ -1,3 +1,5 @@
+import Typography from "@mui/material/Typography";
+
 export const ViewCreatedJobs = () => {
   // query jobs by staff id
   // render JobCards with delete button & edit button
@@ -5,5 +7,17 @@ export const ViewCreatedJobs = () => {
   // onEdit button direct to edit-job path/page
   // error handling
 
-  return <h1>Your Listed Job Openings</h1>;
+  return (
+    <>
+      <Typography
+        variant="h4"
+        gutterBottom
+        component="h1"
+        align="center"
+        sx={{ paddingTop: 2, paddingBottom: 2 }}
+      >
+        Your Job Listings
+      </Typography>
+    </>
+  );
 };
