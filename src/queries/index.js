@@ -36,9 +36,9 @@ export const JOBS = gql`
   }
 `;
 
-export const STAFF_JOBS = gql`
-  query Query($staffId: ID!) {
-    staffJobs(staffId: $staffId) {
+export const GET_STAFF_JOBS = gql`
+  query Query {
+    getStaffJobs {
       id
       title
       company

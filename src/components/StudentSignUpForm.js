@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { Controller, useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
@@ -54,6 +54,9 @@ export const StudentSignUpForm = () => {
     watch,
     control,
   } = useForm();
+
+  const password = useRef({});
+  password.current = watch("password", "");
 
   const [
     executeGetColleges,
@@ -127,7 +130,6 @@ export const StudentSignUpForm = () => {
       textAlign: "center",
     },
   };
-
   return (
     <Box sx={styles.container}>
       {(universitiesLoading || universityLoading) && <Spinner />}

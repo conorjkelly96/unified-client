@@ -1,5 +1,19 @@
 import { gql } from "@apollo/client";
 
+export const SIGNUP_STUDENT = gql`
+  mutation SignupStudent($input: SignupStudentInput!) {
+    signupStudent(input: $input) {
+      student {
+        id
+        firstName
+        lastName
+        username
+        email
+      }
+    }
+  }
+`;
+
 export const SIGNUP_STAFF = gql`
   mutation SignupStaff($input: SignupStaffInput!) {
     signupStaff(input: $input) {

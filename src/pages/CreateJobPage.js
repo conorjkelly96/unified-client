@@ -13,11 +13,15 @@ import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { JobCard } from "../components/JobCard";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AppProvider";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);
 
   const navigate = useNavigate();
+
+  const { user } = useAuth();
+  const userId = user.id;
 
   const {
     register,
@@ -69,8 +73,7 @@ export const CreateJobPage = () => {
       });
 
       if (data) {
-        // TODO: change this to navigate to a list of all the Staff's created jobs
-        navigate("/dashboard", { replace: true });
+        navigate(`/${userId}/jobs`, { replace: true });
       }
     } catch (error) {
       console.log(error);
@@ -82,7 +85,7 @@ export const CreateJobPage = () => {
       backgroundColor: "#fff",
     },
     header: {
-      paddingTop: 2,
+      paddingTop: 3,
       paddingBottom: 2,
     },
     form: {
@@ -152,7 +155,7 @@ export const CreateJobPage = () => {
               minRows={5}
               fullWidth
               helperText={"Limit 2000 characters"}
-              {...register("description", { required: true })}
+              {...register("description", { required: true, maxLength: 2000 })}
               error={!!errors.description}
               disabled={loading}
             />
@@ -168,15 +171,20 @@ export const CreateJobPage = () => {
               disabled={loading}
             />
             <TextField
-              type="text"
-              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               margin="normal"
               id="salary"
               label="Salary"
               name="salary"
               variant="outlined"
               fullWidth
-              {...register("salary", { required: true })}
+              helperText={!!errors.salary ? "Enter a number" : ""}
+              {...register("salary", {
+                required: true,
+                validate: (value) => {
+                  const regex = new RegExp(/^\d*\.?\d*$/);
+                  return regex.test(value);
+                },
+              })}
               error={!!errors.salary}
               disabled={loading}
             />

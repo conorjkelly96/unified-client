@@ -26,18 +26,23 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/error" element={<Error />} />
+
+        {isLoggedIn && user?.__typename === "Student" && (
+          <Route path="/jobs" element={<ViewJobsPage />} />
+        )}
+
         {isLoggedIn ? (
           <>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/buy-sell" element={<BuySellPage />} />
             <Route path="/forum-board" element={<ForumBoardPage />} />
-            <Route path="/job-board" element={<JobBoardPage />} />
           </>
         ) : (
           <Route path="*" element={<Navigate to="/login" />} />
         )}
+
+        <Route path="*" element={<Error />} />
       </Routes>
 
       <Footer />
