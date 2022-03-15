@@ -13,13 +13,18 @@ export const SignUpPage = () => {
     setUserType(value);
   };
 
+  const styles = {
+    container: { textAlign: "center" },
+  };
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={styles.container}>
       <ToggleButtonGroup
         color="primary"
         value={userType}
         exclusive
         onChange={handleChange}
+        sx={{ margin: "25px" }}
       >
         <ToggleButton value="student">Student</ToggleButton>
         <ToggleButton value="staff">Staff</ToggleButton>
