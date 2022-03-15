@@ -11,9 +11,19 @@ import { Select } from "@mui/material";
 
 // import { Spinner } from "./Spinner";
 import { CREATE_ITEM } from "../mutations";
+import { SuccessfulItemModal } from "./SuccessfulItemModal";
+import { useState } from "react";
 
 export const CreateItemForm = () => {
   const [executeCreateItem, { loading, error }] = useMutation(CREATE_ITEM);
+  const [showNoBackEndModal, setNoBackEndModal] = useState(false);
+
+  const onSubmitItemForm = () => {
+    console.log("submitted form");
+    setNoBackEndModal(true);
+  };
+
+  const handleClose = () => setNoBackEndModal(false);
 
   const {
     register,
@@ -47,6 +57,7 @@ export const CreateItemForm = () => {
 
       if (data) {
         console.log("success");
+        // setNoBackEndModal(true);
       }
     } catch (err) {
       console.log(err);
@@ -77,7 +88,7 @@ export const CreateItemForm = () => {
 
   return (
     <Box sx={styles.container}>
-      {/* {(universitiesLoading || universityLoading) && <Spinner />} */}
+      {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
       <Typography
         variant="h4"
         gutterBottom
@@ -98,7 +109,7 @@ export const CreateItemForm = () => {
           fullWidth
           {...register("itemName", { required: true })}
           error={!!errors.itemName}
-          //   disabled={loading}
+          disabled={loading}
         />
         <TextField
           margin="normal"
@@ -107,9 +118,9 @@ export const CreateItemForm = () => {
           name="itemDescription"
           variant="outlined"
           fullWidth
-          {...register("itemDescription", { required: true })}
+          {...register("itemDescription", { required: false })}
           error={!!errors.itemDescription}
-          //   disabled={loading}
+          disabled={loading}
         />
         <TextField
           margin="normal"
@@ -120,7 +131,7 @@ export const CreateItemForm = () => {
           fullWidth
           {...register("category", { required: true })}
           error={!!errors.category}
-          //   disabled={loading}
+          disabled={loading}
         />
         <TextField
           margin="normal"
@@ -131,7 +142,7 @@ export const CreateItemForm = () => {
           fullWidth
           {...register("condition", { required: true })}
           error={!!errors.condition}
-          //   disabled={loading}
+          disabled={loading}
         />
         <TextField
           margin="normal"
@@ -148,7 +159,7 @@ export const CreateItemForm = () => {
             },
           })}
           error={!!errors.price}
-          //   disabled={loading}
+          disabled={loading}
         />
         <TextField
           type="number"
@@ -163,7 +174,7 @@ export const CreateItemForm = () => {
           })}
           defaultValue={1}
           error={!!errors.quantity}
-          //   disabled={loading}
+          disabled={loading}
         />
         {/* <TextField
           id="images"
@@ -186,6 +197,7 @@ export const CreateItemForm = () => {
           sx={styles.loadingButton}
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
+          onClick={onSubmitItemForm}
         >
           Create Item
         </LoadingButton>
