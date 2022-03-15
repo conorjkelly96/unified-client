@@ -2,12 +2,15 @@ import { useMutation, useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "./Error";
+import { Button } from "@mui/material";
 
 export const ViewCreatedJobs = () => {
   const {
@@ -44,7 +47,7 @@ export const ViewCreatedJobs = () => {
 
   const styles = {
     header: {
-      paddingTop: 2,
+      paddingTop: 3,
       paddingBottom: 2,
     },
     container: {
@@ -54,19 +57,41 @@ export const ViewCreatedJobs = () => {
       margin: "auto",
     },
   };
+  console.log(staffJobs);
 
   return (
     <>
-      <Typography
-        variant="h4"
-        gutterBottom
-        component="h1"
-        align="center"
-        sx={styles.header}
-      >
-        Your Job Listings
-      </Typography>
       {staffJobsLoading && <Spinner />}
+
+      {staffJobs.getStaffJobs.length ? (
+        <Typography
+          variant="h4"
+          gutterBottom
+          component="h1"
+          align="center"
+          sx={styles.header}
+        >
+          Your Job Listings
+        </Typography>
+      ) : (
+        <>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            You have no open job listings
+          </Typography>
+          <Stack direction={"row"} sx={{ justifyContent: "center" }}>
+            <Button component="a" href="/create-job" variant="contained">
+              List a job
+            </Button>
+          </Stack>
+        </>
+      )}
+
       <Box sx={styles.container}>
         {staffJobs &&
           staffJobs.getStaffJobs.map((staffJob) => (

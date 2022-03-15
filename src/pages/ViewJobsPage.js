@@ -17,7 +17,7 @@ export const ViewJobsPage = () => {
 
   const styles = {
     header: {
-      paddingTop: 2,
+      paddingTop: 3,
       paddingBottom: 2,
     },
     container: {
