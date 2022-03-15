@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
+import { Button } from "@mui/material";
 
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
@@ -10,7 +10,6 @@ import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "./Error";
-import { Button } from "@mui/material";
 
 export const ViewCreatedJobs = () => {
   const {
@@ -19,11 +18,19 @@ export const ViewCreatedJobs = () => {
     error: staffJobsError,
   } = useQuery(GET_STAFF_JOBS);
 
+  console.log(
+    "staffJobs data:",
+    staffJobs,
+    "staffJobsLoading:",
+    staffJobsLoading,
+    "staffJobsError:",
+    staffJobsError
+  );
+
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
 
   const { user } = useAuth();
-  const navigate = useNavigate();
 
   // TODO: onDelete re-render listings
   // onEdit button direct to edit-job path/page or change JobCard into editable text fields??
@@ -57,7 +64,6 @@ export const ViewCreatedJobs = () => {
       margin: "auto",
     },
   };
-  console.log(staffJobs);
 
   return (
     <>

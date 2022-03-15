@@ -152,7 +152,7 @@ export const CreateJobPage = () => {
               minRows={5}
               fullWidth
               helperText={"Limit 2000 characters"}
-              {...register("description", { required: true })}
+              {...register("description", { required: true, maxLength: 2000 })}
               error={!!errors.description}
               disabled={loading}
             />
@@ -168,15 +168,20 @@ export const CreateJobPage = () => {
               disabled={loading}
             />
             <TextField
-              type="text"
-              inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               margin="normal"
               id="salary"
               label="Salary"
               name="salary"
               variant="outlined"
               fullWidth
-              {...register("salary", { required: true })}
+              helperText={!!errors.salary ? "Enter a number" : ""}
+              {...register("salary", {
+                required: true,
+                validate: (value) => {
+                  const regex = new RegExp(/^\d*\.?\d*$/);
+                  return regex.test(value);
+                },
+              })}
               error={!!errors.salary}
               disabled={loading}
             />
