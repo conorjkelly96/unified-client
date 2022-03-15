@@ -13,11 +13,15 @@ import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { JobCard } from "../components/JobCard";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AppProvider";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);
 
   const navigate = useNavigate();
+
+  const { user } = useAuth();
+  const userId = user.id;
 
   const {
     register,
@@ -69,8 +73,7 @@ export const CreateJobPage = () => {
       });
 
       if (data) {
-        // TODO: change this to navigate to a list of all the Staff's created jobs
-        navigate("/dashboard", { replace: true });
+        navigate(`/${userId}/jobs`, { replace: true });
       }
     } catch (error) {
       console.log(error);
