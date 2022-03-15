@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -10,43 +10,57 @@ import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "./Error";
+import { useEffect, useState } from "react";
 
 export const ViewCreatedJobs = () => {
-  const {
-    data: staffJobs,
-    loading: staffJobsLoading,
-    error: staffJobsError,
-  } = useQuery(GET_STAFF_JOBS);
-
-  console.log(
-    "staffJobs data:",
-    staffJobs,
-    "staffJobsLoading:",
-    staffJobsLoading,
-    "staffJobsError:",
-    staffJobsError
-  );
+  const [executeGetStaffJobs, { loading: staffJobsLoading }] =
+    useLazyQuery(GET_STAFF_JOBS);
+  console.log(staffJobsLoading);
 
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
 
-  const { user } = useAuth();
+  const [jobsData, setJobsData] = useState([]);
 
-  // TODO: onDelete re-render listings
-  // onEdit button direct to edit-job path/page or change JobCard into editable text fields??
+  useEffect(() => {
+    const getStaffJobsData = async () => {
+      try {
+        const { data: staffJobsData, error: staffJobsError } =
+          await executeGetStaffJobs();
 
-  if (staffJobsError) {
-    return <Error />;
-  }
+        if (staffJobsError) {
+          throw new Error("Something went wrong.");
+        }
+
+        console.log("staffJobsData:", jobsData);
+
+        setJobsData(staffJobsData.getStaffJobs);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStaffJobsData();
+  }, [jobsData, executeGetStaffJobs]);
+
+  // TODO: onEdit button direct to edit-job page or change JobCard into editable form??
+
+  // if (staffJobsError) {
+  //   return <Error />;
+  // }
 
   const onDelete = async (event) => {
     const jobId = event.target.id;
     try {
-      const { data } = await executeDeleteJob({
+      const { data: deleteData, error: deleteError } = await executeDeleteJob({
         variables: {
           jobId,
         },
       });
+      if (deleteError) {
+        throw new Error("something went wrong!");
+      }
+
+      setJobsData(deleteData.deleteJob);
     } catch (error) {
       console.log(error);
     }
@@ -65,39 +79,16 @@ export const ViewCreatedJobs = () => {
     },
   };
 
+  console.log(jobsData);
+
   return (
     <>
-      {staffJobsLoading && <Spinner />}
-
-      {!staffJobsLoading && staffJobs?.getStaffJobs?.length ? (
-        <>
-          <Typography
-            variant="h4"
-            gutterBottom
-            component="h1"
-            align="center"
-            sx={styles.header}
-          >
-            Your Job Listings
-          </Typography>
-          <Box sx={styles.container}>
-            {staffJobs &&
-              staffJobs?.getStaffJobs.map((staffJob) => (
-                <JobCard
-                  id={staffJob.id}
-                  title={staffJob.title}
-                  description={staffJob.description}
-                  company={staffJob.company}
-                  url={staffJob.url}
-                  salary={staffJob.salary}
-                  date={new Date(staffJob.closingDate)}
-                  key={staffJob.id}
-                  onDelete={onDelete}
-                />
-              ))}
-          </Box>
-        </>
-      ) : (
+      {staffJobsLoading && (
+        <Box sx={{ height: "500px" }}>
+          <Spinner />
+        </Box>
+      )}
+      {!staffJobsLoading && !jobsData.length ? (
         <>
           <Typography
             variant="h4"
@@ -114,7 +105,36 @@ export const ViewCreatedJobs = () => {
             </Button>
           </Stack>
         </>
-      )}
+      ) : null}
+      {/* TODO: remove rogue "0" on page when this renders */}
+      {!staffJobsLoading && jobsData.length ? (
+        <>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Your Job Listings
+          </Typography>
+          <Box sx={styles.container}>
+            {jobsData.map((staffJob) => (
+              <JobCard
+                id={staffJob.id}
+                title={staffJob.title}
+                description={staffJob.description}
+                company={staffJob.company}
+                url={staffJob.url}
+                salary={staffJob.salary}
+                date={new Date(staffJob.closingDate)}
+                key={staffJob.id}
+                onDelete={onDelete}
+              />
+            ))}
+          </Box>
+        </>
+      ) : null}
     </>
   );
 };

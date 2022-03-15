@@ -39,6 +39,7 @@ export const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const { isLoggedIn, user } = useAuth();
+  console.log("user:", user);
 
   return (
     <AppBar position="static">
@@ -72,19 +73,17 @@ export const Navbar = () => {
                 <Link to="/dashboard" className={classes.link}>
                   Dashboard
                 </Link>
-                {user.__typename === "Student" && (
-                  <>
-                    <Link to="/forum" className={classes.link}>
-                      Forum
-                    </Link>
-                    <Link to="/jobs" className={classes.link}>
-                      Jobs
-                    </Link>
-                    <Link to="/marketplace" className={classes.link}>
-                      Marketplace
-                    </Link>
-                  </>
-                )}
+
+                <Link to="/forum" className={classes.link}>
+                  Forum
+                </Link>
+                <Link to="/jobs" className={classes.link}>
+                  Jobs
+                </Link>
+                <Link to="/marketplace" className={classes.link}>
+                  Marketplace
+                </Link>
+
                 <Link
                   to="/"
                   component="button"
