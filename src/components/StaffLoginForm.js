@@ -60,7 +60,7 @@ export const StaffLoginForm = () => {
       backgroundColor: "#fff",
     },
     header: {
-      paddingTop: 2,
+      paddingTop: 3,
       paddingBottom: 2,
     },
     form: {
