@@ -9,11 +9,11 @@ import { ForumBoardPage } from "../pages/ForumBoardPage";
 import { JobBoardPage } from "../pages/JobBoardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
+import { CreateItemPage } from "../pages/CreateItemPage";
 import { Navbar } from "./Navbar";
 import { CreateJobPage } from "../pages/CreateJobPage";
 import { ViewJobsPage } from "../pages/ViewJobsPage";
 import { Footer } from "../components/Footer";
-import { AboutPage } from "../pages/AboutPage";
 import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 
 export const AppRouter = () => {
@@ -23,6 +23,7 @@ export const AppRouter = () => {
   return (
     <>
       <Navbar />
+
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
@@ -37,12 +38,15 @@ export const AppRouter = () => {
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/buy-sell" element={<BuySellPage />} />
             <Route path="/forum-board" element={<ForumBoardPage />} />
+            <Route path="/job-board" element={<JobBoardPage />} />
+            <Route path="/create-job" element={<CreateJobPage />} />
+            <Route path="/create-item" element={<CreateItemPage />} />
+            <Route path="/create-item" element={<CreateItemPage />} />
+            <Route path="/my-jobs" element={<ViewCreatedJobs />} />
           </>
         ) : (
           <Route path="*" element={<Navigate to="/login" />} />
         )}
-
-        <Route path="*" element={<Error />} />
       </Routes>
 
       <Footer />
