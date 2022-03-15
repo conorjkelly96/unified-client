@@ -35,7 +35,7 @@ export const StudentLoginForm = () => {
     });
 
     if (data) {
-      const { token, user } = data.loginStaff;
+      const { token, user } = data.loginStudent;
 
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
