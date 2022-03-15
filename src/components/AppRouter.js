@@ -28,8 +28,10 @@ export const AppRouter = () => {
         {user?.__typename === "Staff" && (
           <Route path={`/${user.id}/jobs`} element={<ViewCreatedJobs />} />
         )}
+        {user?.__typename === "Student" && (
+          <Route path="/jobs" element={<ViewJobsPage />} />
+        )}
 
-        <Route path="/jobs" element={<ViewJobsPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
