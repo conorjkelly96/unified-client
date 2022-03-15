@@ -69,16 +69,34 @@ export const ViewCreatedJobs = () => {
     <>
       {staffJobsLoading && <Spinner />}
 
-      {staffJobs.getStaffJobs.length ? (
-        <Typography
-          variant="h4"
-          gutterBottom
-          component="h1"
-          align="center"
-          sx={styles.header}
-        >
-          Your Job Listings
-        </Typography>
+      {!staffJobsLoading && staffJobs?.getStaffJobs?.length ? (
+        <>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Your Job Listings
+          </Typography>
+          <Box sx={styles.container}>
+            {staffJobs &&
+              staffJobs?.getStaffJobs.map((staffJob) => (
+                <JobCard
+                  id={staffJob.id}
+                  title={staffJob.title}
+                  description={staffJob.description}
+                  company={staffJob.company}
+                  url={staffJob.url}
+                  salary={staffJob.salary}
+                  date={new Date(staffJob.closingDate)}
+                  key={staffJob.id}
+                  onDelete={onDelete}
+                />
+              ))}
+          </Box>
+        </>
       ) : (
         <>
           <Typography
@@ -97,23 +115,6 @@ export const ViewCreatedJobs = () => {
           </Stack>
         </>
       )}
-
-      <Box sx={styles.container}>
-        {staffJobs &&
-          staffJobs.getStaffJobs.map((staffJob) => (
-            <JobCard
-              id={staffJob.id}
-              title={staffJob.title}
-              description={staffJob.description}
-              company={staffJob.company}
-              url={staffJob.url}
-              salary={staffJob.salary}
-              date={new Date(staffJob.closingDate)}
-              key={staffJob.id}
-              onDelete={onDelete}
-            />
-          ))}
-      </Box>
     </>
   );
 };
