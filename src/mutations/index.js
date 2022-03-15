@@ -8,6 +8,14 @@ export const SIGNUP_STAFF = gql`
   }
 `;
 
+export const SIGNUP_STUDENT = gql`
+  mutation Mutation($input: SignupStudentInput!) {
+    signupStudent(input: $input) {
+      success
+    }
+  }
+`;
+
 export const LOGIN_STAFF = gql`
   mutation LoginStaff($input: LoginInput!) {
     loginStaff(input: $input) {
@@ -38,6 +46,27 @@ export const CREATE_ITEM = gql`
       price
       quantity
       images
+    }
+  }
+`;
+
+export const LOGIN_STUDENT = gql`
+  mutation LoginStudent($input: LoginInput!) {
+    loginStudent(input: $input) {
+      token
+      user {
+        id
+        firstName
+        lastName
+        username
+        email
+        interests
+        university {
+          name
+        }
+        bio
+        college
+      }
     }
   }
 `;
