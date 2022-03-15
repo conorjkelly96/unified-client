@@ -1,21 +1,40 @@
+import { useRef, useState } from "react";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
-import ErrorIcon from "@mui/icons-material/Error";
-import Divider from "@mui/material/Divider";
-import { MenuItem, Select } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import ErrorIcon from "@mui/icons-material/Error";
+import Divider from "@mui/material/Divider";
+import Checkbox from "@mui/material/Checkbox";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Autocomplete from "@mui/material/Autocomplete";
+import LoadingButton from "@mui/lab/LoadingButton";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 import { SIGNUP_STUDENT } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
 import { Spinner } from "./Spinner";
-import { useRef, useState } from "react";
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+const options = [
+  "Travelling",
+  "Exercise",
+  "Movies",
+  "Dancing",
+  "Cooking",
+  "Outdoors",
+  "Politics",
+  "Pets",
+];
 
 export const StudentSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STUDENT);
@@ -33,6 +52,7 @@ export const StudentSignUpForm = () => {
     getValues,
     formState: { errors },
     watch,
+    control,
   } = useForm();
 
   const password = useRef({});
@@ -59,10 +79,10 @@ export const StudentSignUpForm = () => {
     username,
     email,
     password,
-    bio,
-    interests,
     university,
     college,
+    interests,
+    bio,
   }) => {
     try {
       const { data } = await executeSignUp({
@@ -73,9 +93,9 @@ export const StudentSignUpForm = () => {
             username: username.toLowerCase().trim(),
             email: email.toLowerCase().trim(),
             password,
-            bio: bio.toLowerCase().trim(),
-            interests: interests.toLowerCase.trim(),
+            interests: interests,
             university: university.toLowerCase().trim(),
+            bio: bio.trim(),
             college: college.toLowerCase().trim(),
           },
         },
@@ -110,7 +130,6 @@ export const StudentSignUpForm = () => {
       textAlign: "center",
     },
   };
-  console.log(universityData);
   return (
     <Box sx={styles.container}>
       {(universitiesLoading || universityLoading) && <Spinner />}
@@ -121,7 +140,7 @@ export const StudentSignUpForm = () => {
         align="center"
         sx={styles.header}
       >
-        Sign Up
+        Student Sign Up
       </Typography>
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -191,66 +210,12 @@ export const StudentSignUpForm = () => {
           fullWidth
           {...register("confirmPassword", {
             required: true,
-            validate: (value) => {
-              const { password } = getValues();
-              return password === value || "Passwords should match!";
-            },
+            validate: (value) => getValues("password") === value,
           })}
           error={!!errors.confirmPassword}
           disabled={loading}
+          helperText={errors.confirmPassword ? "Passwords do not match" : ""}
         />
-        <TextField
-          margin="normal"
-          id="bio"
-          label="Bio"
-          name="bio"
-          variant="outlined"
-          fullWidth
-          {...register("bio", { required: true })}
-          error={!!errors.bio}
-          disabled={loading}
-        />
-        <FormControl fullWidth>
-          <InputLabel id="interests" sx={{ margin: "16px 0px" }}>
-            Interests
-          </InputLabel>
-          <Select
-            id="interests"
-            label="Interests"
-            name="interests"
-            variant="outlined"
-            fullWidth
-            {...register("interests", { required: true })}
-            error={!!errors.interests}
-            disabled={loading}
-            sx={{ margin: "16px 0px" }}
-          >
-            <MenuItem key={"travelling"} value={"travelling"}>
-              {"travelling"}
-            </MenuItem>
-            <MenuItem key={"exercise"} value={"exercise"}>
-              {"exercise"}
-            </MenuItem>
-            <MenuItem key={"movies"} value={"movies"}>
-              {"movies"}
-            </MenuItem>
-            <MenuItem key={"dancing"} value={"dancing"}>
-              {"dancing"}
-            </MenuItem>
-            <MenuItem key={"cooking"} value={"cooking"}>
-              {"cooking"}
-            </MenuItem>
-            <MenuItem key={"outdoors"} value={"outdoors"}>
-              {"outdoors"}
-            </MenuItem>
-            <MenuItem key={"politics"} value={"politics"}>
-              {"politics"}
-            </MenuItem>
-            <MenuItem key={"pets"} value={"pets"}>
-              {"pets"}
-            </MenuItem>
-          </Select>
-        </FormControl>
         <FormControl fullWidth>
           <InputLabel id="university" sx={{ margin: "16px 0px" }}>
             University
@@ -310,6 +275,104 @@ export const StudentSignUpForm = () => {
               </Select>
             </FormControl>
           )}
+        <TextField
+          multiline
+          rows={5}
+          margin="normal"
+          id="bio"
+          label="Bio"
+          name="bio"
+          variant="outlined"
+          fullWidth
+          {...register("bio", { required: true })}
+          error={!!errors.bio}
+          disabled={loading}
+        />
+        <Controller
+          control={control}
+          name="interests"
+          render={({ field: { onChange, value } }) => (
+            <Autocomplete
+              multiple
+              fullWidth
+              options={options}
+              disableCloseOnSelect
+              getOptionLabel={(option) => option}
+              renderOption={(props, option, { selected }) => (
+                <li {...props}>
+                  <Checkbox
+                    icon={icon}
+                    checkedIcon={checkedIcon}
+                    style={{ marginRight: 8 }}
+                    checked={selected}
+                  />
+                  {option}
+                </li>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Interests"
+                  margin="normal"
+                  variant="outlined"
+                  onChange={onChange}
+                  value={value}
+                />
+              )}
+              onChange={(event, values, reason) => onChange(values)}
+              value={value || []}
+            />
+          )}
+        />
+        {/* <Controller
+          onChange={([event, data]) => {
+            return data;
+          }}
+          name="interests"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <Autocomplete
+              multiple
+              fullWidth
+              id="interests-multi-select"
+              options={options}
+              disableCloseOnSelect
+              getOptionLabel={(option) => option}
+              renderOption={(props, option, { selected }) => (
+                <li {...props}>
+                  <Checkbox
+                    icon={icon}
+                    checkedIcon={checkedIcon}
+                    style={{ marginRight: 8 }}
+                    checked={selected}
+                  />
+                  {option}
+                </li>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  margin="normal"
+                  id="interests"
+                  label="Interests"
+                  name="interests"
+                  variant="outlined"
+                  fullWidth
+                  inputProps={{
+                    ...params.inputProps,
+                    autoComplete: "disabled",
+                  }}
+                  onChange={onChange}
+                  // {...register("interests", { required: true })}
+                  // error={!!errors.interests}
+                  // disabled={loading}
+                />
+              )}
+              onChange={(event, values, reason) => onChange(values)}
+              value={value}
+            />
+          )}
+        /> */}
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."

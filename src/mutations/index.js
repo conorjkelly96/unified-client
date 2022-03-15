@@ -1,22 +1,16 @@
 import { gql } from "@apollo/client";
 
-export const SIGNUP_STUDENT = gql`
-  mutation SignupStudent($input: SignupStudentInput!) {
-    signupStudent(input: $input) {
-      student {
-        id
-        firstName
-        lastName
-        username
-        email
-      }
+export const SIGNUP_STAFF = gql`
+  mutation SignupStaff($input: SignupStaffInput!) {
+    signupStaff(input: $input) {
+      success
     }
   }
 `;
 
-export const SIGNUP_STAFF = gql`
-  mutation SignupStaff($input: SignupStaffInput!) {
-    signupStaff(input: $input) {
+export const SIGNUP_STUDENT = gql`
+  mutation Mutation($input: SignupStudentInput!) {
+    signupStudent(input: $input) {
       success
     }
   }
@@ -35,6 +29,27 @@ export const LOGIN_STAFF = gql`
         university {
           name
         }
+        college
+      }
+    }
+  }
+`;
+
+export const LOGIN_STUDENT = gql`
+  mutation LoginStudent($input: LoginInput!) {
+    loginStudent(input: $input) {
+      token
+      user {
+        id
+        firstName
+        lastName
+        username
+        email
+        interests
+        university {
+          name
+        }
+        bio
         college
       }
     }
