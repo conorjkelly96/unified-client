@@ -24,7 +24,6 @@ export const CreateItemForm = () => {
   const { user } = useAuth();
 
   const onSubmitItemForm = () => {
-    console.log("submitted form");
     setNoBackEndModal(true);
   };
 
@@ -89,8 +88,6 @@ export const CreateItemForm = () => {
       textAlign: "center",
     },
   };
-
-  console.log(uploadedImages);
 
   return (
     <Box sx={styles.container}>
@@ -187,17 +184,6 @@ export const CreateItemForm = () => {
           setUploadedImages={setUploadedImages}
           username={user.username}
         />
-        {/* <TextField
-          id="images"
-          label="Images"
-          name="images"
-          variant="outlined"
-          fullWidth
-          {...register("images", { required: true })}
-          error={!!errors.images}
-          //   disabled={loading}
-          sx={{ margin: "16px" }}
-        /> */}
 
         <LoadingButton
           loading={loading}
