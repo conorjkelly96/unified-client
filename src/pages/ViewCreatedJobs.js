@@ -6,22 +6,41 @@ import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
+import { useAuth } from "../contexts/AppProvider";
+import { Error } from "./Error";
 
 export const ViewCreatedJobs = () => {
-  const { data, loading, error } = useQuery(GET_STAFF_JOBS);
+  const {
+    data: staffJobs,
+    loading: staffJobsLoading,
+    error: staffJobsError,
+  } = useQuery(GET_STAFF_JOBS);
 
-  // const [executeDeleteJob, { loading: jobLoading, error: jobError }] =
-  // useMutation(DELETE_JOB_LISTING);
+  const [executeDeleteJob, { loading, error }] =
+    useMutation(DELETE_JOB_LISTING);
 
+  const { user } = useAuth();
   const navigate = useNavigate();
 
-  // onDelete delete the job and re-render list
-  // onEdit button direct to edit-job path/page
-  // error handling
-  if (error) {
-    //   TODO: navigate to 404 page if error
-    // navigate("/*", { replace: true });
+  // TODO: onDelete re-render listings
+  // onEdit button direct to edit-job path/page or change JobCard into editable text fields??
+
+  if (staffJobsError) {
+    return <Error />;
   }
+
+  const onDelete = async (event) => {
+    const jobId = event.target.id;
+    try {
+      const { data } = await executeDeleteJob({
+        variables: {
+          jobId,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const styles = {
     header: {
@@ -36,7 +55,6 @@ export const ViewCreatedJobs = () => {
     },
   };
 
-  console.log(data);
   return (
     <>
       <Typography
@@ -48,11 +66,12 @@ export const ViewCreatedJobs = () => {
       >
         Your Job Listings
       </Typography>
-      {loading && <Spinner />}
+      {staffJobsLoading && <Spinner />}
       <Box sx={styles.container}>
-        {data &&
-          data.getStaffJobs.map((staffJob) => (
+        {staffJobs &&
+          staffJobs.getStaffJobs.map((staffJob) => (
             <JobCard
+              id={staffJob.id}
               title={staffJob.title}
               description={staffJob.description}
               company={staffJob.company}
@@ -60,6 +79,7 @@ export const ViewCreatedJobs = () => {
               salary={staffJob.salary}
               date={new Date(staffJob.closingDate)}
               key={staffJob.id}
+              onDelete={onDelete}
             />
           ))}
       </Box>

@@ -9,7 +9,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAuth } from "../contexts/AppProvider";
 
-export const JobCard = ({ title, description, company, url, salary, date }) => {
+export const JobCard = ({
+  id,
+  title,
+  description,
+  company,
+  url,
+  salary,
+  date,
+  onDelete,
+}) => {
   const { user } = useAuth();
 
   return (
@@ -59,12 +68,13 @@ export const JobCard = ({ title, description, company, url, salary, date }) => {
                 Edit
               </Button>
               <Button
+                id={id}
                 variant="contained"
                 size="small"
                 endIcon={<DeleteIcon />}
                 color="error"
                 sx={{ marginLeft: "8px" }}
-                // onClick={}
+                onClick={onDelete}
               >
                 Delete
               </Button>
