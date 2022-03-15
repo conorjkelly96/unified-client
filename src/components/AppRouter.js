@@ -9,26 +9,39 @@ import { ForumBoardPage } from "../pages/ForumBoardPage";
 import { JobBoardPage } from "../pages/JobBoardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
+import { Navbar } from "./Navbar";
+import { CreateJobPage } from "../pages/CreateJobPage";
+import { ViewJobsPage } from "../pages/ViewJobsPage";
+import { Footer } from "../components/Footer";
+import { AboutPage } from "../pages/AboutPage";
+import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 
 export const AppRouter = () => {
-  const { isLoggedIn } = useAuth();
+  // TODO: wrap routes with isLoggedIn and user type
+  const { isLoggedIn, user } = useAuth();
+  console.log("user in context:", user);
 
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/sign-up" element={<SignUpPage />} />
-      <Route path="/error" element={<Error />} />
-      {isLoggedIn ? (
-        <>
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/about-us" element={<AboutUsPage />} />
-          <Route path="/buy-sell" element={<BuySellPage />} />
-          <Route path="/forum-board" element={<ForumBoardPage />} />
-          <Route path="/job-board" element={<JobBoardPage />} />
-        </>
-      ) : (
-        <Route path="*" element={<Navigate to="/login" />} />
-      )}
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/error" element={<Error />} />
+        {isLoggedIn ? (
+          <>
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/about-us" element={<AboutUsPage />} />
+            <Route path="/buy-sell" element={<BuySellPage />} />
+            <Route path="/forum-board" element={<ForumBoardPage />} />
+            <Route path="/job-board" element={<JobBoardPage />} />
+          </>
+        ) : (
+          <Route path="*" element={<Navigate to="/login" />} />
+        )}
+      </Routes>
+
+      <Footer />
+    </>
   );
 };
