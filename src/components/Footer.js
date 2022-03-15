@@ -9,17 +9,17 @@ export const Footer = () => {
   return (
     <Box
       sx={{
-        height: "200px",
+        // height: "200px",
         width: "100%",
-        position: "fixed",
+        // position: "fixed",
         bottom: 0,
-        marginTop: "200px",
+        // marginTop: "200px",
       }}
     >
       <Divider sx={{ marginTop: "50px", marginBottom: "25px" }}></Divider>
       <Stack
         component="footer"
-        direction="column"
+        direction="row"
         spacing={1}
         alignItems="center"
         justifyContent="center"

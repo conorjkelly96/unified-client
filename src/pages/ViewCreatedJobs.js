@@ -89,7 +89,7 @@ export const ViewCreatedJobs = () => {
         </Box>
       )}
       {!staffJobsLoading && !jobsData.length ? (
-        <>
+        <Box sx={{ height: "75vh" }}>
           <Typography
             variant="h4"
             gutterBottom
@@ -104,9 +104,9 @@ export const ViewCreatedJobs = () => {
               List a job
             </Button>
           </Stack>
-        </>
+        </Box>
       ) : null}
-      {/* TODO: remove rogue "0" on page when this renders */}
+
       {!staffJobsLoading && jobsData.length ? (
         <>
           <Typography

@@ -35,6 +35,7 @@ export const AppRouter = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="*" element={<Error />} />
       </Routes>
+
       <Footer />
     </>
   );
