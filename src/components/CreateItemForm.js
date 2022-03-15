@@ -13,10 +13,15 @@ import { Select } from "@mui/material";
 import { CREATE_ITEM } from "../mutations";
 import { SuccessfulItemModal } from "./SuccessfulItemModal";
 import { useState } from "react";
+import { MultiImageUploader } from "./MultiImageUploader";
+import { useAuth } from "../contexts/AppProvider";
 
 export const CreateItemForm = () => {
   const [executeCreateItem, { loading, error }] = useMutation(CREATE_ITEM);
   const [showNoBackEndModal, setNoBackEndModal] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  const { user } = useAuth();
 
   const onSubmitItemForm = () => {
     console.log("submitted form");
@@ -38,7 +43,6 @@ export const CreateItemForm = () => {
     condition,
     price,
     quantity,
-    // images,
   }) => {
     try {
       const { data } = await executeCreateItem({
@@ -50,7 +54,7 @@ export const CreateItemForm = () => {
             condition: condition.trim(),
             price: parseFloat(price),
             quantity: parseInt(quantity.trim(), 10),
-            // images: images.trim(),
+            images: uploadedImages,
           },
         },
       });
@@ -85,6 +89,8 @@ export const CreateItemForm = () => {
       textAlign: "center",
     },
   };
+
+  console.log(uploadedImages);
 
   return (
     <Box sx={styles.container}>
@@ -175,6 +181,11 @@ export const CreateItemForm = () => {
           defaultValue={1}
           error={!!errors.quantity}
           disabled={loading}
+        />
+        <MultiImageUploader
+          uploadedImages={uploadedImages}
+          setUploadedImages={setUploadedImages}
+          username={user.username}
         />
         {/* <TextField
           id="images"
