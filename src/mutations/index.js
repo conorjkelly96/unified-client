@@ -35,6 +35,27 @@ export const LOGIN_STAFF = gql`
   }
 `;
 
+export const LOGIN_STUDENT = gql`
+  mutation LoginStudent($input: LoginInput!) {
+    loginStudent(input: $input) {
+      token
+      user {
+        id
+        firstName
+        lastName
+        username
+        email
+        interests
+        university {
+          name
+        }
+        bio
+        college
+      }
+    }
+  }
+`;
+
 export const CREATE_JOB = gql`
   mutation Mutation($newJobInput: CreateJobInput!) {
     createJob(newJobInput: $newJobInput) {
