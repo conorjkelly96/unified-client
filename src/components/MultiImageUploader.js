@@ -50,6 +50,8 @@ export const MultiImageUploader = ({
   const uploadImages = async () => {
     setLoading(true);
 
+    console.log(process.env.REACT_APP_ACCESS_KEY);
+
     aws.config.update({
       accessKeyId: process.env.REACT_APP_ACCESS_KEY,
       secretAccessKey: process.env.REACT_APP_ACCESS_ID,
