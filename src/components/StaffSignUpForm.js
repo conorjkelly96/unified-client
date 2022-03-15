@@ -46,6 +46,7 @@ export const StaffSignUpForm = () => {
 
   const navigate = useNavigate();
 
+  // TODO: navigate to error page
   // if (universitiesError || universityError) {
   //   navigate("/error", { replace: true });
   // }
