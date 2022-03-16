@@ -15,7 +15,6 @@ import { useEffect, useState } from "react";
 export const ViewCreatedJobs = () => {
   const [executeGetStaffJobs, { loading: staffJobsLoading }] =
     useLazyQuery(GET_STAFF_JOBS);
-  console.log(staffJobsLoading);
 
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
@@ -78,8 +77,6 @@ export const ViewCreatedJobs = () => {
       margin: "auto",
     },
   };
-
-  console.log(jobsData);
 
   return (
     <>
