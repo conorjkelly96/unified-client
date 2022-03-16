@@ -1,13 +1,16 @@
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { Divider } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { ItemCard } from "../components/ItemCard";
 import { VIEW_ALL_ITEMS } from "../queries";
+import { DELETE_ITEM } from "../mutations";
 
 export const Marketplace = () => {
   const [executeViewAllItems, { loading: allItemsLoading }] =
     useLazyQuery(VIEW_ALL_ITEMS);
+
+  const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
   const [itemData, setItemData] = useState([]);
 
@@ -31,6 +34,24 @@ export const Marketplace = () => {
     getItemData();
   }, [itemData, executeViewAllItems]);
 
+  const onDelete = async (event) => {
+    const itemId = event.target.id;
+    try {
+      const { data: deleteData, error: deleteError } = await executeDeleteItem({
+        variables: {
+          itemId,
+        },
+      });
+      if (deleteError) {
+        throw new Error("something went wrong!");
+      }
+
+      setItemData(deleteData.deleteItem);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
@@ -45,6 +66,7 @@ export const Marketplace = () => {
             price={item.price}
             quantity={item.quantity}
             seller={item.seller}
+            onDelete={onDelete}
           />
         ))}
       </Box>

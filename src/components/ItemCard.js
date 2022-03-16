@@ -18,6 +18,7 @@ export const ItemCard = ({
   quantity,
   seller,
   images,
+  onDelete,
 }) => {
   const { user } = useAuth();
 
@@ -90,7 +91,7 @@ export const ItemCard = ({
                 endIcon={<DeleteIcon />}
                 color="error"
                 sx={{ marginLeft: "8px" }}
-                // onClick={onDelete}
+                onClick={onDelete}
               >
                 Delete
               </Button>
