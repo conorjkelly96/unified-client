@@ -73,7 +73,7 @@ export const CreateJobPage = () => {
       });
 
       if (data) {
-        navigate(`/${userId}/jobs`, { replace: true });
+        navigate(`/my-jobs`, { replace: true });
       }
     } catch (error) {
       console.log(error);
