@@ -17,7 +17,7 @@ export const ItemCard = ({
   condition,
   price,
   quantity,
-  seller.username,
+  seller,
   images,
 }) => {
   const { user } = useAuth();
@@ -67,7 +67,7 @@ export const ItemCard = ({
             size="small"
             component="a"
             target="_blank"
-            href={url}
+            // href={url}
             sx={{ marginBottom: "16px" }}
           >
             {user?.__typename === "Student" ? "Link" : "Interested"}
@@ -85,13 +85,13 @@ export const ItemCard = ({
                 Edit
               </Button>
               <Button
-                id={id}
+                // id={id}
                 variant="contained"
                 size="small"
                 endIcon={<DeleteIcon />}
                 color="error"
                 sx={{ marginLeft: "8px" }}
-                onClick={onDelete}
+                // onClick={onDelete}
               >
                 Delete
               </Button>
