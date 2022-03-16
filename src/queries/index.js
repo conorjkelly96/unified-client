@@ -50,3 +50,21 @@ export const GET_STAFF_JOBS = gql`
     }
   }
 `;
+
+export const VIEW_ALL_ITEMS = gql`
+  query Query {
+    viewAllItems {
+      itemName
+      itemDescription
+      category
+      status
+      condition
+      price
+      quantity
+      seller {
+        username
+      }
+      images
+    }
+  }
+`;

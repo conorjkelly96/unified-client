@@ -4,7 +4,7 @@ import { LoginPage } from "../pages/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { AboutUsPage } from "../pages/AboutUsPage";
-import { BuySellPage } from "../pages/BuySellPage";
+import { Marketplace } from "../pages/Marketplace";
 import { ForumBoardPage } from "../pages/ForumBoardPage";
 import { JobBoardPage } from "../pages/JobBoardPage";
 import { useAuth } from "../contexts/AppProvider";
@@ -36,7 +36,7 @@ export const AppRouter = () => {
           <>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/about-us" element={<AboutUsPage />} />
-            <Route path="/buy-sell" element={<BuySellPage />} />
+            <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/forum-board" element={<ForumBoardPage />} />
             <Route path="/job-board" element={<JobBoardPage />} />
             <Route path="/create-job" element={<CreateJobPage />} />
