@@ -35,16 +35,18 @@ export const Marketplace = () => {
     <>
       <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
       <Box sx={{ px: "32px", paddingTop: "40px" }}>
-        <ItemCard
-          itemName={"itemName,"}
-          itemDescription={"  itemDescription,"}
-          category={"  category,"}
-          status={"  status,"}
-          condition={"  condition,"}
-          price={"  price,"}
-          quantity={"  quantity,"}
-          seller={"  seller.username,"}
-        />
+        {itemData.map((item) => (
+          <ItemCard
+            itemName={item.itemName}
+            itemDescription={item.itemDescription}
+            category={item.category}
+            status={item.status}
+            condition={item.condition}
+            price={item.price}
+            quantity={item.quantity}
+            seller={item.seller}
+          />
+        ))}
       </Box>
     </>
   );
