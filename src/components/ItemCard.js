@@ -9,6 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useAuth } from "../contexts/AppProvider";
 
 export const ItemCard = ({
+  id,
   itemName,
   itemDescription,
   category,
@@ -85,7 +86,7 @@ export const ItemCard = ({
                 Edit
               </Button>
               <Button
-                // id={id}
+                id={id}
                 variant="contained"
                 size="small"
                 endIcon={<DeleteIcon />}
