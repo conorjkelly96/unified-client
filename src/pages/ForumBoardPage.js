@@ -43,6 +43,7 @@ export const ForumBoardPage = () => {
           <Spinner />
         </Box>
       )}
+
       <Box sx={{ maxWidth: "750px", margin: "auto" }}>
         <Stack
           direction="row"
@@ -63,7 +64,7 @@ export const ForumBoardPage = () => {
       >
         Forum
       </Typography>
-      <Divider sx={{ maxWidth: "90%", margin: "auto", mb: "25px" }} />
+      <Divider sx={{ maxWidth: "90%", margin: "auto", mb: "40px" }} />
       {!loading && data && (
         <Box sx={styles.container}>
           {data.forumPosts.map((post) => (

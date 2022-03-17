@@ -51,7 +51,9 @@ export const ForumPostCard = ({
             >
               View Replies
             </Button>
-            {user.username === username && (
+
+            {/* TODO: render this button when a student is viewing their own posts */}
+            {/* {user.username === username && (
               <Button
                 id={id}
                 variant="contained"
@@ -63,7 +65,7 @@ export const ForumPostCard = ({
               >
                 Delete
               </Button>
-            )}
+            )} */}
           </Box>
         </Stack>
       </CardActions>

@@ -56,7 +56,7 @@ export const ViewCreatedJobs = () => {
         },
       });
       if (deleteError) {
-        throw new Error("something went wrong!");
+        throw new Error("Something went wrong!");
       }
 
       setJobsData(deleteData.deleteJob);
