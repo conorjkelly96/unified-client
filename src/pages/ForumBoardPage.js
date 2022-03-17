@@ -60,7 +60,7 @@ export const ForumBoardPage = () => {
           data.forumPosts.map((post) => (
             <ForumPostCard
               id={post.id}
-              text={post.postText}
+              text={post.postText.slice(0, 100)}
               username={post.postedBy.username}
               college={post.postedBy.college}
               createdAt={post.createdAt}

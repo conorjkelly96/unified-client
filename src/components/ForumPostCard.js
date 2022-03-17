@@ -25,6 +25,7 @@ export const ForumPostCard = ({
         {/* TODO: link to ViewForumPost page */}
         <Typography id={id} variant="h5" component="a">
           {text}
+          {"..."}
         </Typography>
 
         <Typography color="text.secondary" sx={{ mt: "8px", mb: "5px" }}>
