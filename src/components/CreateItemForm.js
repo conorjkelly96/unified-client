@@ -103,7 +103,7 @@ export const CreateItemForm = () => {
       >
         Sell your item today!
       </Typography>
-      <Divider />
+      <Divider sx={{ marginTop: "50px", marginBottom: "40px" }}></Divider>
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <TextField
           margin="normal"
