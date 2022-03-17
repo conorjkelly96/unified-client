@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { Divider } from "@mui/material";
 import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
+import Container from "@mui/material/Container";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { ItemCard } from "../components/ItemCard";
 import { VIEW_ALL_ITEMS } from "../queries";
 import { DELETE_ITEM } from "../mutations";
@@ -16,9 +19,15 @@ export const Marketplace = () => {
 
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
+  const [viewMyItems, setViewItemType] = useState("myItems");
+
+  const handleChange = (event, value) => {
+    setViewItemType(value);
+    console.log(value);
+  };
+
   const onDelete = async (event) => {
     const itemId = event.target.id;
-    console.log(itemId);
     try {
       const { data: deleteData, error: deleteError } = await executeDeleteItem({
         variables: {
@@ -35,8 +44,26 @@ export const Marketplace = () => {
     }
   };
 
+  const styles = {
+    container: { textAlign: "center" },
+  };
+
   return (
     <>
+      <Container component="main" maxWidth="xs" sx={styles.container}>
+        <ToggleButtonGroup
+          color="primary"
+          value={viewMyItems}
+          exclusive
+          onChange={handleChange}
+          sx={{ margin: "25px" }}
+        >
+          <ToggleButton value="myItems">My Items</ToggleButton>
+          <ToggleButton value="allItems">All Items</ToggleButton>
+        </ToggleButtonGroup>
+        {viewMyItems === "myItems"}
+        {viewMyItems === "allItems"}
+      </Container>
       <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
       <Box sx={{ px: "32px", paddingTop: "40px" }}>
         {itemData?.viewAllItems?.map((item) => {
