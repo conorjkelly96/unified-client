@@ -9,10 +9,6 @@ import { Error } from "./Error";
 export const ViewJobsPage = () => {
   const { data, loading, error } = useQuery(JOBS);
 
-  if (error) {
-    return <Error />;
-  }
-
   const styles = {
     header: {
       paddingTop: 3,
@@ -25,6 +21,14 @@ export const ViewJobsPage = () => {
       margin: "auto",
     },
   };
+
+  if (error) {
+    return <Error />;
+  }
+
+  if (loading) {
+    return <h1>Loading</h1>;
+  }
 
   return (
     <Box>
@@ -39,18 +43,17 @@ export const ViewJobsPage = () => {
       </Typography>
 
       <Box sx={styles.container}>
-        {data &&
-          data.jobs.map((job) => (
-            <JobCard
-              title={job.title}
-              description={job.description}
-              company={job.company}
-              url={job.url}
-              salary={job.salary}
-              date={new Date(job.closingDate)}
-              key={job.id}
-            />
-          ))}
+        {data?.jobs?.map((job) => (
+          <JobCard
+            title={job.title}
+            description={job.description}
+            company={job.company}
+            url={job.url}
+            salary={job.salary}
+            date={new Date(job.closingDate)}
+            key={job.id}
+          />
+        ))}
       </Box>
     </Box>
   );

@@ -91,7 +91,7 @@ export const JobCard = ({
                 sx={{ marginLeft: "8px" }}
                 onClick={onAdd}
               >
-                Edit
+                Save job
               </Button>
             </Box>
           )}
