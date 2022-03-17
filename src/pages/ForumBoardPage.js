@@ -2,12 +2,15 @@ import { useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { GET_FORUM_POSTS } from "../queries";
 import { Error } from "./Error";
 import { ForumPostCard } from "../components/ForumPostCard";
+import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
+
+import { Spinner } from "../components/Spinner";
+import { GET_FORUM_POSTS } from "../queries";
 
 export const ForumBoardPage = () => {
   const { data, loading, error } = useQuery(GET_FORUM_POSTS);
@@ -35,6 +38,11 @@ export const ForumBoardPage = () => {
 
   return (
     <>
+      {loading && (
+        <Box sx={{ height: "500px" }}>
+          <Spinner />
+        </Box>
+      )}
       <Box sx={{ maxWidth: "750px", margin: "auto" }}>
         <Stack
           direction="row"
@@ -55,9 +63,10 @@ export const ForumBoardPage = () => {
       >
         Forum
       </Typography>
-      <Box sx={styles.container}>
-        {data &&
-          data.forumPosts.map((post) => (
+      <Divider sx={{ maxWidth: "90%", margin: "auto", mb: "25px" }} />
+      {!loading && data && (
+        <Box sx={styles.container}>
+          {data.forumPosts.map((post) => (
             <ForumPostCard
               id={post.id}
               text={post.postText.slice(0, 100)}
@@ -68,7 +77,22 @@ export const ForumBoardPage = () => {
               key={post.id}
             />
           ))}
-      </Box>
+        </Box>
+      )}
+
+      {!loading && !data && (
+        <Box sx={{ height: "75vh" }}>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            There are currently no forum posts.
+          </Typography>
+        </Box>
+      )}
     </>
   );
 };
