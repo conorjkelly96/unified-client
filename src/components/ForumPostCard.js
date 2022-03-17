@@ -52,7 +52,7 @@ export const ForumPostCard = ({
               View Replies
             </Button>
 
-            {/* TODO: render this button when a student is viewing their own posts */}
+            {/* TODO: render this button on the page where a student is viewing their own posts */}
             {/* {user.username === username && (
               <Button
                 id={id}
