@@ -8,6 +8,7 @@ import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
+import {}
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
@@ -66,6 +67,7 @@ export const ViewCreatedJobs = () => {
     }
   };
 
+  const onAdd = (event) => {};
   const styles = {
     header: {
       paddingTop: 3,
