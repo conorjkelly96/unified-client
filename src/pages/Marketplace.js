@@ -81,17 +81,17 @@ export const Marketplace = () => {
         {itemData?.viewAllItems?.map((item) => {
           return (
             <ItemCard
-              id={"id"}
-              itemName={"item.itemName"}
-              itemDescription={"item.itemDescription"}
-              category={"item.category"}
-              status={"item.status"}
-              condition={"item.condition"}
-              price={"item.price"}
-              quantity={"item.quantity"}
-              seller={"item.seller"}
+              // id={id}
+              itemName={item.itemName}
+              itemDescription={item.itemDescription}
+              category={item.category}
+              status={item.status}
+              condition={item.condition}
+              price={item.price}
+              quantity={item.quantity}
+              seller={item.seller}
               onDelete={onDelete}
-              key={"item.id"}
+              key={item.id}
             />
           );
         })}

@@ -40,8 +40,6 @@ export const ItemCard = ({
           {status || "Status"}
         </Typography>
 
-        <Typography sx={{ mb: 1.5 }}>{category || "Category"}</Typography>
-
         <Typography>
           {"Condition"}
           {condition}
