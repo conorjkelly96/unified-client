@@ -1,8 +1,8 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";

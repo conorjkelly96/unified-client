@@ -35,7 +35,7 @@ export const ForumPostCard = ({
           {createdAt}
         </Typography>
 
-        <Typography variant="body2" sx={{ mb: "15px" }}>
+        <Typography variant="body2">
           {replies.length} {"replies"}
         </Typography>
       </CardContent>
