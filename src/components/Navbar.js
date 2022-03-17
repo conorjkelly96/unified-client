@@ -39,7 +39,6 @@ export const Navbar = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const { isLoggedIn, user } = useAuth();
-  console.log("user:", user);
 
   return (
     <AppBar position="static">

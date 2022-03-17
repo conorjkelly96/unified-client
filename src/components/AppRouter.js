@@ -15,6 +15,7 @@ import { CreateJobPage } from "../pages/CreateJobPage";
 import { ViewJobsPage } from "../pages/ViewJobsPage";
 import { Footer } from "../components/Footer";
 import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
+import { CreatePostPage } from "../pages/CreatePostPage";
 
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
@@ -37,11 +38,10 @@ export const AppRouter = () => {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/buy-sell" element={<BuySellPage />} />
-            <Route path="/forum-board" element={<ForumBoardPage />} />
-            <Route path="/job-board" element={<JobBoardPage />} />
+            <Route path="/forum" element={<ForumBoardPage />} />
             <Route path="/create-job" element={<CreateJobPage />} />
             <Route path="/create-item" element={<CreateItemPage />} />
-            <Route path="/create-item" element={<CreateItemPage />} />
+            <Route path="/create-post" element={<CreatePostPage />} />
             <Route path="/my-jobs" element={<ViewCreatedJobs />} />
           </>
         ) : (
