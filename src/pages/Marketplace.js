@@ -17,13 +17,25 @@ export const Marketplace = () => {
     refetch,
   } = useQuery(VIEW_ALL_ITEMS);
 
+  //  filter out items which belong to me
+  // const myItems = itemData.filter((item) => console.log(item));
+
+  const myItems = (itemData) => {
+    console.log(itemData);
+  };
+
+  const loggedInUser = JSON.parse(localStorage.getItem("user") || "[]");
+
+  console.log(loggedInUser.id);
+
+  myItems(itemData);
+
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
   const [viewMyItems, setViewItemType] = useState("myItems");
 
   const handleChange = (event, value) => {
     setViewItemType(value);
-    console.log(value);
   };
 
   const onDelete = async (event) => {
@@ -50,7 +62,7 @@ export const Marketplace = () => {
 
   return (
     <>
-      <Container component="main" maxWidth="xs" sx={styles.container}>
+      <Container component={"main"} maxWidth={"xs"} sx={styles.container}>
         <ToggleButtonGroup
           color="primary"
           value={viewMyItems}
@@ -69,17 +81,17 @@ export const Marketplace = () => {
         {itemData?.viewAllItems?.map((item) => {
           return (
             <ItemCard
-              id={item.id}
-              itemName={item.itemName}
-              itemDescription={item.itemDescription}
-              category={item.category}
-              status={item.status}
-              condition={item.condition}
-              price={item.price}
-              quantity={item.quantity}
-              seller={item.seller}
+              id={"id"}
+              itemName={"item.itemName"}
+              itemDescription={"item.itemDescription"}
+              category={"item.category"}
+              status={"item.status"}
+              condition={"item.condition"}
+              price={"item.price"}
+              quantity={"item.quantity"}
+              seller={"item.seller"}
               onDelete={onDelete}
-              key={item.id}
+              key={"item.id"}
             />
           );
         })}

@@ -59,7 +59,7 @@ export const ItemCard = ({
 
         <Typography>
           {"Seller"}
-          {seller.username}
+          {seller}
         </Typography>
       </CardContent>
       <CardActions>
