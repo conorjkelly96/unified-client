@@ -13,15 +13,15 @@ import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { JobCard } from "../components/JobCard";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AppProvider";
+// import { useAuth } from "../contexts/AppProvider";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);
 
   const navigate = useNavigate();
 
-  const { user } = useAuth();
-  const userId = user.id;
+  // const { user } = useAuth();
+  // const userId = user.id;
 
   const {
     register,
