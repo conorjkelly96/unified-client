@@ -9,6 +9,8 @@ import { useMediaQuery } from "@mui/material";
 
 import { DrawerComponent } from "./Drawer";
 import { useAuth } from "../contexts/AppProvider";
+import { maxWidth } from "@mui/system";
+import { spacing } from "@mui/system";
 
 //css style navbar
 const useStyles = makeStyles({
@@ -21,6 +23,8 @@ const useStyles = makeStyles({
     cursor: "pointer",
     textDecoration: "none",
     color: "white",
+    maxWidth: "md",
+    paddingTop: "2",
   },
   link: {
     textDecoration: "none",
@@ -51,7 +55,7 @@ export const Navbar = () => {
           href="/login"
           className={classes.logo}
         >
-          Unified Logo
+          <img src="./images/unified-navbar-logo.png" alt="Unified Logo"></img>
         </Typography>
         {isMobile ? (
           <DrawerComponent />
