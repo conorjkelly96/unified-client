@@ -18,6 +18,7 @@ export const JobCard = ({
   salary,
   date,
   onDelete,
+  onAdd,
 }) => {
   const { user } = useAuth();
 
@@ -53,7 +54,7 @@ export const JobCard = ({
             href={url}
             sx={{ marginBottom: "16px" }}
           >
-            {user?.__typename === "Staff" ? "Link" : "Learn More & Apply"}
+            "Learn More & Apply"
           </Button>
           {user?.__typename === "Staff" && (
             <Box sx={{ marginBottom: "10px" }}>
@@ -77,6 +78,20 @@ export const JobCard = ({
                 onClick={onDelete}
               >
                 Delete
+              </Button>
+            </Box>
+          )}
+          {user?.__typename === "Student" && (
+            <Box sx={{ marginBottom: "10px" }}>
+              <Button
+                variant="contained"
+                size="small"
+                endIcon={<EditIcon />}
+                color="info"
+                sx={{ marginLeft: "8px" }}
+                onClick={onAdd}
+              >
+                Edit
               </Button>
             </Box>
           )}
