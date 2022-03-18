@@ -18,7 +18,6 @@ export const Navbar = () => {
 
   const styles = {
     navContainer: {
-      backgroundColor: "orange",
       alignContent: "center",
     },
     navLinks: {
@@ -27,19 +26,75 @@ export const Navbar = () => {
       justifyContent: "flex-end",
     },
     logo: {
-      color: "white",
       display: "flex",
       alignContent: "center",
     },
     link: {
       textDecoration: "none",
-      color: "white",
       fontSize: "20px",
-      marginLeft: 20,
       "&:hover": {
         borderBottom: "1px solid white",
       },
     },
+  };
+
+  const staffStyles = {
+    navContainer: {
+      backgroundColor: "orange",
+    },
+    link: {
+      color: "blue",
+    },
+    button: {
+      backgroundColor: "blue",
+      color: "orange",
+      marginLeft: "10px",
+      "&:hover": {
+        border: "1px solid blue",
+        backgroundColor: "orange",
+        color: "blue",
+      },
+    },
+  };
+
+  const studentStyles = {
+    navContainer: {
+      backgroundColor: "blue",
+    },
+    link: {
+      color: "orange",
+    },
+  };
+
+  const publicStyles = {
+    navContainer: {
+      backgroundColor: "white",
+    },
+    link: {
+      color: "black",
+    },
+  };
+
+  const handleNavStyles = (element) => {
+    if (isLoggedIn && user?.type === "student") {
+      return {
+        ...styles[element],
+        ...studentStyles[element],
+      };
+    }
+
+    if (isLoggedIn && user?.type === "staff") {
+      return {
+        ...styles[element],
+        ...staffStyles[element],
+      };
+    }
+    if (!isLoggedIn) {
+      return {
+        ...styles[element],
+        ...publicStyles[element],
+      };
+    }
   };
 
   const handleNavigation = (path) => () => {
@@ -90,7 +145,11 @@ export const Navbar = () => {
   ];
 
   const renderLogout = () => (
-    <Button variant="outlined" onClick={handleLogout}>
+    <Button
+      variant="outlined"
+      sx={handleNavStyles("button")}
+      onClick={handleLogout}
+    >
       Logout
     </Button>
   );
@@ -98,16 +157,28 @@ export const Navbar = () => {
   return (
     <AppBar position="static">
       <CssBaseline />
-      <Toolbar sx={styles.navContainer}>
+      <Toolbar sx={handleNavStyles("navContainer")}>
         <Box sx={styles.logo}>
-          <img
-            src="./images/unified-navbar-logo.png"
-            alt="Unified Logo"
-            style={{
-              width: "140px",
-              height: "100%",
-            }}
-          />
+          {isLoggedIn ? (
+            <img
+              src="./images/unified-navbar-logo.png"
+              alt="Unified Logo"
+              style={{
+                width: "140px",
+                height: "100%",
+              }}
+            />
+          ) : (
+            // TO DO: Add public landing image here
+            <img
+              src="./images/unified-navbar-logo.png"
+              alt="Unified Logo"
+              style={{
+                width: "140px",
+                height: "100%",
+              }}
+            />
+          )}
         </Box>
         {isMobile ? (
           <DrawerComponent />
@@ -116,7 +187,12 @@ export const Navbar = () => {
             {!isLoggedIn && (
               <>
                 {publicLinks.map((link) => (
-                  <Button variant="text" onClick={handleNavigation(link.path)}>
+                  <Button
+                    key={link.label}
+                    variant="text"
+                    sx={handleNavStyles("link")}
+                    onClick={handleNavigation(link.path)}
+                  >
                     {link.label}
                   </Button>
                 ))}
@@ -126,7 +202,12 @@ export const Navbar = () => {
             {isLoggedIn && user?.type === "staff" && (
               <>
                 {staffLinks.map((link) => (
-                  <Button variant="text" onClick={handleNavigation(link.path)}>
+                  <Button
+                    variant="text"
+                    key={link.label}
+                    sx={handleNavStyles("link")}
+                    onClick={handleNavigation(link.path)}
+                  >
                     {link.label}
                   </Button>
                 ))}
@@ -137,7 +218,12 @@ export const Navbar = () => {
             {isLoggedIn && user?.type === "student" && (
               <>
                 {studentLinks.map((link) => (
-                  <Button variant="text" onClick={handleNavigation(link.path)}>
+                  <Button
+                    variant="text"
+                    key={link.label}
+                    sx={handleNavStyles("link")}
+                    onClick={handleNavigation(link.path)}
+                  >
                     {link.label}
                   </Button>
                 ))}
