@@ -36,12 +36,10 @@ export const Marketplace = () => {
   }, [itemData, selectedValue]);
 
   const handleChange = async (event, value) => {
-    // setViewItemType(value);
     console.log("VALUE SELECTED ON CLICK", value);
     setSelectedValue(value);
     if (value === "allItems") {
       refetch();
-      // displayedItems = itemData.viewAllItems;
     }
 
     if (value === "myItems") {
