@@ -17,18 +17,11 @@ export const Marketplace = () => {
     refetch,
   } = useQuery(VIEW_ALL_ITEMS);
 
-  //  filter out items which belong to me
-  // const myItems = itemData.filter((item) => console.log(item));
-
-  const myItems = (itemData) => {
-    console.log(itemData);
-  };
-
   const loggedInUser = JSON.parse(localStorage.getItem("user") || "[]");
 
-  console.log(loggedInUser.id);
+  console.log(itemData);
 
-  myItems(itemData);
+  console.log(loggedInUser.id);
 
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
@@ -81,7 +74,7 @@ export const Marketplace = () => {
         {itemData?.viewAllItems?.map((item) => {
           return (
             <ItemCard
-              // id={id}
+              id={item.id}
               itemName={item.itemName}
               itemDescription={item.itemDescription}
               category={item.category}
@@ -89,7 +82,7 @@ export const Marketplace = () => {
               condition={item.condition}
               price={item.price}
               quantity={item.quantity}
-              seller={item.seller}
+              seller={item.seller.username}
               onDelete={onDelete}
               key={item.id}
             />

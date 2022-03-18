@@ -26,6 +26,17 @@ export const ItemCard = ({
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
+        <Box
+          component="img"
+          sx={{
+            height: 233,
+            width: 350,
+            maxHeight: { xs: 233, md: 167 },
+            maxWidth: { xs: 350, md: 250 },
+          }}
+          alt={`${itemDescription}`}
+          src={`https://unified-resources.s3.eu-west-2.amazonaws.com/${seller}/images/${images}`}
+        />
         <Typography variant="h5" component="div">
           {itemName || "Item Name"}
         </Typography>

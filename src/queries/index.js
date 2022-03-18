@@ -63,6 +63,7 @@ export const VIEW_ALL_ITEMS = gql`
       price
       quantity
       seller {
+        id
         username
       }
       images
