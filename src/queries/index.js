@@ -55,17 +55,19 @@ export const GET_STAFF_JOBS = gql`
 
 // FORUM
 export const GET_FORUM_POSTS = gql`
-  query Query {
+  query ForumPosts {
     forumPosts {
       id
       postText
       postedBy {
+        id
         username
         college
-        id
       }
       createdAt
-      replies
+      replies {
+        id
+      }
     }
   }
 `;
