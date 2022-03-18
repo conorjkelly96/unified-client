@@ -69,3 +69,23 @@ export const GET_FORUM_POSTS = gql`
     }
   }
 `;
+
+export const GET_FORUM_POST = gql`
+  query Query($postId: ID!) {
+    getForumPost(postId: $postId) {
+      id
+      postText
+      postedBy {
+        id
+        username
+      }
+      createdAt
+      replies {
+        id
+        text
+        user
+        createdAt
+      }
+    }
+  }
+`;
