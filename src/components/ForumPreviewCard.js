@@ -5,11 +5,10 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useAuth } from "../contexts/AppProvider";
 
-export const ForumPostCard = ({
+export const ForumPreviewCard = ({
   id,
   text,
   username,
@@ -22,8 +21,7 @@ export const ForumPostCard = ({
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
-        {/* TODO: link to ViewForumPost page */}
-        <Typography id={id} variant="h5" component="a">
+        <Typography id={id} variant="h5" component="a" href={`/forum/${id}`}>
           {text}
           {"..."}
         </Typography>
@@ -51,21 +49,6 @@ export const ForumPostCard = ({
             >
               View
             </Button>
-
-            {/* TODO: render this button on the page where a student is viewing their own posts */}
-            {/* {user.username === username && (
-              <Button
-                id={id}
-                variant="contained"
-                size="small"
-                endIcon={<DeleteIcon />}
-                color="error"
-                sx={{ marginLeft: "8px" }}
-                //   onClick= {onDelete}
-              >
-                Delete
-              </Button>
-            )} */}
           </Box>
         </Stack>
       </CardActions>
