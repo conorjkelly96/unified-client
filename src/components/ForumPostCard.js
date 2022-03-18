@@ -49,7 +49,7 @@ export const ForumPostCard = ({
               color="info"
               sx={{ marginLeft: "8px" }}
             >
-              View Replies
+              View
             </Button>
 
             {/* TODO: render this button on the page where a student is viewing their own posts */}
