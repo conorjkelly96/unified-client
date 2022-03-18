@@ -49,6 +49,7 @@ export const StaffLoginForm = () => {
         username: user.username,
         university: user.university,
         college: user.college,
+        type: user.type,
       });
 
       navigate("/dashboard", { replace: true });

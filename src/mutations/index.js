@@ -30,6 +30,7 @@ export const LOGIN_STAFF = gql`
           name
         }
         college
+        type
       }
     }
   }
@@ -66,6 +67,7 @@ export const LOGIN_STUDENT = gql`
         }
         bio
         college
+        type
       }
     }
   }
