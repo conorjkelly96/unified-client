@@ -87,7 +87,7 @@ export const StudentLoginForm = () => {
         align="center"
         sx={styles.header}
       >
-        Login
+        Student Login
       </Typography>
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>

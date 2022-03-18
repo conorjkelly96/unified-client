@@ -87,7 +87,7 @@ export const StaffLoginForm = () => {
         align="center"
         sx={styles.header}
       >
-        Login
+        Staff Login
       </Typography>
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
