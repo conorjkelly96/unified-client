@@ -77,14 +77,13 @@ export const VIEW_MY_ITEMS_FOR_SALE = gql`
       id
       itemName
       itemDescription
-      status
       category
+      status
       condition
       price
       quantity
-      comments {
-        commentId
-        commentBody
+      seller {
+        id
         username
       }
       images

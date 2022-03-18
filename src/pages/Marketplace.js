@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { Divider } from "@mui/material";
 import { Box } from "@mui/system";
@@ -10,6 +10,9 @@ import { VIEW_ALL_ITEMS, VIEW_MY_ITEMS_FOR_SALE } from "../queries";
 import { DELETE_ITEM } from "../mutations";
 
 export const Marketplace = () => {
+  const [selectedValue, setSelectedValue] = useState("allItems");
+  const [itemsToDisplay, setItemsToDisplay] = useState([]);
+
   const {
     data: itemData,
     loading: itemLoading,
@@ -17,38 +20,36 @@ export const Marketplace = () => {
     refetch,
   } = useQuery(VIEW_ALL_ITEMS);
 
-  let displayedItems = itemData?.viewAllItems;
-
-  console.log(displayedItems);
-
-  const [getMyItems] = useLazyQuery(VIEW_MY_ITEMS_FOR_SALE);
+  const [getMyItems, { loading: myItemsLoading, error: myItemsError }] =
+    useLazyQuery(VIEW_MY_ITEMS_FOR_SALE);
 
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
-  // const [viewMyItems, setViewItemType] = useState("allItems");
+  useEffect(() => {
+    if (
+      !itemLoading &&
+      itemData?.viewAllItems &&
+      selectedValue === "allItems"
+    ) {
+      setItemsToDisplay(itemData?.viewAllItems);
+    }
+  }, [itemData, selectedValue]);
 
-  let selectedValue = "allItems";
-  console.log(selectedValue);
-
-  const handleChange = (event, value) => {
+  const handleChange = async (event, value) => {
     // setViewItemType(value);
     console.log("VALUE SELECTED ON CLICK", value);
-    selectedValue = value;
-    if (selectedValue === "allItems") {
+    setSelectedValue(value);
+    if (value === "allItems") {
       refetch();
-      displayedItems = itemData.viewAllItems;
+      // displayedItems = itemData.viewAllItems;
     }
 
-    if (selectedValue === "myItems") {
-      const {
-        data: myItemsData,
-        loading: myItemsLoading,
-        error: myItemsError,
-      } = getMyItems();
+    if (value === "myItems") {
+      const { data: myItemsData } = await getMyItems();
 
       console.log(myItemsData);
 
-      displayedItems = myItemsData?.viewMyItems;
+      setItemsToDisplay(myItemsData?.viewMyItems);
     }
   };
 
@@ -90,23 +91,25 @@ export const Marketplace = () => {
       </Container>
       <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
       <Box sx={{ px: "32px", paddingTop: "40px" }}>
-        {displayedItems?.viewAllItems?.map((item) => {
-          return (
-            <ItemCard
-              id={item.id}
-              itemName={item.itemName}
-              itemDescription={item.itemDescription}
-              category={item.category}
-              status={item.status}
-              condition={item.condition}
-              price={item.price}
-              quantity={item.quantity}
-              seller={item.seller.username}
-              onDelete={onDelete}
-              key={item.id}
-            />
-          );
-        })}
+        {!myItemsLoading &&
+          !itemLoading &&
+          itemsToDisplay?.map((item) => {
+            return (
+              <ItemCard
+                id={item.id}
+                itemName={item.itemName}
+                itemDescription={item.itemDescription}
+                category={item.category}
+                status={item.status}
+                condition={item.condition}
+                price={item.price}
+                quantity={item.quantity}
+                seller={item.seller.username}
+                onDelete={onDelete}
+                key={item.id}
+              />
+            );
+          })}
       </Box>
     </>
   );
