@@ -70,3 +70,24 @@ export const VIEW_ALL_ITEMS = gql`
     }
   }
 `;
+
+export const VIEW_MY_ITEMS_FOR_SALE = gql`
+  query Query {
+    viewMyItems {
+      id
+      itemName
+      itemDescription
+      status
+      category
+      condition
+      price
+      quantity
+      comments {
+        commentId
+        commentBody
+        username
+      }
+      images
+    }
+  }
+`;

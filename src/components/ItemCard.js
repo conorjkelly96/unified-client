@@ -80,9 +80,9 @@ export const ItemCard = ({
             // href={url}
             sx={{ marginBottom: "16px" }}
           >
-            {user?.__typename === "Student" ? "Link" : "Interested"}
+            {!seller ? "" : "lol"}
           </Button>
-          {user?.__typename === "Student" && (
+          {seller && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
                 variant="contained"
@@ -104,6 +104,20 @@ export const ItemCard = ({
                 onClick={onDelete}
               >
                 Delete
+              </Button>
+            </Box>
+          )}
+          {!seller && (
+            <Box sx={{ marginBottom: "10px" }}>
+              <Button
+                variant="contained"
+                size="small"
+                endIcon={<EditIcon />}
+                color="info"
+                sx={{ marginLeft: "8px" }}
+                // onClick={}
+              >
+                Mark Interested
               </Button>
             </Box>
           )}
