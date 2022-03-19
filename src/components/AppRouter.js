@@ -30,7 +30,10 @@ export const AppRouter = () => {
         <Route path="/sign-up" element={<SignUpPage />} />
 
         {isLoggedIn && user?.__typename === "Student" && (
-          <Route path="/jobs" element={<ViewJobsPage />} />
+          <>
+            <Route path="/jobs" element={<ViewJobsPage />} />
+            <Route path="/job-board" element={<JobBoardPage />} />
+          </>
         )}
 
         {isLoggedIn ? (

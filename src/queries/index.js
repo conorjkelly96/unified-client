@@ -53,6 +53,21 @@ export const GET_STAFF_JOBS = gql`
   }
 `;
 
+export const GET_STUDENT_JOBS = gql`
+  query Query {
+    getStudentJobs {
+      id
+      title
+      company
+      description
+      url
+      createdAt
+      salary
+      closingDate
+    }
+  }
+`;
+
 // FORUM
 export const GET_FORUM_POSTS = gql`
   query Query {

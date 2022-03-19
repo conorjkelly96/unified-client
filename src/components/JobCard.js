@@ -17,12 +17,12 @@ export const JobCard = ({
   company,
   url,
   salary,
-  date,
+  closingDate,
   onDelete,
   onAdd,
 }) => {
   const { user } = useAuth();
-
+  console.log(closingDate);
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
@@ -43,7 +43,7 @@ export const JobCard = ({
 
         <Typography>
           {"Closing Date: "}
-          {date ? format(date, "MM/dd/yyyy") : "CLOSING DATE"}
+          {closingDate ? format(closingDate, "MM/dd/yyyy") : "CLOSING DATE"}
         </Typography>
       </CardContent>
       <CardActions>
