@@ -74,14 +74,6 @@ export const Marketplace = () => {
     }
   };
 
-  //   export const ADD_TO_MY_ITEMS = gql`
-  //   mutation Mutation($itemId: String!) {
-  //     saveToMyItems(itemId: $itemId) {
-  //       id
-  //     }
-  //   }
-  // `;
-
   // When a user selects Quick Add To Interested, add the item to their interested array
   const onAddItemToInterested = async (event) => {
     const itemId = event.target.id;

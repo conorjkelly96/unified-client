@@ -1,23 +1,15 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { useForm } from "react-hook-form";
-import { Link as RouterLink, Navigate, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
-import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
-import { Grid, Select } from "@mui/material";
+import { Button, Grid, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
-
-// import { Spinner } from "./Spinner";
-import { CREATE_ITEM } from "../mutations";
-import { SuccessfulItemModal } from "./SuccessfulItemModal";
-import { useState } from "react";
-import { MultiImageUploader } from "./MultiImageUploader";
-import { useAuth } from "../contexts/AppProvider";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import BoltIcon from "@mui/icons-material/Bolt";
 
 export const ViewSingleItemForm = () => {
+  const onContactSeller = () => {
+    console.log("contact seller");
+  };
+
   const styles = {
     container: {
       backgroundColor: "#fff",
@@ -53,6 +45,30 @@ export const ViewSingleItemForm = () => {
             price={"price"}
             quantity={"quantity"}
           />
+          <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+            <Button
+              id={"id"}
+              variant="contained"
+              size="small"
+              endIcon={<ContactSupportIcon />}
+              color="success"
+              sx={{ marginLeft: "8px" }}
+              onClick={onContactSeller}
+            >
+              Contact Seller
+            </Button>
+            <Button
+              id={"id"}
+              variant="contained"
+              size="small"
+              endIcon={<BoltIcon />}
+              color="warning"
+              sx={{ marginLeft: "8px" }}
+              // onClick={onAddItemToInterested}
+            >
+              Add To Interested
+            </Button>
+          </Grid>
         </Box>
       </Grid>
     </Grid>
