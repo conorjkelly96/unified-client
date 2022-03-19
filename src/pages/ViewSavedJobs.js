@@ -11,6 +11,6 @@ import { GET_STAFF_JOBS } from "../queries";
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
-export const JobBoardPage = () => {
+export const ViewSavedJobs = () => {
   return <h1>JobBoardPage</h1>;
 };
