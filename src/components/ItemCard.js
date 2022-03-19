@@ -107,7 +107,7 @@ export const ItemCard = ({
                 endIcon={<PreviewIcon />}
                 color="success"
                 sx={{ marginLeft: "8px" }}
-                onClick={viewListing}
+                href={`/listing/${id}`}
               >
                 View Listing
               </Button>

@@ -103,138 +103,131 @@ export const CreateItemForm = () => {
   };
 
   return (
-    <Box sx={styles.container}>
-      {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
-      <Typography
-        variant="h4"
-        gutterBottom
-        component="h1"
-        align="center"
-        sx={styles.header}
-      >
-        Sell your item today!
-      </Typography>
-      <Divider sx={{ marginTop: "50px", marginBottom: "25px" }}></Divider>
-      <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          margin="normal"
-          id="itemName"
-          label="Item Name"
-          name="itemName"
-          variant="outlined"
-          fullWidth
-          {...register("itemName", { required: true })}
-          error={!!errors.itemName}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="itemDescription"
-          label="Item Description"
-          name="itemDescription"
-          variant="outlined"
-          fullWidth
-          {...register("itemDescription", { required: false })}
-          error={!!errors.itemDescription}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="category"
-          label="Category"
-          name="category"
-          variant="outlined"
-          fullWidth
-          {...register("category", { required: true })}
-          error={!!errors.category}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="condition"
-          label="Condition"
-          name="condition"
-          variant="outlined"
-          fullWidth
-          {...register("condition", { required: true })}
-          error={!!errors.condition}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="price"
-          label="Item Price"
-          name="price"
-          variant="outlined"
-          fullWidth
-          {...register("price", {
-            required: true,
-            validate: (value) => {
-              const regex = new RegExp(/^\d*\.?\d*$/);
-              return regex.test(value);
-            },
-          })}
-          error={!!errors.price}
-          disabled={loading}
-        />
-        <TextField
-          type="number"
-          margin="normal"
-          id="quantity"
-          label="Quantity"
-          name="quantity"
-          variant="outlined"
-          fullWidth
-          {...register("quantity", {
-            required: true,
-          })}
-          defaultValue={1}
-          error={!!errors.quantity}
-          disabled={loading}
-        />
-        <MultiImageUploader
-          uploadedImages={uploadedImages}
-          setUploadedImages={setUploadedImages}
-          username={user.username}
-        />
-
-            <LoadingButton
-              loading={loading}
-              loadingIndicator="Loading..."
-              variant="contained"
+    <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+      <Grid item xs={12} lg={6}>
+        <Box sx={styles.container}>
+          {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Sell your item today!
+          </Typography>
+          <Divider />
+          <Box
+            component="form"
+            sx={styles.form}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <TextField
+              margin="normal"
+              id="itemName"
+              label="Item Name"
+              name="itemName"
+              variant="outlined"
               fullWidth
-              type="submit"
-              sx={styles.loadingButton}
-              startIcon={error && <ErrorIcon />}
-              color={error ? "error" : "primary"}
-              onClick={onSubmitItemForm}
-            >
-              Create Item
-            </LoadingButton>
+              {...register("itemName", { required: true })}
+              error={!!errors.itemName}
+              disabled={loading}
+            />
+            <TextField
+              margin="normal"
+              id="itemDescription"
+              label="Item Description"
+              name="itemDescription"
+              variant="outlined"
+              fullWidth
+              {...register("itemDescription", { required: false })}
+              error={!!errors.itemDescription}
+              disabled={loading}
+            />
+            <TextField
+              margin="normal"
+              id="category"
+              label="Category"
+              name="category"
+              variant="outlined"
+              fullWidth
+              {...register("category", { required: true })}
+              error={!!errors.category}
+              disabled={loading}
+            />
+            <TextField
+              margin="normal"
+              id="condition"
+              label="Condition"
+              name="condition"
+              variant="outlined"
+              fullWidth
+              {...register("condition", { required: true })}
+              error={!!errors.condition}
+              disabled={loading}
+            />
+            <TextField
+              margin="normal"
+              id="price"
+              label="Item Price"
+              name="price"
+              variant="outlined"
+              fullWidth
+              {...register("price", {
+                required: true,
+                validate: (value) => {
+                  const regex = new RegExp(/^\d*\.?\d*$/);
+                  return regex.test(value);
+                },
+              })}
+              error={!!errors.price}
+              disabled={loading}
+            />
+            <TextField
+              type="number"
+              margin="normal"
+              id="quantity"
+              label="Quantity"
+              name="quantity"
+              variant="outlined"
+              fullWidth
+              {...register("quantity", {
+                required: true,
+              })}
+              defaultValue={1}
+              error={!!errors.quantity}
+              disabled={loading}
+            />
+            <MultiImageUploader
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
+              username={user.username}
+            />
           </Box>
         </Box>
-      </Grid>
-      <Grid item xs={12} lg={6}>
-        <Typography
-          variant="h4"
-          gutterBottom
-          component="h1"
-          align="center"
-          sx={styles.header}
-        >
-          Preview
-        </Typography>
-        <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
-        <Box sx={{ px: "32px", paddingTop: "40px" }}>
-          <ItemCard
-            itemName={itemName}
-            itemDescription={itemDescription}
-            category={category}
-            condition={condition}
-            price={price}
-            quantity={quantity}
-          />
-        </Box>
+
+        <Grid item xs={12} lg={6}>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Preview
+          </Typography>
+          <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+          <Box sx={{ px: "32px", paddingTop: "40px" }}>
+            <ItemCard
+              itemName={itemName}
+              itemDescription={itemDescription}
+              category={category}
+              condition={condition}
+              price={price}
+              quantity={quantity}
+            />
+          </Box>
+        </Grid>
       </Grid>
     </Grid>
   );
