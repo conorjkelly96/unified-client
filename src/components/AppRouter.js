@@ -37,7 +37,7 @@ export const AppRouter = () => {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/buy-sell" element={<BuySellPage />} />
-            <Route path="/forum-board" element={<ForumBoardPage />} />
+            <Route path="/forum" element={<ForumBoardPage />} />
             <Route path="/create-job" element={<CreateJobPage />} />
             <Route path="/create-item" element={<CreateItemPage />} />
             <Route path="/my-jobs" element={<ViewCreatedJobs />} />

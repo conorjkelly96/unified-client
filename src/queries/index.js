@@ -57,6 +57,7 @@ export const GET_STAFF_JOBS = gql`
 export const GET_FORUM_POSTS = gql`
   query Query {
     forumPosts {
+      id
       postText
       postedBy {
         username

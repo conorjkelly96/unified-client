@@ -8,8 +8,12 @@ import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
+<<<<<<< HEAD
 import { SAVE_JOB } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
+=======
+
+>>>>>>> 4faeb1b (ForumPostCard)
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
 

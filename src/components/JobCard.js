@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { format } from "date-fns";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+
 import { useAuth } from "../contexts/AppProvider";
 
 export const JobCard = ({
