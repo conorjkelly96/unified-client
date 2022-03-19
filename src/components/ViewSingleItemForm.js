@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import { Button, Grid, Select } from "@mui/material";
+import { Button, Grid, Modal, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import BoltIcon from "@mui/icons-material/Bolt";
@@ -19,12 +19,12 @@ export const ViewSingleItemForm = () => {
     data: itemData,
   } = useQuery(GET_SINGLE_ITEM_DATA, {
     variables: {
-      _id: id,
+      id: id,
     },
   });
 
   const onContactSeller = () => {
-    console.log("contact seller");
+    return <Modal />;
   };
 
   const styles = {

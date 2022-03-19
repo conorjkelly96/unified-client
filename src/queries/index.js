@@ -111,8 +111,8 @@ export const GET_FORUM_POSTS = gql`
 `;
 
 export const GET_SINGLE_ITEM_DATA = gql`
-  query Query {
-    getSingleItemData {
+  query GetSingleItemData($id: ID!) {
+    getSingleItemData(id: $id) {
       id
       itemName
       itemDescription
@@ -121,11 +121,6 @@ export const GET_SINGLE_ITEM_DATA = gql`
       condition
       price
       quantity
-      seller {
-        id
-        username
-      }
-      images
     }
   }
 `;
