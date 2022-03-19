@@ -85,7 +85,6 @@ export const Marketplace = () => {
   // When a user selects Quick Add To Interested, add the item to their interested array
   const onAddItemToInterested = async (event) => {
     const itemId = event.target.id;
-    console.log(typeof itemId);
     setSelectedItem(itemId);
 
     await executeAddItemToInterested({
@@ -97,8 +96,9 @@ export const Marketplace = () => {
 
   // redirect to the single item page
   const viewListing = (event) => () => {
-    console.log(event);
     const itemId = event.target.id;
+    console.log("redirect to", itemId);
+    setSelectedItem(itemId);
     navigate(`listing/${itemId}`, { replace: true });
   };
 
