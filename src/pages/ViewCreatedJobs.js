@@ -18,9 +18,6 @@ export const ViewCreatedJobs = () => {
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
 
-  const [executeSaveJob, { loading: loadingSaveJob, error: saveJobError }] =
-    useMutation(SAVE_JOB);
-
   const [jobsData, setJobsData] = useState([]);
 
   useEffect(() => {
@@ -62,23 +59,6 @@ export const ViewCreatedJobs = () => {
       }
 
       setJobsData(deleteData.deleteJob);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onAdd = async (event) => {
-    const jobId = event.target.id;
-    console.log(jobId);
-    try {
-      const { data: addData, error: addError } = await executeSaveJob({
-        variables: { jobId },
-      });
-      if (addError) {
-        throw new Error("Something went wrong!");
-      }
-
-      setJobsData(addData.addJob);
     } catch (error) {
       console.log(error);
     }
@@ -146,7 +126,6 @@ export const ViewCreatedJobs = () => {
                 date={new Date(staffJob.closingDate)}
                 key={staffJob.id}
                 onDelete={onDelete}
-                onSave={onAdd}
               />
             ))}
           </Box>
