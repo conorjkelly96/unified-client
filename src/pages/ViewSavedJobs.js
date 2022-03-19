@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
-import { SAVE_JOB } from "../mutations";
+
 import { GET_STUDENT_JOBS } from "../queries";
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
@@ -14,8 +14,6 @@ import { useEffect, useState } from "react";
 export const ViewSavedJobs = () => {
   const [executeGetStudentJobs, { loading: studentJobsLoading }] =
     useLazyQuery(GET_STUDENT_JOBS);
-
-  const [executeSaveJob, { loading, error }] = useMutation(SAVE_JOB);
 
   const [jobsData, setJobsData] = useState([]);
 
@@ -28,6 +26,7 @@ export const ViewSavedJobs = () => {
         if (studentJobsError) {
           throw new Error("Something went wrong");
         }
+
         setJobsData(studentJobsData.getStudentJobs);
       } catch (error) {
         console.log(error);
@@ -35,23 +34,6 @@ export const ViewSavedJobs = () => {
     };
     getStudentJobsData();
   }, [jobsData, executeGetStudentJobs]);
-
-  const onAdd = async (event) => {
-    const jobId = event.target.id;
-    console.log(jobId);
-    try {
-      const { data: addData, error: addError } = await executeSaveJob({
-        variables: { jobId },
-      });
-      if (addError) {
-        throw new Error("Something went wrong!");
-      }
-
-      setJobsData(addData.addJob);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const styles = {
     header: {
@@ -115,7 +97,7 @@ export const ViewSavedJobs = () => {
                 salary={studentJob.salary}
                 date={new Date(studentJob.closingDate)}
                 key={studentJob.id}
-                onSave={onAdd}
+                // onSave={onAdd}
               />
             ))}
           </Box>

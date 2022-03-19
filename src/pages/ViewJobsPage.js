@@ -1,13 +1,31 @@
+import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
+import { SAVE_JOB } from "../mutations";
 import { JobCard } from "../components/JobCard";
 import { JOBS } from "../queries";
 import { Error } from "./Error";
 
 export const ViewJobsPage = () => {
   const { data, loading, error } = useQuery(JOBS);
+  const [executeSaveJob, { loading: saveJobLoading, error: saveJobError }] =
+    useMutation(SAVE_JOB);
+
+  const onAdd = async (event) => {
+    const jobId = event.target.id;
+    console.log(jobId);
+    try {
+      const { data: addData, error: addError } = await executeSaveJob({
+        variables: { jobId },
+      });
+      if (addError) {
+        throw new Error("Something went wrong!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const styles = {
     header: {
@@ -52,6 +70,7 @@ export const ViewJobsPage = () => {
             salary={job.salary}
             date={new Date(job.closingDate)}
             key={job.id}
+            onAdd={onAdd}
           />
         ))}
       </Box>
