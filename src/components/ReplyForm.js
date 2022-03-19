@@ -89,7 +89,7 @@ export const ReplyForm = () => {
         error={!!errors.replyText}
         disabled={loading}
       />
-      {/* TODO: left align the SAVE button on large screens. Below code isn't doing it. */}
+      {/* TODO: left align the submit button on large screens. Below code isn't doing it. */}
       <Stack direction="row" justifyContent={isMobile ? "center" : "end"}>
         <LoadingButton
           loading={loading}
@@ -100,7 +100,7 @@ export const ReplyForm = () => {
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >
-          Save
+          Submit Reply
         </LoadingButton>
       </Stack>
       {error && (

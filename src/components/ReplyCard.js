@@ -10,14 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ReplyForm } from "../components/ReplyForm";
 import { useAuth } from "../contexts/AppProvider";
 
-export const ReplyCard = ({
-  id,
-  text,
-  username,
-  college,
-  createdAt,
-  replies,
-}) => {
+export const ReplyCard = ({ id, username, replies }) => {
   const styles = {
     header: {
       paddingTop: 3,
@@ -33,11 +26,10 @@ export const ReplyCard = ({
 
   return (
     <>
-      <h1>ReplyCard here</h1>
       {replies?.length > 0 && (
         <Card sx={{ minWidth: 275, mb: "25px" }}>
           {replies.map((reply) => (
-            <Box sx={{ p: "8px" }}>
+            <Box sx={{ p: "16px" }}>
               <Typography id={reply.id}>{reply.text}</Typography>
               <Typography
                 variant="body2"
@@ -63,7 +55,7 @@ export const ReplyCard = ({
             sx={{ mt: 2 }}
             //   onClick= {onDelete}
           >
-            Delete Post
+            Delete Reply
           </Button>
         )} */}
         </Card>
@@ -71,3 +63,5 @@ export const ReplyCard = ({
     </>
   );
 };
+
+// card should contain DELETE & EDIT reply buttons (for signed-in reply owner)

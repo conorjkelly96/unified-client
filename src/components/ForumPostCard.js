@@ -75,4 +75,4 @@ export const ForumPostCard = ({
   );
 };
 
-// card should contain: 1) REPLY button, 2-3) DELETE & EDIT buttons (for signed-in post owner), 4-5) DELETE & EDIT reply buttons (for signed-in reply owner)
+// card should contain EDIT post button (for signed-in post owner)
