@@ -8,13 +8,16 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { ItemCard } from "../components/ItemCard";
 import { VIEW_ALL_ITEMS, VIEW_MY_ITEMS_FOR_SALE } from "../queries";
-import { DELETE_ITEM } from "../mutations";
+import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 
 export const Marketplace = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("allItems");
   const [itemsToDisplay, setItemsToDisplay] = useState([]);
   const [interestedItems, setInterestedItems] = useState([]);
+
+  const [executeAddItemToInterested, addItemToInterested] =
+    useMutation(ADD_TO_MY_ITEMS);
 
   const {
     data: itemData,
@@ -70,28 +73,23 @@ export const Marketplace = () => {
     }
   };
 
+  const onAddItemToInterested = async (event) => {
+    event.preventDefault();
+
+    const { id } = selectedValue;
+
+    await executeAddItemToInterested({
+      variables: {
+        itemId: id,
+      },
+    });
+  };
+
   // redirect to the single item page
   const viewListing = (event) => () => {
     console.log(event);
     const itemId = event.target.id;
     navigate(`listing/${itemId}`, { replace: true });
-  };
-
-  // create function to handle a quick 'add to interested' item
-  const handleAddToInterested = async (itemId) => {
-    // find the item in `interestedItems` state by the matching id
-    const itemToSave = interestedItems.find((item) => item.id === itemId);
-
-    console.log(itemToSave);
-
-    // check if the user is logged in
-
-    try {
-      // send a response to the back end to add an item to the interested items array
-      // if item successfully saves to user's account, return success
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   const styles = {
@@ -131,7 +129,7 @@ export const Marketplace = () => {
                 onDelete={onDelete}
                 key={item.id}
                 viewListing={viewListing}
-                handleAddToInterested={handleAddToInterested}
+                onAddItemToInterested={onAddItemToInterested}
               />
             );
           })}

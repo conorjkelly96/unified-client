@@ -23,7 +23,7 @@ export const ItemCard = ({
   images,
   onDelete,
   viewListing,
-  handleAddToInterested,
+  onAddItemToInterested,
 }) => {
   const { user } = useAuth();
 
@@ -118,7 +118,7 @@ export const ItemCard = ({
                 endIcon={<BoltIcon />}
                 color="warning"
                 sx={{ marginLeft: "8px" }}
-                onClick={handleAddToInterested}
+                onClick={onAddItemToInterested}
               >
                 Quick Add To Interested
               </Button>
