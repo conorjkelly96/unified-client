@@ -109,3 +109,23 @@ export const GET_FORUM_POSTS = gql`
     }
   }
 `;
+
+export const GET_SINGLE_ITEM_DATA = gql`
+  query Query {
+    getSingleItemData {
+      id
+      itemName
+      itemDescription
+      category
+      status
+      condition
+      price
+      quantity
+      seller {
+        id
+        username
+      }
+      images
+    }
+  }
+`;

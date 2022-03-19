@@ -4,8 +4,25 @@ import { Button, Grid, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import BoltIcon from "@mui/icons-material/Bolt";
+import { useQuery } from "@apollo/client";
+import { GET_SINGLE_ITEM_DATA } from "../queries";
+import { useParams } from "react-router-dom";
+import { Error } from "../pages/Error";
+import { Spinner } from "./Spinner";
 
 export const ViewSingleItemForm = () => {
+  let { id } = useParams();
+
+  const {
+    loading: itemLoading,
+    error: itemError,
+    data: itemData,
+  } = useQuery(GET_SINGLE_ITEM_DATA, {
+    variables: {
+      _id: id,
+    },
+  });
+
   const onContactSeller = () => {
     console.log("contact seller");
   };
@@ -31,6 +48,16 @@ export const ViewSingleItemForm = () => {
       textAlign: "center",
     },
   };
+
+  if (itemError) {
+    return <Error />;
+  }
+
+  if (itemLoading) {
+    return <Spinner />;
+  }
+
+  console.log(itemData);
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
