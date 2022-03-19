@@ -41,7 +41,7 @@ export const ImageUpload = ({ imageUrl, setImageUrl, fileName }) => {
         setImages([]);
         setS3FileName(`${fileName}/${file.name}`);
       } else {
-        console.log("failed to upload image");
+        console.log("Failed to upload image.");
       }
     } catch (error) {
       console.log(error);
@@ -52,7 +52,7 @@ export const ImageUpload = ({ imageUrl, setImageUrl, fileName }) => {
     try {
       const s3Data = await ReactS3Client.deleteFile(s3FileName);
 
-      console.log(s3Data);
+
 
       if (s3Data.status === 204) {
         setImageUrl();

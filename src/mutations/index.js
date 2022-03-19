@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// AUTH
 export const SIGNUP_STAFF = gql`
   mutation SignupStaff($input: SignupStaffInput!) {
     signupStaff(input: $input) {
@@ -35,21 +36,6 @@ export const LOGIN_STAFF = gql`
   }
 `;
 
-export const CREATE_ITEM = gql`
-  mutation CreateItem($input: CreateItemInput!) {
-    createItem(input: $input) {
-      itemName
-      itemDescription
-      category
-      status
-      condition
-      price
-      quantity
-      images
-    }
-  }
-`;
-
 export const LOGIN_STUDENT = gql`
   mutation LoginStudent($input: LoginInput!) {
     loginStudent(input: $input) {
@@ -71,6 +57,23 @@ export const LOGIN_STUDENT = gql`
   }
 `;
 
+// MARKET
+export const CREATE_ITEM = gql`
+  mutation CreateItem($input: CreateItemInput!) {
+    createItem(input: $input) {
+      itemName
+      itemDescription
+      category
+      status
+      condition
+      price
+      quantity
+      images
+    }
+  }
+`;
+
+// JOBS
 export const CREATE_JOB = gql`
   mutation Mutation($newJobInput: CreateJobInput!) {
     createJob(newJobInput: $newJobInput) {
@@ -98,6 +101,21 @@ export const DELETE_ITEM = gql`
   mutation Mutation($itemId: String!) {
     deleteItem(itemId: $itemId) {
       id
+    }
+  }
+`;
+
+// FORUM
+
+export const CREATE_FORUM_POST = gql`
+  mutation Mutation($forumPost: ForumPostInput!) {
+    createForumPost(forumPost: $forumPost) {
+      postText
+      postedBy {
+        id
+      }
+      createdAt
+      replies
     }
   }
 `;
