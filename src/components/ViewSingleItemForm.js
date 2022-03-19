@@ -4,13 +4,20 @@ import { Button, Grid, Modal, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import BoltIcon from "@mui/icons-material/Bolt";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_SINGLE_ITEM_DATA } from "../queries";
 import { useParams } from "react-router-dom";
 import { Error } from "../pages/Error";
 import { Spinner } from "./Spinner";
+import { useState } from "react";
+import { ADD_TO_MY_ITEMS } from "../mutations";
 
 export const ViewSingleItemForm = () => {
+  const [selectedItem, setSelectedItem] = useState();
+  const [interestedItems, setInterestedItems] = useState([]);
+  const [executeAddItemToInterested, addItemToInterested] =
+    useMutation(ADD_TO_MY_ITEMS);
+
   let { id } = useParams();
 
   const {
@@ -23,33 +30,25 @@ export const ViewSingleItemForm = () => {
     },
   });
 
-  const onContactSeller = () => {
+  const onContactSeller = (event) => {
+    console.log(event.target.id);
     return <Modal />;
   };
 
-  const styles = {
-    container: {
-      backgroundColor: "#fff",
-    },
-    header: {
-      paddingTop: 2,
-      paddingBottom: 2,
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: 4,
-    },
-    loadingButton: { marginTop: 3, marginBottom: 2 },
-    errorContainer: {
-      marginTop: 2,
-      color: "#d32f2f",
-      textAlign: "center",
-    },
+  // When a user selects Quick Add To Interested, add the item to their interested array
+  const onAddItemToInterested = async (event) => {
+    const itemId = event.target.id;
+    setSelectedItem(itemId);
+
+    await executeAddItemToInterested({
+      variables: {
+        itemId: itemId,
+      },
+    });
   };
 
   if (itemError) {
+    console.log(itemError);
     return <Error />;
   }
 
@@ -57,7 +56,7 @@ export const ViewSingleItemForm = () => {
     return <Spinner />;
   }
 
-  console.log(itemData);
+  console.log(itemData.getSingleItemData);
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
@@ -65,12 +64,12 @@ export const ViewSingleItemForm = () => {
         <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
         <Box sx={{ px: "32px", paddingTop: "40px" }}>
           <ItemCard
-            itemName={"itemName"}
-            itemDescription={"itemDescription"}
-            category={"category"}
-            condition={"condition"}
-            price={"price"}
-            quantity={"quantity"}
+            itemName={itemData.getSingleItemData.itemName}
+            itemDescription={itemData.getSingleItemData.itemDescription}
+            category={itemData.getSingleItemData.category}
+            condition={itemData.getSingleItemData.condition}
+            price={itemData.getSingleItemData.price}
+            quantity={itemData.getSingleItemData.price}
           />
           <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
             <Button
