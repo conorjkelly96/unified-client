@@ -28,6 +28,7 @@ export const ReplyForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -42,8 +43,8 @@ export const ReplyForm = () => {
         },
       });
 
-      if (data) {
-        // reload page components
+      if (data?.forumReply) {
+        setValue("replyText", "");
       }
     } catch (error) {
       console.log(error);
@@ -62,7 +63,6 @@ export const ReplyForm = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      px: 4,
     },
     loadingButton: { marginTop: 2, marginBottom: 2 },
     errorContainer: {

@@ -45,6 +45,18 @@ export const ForumPostCard = ({
           {" posted "}
           {createdAt}
         </Typography>
+        <Typography
+          variant="h6"
+          gutterBottom
+          component="h2"
+          align="center"
+          sx={{ paddingTop: 1 }}
+        >
+          {replies.length}
+          {replies.length === 1 ? " Reply" : " Replies"}
+        </Typography>
+        <ReplyForm />
+        <ReplyCard replies={replies} />
         {user.username === username && (
           <Button
             id={id}
@@ -55,37 +67,12 @@ export const ForumPostCard = ({
             sx={{ mt: 2 }}
             //   onClick= {onDelete}
           >
-            Delete
+            Delete Post
           </Button>
         )}
       </CardContent>
-      <Typography
-        variant="h6"
-        gutterBottom
-        component="h2"
-        align="center"
-        sx={{ paddingTop: 1 }}
-      >
-        {replies.length}
-        {replies.length === 1 ? " Reply" : " Replies"}
-      </Typography>
-      <ReplyForm />
-      <ReplyCard replies={replies} />
-      {/* <CardActions>
-        <Stack direction={"row"} sx={{ justifyContent: "center" }}>
-          <Box sx={{ marginBottom: "10px" }}>
-            <Button
-              size="small"
-              variant="contained"
-              color="info"
-              sx={{ marginLeft: "8px" }}
-            >
-              View
-            </Button> */}
-
-      {/* </Box>
-        </Stack>
-      </CardActions> */}
     </Card>
   );
 };
+
+// card should contain: 1) REPLY button, 2-3) DELETE & EDIT buttons (for signed-in post owner), 4-5) DELETE & EDIT reply buttons (for signed-in reply owner)

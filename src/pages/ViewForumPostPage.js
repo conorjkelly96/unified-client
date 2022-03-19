@@ -27,38 +27,6 @@ export const ViewForumPostPage = () => {
   //   const [executeDeleteReply, { loading: deleteReplyLoading, error: deleteReplyError }] =
   //     useMutation(DELETE_FORUM_REPLY);
 
-  //   const [postData, setPostData] = useState([]);
-
-  //   useEffect(() => {
-  //     const getForumPostData = async () => {
-  //       try {
-  //         const { data: forumPostData, error: forumPostError } =
-  //           await executeGetForumPost({
-  //             variables: {
-  //               postId: id,
-  //             },
-  //           });
-
-  //         console.log(postData);
-
-  //         if (forumPostError) {
-  //           throw new Error("Something went wrong.");
-  //         }
-
-  //         // console.log(forumPostData.getForumPost);
-
-  //         setPostData(forumPostData.getForumPost);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     getForumPostData();
-  //   }, [postData, executeGetForumPost]);
-
-  // display ForumPostCard, mapping through replies; pass data values to ForumPostCard as props
-
-  // card should contain: 1) REPLY button, 2-3) DELETE & EDIT buttons (for signed-in post owner), 4-5) DELETE & EDIT reply buttons (for signed-in reply owner)
-
   const styles = {
     header: {
       paddingTop: 3,
