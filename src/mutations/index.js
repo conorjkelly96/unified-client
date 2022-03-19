@@ -101,3 +101,11 @@ export const DELETE_ITEM = gql`
     }
   }
 `;
+
+export const ADD_TO_MY_ITEMS = gql`
+  mutation Mutation($itemId: String!) {
+    saveToMyItems(itemId: $itemId) {
+      id
+    }
+  }
+`;
