@@ -10,6 +10,7 @@ import { JobBoardPage } from "../pages/JobBoardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
 import { CreateItemPage } from "../pages/CreateItemPage";
+import { SingleItemPage } from "../pages/SingleItemPage";
 import { Navbar } from "./Navbar";
 import { CreateJobPage } from "../pages/CreateJobPage";
 import { ViewJobsPage } from "../pages/ViewJobsPage";
@@ -41,7 +42,7 @@ export const AppRouter = () => {
             <Route path="/job-board" element={<JobBoardPage />} />
             <Route path="/create-job" element={<CreateJobPage />} />
             <Route path="/create-item" element={<CreateItemPage />} />
-            <Route path="/create-item" element={<CreateItemPage />} />
+            <Route path={`/listing/:id`} element={<SingleItemPage />} />
             <Route path="/my-jobs" element={<ViewCreatedJobs />} />
           </>
         ) : (

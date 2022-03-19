@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import PreviewIcon from "@mui/icons-material/Preview";
+import BoltIcon from "@mui/icons-material/Bolt";
 import { useAuth } from "../contexts/AppProvider";
 
 export const ItemCard = ({
@@ -20,6 +22,8 @@ export const ItemCard = ({
   seller,
   images,
   onDelete,
+  viewListing,
+  handleAddToInterested,
 }) => {
   const { user } = useAuth();
 
@@ -73,15 +77,6 @@ export const ItemCard = ({
       </CardContent>
       <CardActions>
         <Box>
-          <Button
-            size="small"
-            component="a"
-            target="_blank"
-            // href={url}
-            sx={{ marginBottom: "16px" }}
-          >
-            {!seller ? "" : "lol"}
-          </Button>
           {seller && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
@@ -105,19 +100,27 @@ export const ItemCard = ({
               >
                 Delete
               </Button>
-            </Box>
-          )}
-          {!seller && (
-            <Box sx={{ marginBottom: "10px" }}>
               <Button
+                id={id}
                 variant="contained"
                 size="small"
-                endIcon={<EditIcon />}
-                color="info"
+                endIcon={<PreviewIcon />}
+                color="success"
                 sx={{ marginLeft: "8px" }}
-                // onClick={}
+                onClick={viewListing}
               >
-                Mark Interested
+                View Listing
+              </Button>
+              <Button
+                id={id}
+                variant="contained"
+                size="small"
+                endIcon={<BoltIcon />}
+                color="warning"
+                sx={{ marginLeft: "8px" }}
+                onClick={handleAddToInterested}
+              >
+                Quick Add To Interested
               </Button>
             </Box>
           )}
