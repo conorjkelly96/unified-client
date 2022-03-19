@@ -67,10 +67,23 @@ export const ViewCreatedJobs = () => {
     }
   };
 
-  const onAdd = (event) => {
+  const onAdd = async (event) => {
     const jobId = event.target.id;
     console.log(jobId);
+    try {
+      const { data: addData, error: addError } = await executeSaveJob({
+        variables: { jobId },
+      });
+      if (addError) {
+        throw new Error("Something went wrong!");
+      }
+
+      setJobsData(addData.addJob);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   const styles = {
     header: {
       paddingTop: 3,
@@ -133,6 +146,7 @@ export const ViewCreatedJobs = () => {
                 date={new Date(staffJob.closingDate)}
                 key={staffJob.id}
                 onDelete={onDelete}
+                onSave={onAdd}
               />
             ))}
           </Box>
