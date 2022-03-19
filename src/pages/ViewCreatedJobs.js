@@ -1,21 +1,20 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
-import { useAuth } from "../contexts/AppProvider";
+
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
 export const ViewCreatedJobs = () => {
   const [executeGetStaffJobs, { loading: staffJobsLoading }] =
     useLazyQuery(GET_STAFF_JOBS);
-  console.log(staffJobsLoading);
 
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
@@ -57,7 +56,7 @@ export const ViewCreatedJobs = () => {
         },
       });
       if (deleteError) {
-        throw new Error("something went wrong!");
+        throw new Error("Something went wrong!");
       }
 
       setJobsData(deleteData.deleteJob);
@@ -78,8 +77,6 @@ export const ViewCreatedJobs = () => {
       margin: "auto",
     },
   };
-
-  console.log(jobsData);
 
   return (
     <>

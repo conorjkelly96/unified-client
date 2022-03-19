@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// SIGNUP
 export const COLLEGES = gql`
   query Query($id: ID!) {
     colleges(id: $id) {
@@ -17,6 +18,7 @@ export const UNIVERSITIES = gql`
   }
 `;
 
+// JOBS
 export const JOBS = gql`
   query Query {
     jobs {
@@ -47,6 +49,23 @@ export const GET_STAFF_JOBS = gql`
       createdAt
       salary
       closingDate
+    }
+  }
+`;
+
+// FORUM
+export const GET_FORUM_POSTS = gql`
+  query Query {
+    forumPosts {
+      id
+      postText
+      postedBy {
+        username
+        college
+        id
+      }
+      createdAt
+      replies
     }
   }
 `;
