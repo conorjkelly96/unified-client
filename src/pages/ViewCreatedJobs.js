@@ -6,14 +6,8 @@ import Button from "@mui/material/Button";
 
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
-import { DELETE_JOB_LISTING } from "../mutations";
+import { DELETE_JOB_LISTING, SAVE_JOB } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
-<<<<<<< HEAD
-import { SAVE_JOB } from "../mutations";
-import { useAuth } from "../contexts/AppProvider";
-=======
-
->>>>>>> 4faeb1b (ForumPostCard)
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
@@ -24,7 +18,8 @@ export const ViewCreatedJobs = () => {
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
 
-  const [executeSaveJob, { loading, error }] = useMutation(SAVE_JOB);
+  const [executeSaveJob, { loading: loadingSaveJob, error: saveJobError }] =
+    useMutation(SAVE_JOB);
 
   const [jobsData, setJobsData] = useState([]);
 
