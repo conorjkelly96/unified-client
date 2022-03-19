@@ -9,7 +9,6 @@ import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
 
-import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
 export const ViewCreatedJobs = () => {
@@ -30,8 +29,6 @@ export const ViewCreatedJobs = () => {
         if (staffJobsError) {
           throw new Error("Something went wrong.");
         }
-
-        console.log("staffJobsData:", jobsData);
 
         setJobsData(staffJobsData.getStaffJobs);
       } catch (error) {

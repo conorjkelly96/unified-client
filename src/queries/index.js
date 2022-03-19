@@ -80,6 +80,7 @@ export const GET_FORUM_POST = gql`
       postedBy {
         id
         username
+        college
       }
       createdAt
       replies {
