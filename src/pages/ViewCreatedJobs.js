@@ -8,7 +8,7 @@ import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
-import {}
+import { SAVE_JOB } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
@@ -20,6 +20,8 @@ export const ViewCreatedJobs = () => {
 
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
+
+  const [executeSaveJob, { loading, error }] = useMutation(SAVE_JOB);
 
   const [jobsData, setJobsData] = useState([]);
 
@@ -67,7 +69,10 @@ export const ViewCreatedJobs = () => {
     }
   };
 
-  const onAdd = (event) => {};
+  const onAdd = (event) => {
+    const jobId = event.target.id;
+    console.log(jobId);
+  };
   const styles = {
     header: {
       paddingTop: 3,
