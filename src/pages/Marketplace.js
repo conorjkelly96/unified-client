@@ -90,7 +90,7 @@ export const Marketplace = () => {
 
     await executeAddItemToInterested({
       variables: {
-        id: itemId,
+        itemId: itemId,
       },
     });
   };
