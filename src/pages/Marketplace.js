@@ -13,6 +13,7 @@ import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 export const Marketplace = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("allItems");
+  const [selectedItem, setSelectedItem] = useState();
   const [itemsToDisplay, setItemsToDisplay] = useState([]);
   const [interestedItems, setInterestedItems] = useState([]);
 
@@ -73,14 +74,23 @@ export const Marketplace = () => {
     }
   };
 
-  const onAddItemToInterested = async (event) => {
-    event.preventDefault();
+  //   export const ADD_TO_MY_ITEMS = gql`
+  //   mutation Mutation($itemId: String!) {
+  //     saveToMyItems(itemId: $itemId) {
+  //       id
+  //     }
+  //   }
+  // `;
 
-    const { id } = selectedValue;
+  // When a user selects Quick Add To Interested, add the item to their interested array
+  const onAddItemToInterested = async (event) => {
+    const itemId = event.target.id;
+    console.log(typeof itemId);
+    setSelectedItem(itemId);
 
     await executeAddItemToInterested({
       variables: {
-        itemId: id,
+        id: itemId,
       },
     });
   };
