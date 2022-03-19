@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 
 import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
-import { DELETE_JOB_LISTING, SAVE_JOB } from "../mutations";
+import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
 import { Error } from "./Error";
 import { useEffect, useState } from "react";

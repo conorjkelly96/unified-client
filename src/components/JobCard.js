@@ -22,7 +22,7 @@ export const JobCard = ({
   onAdd,
 }) => {
   const { user } = useAuth();
-  console.log(closingDate);
+
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>

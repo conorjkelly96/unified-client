@@ -15,8 +15,7 @@ export const ViewSavedJobs = () => {
   const [executeGetStudentJobs, { loading: studentJobsLoading }] =
     useLazyQuery(GET_STUDENT_JOBS);
 
-  const [executeSaveJob, { loading: loadingSaveJob, error: saveJobError }] =
-    useMutation(SAVE_JOB);
+  const [executeSaveJob, { loading, error }] = useMutation(SAVE_JOB);
 
   const [jobsData, setJobsData] = useState([]);
 
