@@ -33,36 +33,36 @@ export const Navbar = () => {
       textDecoration: "none",
       fontSize: "20px",
       "&:hover": {
-        borderBottom: "1px solid white",
+        border: "1px solid white",
       },
     },
   };
 
   const staffStyles = {
     navContainer: {
-      backgroundColor: "orange",
+      backgroundColor: "#E57A44",
     },
     link: {
-      color: "blue",
+      color: "#009FFD",
     },
     button: {
-      backgroundColor: "blue",
-      color: "orange",
+      backgroundColor: "#009FFD",
+      color: "#E57A44",
       marginLeft: "10px",
       "&:hover": {
-        border: "1px solid blue",
-        backgroundColor: "orange",
-        color: "blue",
+        border: "1px solid white",
+        backgroundColor: "#009FFD",
+        color: "white",
       },
     },
   };
 
   const studentStyles = {
     navContainer: {
-      backgroundColor: "blue",
+      backgroundColor: "#009FFD",
     },
     link: {
-      color: "orange",
+      color: "#E57A44",
     },
   };
 
@@ -72,6 +72,16 @@ export const Navbar = () => {
     },
     link: {
       color: "black",
+    },
+    button: {
+      backgroundColor: "#009FFD",
+      color: "",
+      marginLeft: "",
+      "&:hover": {
+        border: "1px solid black",
+        backgroundColor: "#009FFD",
+        color: "black",
+      },
     },
   };
 
@@ -161,21 +171,23 @@ export const Navbar = () => {
         <Box sx={styles.logo}>
           {isLoggedIn ? (
             <img
-              src="./images/unified-navbar-logo.png"
+              src="./images/unified-private-nav.png"
               alt="Unified Logo"
               style={{
                 width: "140px",
                 height: "100%",
+                padding: "10px",
               }}
             />
           ) : (
             // TO DO: Add public landing image here
             <img
-              src="./images/unified-navbar-logo.png"
+              src="./images/unified-public-nav.png"
               alt="Unified Logo"
               style={{
                 width: "140px",
                 height: "100%",
+                padding: "10px",
               }}
             />
           )}
