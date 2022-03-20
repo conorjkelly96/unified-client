@@ -118,4 +118,10 @@ export const CREATE_FORUM_POST = gql`
   }
 `;
 
-
+export const CREATE_FORUM_REPLY = gql`
+  mutation Mutation($postId: ID!, $input: ForumReplyInput) {
+    forumReply(postId: $postId, input: $input) {
+      id
+    }
+  }
+`;

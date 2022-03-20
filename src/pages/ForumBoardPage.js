@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Error } from "./Error";
-import { ForumPostCard } from "../components/ForumPostCard";
+import { ForumPreviewCard } from "../components/ForumPreviewCard";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material";
@@ -68,7 +68,7 @@ export const ForumBoardPage = () => {
       {!loading && data && (
         <Box sx={styles.container}>
           {data.forumPosts.map((post) => (
-            <ForumPostCard
+            <ForumPreviewCard
               id={post.id}
               text={post.postText.slice(0, 100)}
               username={post.postedBy.username}
