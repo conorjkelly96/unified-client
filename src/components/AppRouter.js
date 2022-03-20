@@ -6,10 +6,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { AboutUsPage } from "../pages/AboutUsPage";
 import { BuySellPage } from "../pages/BuySellPage";
 import { ForumBoardPage } from "../pages/ForumBoardPage";
-<<<<<<< HEAD
 import { ViewSavedJobs } from "../pages/ViewSavedJobs";
-=======
->>>>>>> main
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
 import { CreateItemPage } from "../pages/CreateItemPage";

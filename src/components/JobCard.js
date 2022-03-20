@@ -85,6 +85,7 @@ export const JobCard = ({
           {user?.__typename === "Student" && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
+                id={id}
                 variant="contained"
                 size="small"
                 endIcon={<EditIcon />}

@@ -1,5 +1,5 @@
-import { useMutation } from "@apollo/client";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { SAVE_JOB } from "../mutations";
@@ -11,16 +11,20 @@ export const ViewJobsPage = () => {
   const { data, loading, error } = useQuery(JOBS);
   const [executeSaveJob, { loading: saveJobLoading, error: saveJobError }] =
     useMutation(SAVE_JOB);
+  const navigate = useNavigate();
 
   const onAdd = async (event) => {
     const jobId = event.target.id;
-    console.log(jobId);
+
     try {
       const { data: addData, error: addError } = await executeSaveJob({
         variables: { jobId },
       });
       if (addError) {
         throw new Error("Something went wrong!");
+      }
+      if (addData) {
+        navigate("/job-board", { replace: true });
       }
     } catch (error) {
       console.log(error);
@@ -63,6 +67,7 @@ export const ViewJobsPage = () => {
       <Box sx={styles.container}>
         {data?.jobs?.map((job) => (
           <JobCard
+            id={job.id}
             title={job.title}
             description={job.description}
             company={job.company}
