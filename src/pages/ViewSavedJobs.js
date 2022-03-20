@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -12,28 +12,16 @@ import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
 export const ViewSavedJobs = () => {
-  const [executeGetStudentJobs, { loading: studentJobsLoading }] =
-    useLazyQuery(GET_STUDENT_JOBS);
+  const {
+    data: studentJobsData,
+    error: studentJobsError,
+    loading: studentJobsLoading,
+  } = useQuery(GET_STUDENT_JOBS);
 
-  const [jobsData, setJobsData] = useState([]);
+  console.log(studentJobsData);
+  // const [jobsData, setJobsData] = useState([]);
 
-  useEffect(() => {
-    const getStudentJobsData = async () => {
-      try {
-        const { data: studentJobsData, error: studentJobsError } =
-          await executeGetStudentJobs();
-
-        if (studentJobsError) {
-          throw new Error("Something went wrong");
-        }
-
-        setJobsData(studentJobsData.getStudentJobs);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getStudentJobsData();
-  }, [jobsData, executeGetStudentJobs]);
+  // setJobsData(studentJobsData.getStudentJobs);
 
   const styles = {
     header: {
@@ -56,7 +44,7 @@ export const ViewSavedJobs = () => {
         </Box>
       )}
 
-      {!studentJobsLoading && !jobsData.length ? (
+      {!studentJobsLoading && !studentJobsData?.getStudentJobs.length ? (
         <Box sx={{ height: "75vh" }}>
           <Typography
             variant="h4"
@@ -75,7 +63,7 @@ export const ViewSavedJobs = () => {
         </Box>
       ) : null}
 
-      {!studentJobsLoading && jobsData.length ? (
+      {!studentJobsLoading && studentJobsData?.getStudentJobs.length ? (
         <>
           <Typography
             variant="h4"
@@ -87,7 +75,7 @@ export const ViewSavedJobs = () => {
             Your Job Listings
           </Typography>
           <Box sx={styles.container}>
-            {jobsData.map((studentJob) => (
+            {studentJobsData.getStudentJobs.map((studentJob) => (
               <JobCard
                 id={studentJob.id}
                 title={studentJob.title}
