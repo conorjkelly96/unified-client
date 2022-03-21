@@ -1,14 +1,12 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
+import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 
 import { Error } from "./Error";
 import { Spinner } from "../components/Spinner";
 import { ForumPostCard } from "../components/ForumPostCard";
 import { GET_FORUM_POST } from "../queries";
-import Typography from "@mui/material/Typography";
 
 export const ViewForumPostPage = () => {
   let { id } = useParams();
@@ -22,10 +20,6 @@ export const ViewForumPostPage = () => {
       postId: id,
     },
   });
-
-  // TODO: add delete forum reply mutation
-  //   const [executeDeleteReply, { loading: deleteReplyLoading, error: deleteReplyError }] =
-  //     useMutation(DELETE_FORUM_REPLY);
 
   const styles = {
     header: {
@@ -51,7 +45,7 @@ export const ViewForumPostPage = () => {
       </Box>
     );
   }
-  console.log(postData);
+
   return (
     <>
       {!postLoading && postData?.getForumPost && (
