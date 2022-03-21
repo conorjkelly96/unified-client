@@ -15,7 +15,6 @@ export const Marketplace = () => {
   const [selectedValue, setSelectedValue] = useState("allItems");
   const [selectedItem, setSelectedItem] = useState();
   const [itemsToDisplay, setItemsToDisplay] = useState([]);
-  const [interestedItems, setInterestedItems] = useState([]);
 
   const [executeAddItemToInterested, addItemToInterested] =
     useMutation(ADD_TO_MY_ITEMS);

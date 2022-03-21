@@ -14,7 +14,7 @@ import { ADD_TO_MY_ITEMS } from "../mutations";
 
 export const ViewSingleItemForm = () => {
   const [selectedItem, setSelectedItem] = useState();
-  const [interestedItems, setInterestedItems] = useState([]);
+
   const [executeAddItemToInterested, addItemToInterested] =
     useMutation(ADD_TO_MY_ITEMS);
 
@@ -31,7 +31,6 @@ export const ViewSingleItemForm = () => {
   });
 
   const onContactSeller = (event) => {
-    console.log(event.target.id);
     return <Modal />;
   };
 
@@ -42,7 +41,7 @@ export const ViewSingleItemForm = () => {
 
     await executeAddItemToInterested({
       variables: {
-        itemId: itemId,
+        itemId: id,
       },
     });
   };
@@ -55,8 +54,6 @@ export const ViewSingleItemForm = () => {
   if (itemLoading) {
     return <Spinner />;
   }
-
-  console.log(itemData.getSingleItemData);
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
@@ -73,7 +70,7 @@ export const ViewSingleItemForm = () => {
           />
           <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
             <Button
-              id={"id"}
+              id={itemData.getSingleItemData.id}
               variant="contained"
               size="small"
               endIcon={<ContactSupportIcon />}
@@ -84,13 +81,13 @@ export const ViewSingleItemForm = () => {
               Contact Seller
             </Button>
             <Button
-              id={"id"}
+              id={itemData.getSingleItemData.id}
               variant="contained"
               size="small"
               endIcon={<BoltIcon />}
               color="warning"
               sx={{ marginLeft: "8px" }}
-              // onClick={onAddItemToInterested}
+              onClick={onAddItemToInterested}
             >
               Add To Interested
             </Button>
