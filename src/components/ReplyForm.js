@@ -62,7 +62,6 @@ export const ReplyForm = () => {
     form: {
       display: "flex",
       flexDirection: "column",
-      alignItems: "center",
     },
     loadingButton: { marginTop: 2, marginBottom: 2 },
     errorContainer: {
@@ -89,8 +88,7 @@ export const ReplyForm = () => {
         error={!!errors.replyText}
         disabled={loading}
       />
-      {/* TODO: left align the submit button on large screens. Below code isn't doing it. */}
-      <Stack direction="row" justifyContent={isMobile ? "center" : "end"}>
+      <Stack direction="row" justifyContent={isMobile ? "center" : "start"}>
         <LoadingButton
           loading={loading}
           loadingIndicator="Loading..."

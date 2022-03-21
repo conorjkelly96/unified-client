@@ -9,6 +9,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ReplyForm } from "../components/ReplyForm";
 import { ReplyCard } from "../components/ReplyCard";
 import { useAuth } from "../contexts/AppProvider";
+import { useTheme } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 export const ForumPostCard = ({
   id,
@@ -18,6 +20,18 @@ export const ForumPostCard = ({
   createdAt,
   replies,
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // TODO: add delete forum reply mutation
+  //   const [executeDeleteReply, { loading: deleteReplyLoading, error: deleteReplyError }] =
+  //     useMutation(DELETE_FORUM_REPLY);
+
+  // get id from params
+  // delete by id
+  // delete replies?
+  // redirect to main forum post page
+
   const styles = {
     header: {
       paddingTop: 3,
@@ -46,24 +60,26 @@ export const ForumPostCard = ({
           {createdAt}
         </Typography>
         {user.username === username && (
-          <Button
-            id={id}
-            variant="contained"
-            size="small"
-            endIcon={<DeleteIcon />}
-            color="error"
-            sx={{ mt: 2 }}
-            //   onClick= {onDelete}
-          >
-            Delete Post
-          </Button>
+          <Stack direction="row" justifyContent={isMobile ? "center" : "start"}>
+            <Button
+              id={id}
+              variant="contained"
+              size="small"
+              endIcon={<DeleteIcon />}
+              color="error"
+              sx={{ mt: 2 }}
+              //   onClick= {onDelete}
+            >
+              Delete Post
+            </Button>
+          </Stack>
         )}
         <Typography
           variant="h6"
           gutterBottom
           component="h2"
           align="center"
-          sx={{ paddingTop: 1 }}
+          sx={{ paddingTop: 2 }}
         >
           {replies.length}
           {replies.length === 1 ? " Reply" : " Replies"}

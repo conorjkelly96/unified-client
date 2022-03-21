@@ -25,9 +25,11 @@ export const ReplyCard = ({ id, username, replies }) => {
   };
 
   return (
-    <Card sx={{ minWidth: 275, mt: "25px" }}>
+    <Card
+      sx={{ minWidth: 275, mt: "25px", maxHeight: "300px", overflow: "auto" }}
+    >
       {replies.map((reply) => (
-        <Box sx={{ p: "16px" }}>
+        <Box key={reply.id} sx={{ p: "16px" }}>
           <Typography id={reply.id}>{reply.text}</Typography>
           <Typography
             variant="body2"
