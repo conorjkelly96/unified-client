@@ -73,7 +73,7 @@ export const ForumBoardPage = () => {
               username={post.postedBy.username}
               college={post.postedBy.college}
               createdAt={post.createdAt}
-              replies={post.replies}
+              replyCount={post.replyCount}
               key={post.id}
             />
           ))}
