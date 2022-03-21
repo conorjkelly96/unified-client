@@ -20,9 +20,6 @@ export const CreateJobPage = () => {
 
   const navigate = useNavigate();
 
-  // const { user } = useAuth();
-  // const userId = user.id;
-
   const {
     register,
     handleSubmit,
