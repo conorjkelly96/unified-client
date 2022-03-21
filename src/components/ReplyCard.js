@@ -25,27 +25,27 @@ export const ReplyCard = ({ id, username, replies }) => {
   };
 
   return (
-    <>
-      {replies?.length > 0 && (
-        <Card sx={{ minWidth: 275, mb: "25px" }}>
-          {replies.map((reply) => (
-            <Box sx={{ p: "16px" }}>
-              <Typography id={reply.id}>{reply.text}</Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ mt: "16px", mb: "5px" }}
-              >
-                {"— "}
-                {reply.user}
-                {" posted "}
-                {reply.createdAt}
-              </Typography>
-              <Divider />
-            </Box>
-          ))}
+    <Card
+      sx={{ minWidth: 275, mt: "25px", maxHeight: "300px", overflow: "auto" }}
+    >
+      {replies.map((reply) => (
+        <Box key={reply.id} sx={{ p: "16px" }}>
+          <Typography id={reply.id}>{reply.text}</Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mt: "16px", mb: "5px" }}
+          >
+            {"— "}
+            {reply.user}
+            {" posted "}
+            {reply.createdAt}
+          </Typography>
+          <Divider />
+        </Box>
+      ))}
 
-          {/* {user.username === username && (
+      {/* {user.username === username && (
           <Button
             id={id}
             variant="contained"
@@ -58,9 +58,7 @@ export const ReplyCard = ({ id, username, replies }) => {
             Delete Reply
           </Button>
         )} */}
-        </Card>
-      )}
-    </>
+    </Card>
   );
 };
 
