@@ -30,10 +30,6 @@ export const ForumPostCard = ({
   const [executeDeletePost, { loading, error }] =
     useMutation(DELETE_FORUM_POST);
 
-  // TODO: add delete forum reply mutation
-  //   const [executeDeleteReply, { loading: deleteReplyLoading, error: deleteReplyError }] =
-  //     useMutation(DELETE_FORUM_REPLY);
-
   const onPostDelete = async (event) => {
     const deleteForumPostId = event.target.id;
 

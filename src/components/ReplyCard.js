@@ -5,25 +5,36 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
+import { useMutation } from "@apollo/client";
 
-import { useAuth } from "../contexts/AppProvider";
+import { DELETE_FORUM_REPLY } from "../mutations";
+import { useState } from "react";
 
 export const ReplyCard = ({ id, username, replies }) => {
-  // const { user } = useAuth();
-  const styles = {
-    header: {
-      paddingTop: 3,
-      paddingBottom: 2,
-    },
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      maxWidth: 750,
-      margin: "auto",
-    },
-  };
+  const [repliesData, setRepliesData] = useState([]);
 
-  console.log(replies);
+  // TODO: add delete forum reply mutation
+  // const [executeDeleteReply, { loading, error }] =
+  //   // useMutation(DELETE_FORUM_REPLY);
+
+  const onReplyDelete = async (event) => {
+    const replyId = event.currentTarget.id;
+    try {
+      const { data: deleteReplyData } = await executeDeleteReply({
+        // TODO add variables
+        variables: {},
+      });
+
+      if (deleteReplyData) {
+        // TODO: refresh page by setting state
+        // setRepliesData(deleteReplyData.)
+      } else {
+        throw new Error("Something went wrong!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Card
@@ -43,20 +54,20 @@ export const ReplyCard = ({ id, username, replies }) => {
           {username === reply.user && (
             <>
               <IconButton
-                id={id}
+                id={reply.id}
                 size="small"
                 color="info"
                 sx={{ mt: 2, mb: 1.5, border: "1px solid" }}
-                //   onClick= {onDelete}
+                //   onClick= {onReplyEdit}
               >
                 <EditIcon />
               </IconButton>
               <IconButton
-                id={id}
+                id={reply.id}
                 size="small"
                 color="error"
                 sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
-                //   onClick= {onDelete}
+                onClick={onReplyDelete}
               >
                 <DeleteIcon />
               </IconButton>
