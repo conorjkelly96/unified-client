@@ -12,12 +12,13 @@ import { ForumPostCard } from "../components/ForumPostCard";
 import { GET_FORUM_POST } from "../queries";
 
 export const ViewForumPostPage = () => {
-  let { id } = useParams();
+  const { id } = useParams();
 
   const {
     loading: postLoading,
     error: postError,
     data: postData,
+    refetch,
   } = useQuery(GET_FORUM_POST, {
     variables: {
       postId: id,
@@ -83,6 +84,7 @@ export const ViewForumPostPage = () => {
               college={postData.getForumPost.postedBy.college}
               createdAt={postData.getForumPost.createdAt}
               replies={postData.getForumPost.replies}
+              refetch={refetch}
             />
           </Box>
         </>
