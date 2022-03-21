@@ -1,16 +1,18 @@
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useTheme } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 import { ReplyForm } from "../components/ReplyForm";
 import { ReplyCard } from "../components/ReplyCard";
 import { useAuth } from "../contexts/AppProvider";
-import { useTheme } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
+import { useMutation } from "@apollo/client";
+import { DELETE_FORUM_POST } from "../mutations";
 
 export const ForumPostCard = ({
   id,
@@ -22,15 +24,36 @@ export const ForumPostCard = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate();
+
+  const [
+    executeDeletePost,
+    { loading: deletePostLoading, error: deletePostError },
+  ] = useMutation(DELETE_FORUM_POST);
 
   // TODO: add delete forum reply mutation
   //   const [executeDeleteReply, { loading: deleteReplyLoading, error: deleteReplyError }] =
   //     useMutation(DELETE_FORUM_REPLY);
 
-  // get id from params
-  // delete by id
-  // delete replies?
-  // redirect to main forum post page
+  const onDelete = async (event) => {
+    const deleteForumPostId = event.target.id;
+    console.log(deleteForumPostId);
+    try {
+      const { data } = await executeDeletePost({
+        variables: {
+          deleteForumPostId,
+        },
+      });
+
+      if (data) {
+        navigate("/forum", { replace: true });
+      } else {
+        throw new Error("Something went wrong!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const styles = {
     header: {
@@ -50,7 +73,9 @@ export const ForumPostCard = ({
   return (
     <Card sx={{ minWidth: 275, mb: "25px", p: 3 }}>
       <CardContent>
-        <Typography id={id}>{text}</Typography>
+        <Typography component="p" variant="h6" id={id}>
+          {text}
+        </Typography>
 
         <Typography color="text.secondary" sx={{ mt: "16px", mb: "5px" }}>
           {username}
@@ -68,7 +93,7 @@ export const ForumPostCard = ({
               endIcon={<DeleteIcon />}
               color="error"
               sx={{ mt: 2 }}
-              //   onClick= {onDelete}
+              onClick={onDelete}
             >
               Delete Post
             </Button>

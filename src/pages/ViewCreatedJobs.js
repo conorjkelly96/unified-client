@@ -15,6 +15,7 @@ export const ViewCreatedJobs = () => {
   const [executeGetStaffJobs, { loading: staffJobsLoading }] =
     useLazyQuery(GET_STAFF_JOBS);
 
+  // TODO: handle this loading and error
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
 
@@ -52,6 +53,7 @@ export const ViewCreatedJobs = () => {
           jobId,
         },
       });
+
       if (deleteError) {
         throw new Error("Something went wrong!");
       }
@@ -82,6 +84,7 @@ export const ViewCreatedJobs = () => {
           <Spinner />
         </Box>
       )}
+
       {!staffJobsLoading && !jobsData.length ? (
         <Box sx={{ height: "75vh" }}>
           <Typography

@@ -125,3 +125,11 @@ export const CREATE_FORUM_REPLY = gql`
     }
   }
 `;
+
+export const DELETE_FORUM_POST = gql`
+  mutation Mutation($deleteForumPostId: ID!) {
+    deleteForumPost(id: $deleteForumPostId) {
+      id
+    }
+  }
+`;
