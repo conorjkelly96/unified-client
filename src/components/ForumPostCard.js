@@ -26,10 +26,9 @@ export const ForumPostCard = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
 
-  const [
-    executeDeletePost,
-    { loading: deletePostLoading, error: deletePostError },
-  ] = useMutation(DELETE_FORUM_POST);
+  // TODO: handle this loading and error?
+  const [executeDeletePost, { loading, error }] =
+    useMutation(DELETE_FORUM_POST);
 
   // TODO: add delete forum reply mutation
   //   const [executeDeleteReply, { loading: deleteReplyLoading, error: deleteReplyError }] =
@@ -37,7 +36,7 @@ export const ForumPostCard = ({
 
   const onDelete = async (event) => {
     const deleteForumPostId = event.target.id;
-    console.log(deleteForumPostId);
+
     try {
       const { data } = await executeDeletePost({
         variables: {
