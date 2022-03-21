@@ -21,19 +21,16 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm();
 
-  const commentBody = watch("commentBody");
-  const item = itemId;
-
-  const onSubmit = async ({ commentBody, item }) => {
+  const onSubmit = async ({ commentBody }) => {
     try {
+      console.log(itemId);
       const { data } = await executeComment({
         variables: {
           input: {
             commentBody: commentBody.trim(),
-            itemId: item.trim(),
+            itemId,
           },
         },
       });
@@ -75,14 +72,14 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Subscribe</DialogTitle>
       <DialogContent>
+        <DialogContentText>
+          Let the seller know your questions below:
+        </DialogContentText>
         <Box
           component="form"
           sx={styles.form}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <DialogContentText>
-            Let the seller know your questions below:
-          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -93,12 +90,12 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
             variant="standard"
             {...register("commentBody", { required: true })}
           />
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit">Submit</Button>
+          </DialogActions>
         </Box>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Submit</Button>
-      </DialogActions>
     </Dialog>
   );
 };
