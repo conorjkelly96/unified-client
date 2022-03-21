@@ -11,9 +11,18 @@ import { Error } from "../pages/Error";
 import { Spinner } from "./Spinner";
 import { useState } from "react";
 import { ADD_TO_MY_ITEMS } from "../mutations";
+import { ContactSellerModal } from "./ContactSellerModal";
 
 export const ViewSingleItemForm = () => {
   const [selectedItem, setSelectedItem] = useState();
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
   const [executeAddItemToInterested, addItemToInterested] =
     useMutation(ADD_TO_MY_ITEMS);
@@ -29,10 +38,6 @@ export const ViewSingleItemForm = () => {
       id: id,
     },
   });
-
-  const onContactSeller = (event) => {
-    return <Modal />;
-  };
 
   // When a user selects Quick Add To Interested, add the item to their interested array
   const onAddItemToInterested = async (event) => {
@@ -57,6 +62,11 @@ export const ViewSingleItemForm = () => {
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+      <ContactSellerModal
+        handleClose={handleClose}
+        handleClickOpen={handleClickOpen}
+        open={open}
+      />
       <Grid item xs={12} lg={6}>
         <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
         <Box sx={{ px: "32px", paddingTop: "40px" }}>
@@ -76,7 +86,7 @@ export const ViewSingleItemForm = () => {
               endIcon={<ContactSupportIcon />}
               color="success"
               sx={{ marginLeft: "8px" }}
-              onClick={onContactSeller}
+              onClick={handleClickOpen}
             >
               Contact Seller
             </Button>
