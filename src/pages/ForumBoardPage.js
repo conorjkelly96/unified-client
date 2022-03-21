@@ -30,7 +30,7 @@ export const ForumBoardPage = () => {
     },
     container: {
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column-reverse",
       maxWidth: 750,
       margin: "auto",
     },
@@ -44,7 +44,7 @@ export const ForumBoardPage = () => {
         </Box>
       )}
 
-      <Box sx={{ maxWidth: "750px", margin: "auto" }}>
+      <Box sx={{ margin: "auto", marginRight: 4 }}>
         <Stack
           direction="row"
           justifyContent={isMobile ? "center" : "end"}

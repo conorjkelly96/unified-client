@@ -1,14 +1,14 @@
 import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "@apollo/client";
+import { useState } from "react";
 
 import { DELETE_FORUM_REPLY } from "../mutations";
-import { useState } from "react";
 
 export const ReplyCard = ({ id, username, replies }) => {
   // TODO: Complete delete forum reply
@@ -37,9 +37,7 @@ export const ReplyCard = ({ id, username, replies }) => {
   // };
 
   return (
-    <Card
-      sx={{ minWidth: 275, mt: "25px", maxHeight: "300px", overflow: "auto" }}
-    >
+    <Card sx={{ minWidth: 275, maxHeight: "300px", overflow: "auto" }}>
       {replies.map((reply) => (
         <Box key={reply.id} sx={{ px: 2 }}>
           <Typography id={reply.id} sx={{ mt: 2 }}>

@@ -100,7 +100,7 @@ export const ForumPostCard = ({
           gutterBottom
           component="h2"
           align="center"
-          sx={{ paddingTop: 2 }}
+          sx={{ mt: 4 }}
         >
           {replies.length}
           {replies.length === 1 ? " Reply" : " Replies"}

@@ -62,6 +62,7 @@ export const ReplyForm = () => {
     form: {
       display: "flex",
       flexDirection: "column",
+      mb: 4,
     },
     loadingButton: { marginTop: 2, marginBottom: 2 },
     errorContainer: {
