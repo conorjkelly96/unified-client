@@ -17,6 +17,7 @@ import { Footer } from "../components/Footer";
 import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 import { CreatePostPage } from "../pages/CreatePostPage";
 import { ViewForumPostPage } from "../pages/ViewForumPostPage";
+import { JobBoardPage } from "../pages/JobBoardPage";
 
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
