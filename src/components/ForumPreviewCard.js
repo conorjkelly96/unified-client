@@ -22,7 +22,7 @@ export const ForumPreviewCard = ({
           {"..."}
         </Typography>
 
-        <Typography color="text.secondary" sx={{ mt: "8px", mb: "5px" }}>
+        <Typography color="text.secondary" sx={{ mt: 1, mb: "5px" }}>
           {username}
           {college ? ", " : ""}
           {college || " "}
@@ -43,7 +43,7 @@ export const ForumPreviewCard = ({
               variant="contained"
               color="info"
               href={`/forum/${id}`}
-              sx={{ marginLeft: "8px" }}
+              sx={{ marginLeft: 1 }}
             >
               View
             </Button>

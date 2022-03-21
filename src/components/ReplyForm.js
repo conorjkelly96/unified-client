@@ -82,7 +82,6 @@ export const ReplyForm = () => {
         multiline
         minRows={2}
         fullWidth
-        autoFocus
         helperText={"Limit 2000 characters"}
         {...register("replyText", { required: true, maxLength: 2000 })}
         error={!!errors.replyText}

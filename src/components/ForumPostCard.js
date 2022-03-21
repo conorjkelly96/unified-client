@@ -34,7 +34,7 @@ export const ForumPostCard = ({
   //   const [executeDeleteReply, { loading: deleteReplyLoading, error: deleteReplyError }] =
   //     useMutation(DELETE_FORUM_REPLY);
 
-  const onDelete = async (event) => {
+  const onPostDelete = async (event) => {
     const deleteForumPostId = event.target.id;
 
     try {
@@ -54,19 +54,6 @@ export const ForumPostCard = ({
     }
   };
 
-  const styles = {
-    header: {
-      paddingTop: 3,
-      paddingBottom: 2,
-    },
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      maxWidth: 750,
-      margin: "auto",
-    },
-  };
-
   const { user } = useAuth();
 
   return (
@@ -76,8 +63,8 @@ export const ForumPostCard = ({
           {text}
         </Typography>
 
-        <Typography color="text.secondary" sx={{ mt: "16px", mb: "5px" }}>
-          {username}
+        <Typography color="text.secondary" sx={{ mt: 2, mb: "5px" }}>
+          {user.username === username ? "You" : username}
           {college ? ", " : ""}
           {college || " "}
           {" posted "}
@@ -92,7 +79,7 @@ export const ForumPostCard = ({
               endIcon={<DeleteIcon />}
               color="error"
               sx={{ mt: 2 }}
-              onClick={onDelete}
+              onClick={onPostDelete}
             >
               Delete Post
             </Button>
@@ -110,7 +97,7 @@ export const ForumPostCard = ({
         </Typography>
         <ReplyForm />
         {replies?.length > 0 ? (
-          <ReplyCard replies={replies} />
+          <ReplyCard replies={replies} username={username} />
         ) : (
           <Typography>No replies</Typography>
         )}
