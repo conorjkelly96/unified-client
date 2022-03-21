@@ -12,7 +12,7 @@ export const ForumPreviewCard = ({
   username,
   college,
   createdAt,
-  replies,
+  replyCount,
 }) => {
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
@@ -31,7 +31,7 @@ export const ForumPreviewCard = ({
         </Typography>
 
         <Typography variant="body2">
-          {replies.length} {"replies"}
+          {replyCount} {"replies"}
         </Typography>
       </CardContent>
       <CardActions>

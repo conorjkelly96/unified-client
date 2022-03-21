@@ -19,6 +19,7 @@ export const ViewForumPostPage = () => {
     variables: {
       postId: id,
     },
+    pollInterval: 5000,
   });
 
   const styles = {

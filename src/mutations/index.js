@@ -106,7 +106,6 @@ export const CREATE_FORUM_POST = gql`
         id
       }
       createdAt
-      replies
     }
   }
 `;

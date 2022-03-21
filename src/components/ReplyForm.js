@@ -18,7 +18,7 @@ export const ReplyForm = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [executeCreateForumReply, { loading, error }] = useMutation(
+  const [executeForumReply, { loading, error }] = useMutation(
     CREATE_FORUM_REPLY,
     {
       refetchQueries: [GET_FORUM_POST],
@@ -34,7 +34,7 @@ export const ReplyForm = () => {
 
   const onSubmit = async ({ replyText }) => {
     try {
-      const { data } = await executeCreateForumReply({
+      const { data } = await executeForumReply({
         variables: {
           postId: id,
           input: {
