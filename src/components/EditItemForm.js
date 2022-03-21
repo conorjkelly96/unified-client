@@ -16,12 +16,14 @@ import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
 import { GET_SINGLE_ITEM_DATA } from "../queries";
 import { Spinner } from "./Spinner";
+import { LoadingButton } from "@mui/lab";
 
 export const EditItemForm = () => {
-  const [executeCreateItem, { loading, error }] = useMutation(UPDATE_ITEM);
+  const [executeUpdateItem, { loading, error }] = useMutation(UPDATE_ITEM);
   const [uploadedImages, setUploadedImages] = useState([]);
 
   const { id } = useParams();
+  const itemId = id;
 
   const {
     loading: itemLoading,
@@ -40,15 +42,7 @@ export const EditItemForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm();
-
-  const itemName = watch("itemName", "");
-  const itemDescription = watch("itemDescription", "");
-  const category = watch("category", "");
-  const condition = watch("condition", "");
-  const price = watch("price", "");
-  const quantity = watch("quantity", "");
 
   const onSubmit = async ({
     itemName,
@@ -57,10 +51,12 @@ export const EditItemForm = () => {
     condition,
     price,
     quantity,
+    itemId,
   }) => {
     try {
-      const { data } = await executeCreateItem({
+      const { data } = await executeUpdateItem({
         variables: {
+          itemId,
           input: {
             itemName: itemName.trim(),
             itemDescription: itemDescription.trim(),
@@ -68,10 +64,11 @@ export const EditItemForm = () => {
             condition: condition.trim(),
             price: parseFloat(price),
             quantity: parseInt(quantity.trim(), 10),
-            images: uploadedImages,
           },
         },
       });
+
+      console.log(data);
 
       if (data) {
         console.log("success");
@@ -214,6 +211,18 @@ export const EditItemForm = () => {
                 setUploadedImages={setUploadedImages}
                 username={user.username}
               />
+              <LoadingButton
+                loading={loading}
+                loadingIndicator="Loading..."
+                variant="contained"
+                fullWidth
+                type="submit"
+                sx={styles.loadingButton}
+                color={error ? "error" : "primary"}
+                onClick={onSubmit}
+              >
+                Create Item
+              </LoadingButton>
             </Box>
           </Box>
 
@@ -230,12 +239,12 @@ export const EditItemForm = () => {
             <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
             <Box sx={{ px: "32px", paddingTop: "40px" }}>
               <ItemCard
-                itemName={itemName}
-                itemDescription={itemDescription}
-                category={category}
-                condition={condition}
-                price={price}
-                quantity={quantity}
+                itemName={itemData.getSingleItemData.itemName}
+                itemDescription={itemData.getSingleItemData.itemDescription}
+                category={itemData.getSingleItemData.category}
+                condition={itemData.getSingleItemData.condition}
+                price={itemData.getSingleItemData.price}
+                quantity={itemData.getSingleItemData.quantity}
               />
             </Box>
           </Grid>
