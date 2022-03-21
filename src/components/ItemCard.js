@@ -85,12 +85,13 @@ export const ItemCard = ({
                 endIcon={<EditIcon />}
                 color="info"
                 sx={{ marginLeft: "8px" }}
-                // onClick={}
+                href={`/edit-item/${id}`}
               >
                 Edit
               </Button>
               <Button
                 id={id}
+                itemId={id}
                 variant="contained"
                 size="small"
                 endIcon={<DeleteIcon />}

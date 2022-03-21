@@ -155,3 +155,21 @@ export const COMMENT_ON_ITEM = gql`
     }
   }
 `;
+
+export const UPDATE_ITEM = gql`
+  mutation Mutation($itemId: String!, $input: UpdateItemInput!) {
+    updateItem(itemId: $itemId, input: $input) {
+      itemName
+      itemDescription
+      category
+      status
+      condition
+      quantity
+      price
+      seller {
+        id
+        firstName
+      }
+    }
+  }
+`;

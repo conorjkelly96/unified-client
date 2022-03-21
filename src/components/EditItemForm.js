@@ -1,35 +1,41 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
-import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
 import { Grid, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
 
 // import { Spinner } from "./Spinner";
-import { CREATE_ITEM } from "../mutations";
-import { SuccessfulItemModal } from "./SuccessfulItemModal";
+import { UPDATE_ITEM } from "../mutations";
+
 import { useState } from "react";
 import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
+import { GET_SINGLE_ITEM_DATA } from "../queries";
 
-export const CreateItemForm = () => {
-  const [executeCreateItem, { loading, error }] = useMutation(CREATE_ITEM);
+export const EditItemForm = () => {
+  const [executeCreateItem, { loading, error }] = useMutation(UPDATE_ITEM);
   const [showNoBackEndModal, setNoBackEndModal] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
 
+  const { id } = useParams();
+  console.log(id);
+
+  const {
+    loading: itemLoading,
+    error: itemError,
+    data: itemData,
+  } = useQuery(GET_SINGLE_ITEM_DATA, {
+    variables: {
+      id: id,
+    },
+  });
+
   const { user } = useAuth();
   const navigate = useNavigate();
-
-  const onSubmitItemForm = () => {
-    setNoBackEndModal(true);
-  };
-
-  const handleClose = () => setNoBackEndModal(false);
 
   const {
     register,
@@ -46,6 +52,8 @@ export const CreateItemForm = () => {
   const condition = watch("condition", "");
   const price = watch("price", "");
   const quantity = watch("quantity", "");
+
+  console.log(itemData);
 
   const onSubmit = async ({
     itemName,
@@ -125,7 +133,7 @@ export const CreateItemForm = () => {
             <TextField
               margin="normal"
               id="itemName"
-              label="Item Name"
+              label={`${itemData.getSingleItemData.itemName}`}
               name="itemName"
               variant="outlined"
               fullWidth
@@ -136,7 +144,7 @@ export const CreateItemForm = () => {
             <TextField
               margin="normal"
               id="itemDescription"
-              label="Item Description"
+              label={`${itemData.getSingleItemData.itemDescription}`}
               name="itemDescription"
               variant="outlined"
               fullWidth
@@ -147,7 +155,7 @@ export const CreateItemForm = () => {
             <TextField
               margin="normal"
               id="category"
-              label="Category"
+              label={`${itemData.getSingleItemData.category}`}
               name="category"
               variant="outlined"
               fullWidth
@@ -159,7 +167,7 @@ export const CreateItemForm = () => {
               margin="normal"
               id="condition"
               label="Condition"
-              name="condition"
+              label={`${itemData.getSingleItemData.condition}`}
               variant="outlined"
               fullWidth
               {...register("condition", { required: true })}
@@ -169,7 +177,7 @@ export const CreateItemForm = () => {
             <TextField
               margin="normal"
               id="price"
-              label="Item Price"
+              label={`${itemData.getSingleItemData.price}`}
               name="price"
               variant="outlined"
               fullWidth
@@ -187,7 +195,6 @@ export const CreateItemForm = () => {
               type="number"
               margin="normal"
               id="quantity"
-              label="Quantity"
               name="quantity"
               variant="outlined"
               fullWidth

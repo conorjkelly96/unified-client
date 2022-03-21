@@ -203,6 +203,19 @@ export const CreateItemForm = () => {
               setUploadedImages={setUploadedImages}
               username={user.username}
             />
+            <LoadingButton
+              loading={loading}
+              loadingIndicator="Loading..."
+              variant="contained"
+              fullWidth
+              type="submit"
+              sx={styles.loadingButton}
+              startIcon={error && <ErrorIcon />}
+              color={error ? "error" : "primary"}
+              onClick={onSubmitItemForm}
+            >
+              Create Item
+            </LoadingButton>
           </Box>
         </Box>
 

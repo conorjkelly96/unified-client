@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import { Box } from "@mui/system";
 import Container from "@mui/material/Container";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -110,6 +110,11 @@ export const Marketplace = () => {
           <ToggleButton value="myItems">My Items</ToggleButton>
           <ToggleButton value="allItems">All Items</ToggleButton>
         </ToggleButtonGroup>
+        <Box sx={{ px: "32px", padding: "20px" }}>
+          <Button color="secondary" href="/create-item">
+            Sell an item today!
+          </Button>
+        </Box>
       </Container>
       <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
       <Box sx={{ px: "32px", paddingTop: "40px" }}>
