@@ -11,30 +11,30 @@ import { DELETE_FORUM_REPLY } from "../mutations";
 import { useState } from "react";
 
 export const ReplyCard = ({ id, username, replies }) => {
-  const [repliesData, setRepliesData] = useState([]);
+  // TODO: Complete delete forum reply
+  // const [repliesData, setRepliesData] = useState([]);
 
-  // TODO: add delete forum reply mutation
   // const [executeDeleteReply, { loading, error }] =
-  //   // useMutation(DELETE_FORUM_REPLY);
+  //   useMutation(DELETE_FORUM_REPLY);
 
-  const onReplyDelete = async (event) => {
-    const replyId = event.currentTarget.id;
-    try {
-      const { data: deleteReplyData } = await executeDeleteReply({
-        // TODO add variables
-        variables: {},
-      });
+  // const onReplyDelete = async (event) => {
+  //   const replyId = event.currentTarget.id;
+  //   try {
+  //     const { data: deleteReplyData } = await executeDeleteReply({
+  //       // TODO add variables
+  //       variables: {},
+  //     });
 
-      if (deleteReplyData) {
-        // TODO: refresh page by setting state
-        // setRepliesData(deleteReplyData.)
-      } else {
-        throw new Error("Something went wrong!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     if (deleteReplyData) {
+  //       // TODO: refresh page by setting state
+  //       // setRepliesData(deleteReplyData.deleteForumReply)
+  //     } else {
+  //       throw new Error("Something went wrong!");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Card
@@ -67,7 +67,7 @@ export const ReplyCard = ({ id, username, replies }) => {
                 size="small"
                 color="error"
                 sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
-                onClick={onReplyDelete}
+                // onClick={onReplyDelete}
               >
                 <DeleteIcon />
               </IconButton>

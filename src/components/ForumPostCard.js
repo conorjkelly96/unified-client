@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useTheme } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 
 import { ReplyForm } from "../components/ReplyForm";
 import { ReplyCard } from "../components/ReplyCard";
@@ -50,6 +51,8 @@ export const ForumPostCard = ({
     }
   };
 
+  const onPostEdit = async () => {};
+
   const { user } = useAuth();
 
   return (
@@ -72,9 +75,20 @@ export const ForumPostCard = ({
               id={id}
               variant="contained"
               size="small"
+              endIcon={<EditIcon />}
+              color="info"
+              sx={{ mt: 2 }}
+              onClick={onPostEdit}
+            >
+              Edit Post
+            </Button>
+            <Button
+              id={id}
+              variant="contained"
+              size="small"
               endIcon={<DeleteIcon />}
               color="error"
-              sx={{ mt: 2 }}
+              sx={{ mt: 2, marginLeft: 1 }}
               onClick={onPostDelete}
             >
               Delete Post
