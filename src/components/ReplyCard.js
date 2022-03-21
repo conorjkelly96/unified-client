@@ -4,7 +4,6 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 
@@ -51,15 +50,6 @@ export const ReplyCard = ({ id, username, replies }) => {
           </Typography>
           {username === reply.user && (
             <>
-              {/* <IconButton
-                id={reply.id}
-                size="small"
-                color="info"
-                sx={{ mt: 2, mb: 1.5, border: "1px solid" }}
-                //   onClick= {onReplyEdit}
-              >
-                <EditIcon />
-              </IconButton> */}
               <IconButton
                 id={reply.id}
                 size="small"

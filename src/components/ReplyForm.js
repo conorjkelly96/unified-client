@@ -83,7 +83,11 @@ export const ReplyForm = () => {
         multiline
         minRows={2}
         fullWidth
-        helperText={"Limit 2000 characters"}
+        helperText={
+          !!errors.replyText
+            ? "*Reply must be 1-2000 characters"
+            : "Limit 2000 characters"
+        }
         {...register("replyText", { required: true, maxLength: 2000 })}
         error={!!errors.replyText}
         disabled={loading}

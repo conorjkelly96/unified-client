@@ -17,7 +17,6 @@ import { Footer } from "../components/Footer";
 import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 import { CreatePostPage } from "../pages/CreatePostPage";
 import { ViewForumPostPage } from "../pages/ViewForumPostPage";
-import { TestEditable } from "../pages/TEST";
 
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
@@ -30,7 +29,6 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/test" element={<TestEditable />} />
 
         {isLoggedIn && user?.__typename === "Student" && (
           <>

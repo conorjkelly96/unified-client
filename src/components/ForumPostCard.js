@@ -8,15 +8,13 @@ import { useTheme } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import { useState } from "react";
 
 import { ReplyForm } from "../components/ReplyForm";
 import { ReplyCard } from "../components/ReplyCard";
 import { useAuth } from "../contexts/AppProvider";
 import { useMutation } from "@apollo/client";
 import { DELETE_FORUM_POST, UPDATE_FORUM_POST } from "../mutations";
-import { useRef, useState } from "react";
-import { Editable } from "./Editable";
-import { useForm } from "react-hook-form";
 import { EditableTextField } from "./EditableTextField";
 
 export const ForumPostCard = ({
@@ -30,12 +28,9 @@ export const ForumPostCard = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm();
-
-  const textareaRef = useRef();
-  const [description, setDescription] = useState(text);
   const [isEditable, setIsEditable] = useState();
 
   // TODO: handle this loading and error?
@@ -132,7 +127,7 @@ export const ForumPostCard = ({
             onSubmit={onSubmit}
             initialValue={text}
             onCancel={onCancel}
-            label="Post Text"
+            label="Post your question"
             name="postText"
             required
           />
@@ -158,5 +153,3 @@ export const ForumPostCard = ({
     </Card>
   );
 };
-
-// card should contain EDIT post button (for signed-in post owner)

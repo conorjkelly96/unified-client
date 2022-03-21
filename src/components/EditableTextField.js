@@ -34,6 +34,7 @@ export const EditableTextField = ({
           required,
         })}
         error={!!errors[name]}
+        helperText={!!errors[name] ? "*Post cannot be empty" : ""}
       />
       <Stack direction="row" justifyContent={isMobile ? "center" : "start"}>
         <Button
