@@ -34,7 +34,7 @@ export const ForumPostCard = ({
   const { user } = useAuth();
 
   return (
-    <Card sx={{ minWidth: 275, mb: "25px" }}>
+    <Card sx={{ minWidth: 275, mb: "25px", p: 3 }}>
       <CardContent>
         <Typography id={id}>{text}</Typography>
 
@@ -45,18 +45,6 @@ export const ForumPostCard = ({
           {" posted "}
           {createdAt}
         </Typography>
-        <Typography
-          variant="h6"
-          gutterBottom
-          component="h2"
-          align="center"
-          sx={{ paddingTop: 1 }}
-        >
-          {replies.length}
-          {replies.length === 1 ? " Reply" : " Replies"}
-        </Typography>
-        <ReplyForm />
-        <ReplyCard replies={replies} />
         {user.username === username && (
           <Button
             id={id}
@@ -69,6 +57,22 @@ export const ForumPostCard = ({
           >
             Delete Post
           </Button>
+        )}
+        <Typography
+          variant="h6"
+          gutterBottom
+          component="h2"
+          align="center"
+          sx={{ paddingTop: 1 }}
+        >
+          {replies.length}
+          {replies.length === 1 ? " Reply" : " Replies"}
+        </Typography>
+        <ReplyForm />
+        {replies?.length > 0 ? (
+          <ReplyCard replies={replies} />
+        ) : (
+          <Typography>No replies</Typography>
         )}
       </CardContent>
     </Card>
