@@ -6,7 +6,6 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { AboutUsPage } from "../pages/AboutUsPage";
 import { Marketplace } from "../pages/Marketplace";
 import { ForumBoardPage } from "../pages/ForumBoardPage";
-import { JobBoardPage } from "../pages/JobBoardPage";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
 import { CreateItemPage } from "../pages/CreateItemPage";
@@ -17,6 +16,7 @@ import { ViewJobsPage } from "../pages/ViewJobsPage";
 import { Footer } from "../components/Footer";
 import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 import { CreatePostPage } from "../pages/CreatePostPage";
+import { ViewForumPostPage } from "../pages/ViewForumPostPage";
 
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
@@ -31,7 +31,10 @@ export const AppRouter = () => {
         <Route path="/sign-up" element={<SignUpPage />} />
 
         {isLoggedIn && user?.__typename === "Student" && (
-          <Route path="/jobs" element={<ViewJobsPage />} />
+          <>
+            <Route path="/jobs" element={<ViewJobsPage />} />
+            <Route path={"/forum/:id"} element={<ViewForumPostPage />} />
+          </>
         )}
 
         {isLoggedIn ? (

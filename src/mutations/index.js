@@ -127,3 +127,19 @@ export const ADD_TO_MY_ITEMS = gql`
     }
   }
 `;
+
+export const CREATE_FORUM_REPLY = gql`
+  mutation Mutation($postId: ID!, $input: ForumReplyInput) {
+    forumReply(postId: $postId, input: $input) {
+      id
+    }
+  }
+`;
+
+export const DELETE_FORUM_POST = gql`
+  mutation Mutation($deleteForumPostId: ID!) {
+    deleteForumPost(id: $deleteForumPostId) {
+      id
+    }
+  }
+`;
