@@ -6,6 +6,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { AboutUsPage } from "../pages/AboutUsPage";
 import { BuySellPage } from "../pages/BuySellPage";
 import { ForumBoardPage } from "../pages/ForumBoardPage";
+import { ViewSavedJobs } from "../pages/ViewSavedJobs";
 import { useAuth } from "../contexts/AppProvider";
 import { Error } from "../pages/Error";
 import { CreateItemPage } from "../pages/CreateItemPage";
@@ -34,6 +35,7 @@ export const AppRouter = () => {
         {isLoggedIn && user?.__typename === "Student" && (
           <>
             <Route path="/jobs" element={<ViewJobsPage />} />
+            <Route path="/job-board" element={<ViewSavedJobs />} />
             <Route path={"/forum/:id"} element={<ViewForumPostPage />} />
           </>
         )}

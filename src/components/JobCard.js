@@ -17,8 +17,10 @@ export const JobCard = ({
   company,
   url,
   salary,
-  date,
+  closingDate,
   onDelete,
+  onAdd,
+  alreadySaved,
 }) => {
   const { user } = useAuth();
 
@@ -42,7 +44,7 @@ export const JobCard = ({
 
         <Typography>
           {"Closing Date: "}
-          {date ? format(date, "MM/dd/yyyy") : "CLOSING DATE"}
+          {closingDate ? format(closingDate, "MM/dd/yyyy") : "CLOSING DATE"}
         </Typography>
       </CardContent>
       <CardActions>
@@ -54,7 +56,7 @@ export const JobCard = ({
             href={url}
             sx={{ marginBottom: 2 }}
           >
-            {user?.__typename === "Staff" ? "Link" : "Learn More & Apply"}
+            "Learn More & Apply"
           </Button>
           {user?.__typename === "Staff" && (
             <Box sx={{ marginBottom: "10px" }}>
@@ -78,6 +80,35 @@ export const JobCard = ({
                 onClick={onDelete}
               >
                 Delete
+              </Button>
+            </Box>
+          )}
+          {user?.__typename === "Student" && !alreadySaved && (
+            <Box sx={{ marginBottom: "10px" }}>
+              <Button
+                id={id}
+                variant="contained"
+                size="small"
+                endIcon={<EditIcon />}
+                color="info"
+                sx={{ marginLeft: "8px" }}
+                onClick={onAdd}
+              >
+                Save job
+              </Button>
+            </Box>
+          )}
+          {user?.__typename === "Student" && alreadySaved && (
+            <Box sx={{ marginBottom: "10px" }}>
+              <Button
+                id={id}
+                variant="contained"
+                size="small"
+                // endIcon={<EditIcon />}
+                color="success"
+                sx={{ marginLeft: "8px" }}
+              >
+                Saved
               </Button>
             </Box>
           )}
