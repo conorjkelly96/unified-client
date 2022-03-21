@@ -143,3 +143,13 @@ export const DELETE_FORUM_POST = gql`
     }
   }
 `;
+
+export const COMMENT_ON_ITEM = gql`
+  mutation Mutation($itemId: String!, $input: ItemCommentInput) {
+    addCommentToItem(itemId: $itemId, input: $input) {
+      comments {
+        commentBody
+      }
+    }
+  }
+`;

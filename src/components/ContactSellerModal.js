@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export const ContactSellerModal = ({ handleClose, open }) => {
+export const ContactSellerModal = ({ handleClose, open, itemId }) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
@@ -19,7 +19,7 @@ export const ContactSellerModal = ({ handleClose, open }) => {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="comment"
             label="Questions"
             type="text"
             fullWidth

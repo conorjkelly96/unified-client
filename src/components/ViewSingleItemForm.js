@@ -66,6 +66,7 @@ export const ViewSingleItemForm = () => {
         handleClose={handleClose}
         handleClickOpen={handleClickOpen}
         open={open}
+        itemId={itemData.getSingleItemData.id}
       />
       <Grid item xs={12} lg={6}>
         <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
