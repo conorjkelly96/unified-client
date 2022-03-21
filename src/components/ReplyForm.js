@@ -16,7 +16,7 @@ import { useMediaQuery } from "@mui/material";
 export const ReplyForm = () => {
   let { id } = useParams();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [executeCreateForumReply, { loading, error }] = useMutation(
     CREATE_FORUM_REPLY,

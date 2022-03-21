@@ -51,7 +51,7 @@ export const ReplyCard = ({ id, username, replies }) => {
           </Typography>
           {username === reply.user && (
             <>
-              <IconButton
+              {/* <IconButton
                 id={reply.id}
                 size="small"
                 color="info"
@@ -59,7 +59,7 @@ export const ReplyCard = ({ id, username, replies }) => {
                 //   onClick= {onReplyEdit}
               >
                 <EditIcon />
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 id={reply.id}
                 size="small"

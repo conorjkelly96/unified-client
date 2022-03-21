@@ -29,7 +29,7 @@ export const ForumPostCard = ({
   refetch,
 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
@@ -87,20 +87,44 @@ export const ForumPostCard = ({
   return (
     <Card sx={{ minWidth: 275, mb: "25px", p: 3 }}>
       <CardContent>
-        {!isEditable && (
+        {!isEditable && user.username === username && (
           <>
             <Typography component="p" variant="h6" id={id}>
               {text}
             </Typography>
-            <Button
-              variant="contained"
-              size="small"
-              color="info"
-              sx={{ mt: 2 }}
-              onClick={() => setIsEditable({ name: "postText" })}
+            <Typography color="text.secondary" sx={{ mt: 2, mb: "5px" }}>
+              {user.username === username ? "You" : username}
+              {college ? ", " : ""}
+              {college || " "}
+              {" posted "}
+              {createdAt}
+            </Typography>
+            <Stack
+              direction="row"
+              justifyContent={isMobile ? "center" : "start"}
             >
-              Edit Post
-            </Button>
+              <Button
+                variant="contained"
+                size="small"
+                endIcon={<EditIcon />}
+                color="info"
+                sx={{ mt: 2 }}
+                onClick={() => setIsEditable({ name: "postText" })}
+              >
+                Edit Post
+              </Button>
+              <Button
+                id={id}
+                variant="contained"
+                size="small"
+                endIcon={<DeleteIcon />}
+                color="error"
+                sx={{ mt: 2, marginLeft: 1 }}
+                onClick={onPostDelete}
+              >
+                Delete Post
+              </Button>
+            </Stack>
           </>
         )}
         {isEditable?.name === "postText" && (
@@ -114,28 +138,6 @@ export const ForumPostCard = ({
           />
         )}
 
-        <Typography color="text.secondary" sx={{ mt: 2, mb: "5px" }}>
-          {user.username === username ? "You" : username}
-          {college ? ", " : ""}
-          {college || " "}
-          {" posted "}
-          {createdAt}
-        </Typography>
-        {user.username === username && (
-          <Stack direction="row" justifyContent={isMobile ? "center" : "start"}>
-            <Button
-              id={id}
-              variant="contained"
-              size="small"
-              endIcon={<DeleteIcon />}
-              color="error"
-              sx={{ mt: 2, marginLeft: 1 }}
-              onClick={onPostDelete}
-            >
-              Delete Post
-            </Button>
-          </Stack>
-        )}
         <Typography
           variant="h6"
           gutterBottom
