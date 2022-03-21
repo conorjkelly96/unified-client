@@ -113,8 +113,9 @@ export const EditItemForm = () => {
     console.log(itemError);
   }
 
-  {
-    !itemLoading && !itemError && (
+  return (
+    !itemLoading &&
+    !itemError && (
       <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
         <Grid item xs={12} lg={6}>
           <Box sx={styles.container}>
@@ -137,7 +138,7 @@ export const EditItemForm = () => {
               <TextField
                 margin="normal"
                 id="itemName"
-                label={`${itemData.getSingleItemData.itemName}`}
+                label={itemData.getSingleItemData.itemName}
                 name="itemName"
                 variant="outlined"
                 fullWidth
@@ -148,7 +149,7 @@ export const EditItemForm = () => {
               <TextField
                 margin="normal"
                 id="itemDescription"
-                label={`${itemData.getSingleItemData.itemDescription}`}
+                label={itemData.getSingleItemData.itemDescription}
                 name="itemDescription"
                 variant="outlined"
                 fullWidth
@@ -159,7 +160,7 @@ export const EditItemForm = () => {
               <TextField
                 margin="normal"
                 id="category"
-                label={`${itemData.getSingleItemData.category}`}
+                label={itemData.getSingleItemData.category}
                 name="category"
                 variant="outlined"
                 fullWidth
@@ -170,7 +171,7 @@ export const EditItemForm = () => {
               <TextField
                 margin="normal"
                 id="condition"
-                label={`${itemData.getSingleItemData.condition}`}
+                label={itemData.getSingleItemData.condition}
                 variant="outlined"
                 fullWidth
                 {...register("condition", { required: true })}
@@ -180,7 +181,7 @@ export const EditItemForm = () => {
               <TextField
                 margin="normal"
                 id="price"
-                label={`${itemData.getSingleItemData.price}`}
+                label={itemData.getSingleItemData.price}
                 name="price"
                 variant="outlined"
                 fullWidth
@@ -240,6 +241,6 @@ export const EditItemForm = () => {
           </Grid>
         </Grid>
       </Grid>
-    );
-  }
+    )
+  );
 };
