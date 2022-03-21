@@ -20,6 +20,7 @@ export const JobCard = ({
   closingDate,
   onDelete,
   onAdd,
+  alreadySaved,
 }) => {
   const { user } = useAuth();
 
@@ -82,7 +83,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" && (
+          {user?.__typename === "Student" && !alreadySaved && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
                 id={id}
@@ -94,6 +95,20 @@ export const JobCard = ({
                 onClick={onAdd}
               >
                 Save job
+              </Button>
+            </Box>
+          )}
+          {user?.__typename === "Student" && alreadySaved && (
+            <Box sx={{ marginBottom: "10px" }}>
+              <Button
+                id={id}
+                variant="contained"
+                size="small"
+                // endIcon={<EditIcon />}
+                color="success"
+                sx={{ marginLeft: "8px" }}
+              >
+                Saved
               </Button>
             </Box>
           )}

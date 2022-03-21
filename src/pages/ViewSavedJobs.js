@@ -18,11 +18,6 @@ export const ViewSavedJobs = () => {
     loading: studentJobsLoading,
   } = useQuery(GET_STUDENT_JOBS);
 
-  console.log(studentJobsData);
-  // const [jobsData, setJobsData] = useState([]);
-
-  // setJobsData(studentJobsData.getStudentJobs);
-
   const styles = {
     header: {
       paddingTop: 3,
@@ -85,7 +80,6 @@ export const ViewSavedJobs = () => {
                 salary={studentJob.salary}
                 date={new Date(studentJob.closingDate)}
                 key={studentJob.id}
-                // onSave={onAdd}
               />
             ))}
           </Box>
