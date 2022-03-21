@@ -22,7 +22,6 @@ export const ItemCard = ({
   seller,
   images,
   onDelete,
-  viewListing,
   onAddItemToInterested,
 }) => {
   const { user } = useAuth();
@@ -91,7 +90,6 @@ export const ItemCard = ({
               </Button>
               <Button
                 id={id}
-                itemId={id}
                 variant="contained"
                 size="small"
                 endIcon={<DeleteIcon />}

@@ -23,7 +23,6 @@ export const EditItemForm = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
 
   const { id } = useParams();
-  const itemId = id;
 
   const {
     loading: itemLoading,
@@ -51,12 +50,11 @@ export const EditItemForm = () => {
     condition,
     price,
     quantity,
-    itemId,
   }) => {
     try {
       const { data } = await executeUpdateItem({
         variables: {
-          itemId,
+          itemId: id,
           input: {
             itemName: itemName.trim(),
             itemDescription: itemDescription.trim(),
@@ -221,7 +219,7 @@ export const EditItemForm = () => {
                 color={error ? "error" : "primary"}
                 onClick={onSubmit}
               >
-                Create Item
+                Edit Item
               </LoadingButton>
             </Box>
           </Box>

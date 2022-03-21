@@ -85,14 +85,6 @@ export const Marketplace = () => {
     });
   };
 
-  // redirect to the single item page
-  const viewListing = (event) => () => {
-    const itemId = event.target.id;
-    console.log("redirect to", itemId);
-    setSelectedItem(itemId);
-    navigate(`listing/${itemId}`, { replace: true });
-  };
-
   const styles = {
     container: { textAlign: "center" },
   };
@@ -134,7 +126,6 @@ export const Marketplace = () => {
                 seller={item.seller.username}
                 onDelete={onDelete}
                 key={item.id}
-                viewListing={viewListing}
                 onAddItemToInterested={onAddItemToInterested}
               />
             );
