@@ -54,7 +54,7 @@ export const JobCard = ({
             component="a"
             target="_blank"
             href={url}
-            sx={{ marginBottom: "16px" }}
+            sx={{ marginBottom: 2 }}
           >
             "Learn More & Apply"
           </Button>
@@ -65,7 +65,7 @@ export const JobCard = ({
                 size="small"
                 endIcon={<EditIcon />}
                 color="info"
-                sx={{ marginLeft: "8px" }}
+                sx={{ marginLeft: 1 }}
                 // onClick={}
               >
                 Edit
@@ -76,7 +76,7 @@ export const JobCard = ({
                 size="small"
                 endIcon={<DeleteIcon />}
                 color="error"
-                sx={{ marginLeft: "8px" }}
+                sx={{ marginLeft: 1 }}
                 onClick={onDelete}
               >
                 Delete
