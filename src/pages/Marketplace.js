@@ -9,12 +9,14 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { ItemCard } from "../components/ItemCard";
 import { VIEW_ALL_ITEMS, VIEW_MY_ITEMS_FOR_SALE } from "../queries";
 import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
+import { useAuth } from "../contexts/AppProvider";
 
 export const Marketplace = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("allItems");
   const [selectedItem, setSelectedItem] = useState();
   const [itemsToDisplay, setItemsToDisplay] = useState([]);
+  const { user } = useAuth();
 
   const [executeAddItemToInterested, addItemToInterested] =
     useMutation(ADD_TO_MY_ITEMS);
@@ -85,6 +87,15 @@ export const Marketplace = () => {
     });
   };
 
+  // Get the seller ID so we can match it against the user ID and conditionally render buttons
+  const sellerId = itemsToDisplay.map((item) => {
+    const seller = item.seller.id;
+    return seller;
+  });
+
+  // Pass this down with the seller id so we can match them off and conditionally render buttons on the item card
+  const userId = user.id;
+
   const styles = {
     container: { textAlign: "center" },
   };
@@ -124,6 +135,8 @@ export const Marketplace = () => {
                 price={item.price}
                 quantity={item.quantity}
                 seller={item.seller.username}
+                sellerId={sellerId}
+                userId={userId}
                 onDelete={onDelete}
                 key={item.id}
                 onAddItemToInterested={onAddItemToInterested}
