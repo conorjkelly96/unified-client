@@ -136,7 +136,17 @@ export const CREATE_FORUM_REPLY = gql`
   }
 `;
 
-//* export const DELETE_FORUM_REPLY = gql``;
+export const DELETE_FORUM_REPLY = gql`
+  mutation Mutation($postId: ID!, $replyId: ID!) {
+    deleteForumReply(postId: $postId, replyId: $replyId) {
+      id
+      replies {
+        id
+        text
+      }
+    }
+  }
+`;
 
 export const EDIT_FORUM_POST = gql`
   mutation Mutation($updateForumPostId: ID!, $input: ForumPostInput!) {
