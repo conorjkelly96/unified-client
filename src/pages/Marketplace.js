@@ -135,7 +135,7 @@ export const Marketplace = () => {
                 price={item.price}
                 quantity={item.quantity}
                 seller={item.seller.username}
-                sellerId={sellerId}
+                sellerId={item.seller.id}
                 userId={userId}
                 onDelete={onDelete}
                 key={item.id}
