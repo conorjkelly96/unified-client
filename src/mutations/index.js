@@ -140,14 +140,6 @@ export const DELETE_FORUM_REPLY = gql`
   }
 `;
 
-export const EDIT_FORUM_POST = gql`
-  mutation Mutation($updateForumPostId: ID!, $input: ForumPostInput!) {
-    updateForumPost(id: $updateForumPostId, input: $input) {
-      id
-    }
-  }
-`;
-
 export const UPDATE_FORUM_POST = gql`
   mutation Mutation($updateForumPostId: ID!, $input: ForumPostInput!) {
     updateForumPost(id: $updateForumPostId, input: $input) {
