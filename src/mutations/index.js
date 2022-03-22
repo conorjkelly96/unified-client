@@ -115,7 +115,6 @@ export const CREATE_FORUM_POST = gql`
         id
       }
       createdAt
-      replies
     }
   }
 `;
@@ -152,6 +151,10 @@ export const EDIT_FORUM_POST = gql`
   mutation Mutation($updateForumPostId: ID!, $input: ForumPostInput!) {
     updateForumPost(id: $updateForumPostId, input: $input) {
       id
+      replies {
+        id
+        text
+      }
     }
   }
 `;

@@ -13,7 +13,7 @@ export const ForumPreviewCard = ({
   username,
   college,
   createdAt,
-  replies,
+  replyCount,
 }) => {
   const { user } = useAuth();
 
@@ -34,7 +34,7 @@ export const ForumPreviewCard = ({
         </Typography>
 
         <Typography variant="body2">
-          {replies.length} {"replies"}
+          {replyCount} {"replies"}
         </Typography>
       </CardContent>
       <CardActions>
