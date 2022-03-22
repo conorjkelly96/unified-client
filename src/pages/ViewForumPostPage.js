@@ -1,8 +1,6 @@
 import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 
