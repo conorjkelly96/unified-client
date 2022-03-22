@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { useMutation } from "@apollo/client";
+import ErrorIcon from "@mui/icons-material/Error";
+import PendingIcon from "@mui/icons-material/Pending";
 
 import { DELETE_FORUM_REPLY } from "../mutations";
 import { GET_FORUM_POST } from "../queries";
@@ -56,7 +58,9 @@ export const ReplyCard = ({ id, username, replies }) => {
                 sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
                 onClick={onReplyDelete}
               >
-                <DeleteIcon />
+                {!loading && error && <ErrorIcon />}
+                {loading && <PendingIcon />}
+                {!loading && !error && <DeleteIcon />}
               </IconButton>
             </>
           )}
