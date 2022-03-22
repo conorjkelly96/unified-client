@@ -16,7 +16,7 @@ import { useMediaQuery } from "@mui/material";
 export const ReplyForm = () => {
   let { id } = useParams();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [executeCreateForumReply, { loading, error }] = useMutation(
     CREATE_FORUM_REPLY,
@@ -62,6 +62,7 @@ export const ReplyForm = () => {
     form: {
       display: "flex",
       flexDirection: "column",
+      mb: 4,
     },
     loadingButton: { marginTop: 2, marginBottom: 2 },
     errorContainer: {
@@ -82,8 +83,11 @@ export const ReplyForm = () => {
         multiline
         minRows={2}
         fullWidth
-        autoFocus
-        helperText={"Limit 2000 characters"}
+        helperText={
+          !!errors.replyText
+            ? "*Reply must be 1-2000 characters"
+            : "Limit 2000 characters"
+        }
         {...register("replyText", { required: true, maxLength: 2000 })}
         error={!!errors.replyText}
         disabled={loading}

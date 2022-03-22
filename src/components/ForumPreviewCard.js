@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import { useAuth } from "../contexts/AppProvider";
 
 export const ForumPreviewCard = ({
   id,
@@ -14,6 +15,8 @@ export const ForumPreviewCard = ({
   createdAt,
   replies,
 }) => {
+  const { user } = useAuth();
+
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
@@ -22,8 +25,8 @@ export const ForumPreviewCard = ({
           {"..."}
         </Typography>
 
-        <Typography color="text.secondary" sx={{ mt: "8px", mb: "5px" }}>
-          {username}
+        <Typography color="text.secondary" sx={{ mt: 1, mb: "5px" }}>
+          {user.username === username ? "You" : username}
           {college ? ", " : ""}
           {college || " "}
           {" posted "}
@@ -43,7 +46,7 @@ export const ForumPreviewCard = ({
               variant="contained"
               color="info"
               href={`/forum/${id}`}
-              sx={{ marginLeft: "8px" }}
+              sx={{ marginLeft: 1 }}
             >
               View
             </Button>

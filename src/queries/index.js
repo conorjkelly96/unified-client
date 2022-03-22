@@ -147,3 +147,18 @@ export const GET_SINGLE_ITEM_DATA = gql`
     }
   }
 `;
+
+export const GET_STUDENT_JOBS = gql`
+  query Query {
+    getStudentJobs {
+      id
+      title
+      company
+      description
+      url
+      createdAt
+      salary
+      closingDate
+    }
+  }
+`;

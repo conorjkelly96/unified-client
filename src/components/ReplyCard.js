@@ -1,63 +1,69 @@
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import Divider from "@mui/material/Divider";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ReplyForm } from "../components/ReplyForm";
-import { useAuth } from "../contexts/AppProvider";
+import IconButton from "@mui/material/IconButton";
+import { useMutation } from "@apollo/client";
+import { useState } from "react";
+
+import { DELETE_FORUM_REPLY } from "../mutations";
 
 export const ReplyCard = ({ id, username, replies }) => {
-  const styles = {
-    header: {
-      paddingTop: 3,
-      paddingBottom: 2,
-    },
-    container: {
-      display: "flex",
-      flexDirection: "column",
-      maxWidth: 750,
-      margin: "auto",
-    },
-  };
+  // TODO: Complete delete forum reply
+  // const [repliesData, setRepliesData] = useState([]);
+
+  // const [executeDeleteReply, { loading, error }] =
+  //   useMutation(DELETE_FORUM_REPLY);
+
+  // const onReplyDelete = async (event) => {
+  //   const replyId = event.currentTarget.id;
+  //   try {
+  //     const { data: deleteReplyData } = await executeDeleteReply({
+  //       // TODO add variables
+  //       variables: {},
+  //     });
+
+  //     if (deleteReplyData) {
+  //       // TODO: refresh page by setting state
+  //       // setRepliesData(deleteReplyData.deleteForumReply)
+  //     } else {
+  //       throw new Error("Something went wrong!");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
-    <Card
-      sx={{ minWidth: 275, mt: "25px", maxHeight: "300px", overflow: "auto" }}
-    >
+    <Card sx={{ minWidth: 275, maxHeight: "300px", overflow: "auto" }}>
       {replies.map((reply) => (
-        <Box key={reply.id} sx={{ p: "16px" }}>
-          <Typography id={reply.id}>{reply.text}</Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ mt: "16px", mb: "5px" }}
-          >
+        <Box key={reply.id} sx={{ px: 2 }}>
+          <Typography id={reply.id} sx={{ mt: 2 }}>
+            {reply.text}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
             {"— "}
             {reply.user}
             {" posted "}
             {reply.createdAt}
           </Typography>
+          {username === reply.user && (
+            <>
+              <IconButton
+                id={reply.id}
+                size="small"
+                color="error"
+                sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
+                // onClick={onReplyDelete}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </>
+          )}
           <Divider />
         </Box>
       ))}
-
-      {/* {user.username === username && (
-          <Button
-            id={id}
-            variant="contained"
-            size="small"
-            endIcon={<DeleteIcon />}
-            color="error"
-            sx={{ mt: 2 }}
-            //   onClick= {onDelete}
-          >
-            Delete Reply
-          </Button>
-        )} */}
     </Card>
   );
 };
