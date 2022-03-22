@@ -19,11 +19,11 @@ export const PurchaseRequestsPage = () => {
     return <Spinner />;
   }
 
-  const comments = itemData.getCommentsOnMyItems.map((item) => {
-    return item.map((item) => console.log(item));
-  });
+  // get all the items from back end
 
-  console.log(comments);
+  console.log(itemData.getComment);
+
+  // send it down and iterate within the card
 
   return <h1>Purchase Requests</h1>;
 
