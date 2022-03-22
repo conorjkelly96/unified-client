@@ -54,8 +54,8 @@ export const GET_STAFF_JOBS = gql`
 `;
 
 export const VIEW_ALL_ITEMS = gql`
-  query Query {
-    viewAllItems {
+  query Query($category: String) {
+    viewAllItems(category: $category) {
       id
       itemName
       itemDescription

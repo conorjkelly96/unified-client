@@ -21,9 +21,7 @@ import { FilterByCategoryComponent } from "../components/FilterByCategoryCompone
 export const Marketplace = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("allItems");
-  const [selectedCategoryValue, setSelectedCategoryValue] = useState(
-    "Clothing & Accessories"
-  );
+  const [selectedCategoryValue, setSelectedCategoryValue] = useState();
   const [selectedItem, setSelectedItem] = useState();
   const [itemsToDisplay, setItemsToDisplay] = useState([]);
   const { user } = useAuth();
@@ -44,7 +42,7 @@ export const Marketplace = () => {
     useLazyQuery(VIEW_MY_ITEMS_FOR_SALE);
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (
       !itemLoading &&
       itemData?.viewAllItems &&
@@ -52,7 +50,12 @@ export const Marketplace = () => {
     ) {
       setItemsToDisplay(itemData?.viewAllItems);
     }
-  }, [itemData, selectedValue]);
+    if (selectedCategoryValue) {
+      console.log("refetching", selectedCategoryValue);
+      await refetch({ category: selectedCategoryValue });
+      setItemsToDisplay(itemData?.viewAllItems);
+    }
+  }, [itemData, selectedValue, selectedCategoryValue]);
 
   const handleItemViewChange = async (event, value) => {
     setSelectedValue(value);
@@ -69,10 +72,6 @@ export const Marketplace = () => {
 
   const handleCategoryViewChange = async (event, value) => {
     setSelectedCategoryValue(value.props.value);
-
-    console.log(value.props.value);
-
-    // setItemsToDisplay(myItemsData?.viewMyItems);
   };
 
   // Delete an Item if the user created the listing
