@@ -4,11 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import PreviewIcon from "@mui/icons-material/Preview";
-import BoltIcon from "@mui/icons-material/Bolt";
 import { useAuth } from "../contexts/AppProvider";
+import { BuyerButtonOptions } from "./BuyerButtonOptions";
+import { SellerButtonOptions } from "./SellerButtonOptions";
 
 export const ItemCard = ({
   id,
@@ -23,9 +21,9 @@ export const ItemCard = ({
   images,
   onDelete,
   onAddItemToInterested,
+  sellerId,
+  userId,
 }) => {
-  const { user } = useAuth();
-
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
@@ -76,52 +74,13 @@ export const ItemCard = ({
       </CardContent>
       <CardActions>
         <Box>
-          {seller && (
-            <Box sx={{ marginBottom: "10px" }}>
-              <Button
-                variant="contained"
-                size="small"
-                endIcon={<EditIcon />}
-                color="info"
-                sx={{ marginLeft: "8px" }}
-                href={`/edit-item/${id}`}
-              >
-                Edit
-              </Button>
-              <Button
-                id={id}
-                variant="contained"
-                size="small"
-                endIcon={<DeleteIcon />}
-                color="error"
-                sx={{ marginLeft: "8px" }}
-                onClick={onDelete}
-              >
-                Delete
-              </Button>
-              <Button
-                id={id}
-                variant="contained"
-                size="small"
-                endIcon={<PreviewIcon />}
-                color="success"
-                sx={{ marginLeft: "8px" }}
-                href={`/listing/${id}`}
-              >
-                View Listing
-              </Button>
-              <Button
-                id={id}
-                variant="contained"
-                size="small"
-                endIcon={<BoltIcon />}
-                color="warning"
-                sx={{ marginLeft: "8px" }}
-                onClick={onAddItemToInterested}
-              >
-                Quick Add To Interested
-              </Button>
-            </Box>
+          {sellerId !== userId ? (
+            <BuyerButtonOptions
+              id={id}
+              onAddItemToInterested={onAddItemToInterested}
+            />
+          ) : (
+            <SellerButtonOptions id={id} onDelete={onDelete} />
           )}
         </Box>
       </CardActions>
