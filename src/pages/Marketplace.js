@@ -41,10 +41,10 @@ export const Marketplace = () => {
   const [getMyItems, { loading: myItemsLoading, error: myItemsError }] =
     useLazyQuery(VIEW_MY_ITEMS_FOR_SALE);
 
-  const [
-    getItemsByCategory,
-    { loading: itemsByCategoryLoading, error: itemsByCategoryError },
-  ] = useLazyQuery(GET_ITEMS_BY_CATEGORY);
+  // const [
+  //   getItemsByCategory,
+  //   { loading: itemsByCategoryLoading, error: itemsByCategoryError },
+  // ] = useLazyQuery(GET_ITEMS_BY_CATEGORY);
 
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
@@ -71,16 +71,16 @@ export const Marketplace = () => {
     }
   };
 
-  // const handleCategoryViewChange = async (event, value) => {
-  //   setSelectedCategoryValue(value.props.value);
-  //   const { data: itemsByCategoryData } = await getItemsByCategory(
-  //     value.props.value
-  //   );
+  const handleCategoryViewChange = async (event, value) => {
+    setSelectedCategoryValue(value.props.value);
+    // const { data: itemsByCategoryData } = await getItemsByCategory(
+    //   value.props.value
+    // );
 
-  //   console.log(itemsByCategoryData);
+    // console.log(itemsByCategoryData);
 
-  // setItemsToDisplay(myItemsData?.viewMyItems);
-  // };
+    // setItemsToDisplay(myItemsData?.viewMyItems);
+  };
 
   // Delete an Item if the user created the listing
   const onDelete = async (event) => {
@@ -153,7 +153,7 @@ export const Marketplace = () => {
         )}
         {selectedValue === "allItems" && (
           <FilterByCategoryComponent
-          // handleCategoryViewChange={handleCategoryViewChange}
+            handleCategoryViewChange={handleCategoryViewChange}
           />
         )}
       </Container>
