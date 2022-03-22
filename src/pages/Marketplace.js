@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
-import { Button, Divider } from "@mui/material";
+import { Button, Divider, FormControl, InputLabel } from "@mui/material";
 import { Box } from "@mui/system";
 import Container from "@mui/material/Container";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -10,6 +10,7 @@ import { ItemCard } from "../components/ItemCard";
 import { VIEW_ALL_ITEMS, VIEW_MY_ITEMS_FOR_SALE } from "../queries";
 import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
+import { FilterByCategoryComponent } from "../components/FilterByCategoryComponent";
 
 export const Marketplace = () => {
   const navigate = useNavigate();
@@ -107,11 +108,14 @@ export const Marketplace = () => {
           <ToggleButton value="myItems">My Items</ToggleButton>
           <ToggleButton value="allItems">All Items</ToggleButton>
         </ToggleButtonGroup>
-        <Box sx={{ px: "32px", padding: "20px" }}>
-          <Button color="secondary" href="/create-item">
-            Sell an item today!
-          </Button>
-        </Box>
+        {selectedValue === "myItems" && (
+          <Box sx={{ px: "32px", padding: "20px" }}>
+            <Button color="secondary" href="/create-item">
+              Sell an item today!
+            </Button>
+          </Box>
+        )}
+        {selectedValue === "allItems" && <FilterByCategoryComponent />}
       </Container>
       <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
       <Box sx={{ px: "32px", paddingTop: "40px" }}>

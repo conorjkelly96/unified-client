@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
-import { Grid, Select } from "@mui/material";
+import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
 
 // import { Spinner } from "./Spinner";
@@ -73,7 +73,7 @@ export const CreateItemForm = () => {
       if (data) {
         console.log("success");
         // setNoBackEndModal(true);
-        navigate("/create-item", { replace: true });
+        navigate("/marketplace", { replace: true });
       }
     } catch (err) {
       console.log(err);
@@ -144,28 +144,56 @@ export const CreateItemForm = () => {
               error={!!errors.itemDescription}
               disabled={loading}
             />
-            <TextField
-              margin="normal"
-              id="category"
-              label="Category"
-              name="category"
-              variant="outlined"
-              fullWidth
-              {...register("category", { required: true })}
-              error={!!errors.category}
-              disabled={loading}
-            />
-            <TextField
-              margin="normal"
-              id="condition"
-              label="Condition"
-              name="condition"
-              variant="outlined"
-              fullWidth
-              {...register("condition", { required: true })}
-              error={!!errors.condition}
-              disabled={loading}
-            />
+
+            <FormControl fullWidth>
+              <InputLabel id="category" sx={{ margin: "16px 0px" }}>
+                Category
+              </InputLabel>
+              <Select
+                id="category"
+                label="Category"
+                name="category"
+                variant="outlined"
+                fullWidth
+                {...register("category", { required: true })}
+                error={!!errors.category}
+                disabled={loading}
+                sx={{ margin: "16px 0px" }}
+              >
+                <MenuItem value={"Clothing & Accessories"}>
+                  Clothing & Accessories
+                </MenuItem>
+                <MenuItem value={"Sporting Goods"}>Sporting Goods</MenuItem>
+                <MenuItem value={"Electronics"}>Electronics</MenuItem>
+                <MenuItem value={"Academic Materials"}>
+                  Academic Materials
+                </MenuItem>
+                <MenuItem value={"Other"}>Other</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth>
+              <InputLabel id="condition" sx={{ margin: "16px 0px" }}>
+                Condition
+              </InputLabel>
+              <Select
+                id="condition"
+                label="Condition"
+                name="condition"
+                variant="outlined"
+                fullWidth
+                {...register("condition", { required: true })}
+                error={!!errors.condition}
+                disabled={loading}
+                sx={{ margin: "16px 0px" }}
+              >
+                <MenuItem value={"New"}>New</MenuItem>
+                <MenuItem value={"Fair"}>Fair</MenuItem>
+                <MenuItem value={"Like New"}>Like New</MenuItem>
+                <MenuItem value={"Used"}>Used</MenuItem>
+              </Select>
+            </FormControl>
+
             <TextField
               margin="normal"
               id="price"
