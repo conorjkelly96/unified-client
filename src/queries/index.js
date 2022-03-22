@@ -53,19 +53,57 @@ export const GET_STAFF_JOBS = gql`
   }
 `;
 
+export const GET_STUDENT_JOBS = gql`
+  query Query {
+    getStudentJobs {
+      id
+      title
+      company
+      description
+      url
+      createdAt
+      salary
+      closingDate
+    }
+  }
+`;
+
 // FORUM
 export const GET_FORUM_POSTS = gql`
-  query Query {
+  query ForumPosts {
     forumPosts {
       id
       postText
       postedBy {
+        id
         username
         college
-        id
       }
       createdAt
-      replies
+      replies {
+        id
+      }
+    }
+  }
+`;
+
+export const GET_FORUM_POST = gql`
+  query Query($postId: ID!) {
+    getForumPost(postId: $postId) {
+      id
+      postText
+      postedBy {
+        id
+        username
+        college
+      }
+      createdAt
+      replies {
+        id
+        text
+        user
+        createdAt
+      }
     }
   }
 `;

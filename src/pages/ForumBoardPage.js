@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Error } from "./Error";
-import { ForumPostCard } from "../components/ForumPostCard";
+import { ForumPreviewCard } from "../components/ForumPreviewCard";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material";
@@ -30,7 +30,7 @@ export const ForumBoardPage = () => {
     },
     container: {
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column-reverse",
       maxWidth: 750,
       margin: "auto",
     },
@@ -44,7 +44,7 @@ export const ForumBoardPage = () => {
         </Box>
       )}
 
-      <Box sx={{ maxWidth: "750px", margin: "auto" }}>
+      <Box sx={{ margin: "auto", marginRight: 4 }}>
         <Stack
           direction="row"
           justifyContent={isMobile ? "center" : "end"}
@@ -68,7 +68,7 @@ export const ForumBoardPage = () => {
       {!loading && data && (
         <Box sx={styles.container}>
           {data.forumPosts.map((post) => (
-            <ForumPostCard
+            <ForumPreviewCard
               id={post.id}
               text={post.postText.slice(0, 100)}
               username={post.postedBy.username}

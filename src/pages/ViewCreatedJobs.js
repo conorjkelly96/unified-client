@@ -8,7 +8,6 @@ import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
-
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
@@ -16,6 +15,7 @@ export const ViewCreatedJobs = () => {
   const [executeGetStaffJobs, { loading: staffJobsLoading }] =
     useLazyQuery(GET_STAFF_JOBS);
 
+  // TODO: handle this loading and error
   const [executeDeleteJob, { loading, error }] =
     useMutation(DELETE_JOB_LISTING);
 
@@ -30,8 +30,6 @@ export const ViewCreatedJobs = () => {
         if (staffJobsError) {
           throw new Error("Something went wrong.");
         }
-
-        console.log("staffJobsData:", jobsData);
 
         setJobsData(staffJobsData.getStaffJobs);
       } catch (error) {
@@ -55,6 +53,7 @@ export const ViewCreatedJobs = () => {
           jobId,
         },
       });
+
       if (deleteError) {
         throw new Error("Something went wrong!");
       }
@@ -85,6 +84,7 @@ export const ViewCreatedJobs = () => {
           <Spinner />
         </Box>
       )}
+
       {!staffJobsLoading && !jobsData.length ? (
         <Box sx={{ height: "75vh" }}>
           <Typography
