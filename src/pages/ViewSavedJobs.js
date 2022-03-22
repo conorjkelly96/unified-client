@@ -8,14 +8,19 @@ import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 
 import { GET_STUDENT_JOBS } from "../queries";
+import { REMOVE_SAVED_JOB } from "../mutations";
+
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
 export const ViewSavedJobs = () => {
   const [
     getStudentJobs,
-    { error: studentJobsError, loading: studentJobsLoading },
+    { error: studentJobsError, loading: studentJobsLoading, refetch },
   ] = useLazyQuery(GET_STUDENT_JOBS);
+
+  const [removeSavedJob, { loading: removeJobLoading, error: removeJobError }] =
+    useMutation(REMOVE_SAVED_JOB);
 
   const [jobsData, setJobsData] = useState([]);
 
@@ -27,6 +32,29 @@ export const ViewSavedJobs = () => {
     }
     fetchData();
   }, [getStudentJobs, jobsData]);
+
+  const onDelete = async (event) => {
+    const jobId = event.target.id;
+
+    try {
+      const { data: removeData } = await removeSavedJob({
+        variables: { jobId },
+      });
+
+      if (removeJobError) {
+        throw new Error("Something went wrong!");
+      }
+
+      if (removeData) {
+        console.log("success");
+
+        setJobsData();
+        refetch();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const styles = {
     header: {
@@ -90,6 +118,8 @@ export const ViewSavedJobs = () => {
                 salary={studentJob.salary}
                 date={new Date(studentJob.closingDate)}
                 key={studentJob.id}
+                deleteBtn={true}
+                onDelete={onDelete}
               />
             ))}
           </Box>

@@ -107,6 +107,14 @@ export const SAVE_JOB = gql`
   }
 `;
 
+export const REMOVE_SAVED_JOB = gql`
+  mutation Mutation($jobId: ID!) {
+    removeSavedJobs(jobId: $jobId) {
+      id
+    }
+  }
+`;
+
 export const CREATE_FORUM_POST = gql`
   mutation Mutation($forumPost: ForumPostInput!) {
     createForumPost(forumPost: $forumPost) {
