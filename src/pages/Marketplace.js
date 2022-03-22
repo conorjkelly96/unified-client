@@ -15,6 +15,9 @@ import { FilterByCategoryComponent } from "../components/FilterByCategoryCompone
 export const Marketplace = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("allItems");
+  const [selectedCategoryValue, setSelectedCategoryValue] = useState(
+    "Clothing & Accessories"
+  );
   const [selectedItem, setSelectedItem] = useState();
   const [itemsToDisplay, setItemsToDisplay] = useState([]);
   const { user } = useAuth();
@@ -44,7 +47,7 @@ export const Marketplace = () => {
     }
   }, [itemData, selectedValue]);
 
-  const handleChange = async (event, value) => {
+  const handleItemViewChange = async (event, value) => {
     setSelectedValue(value);
     if (value === "allItems") {
       refetch();
@@ -55,6 +58,10 @@ export const Marketplace = () => {
 
       setItemsToDisplay(myItemsData?.viewMyItems);
     }
+  };
+
+  const handleCategoryViewChange = async (event, value) => {
+    setSelectedCategoryValue(value.props.value);
   };
 
   // Delete an Item if the user created the listing
@@ -102,7 +109,7 @@ export const Marketplace = () => {
           color="primary"
           value={selectedValue}
           exclusive
-          onChange={handleChange}
+          onChange={handleItemViewChange}
           sx={{ margin: "25px" }}
         >
           <ToggleButton value="myItems">My Items</ToggleButton>
@@ -115,7 +122,11 @@ export const Marketplace = () => {
             </Button>
           </Box>
         )}
-        {selectedValue === "allItems" && <FilterByCategoryComponent />}
+        {selectedValue === "allItems" && (
+          <FilterByCategoryComponent
+            handleCategoryViewChange={handleCategoryViewChange}
+          />
+        )}
       </Container>
       <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
       <Box sx={{ px: "32px", paddingTop: "40px" }}>

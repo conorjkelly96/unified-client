@@ -162,3 +162,18 @@ export const GET_STUDENT_JOBS = gql`
     }
   }
 `;
+
+export const GET_ITEMS_BY_CATEGORY = gql`
+  query Query($input: String!) {
+    getItemsByCategory(input: $input) {
+      id
+      itemName
+      itemDescription
+      category
+      status
+      condition
+      price
+      quantity
+    }
+  }
+`;

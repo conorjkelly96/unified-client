@@ -1,12 +1,13 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-export const FilterByCategoryComponent = () => {
+export const FilterByCategoryComponent = ({ handleCategoryViewChange }) => {
   return (
     <FormControl fullWidth>
       <InputLabel id="category" sx={{ margin: "16px 0px" }}>
         Category
       </InputLabel>
       <Select
+        onChange={handleCategoryViewChange}
         id="category"
         label="Category"
         name="category"
