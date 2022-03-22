@@ -7,7 +7,11 @@ import Container from "@mui/material/Container";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { ItemCard } from "../components/ItemCard";
-import { VIEW_ALL_ITEMS, VIEW_MY_ITEMS_FOR_SALE } from "../queries";
+import {
+  VIEW_ALL_ITEMS,
+  VIEW_MY_ITEMS_FOR_SALE,
+  GET_ITEMS_BY_CATEGORY,
+} from "../queries";
 import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
 import { FilterByCategoryComponent } from "../components/FilterByCategoryComponent";
@@ -34,6 +38,11 @@ export const Marketplace = () => {
 
   const [getMyItems, { loading: myItemsLoading, error: myItemsError }] =
     useLazyQuery(VIEW_MY_ITEMS_FOR_SALE);
+
+  const [
+    getItemsByCategory,
+    { loading: itemsByCategoryLoading, error: itemsByCategoryError },
+  ] = useLazyQuery(GET_ITEMS_BY_CATEGORY);
 
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
@@ -62,6 +71,13 @@ export const Marketplace = () => {
 
   const handleCategoryViewChange = async (event, value) => {
     setSelectedCategoryValue(value.props.value);
+    const { data: itemsByCategoryData } = await getItemsByCategory(
+      value.props.value
+    );
+
+    console.log(itemsByCategoryData);
+
+    // setItemsToDisplay(myItemsData?.viewMyItems);
   };
 
   // Delete an Item if the user created the listing
