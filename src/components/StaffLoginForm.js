@@ -49,6 +49,7 @@ export const StaffLoginForm = () => {
         username: user.username,
         university: user.university,
         college: user.college,
+        type: user.type,
       });
 
       navigate("/dashboard", { replace: true });
@@ -86,7 +87,7 @@ export const StaffLoginForm = () => {
         align="center"
         sx={styles.header}
       >
-        Login
+        Staff Login
       </Typography>
       <Divider />
       <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
