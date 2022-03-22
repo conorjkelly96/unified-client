@@ -1,4 +1,5 @@
 import { Container } from "../components/Styling/container.styled";
+import { Navbar } from "../components/Navbar";
 export const AboutUsPage = () => {
   return (
     <Container>
