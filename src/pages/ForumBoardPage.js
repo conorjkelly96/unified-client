@@ -21,7 +21,6 @@ export const ForumBoardPage = () => {
   if (error) {
     return <Error />;
   }
-  console.log(data);
 
   const styles = {
     header: {
