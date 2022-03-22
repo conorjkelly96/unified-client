@@ -1,101 +1,248 @@
-import { AppBar } from "@mui/material";
-import { Toolbar } from "@mui/material";
-import { CssBaseline } from "@mui/material";
-import { Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
-import { useTheme } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CssBaseline from "@mui/material/CssBaseline";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 import { DrawerComponent } from "./Drawer";
 import { useAuth } from "../contexts/AppProvider";
 
-//css style navbar
-const useStyles = makeStyles({
-  navlinks: {
-    marginLeft: 15,
-    display: "flex",
-  },
-  logo: {
-    flexGrow: "1",
-    cursor: "pointer",
-    textDecoration: "none",
-    color: "white",
-  },
-  link: {
-    textDecoration: "none",
-    color: "white",
-    fontSize: "20px",
-    marginLeft: 20,
-    "&:hover": {
-      borderBottom: "1px solid white",
-    },
-  },
-});
-
 export const Navbar = () => {
-  const classes = useStyles();
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const { isLoggedIn, user, setUser, setIsLoggedIn } = useAuth();
 
-  const { isLoggedIn, user } = useAuth();
+  const styles = {
+    navContainer: {
+      alignContent: "center",
+    },
+    navLinks: {
+      display: "flex",
+      flexGrow: 1,
+      justifyContent: "flex-end",
+    },
+    logo: {
+      display: "flex",
+      alignContent: "center",
+    },
+    link: {
+      textDecoration: "none",
+      fontSize: "20px",
+      "&:hover": {
+        border: "1px solid white",
+      },
+    },
+  };
+
+  const staffStyles = {
+    navContainer: {
+      backgroundColor: "#E57A44",
+    },
+    link: {
+      color: "#009FFD",
+    },
+    button: {
+      backgroundColor: "#009FFD",
+      color: "#E57A44",
+      marginLeft: "10px",
+      "&:hover": {
+        border: "1px solid white",
+        backgroundColor: "#009FFD",
+        color: "white",
+      },
+    },
+  };
+
+  const studentStyles = {
+    navContainer: {
+      backgroundColor: "#009FFD",
+    },
+    link: {
+      color: "#E57A44",
+    },
+  };
+
+  const publicStyles = {
+    navContainer: {
+      backgroundColor: "white",
+    },
+    link: {
+      color: "black",
+    },
+    button: {
+      backgroundColor: "#009FFD",
+      color: "",
+      marginLeft: "",
+      "&:hover": {
+        border: "1px solid black",
+        backgroundColor: "#009FFD",
+        color: "black",
+      },
+    },
+  };
+
+  const handleNavStyles = (element) => {
+    if (isLoggedIn && user?.type === "student") {
+      return {
+        ...styles[element],
+        ...studentStyles[element],
+      };
+    }
+
+    if (isLoggedIn && user?.type === "staff") {
+      return {
+        ...styles[element],
+        ...staffStyles[element],
+      };
+    }
+    if (!isLoggedIn) {
+      return {
+        ...styles[element],
+        ...publicStyles[element],
+      };
+    }
+  };
+
+  const handleNavigation = (path) => () => {
+    navigate(path, { replace: true });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    setUser();
+    setIsLoggedIn(false);
+
+    navigate("login", { replace: true });
+  };
+
+  const publicLinks = [
+    {
+      label: "Login",
+      path: "login",
+    },
+    {
+      label: "Sign Up",
+      path: "sign-up",
+    },
+  ];
+
+  const staffLinks = [
+    {
+      label: "Dashboard",
+      path: "dashboard",
+    },
+    {
+      label: "Jobs",
+      path: "jobs",
+    },
+  ];
+
+  const studentLinks = [
+    {
+      label: "Dashboard",
+      path: "dashboard",
+    },
+    {
+      label: "Marketplace",
+      path: "marketplace",
+    },
+  ];
+
+  const renderLogout = () => (
+    <Button
+      variant="outlined"
+      sx={handleNavStyles("button")}
+      onClick={handleLogout}
+    >
+      Logout
+    </Button>
+  );
 
   return (
     <AppBar position="static">
       <CssBaseline />
-      <Toolbar>
-        <Typography
-          variant="h4"
-          component="a"
-          href="/login"
-          className={classes.logo}
-        >
-          Unified Logo
-        </Typography>
+      <Toolbar sx={handleNavStyles("navContainer")}>
+        <Box sx={styles.logo}>
+          {isLoggedIn ? (
+            <img
+              src="./images/unified-private-nav.png"
+              alt="Unified Logo"
+              style={{
+                width: "140px",
+                height: "100%",
+                padding: "10px",
+              }}
+            />
+          ) : (
+            // TO DO: Add public landing image here
+            <img
+              src="./images/unified-public-nav.png"
+              alt="Unified Logo"
+              style={{
+                width: "140px",
+                height: "100%",
+                padding: "10px",
+              }}
+            />
+          )}
+        </Box>
         {isMobile ? (
           <DrawerComponent />
         ) : (
-          <div className={classes.navlinks}>
+          <Box sx={styles.navLinks}>
             {!isLoggedIn && (
               <>
-                <Link to="/login" className={classes.link}>
-                  Login
-                </Link>
-                <Link to="/sign-up" className={classes.link}>
-                  Sign Up
-                </Link>
+                {publicLinks.map((link) => (
+                  <Button
+                    key={link.label}
+                    variant="text"
+                    sx={handleNavStyles("link")}
+                    onClick={handleNavigation(link.path)}
+                  >
+                    {link.label}
+                  </Button>
+                ))}
               </>
             )}
 
-            {isLoggedIn && (
+            {isLoggedIn && user?.type === "staff" && (
               <>
-                <Link to="/dashboard" className={classes.link}>
-                  Dashboard
-                </Link>
-
-                <Link to="/forum" className={classes.link}>
-                  Forum
-                </Link>
-                <Link to="/jobs" className={classes.link}>
-                  Jobs
-                </Link>
-                <Link to="/marketplace" className={classes.link}>
-                  Marketplace
-                </Link>
-
-                <Link
-                  to="/"
-                  component="button"
-                  onClick={() => {
-                    console.log("TODO: add logout function");
-                  }}
-                  className={classes.link}
-                >
-                  Logout
-                </Link>
+                {staffLinks.map((link) => (
+                  <Button
+                    variant="text"
+                    key={link.label}
+                    sx={handleNavStyles("link")}
+                    onClick={handleNavigation(link.path)}
+                  >
+                    {link.label}
+                  </Button>
+                ))}
+                {renderLogout()}
               </>
             )}
-          </div>
+
+            {isLoggedIn && user?.type === "student" && (
+              <>
+                {studentLinks.map((link) => (
+                  <Button
+                    variant="text"
+                    key={link.label}
+                    sx={handleNavStyles("link")}
+                    onClick={handleNavigation(link.path)}
+                  >
+                    {link.label}
+                  </Button>
+                ))}
+                {renderLogout()}
+              </>
+            )}
+          </Box>
         )}
       </Toolbar>
     </AppBar>
