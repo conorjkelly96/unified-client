@@ -51,7 +51,6 @@ export const Marketplace = () => {
       setItemsToDisplay(itemData?.viewAllItems);
     }
     if (selectedCategoryValue) {
-      console.log("refetching", selectedCategoryValue);
       await refetch({ category: selectedCategoryValue });
       setItemsToDisplay(itemData?.viewAllItems);
     }
