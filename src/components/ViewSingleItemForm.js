@@ -12,6 +12,7 @@ import { Spinner } from "./Spinner";
 import { useState } from "react";
 import { ADD_TO_MY_ITEMS } from "../mutations";
 import { ContactSellerModal } from "./ContactSellerModal";
+import { BuyerButtonOptions } from "./BuyerButtonOptions";
 
 export const ViewSingleItemForm = () => {
   const [selectedItem, setSelectedItem] = useState();
@@ -80,28 +81,10 @@ export const ViewSingleItemForm = () => {
             quantity={itemData.getSingleItemData.price}
           />
           <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
-            <Button
+            <BuyerButtonOptions
               id={itemData.getSingleItemData.id}
-              variant="contained"
-              size="small"
-              endIcon={<ContactSupportIcon />}
-              color="success"
-              sx={{ marginLeft: "8px" }}
-              onClick={handleClickOpen}
-            >
-              Contact Seller
-            </Button>
-            <Button
-              id={itemData.getSingleItemData.id}
-              variant="contained"
-              size="small"
-              endIcon={<BoltIcon />}
-              color="warning"
-              sx={{ marginLeft: "8px" }}
-              onClick={onAddItemToInterested}
-            >
-              Add To Interested
-            </Button>
+              onAddItemToInterested={onAddItemToInterested}
+            />
           </Grid>
         </Box>
       </Grid>
