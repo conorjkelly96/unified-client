@@ -20,6 +20,7 @@ import { CreatePostPage } from "../pages/CreatePostPage";
 import { ViewForumPostPage } from "../pages/ViewForumPostPage";
 // import { JobBoardPage } from "../pages/JobBoardPage";
 import { EditItemPage } from "../pages/EditItemPage";
+import { PurchaseRequestsPage } from "../pages/PurchaseRequestsPage";
 
 export const AppRouter = () => {
   // TODO: wrap routes with isLoggedIn and user type
@@ -47,7 +48,10 @@ export const AppRouter = () => {
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/forum-board" element={<ForumBoardPage />} />
-            {/* <Route path="/job-board" element={<JobBoardPage />} /> */}
+            <Route
+              path="/purchase-requests"
+              element={<PurchaseRequestsPage />}
+            />
             <Route path="/create-job" element={<CreateJobPage />} />
             <Route path="/create-item" element={<CreateItemPage />} />
             <Route path={`/listing/:id`} element={<SingleItemPage />} />
