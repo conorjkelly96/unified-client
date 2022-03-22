@@ -69,16 +69,16 @@ export const Marketplace = () => {
     }
   };
 
-  const handleCategoryViewChange = async (event, value) => {
-    setSelectedCategoryValue(value.props.value);
-    const { data: itemsByCategoryData } = await getItemsByCategory(
-      value.props.value
-    );
+  // const handleCategoryViewChange = async (event, value) => {
+  //   setSelectedCategoryValue(value.props.value);
+  //   const { data: itemsByCategoryData } = await getItemsByCategory(
+  //     value.props.value
+  //   );
 
-    console.log(itemsByCategoryData);
+  //   console.log(itemsByCategoryData);
 
-    // setItemsToDisplay(myItemsData?.viewMyItems);
-  };
+  // setItemsToDisplay(myItemsData?.viewMyItems);
+  // };
 
   // Delete an Item if the user created the listing
   const onDelete = async (event) => {
@@ -136,11 +136,14 @@ export const Marketplace = () => {
             <Button color="secondary" href="/create-item">
               Sell an item today!
             </Button>
+            <Button color="secondary" href="/purchase-requests">
+              View Purchase Requests
+            </Button>
           </Box>
         )}
         {selectedValue === "allItems" && (
           <FilterByCategoryComponent
-            handleCategoryViewChange={handleCategoryViewChange}
+          // handleCategoryViewChange={handleCategoryViewChange}
           />
         )}
       </Container>
