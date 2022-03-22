@@ -82,6 +82,7 @@ export const GET_FORUM_POSTS = gql`
       }
       createdAt
       replyCount
+      tags
     }
   }
 `;
@@ -109,6 +110,14 @@ export const GET_FORUM_POST = gql`
           profileImageUrl
         }
       }
+    }
+  }
+`;
+
+export const TAGS = gql`
+  query Query {
+    tags {
+      name
     }
   }
 `;
