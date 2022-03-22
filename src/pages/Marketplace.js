@@ -7,6 +7,8 @@ import Container from "@mui/material/Container";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { ItemCard } from "../components/ItemCard";
+import SellIcon from "@mui/icons-material/Sell";
+import StoreIcon from "@mui/icons-material/Store";
 import {
   VIEW_ALL_ITEMS,
   VIEW_MY_ITEMS_FOR_SALE,
@@ -133,10 +135,18 @@ export const Marketplace = () => {
         </ToggleButtonGroup>
         {selectedValue === "myItems" && (
           <Box sx={{ px: "32px", padding: "20px" }}>
-            <Button color="secondary" href="/create-item">
+            <Button
+              endIcon={<SellIcon />}
+              color="secondary"
+              href="/create-item"
+            >
               Sell an item today!
             </Button>
-            <Button color="secondary" href="/purchase-requests">
+            <Button
+              endIcon={<StoreIcon />}
+              color="secondary"
+              href="/purchase-requests"
+            >
               View Purchase Requests
             </Button>
           </Box>
