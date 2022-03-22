@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import { GET_COMMENTS_ON_MY_ITEMS } from "../queries";
 import { useQuery } from "@apollo/client";
 import { Spinner } from "../components/Spinner";
+import { PreviewItemCard } from "../components/PreviewItemCard";
 
 export const PurchaseRequestsPage = () => {
   const {
@@ -21,15 +22,18 @@ export const PurchaseRequestsPage = () => {
 
   // get all the items from back end
 
-  console.log(itemData.getComment);
+  console.log(itemData);
+
+  // const itemDataArray = itemData.getCommentsOnMyItems;
+  // console.log(itemDataArray.itemName);
+
+  // const itemCommentsArray = itemDataArray.map((item) => item.comments);
+
+  // const comments = itemCommentsArray.map((item) => item.commentBody);
+
+  // console.log(itemDataArray);
 
   // send it down and iterate within the card
 
-  return <h1>Purchase Requests</h1>;
-
-  // return comments?.length > 0 ? (
-  //   <CommentCard comments={comments} username={username} />
-  // ) : (
-  //   <Typography>Commments</Typography>
-  // );
+  return <h1>PurchaseRequestsPage</h1>;
 };
