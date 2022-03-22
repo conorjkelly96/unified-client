@@ -87,12 +87,6 @@ export const Marketplace = () => {
     });
   };
 
-  // Get the seller ID so we can match it against the user ID and conditionally render buttons
-  const sellerId = itemsToDisplay.map((item) => {
-    const seller = item.seller.id;
-    return seller;
-  });
-
   // Pass this down with the seller id so we can match them off and conditionally render buttons on the item card
   const userId = user.id;
 

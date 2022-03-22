@@ -15,7 +15,6 @@ import { useAuth } from "../contexts/AppProvider";
 
 export const ViewSingleItemForm = () => {
   const [selectedItem, setSelectedItem] = useState();
-  const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -70,7 +69,6 @@ export const ViewSingleItemForm = () => {
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
       <ContactSellerModal
         handleClose={handleClose}
-        handleClickOpen={handleClickOpen}
         open={open}
         itemId={itemData.getSingleItemData.id}
       />
@@ -87,6 +85,7 @@ export const ViewSingleItemForm = () => {
             id={itemData.getSingleItemData.id}
             userId={userId}
             onAddItemToInterested={onAddItemToInterested}
+            handleClickOpen={handleClickOpen}
           />
         </Box>
       </Grid>

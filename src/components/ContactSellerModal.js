@@ -35,8 +35,6 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
         },
       });
 
-      console.log(data);
-
       if (data) {
         console.log("success");
         navigate("/marketplace", { replace: true });

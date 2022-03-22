@@ -21,6 +21,7 @@ export const ItemCard = ({
   onAddItemToInterested,
   sellerId,
   userId,
+  handleClickOpen,
 }) => {
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
@@ -76,6 +77,7 @@ export const ItemCard = ({
             <BuyerButtonOptions
               id={id}
               onAddItemToInterested={onAddItemToInterested}
+              handleClickOpen={handleClickOpen}
             />
           ) : (
             <SellerButtonOptions id={id} onDelete={onDelete} />
