@@ -16,18 +16,20 @@ export const ViewJobsPage = () => {
 
   const { data: studentJobsData } = useQuery(GET_STUDENT_JOBS);
 
-  const navigate = useNavigate();
+  let navigate = useNavigate();
 
   const onAdd = async (event) => {
     const jobId = event.target.id;
 
     try {
-      const { data: addData, error: addError } = await executeSaveJob({
+      const { data: addData } = await executeSaveJob({
         variables: { jobId },
       });
-      if (addError) {
+
+      if (saveJobError) {
         throw new Error("Something went wrong!");
       }
+
       if (addData) {
         navigate("/job-board", { replace: true });
       }

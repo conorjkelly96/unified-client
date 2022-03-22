@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -12,11 +12,21 @@ import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
 export const ViewSavedJobs = () => {
-  const {
-    data: studentJobsData,
-    error: studentJobsError,
-    loading: studentJobsLoading,
-  } = useQuery(GET_STUDENT_JOBS);
+  const [
+    getStudentJobs,
+    { error: studentJobsError, loading: studentJobsLoading },
+  ] = useLazyQuery(GET_STUDENT_JOBS);
+
+  const [jobsData, setJobsData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data: studentJobsData } = await getStudentJobs();
+
+      setJobsData(studentJobsData.getStudentJobs);
+    }
+    fetchData();
+  }, [getStudentJobs, jobsData]);
 
   const styles = {
     header: {
@@ -39,7 +49,7 @@ export const ViewSavedJobs = () => {
         </Box>
       )}
 
-      {!studentJobsLoading && !studentJobsData?.getStudentJobs.length ? (
+      {!studentJobsLoading && !jobsData?.length ? (
         <Box sx={{ height: "75vh" }}>
           <Typography
             variant="h4"
@@ -58,7 +68,7 @@ export const ViewSavedJobs = () => {
         </Box>
       ) : null}
 
-      {!studentJobsLoading && studentJobsData?.getStudentJobs.length ? (
+      {!studentJobsLoading && jobsData?.length ? (
         <>
           <Typography
             variant="h4"
@@ -70,7 +80,7 @@ export const ViewSavedJobs = () => {
             Your Job Listings
           </Typography>
           <Box sx={styles.container}>
-            {studentJobsData.getStudentJobs.map((studentJob) => (
+            {jobsData?.map((studentJob) => (
               <JobCard
                 id={studentJob.id}
                 title={studentJob.title}
