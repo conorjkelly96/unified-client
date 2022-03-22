@@ -36,16 +36,12 @@ export const Marketplace = () => {
     loading: itemLoading,
     error: itemError,
     refetch,
-  } = useQuery(VIEW_ALL_ITEMS);
+  } = useQuery(VIEW_ALL_ITEMS, {
+    variables: { category: selectedCategoryValue },
+  });
 
   const [getMyItems, { loading: myItemsLoading, error: myItemsError }] =
     useLazyQuery(VIEW_MY_ITEMS_FOR_SALE);
-
-  // const [
-  //   getItemsByCategory,
-  //   { loading: itemsByCategoryLoading, error: itemsByCategoryError },
-  // ] = useLazyQuery(GET_ITEMS_BY_CATEGORY);
-
   const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
 
   useEffect(() => {
@@ -73,11 +69,8 @@ export const Marketplace = () => {
 
   const handleCategoryViewChange = async (event, value) => {
     setSelectedCategoryValue(value.props.value);
-    // const { data: itemsByCategoryData } = await getItemsByCategory(
-    //   value.props.value
-    // );
 
-    // console.log(itemsByCategoryData);
+    console.log(value.props.value);
 
     // setItemsToDisplay(myItemsData?.viewMyItems);
   };
