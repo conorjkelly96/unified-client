@@ -78,11 +78,10 @@ export const GET_FORUM_POSTS = gql`
         id
         username
         college
+        profileImageUrl
       }
       createdAt
-      replies {
-        id
-      }
+      replyCount
     }
   }
 `;
@@ -101,8 +100,14 @@ export const GET_FORUM_POST = gql`
       replies {
         id
         text
-        user
         createdAt
+        user {
+          id
+          firstName
+          lastName
+          username
+          profileImageUrl
+        }
       }
     }
   }

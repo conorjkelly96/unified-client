@@ -45,7 +45,7 @@ export const ReplyCard = ({ id, username, replies }) => {
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
             {"— "}
-            {reply.user}
+            {reply.user.username}
             {" posted "}
             {reply.createdAt}
           </Typography>
