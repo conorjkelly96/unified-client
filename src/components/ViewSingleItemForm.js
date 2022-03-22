@@ -2,24 +2,25 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { Button, Grid, Modal, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
-import ContactSupportIcon from "@mui/icons-material/ContactSupport";
-import BoltIcon from "@mui/icons-material/Bolt";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_SINGLE_ITEM_DATA } from "../queries";
 import { useParams } from "react-router-dom";
 import { Error } from "../pages/Error";
 import { Spinner } from "./Spinner";
 import { useState } from "react";
-import { ADD_TO_MY_ITEMS } from "../mutations";
+import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 import { ContactSellerModal } from "./ContactSellerModal";
 import { BuyerButtonOptions } from "./BuyerButtonOptions";
+import { useAuth } from "../contexts/AppProvider";
 
 export const ViewSingleItemForm = () => {
   const [selectedItem, setSelectedItem] = useState();
+  const [executeDeleteItem, { loading, error }] = useMutation(DELETE_ITEM);
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
+  const { user } = useAuth();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,6 +62,10 @@ export const ViewSingleItemForm = () => {
     return <Spinner />;
   }
 
+  const userId = user.id;
+
+  console.log(itemData.getSingleItemData);
+
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
       <ContactSellerModal
@@ -79,13 +84,10 @@ export const ViewSingleItemForm = () => {
             condition={itemData.getSingleItemData.condition}
             price={itemData.getSingleItemData.price}
             quantity={itemData.getSingleItemData.price}
+            id={itemData.getSingleItemData.id}
+            userId={userId}
+            onAddItemToInterested={onAddItemToInterested}
           />
-          <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
-            <BuyerButtonOptions
-              id={itemData.getSingleItemData.id}
-              onAddItemToInterested={onAddItemToInterested}
-            />
-          </Grid>
         </Box>
       </Grid>
     </Grid>
