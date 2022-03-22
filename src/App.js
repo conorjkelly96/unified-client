@@ -36,7 +36,6 @@ export const App = () => {
     <ApolloProvider client={client}>
       <AppProvider>
         <BrowserRouter>
-          {/* <NavBar /> */}
           <AppRouter />
         </BrowserRouter>
       </AppProvider>
