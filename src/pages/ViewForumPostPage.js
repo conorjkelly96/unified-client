@@ -55,17 +55,6 @@ export const ViewForumPostPage = () => {
     <>
       {!postLoading && postData?.getForumPost && (
         <>
-          {/* <Box>
-            <Stack
-              direction="row"
-              justifyContent="start"
-              sx={{ mt: 4, mx: 2, mb: 2 }}
-            >
-              <Button variant="contained" component="a" href="/forum">
-                Back
-              </Button>
-            </Stack>
-          </Box> */}
           <Typography
             variant="h4"
             gutterBottom
