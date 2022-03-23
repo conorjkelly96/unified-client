@@ -79,21 +79,24 @@ export const ForumPostCard = ({
 
   const { user } = useAuth();
 
+  console.log(text);
+
   return (
     <Card sx={{ minWidth: 275, mb: "25px", p: 3 }}>
       <CardContent>
-        {!isEditable && user.username === username && (
-          <>
-            <Typography component="p" variant="h6" id={id}>
-              {text}
-            </Typography>
-            <Typography color="text.secondary" sx={{ mt: 2, mb: "5px" }}>
-              {user.username === username ? "You" : username}
-              {college ? ", " : ""}
-              {college || " "}
-              {" posted "}
-              {createdAt}
-            </Typography>
+        <>
+          <Typography component="p" variant="h6" id={id}>
+            {text}
+          </Typography>
+          <Typography color="text.secondary" sx={{ mt: 2, mb: "5px" }}>
+            {user.username === username ? "You" : username}
+            {college ? ", " : ""}
+            {college || " "}
+            {" posted "}
+            {createdAt}
+          </Typography>
+
+          {!isEditable && user.username === username && (
             <Stack
               direction="row"
               justifyContent={isMobile ? "center" : "start"}
@@ -120,8 +123,8 @@ export const ForumPostCard = ({
                 Delete Post
               </Button>
             </Stack>
-          </>
-        )}
+          )}
+        </>
         {isEditable?.name === "postText" && (
           <EditableTextField
             onSubmit={onSubmit}
@@ -132,7 +135,6 @@ export const ForumPostCard = ({
             required
           />
         )}
-
         <Typography
           variant="h6"
           gutterBottom
