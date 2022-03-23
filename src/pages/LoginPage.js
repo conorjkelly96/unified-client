@@ -5,7 +5,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 import { StaffLoginForm } from "../components/StaffLoginForm";
 import { StudentLoginForm } from "../components/StudentLoginForm";
-import { mainContainer } from "../styles";
+import { mainContainer, pageHeader } from "../styles";
 
 export const LoginPage = () => {
   const [userType, setUserType] = useState("student");
@@ -21,7 +21,7 @@ export const LoginPage = () => {
         value={userType}
         exclusive
         onChange={handleChange}
-        sx={{ mt: 6, mb: 3, justifyContent: "center", width: "100%" }}
+        sx={pageHeader}
       >
         <ToggleButton value="student">Student</ToggleButton>
         <ToggleButton value="staff">Staff</ToggleButton>

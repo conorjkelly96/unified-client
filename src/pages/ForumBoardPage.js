@@ -2,15 +2,17 @@ import { useQuery } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { Error } from "./Error";
-import { ForumPreviewCard } from "../components/ForumPreviewCard";
 import Divider from "@mui/material/Divider";
-import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import Alert from "@mui/material/Alert";
 import { useTheme } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 
-import { Spinner } from "../components/Spinner";
 import { GET_FORUM_POSTS } from "../queries";
+import { Spinner } from "../components/Spinner";
+import { ForumPreviewCard } from "../components/ForumPreviewCard";
+import { Error } from "./Error";
+import { alertContainer, mainContainer } from "../styles";
 
 export const ForumBoardPage = () => {
   const { data, loading, error } = useQuery(GET_FORUM_POSTS);
@@ -35,38 +37,45 @@ export const ForumBoardPage = () => {
     },
   };
 
+  console.log(data);
+
   return (
-    <>
-      {loading && (
-        <Box sx={{ height: "500px" }}>
-          <Spinner />
-        </Box>
+    <Container
+      component="main"
+      maxWidth="md"
+      sx={{ ...mainContainer, boxShadow: "none" }}
+    >
+      <Spinner loading={loading} />
+
+      {!loading && (
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: isMobile ? "center" : "flex-end",
+            }}
+          >
+            <Button variant="contained" component="a" href="/create-post">
+              Post Question
+            </Button>
+          </Box>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Forum
+          </Typography>
+          <Divider sx={{ maxWidth: "90%", margin: "auto", mb: "40px" }} />
+        </>
       )}
 
-      <Box sx={{ margin: "auto", marginRight: 4 }}>
-        <Stack
-          direction="row"
-          justifyContent={isMobile ? "center" : "end"}
-          sx={{ marginTop: "32px" }}
-        >
-          <Button variant="contained" component="a" href="/create-post">
-            Post Question
-          </Button>
-        </Stack>
-      </Box>
-      <Typography
-        variant="h4"
-        gutterBottom
-        component="h1"
-        align="center"
-        sx={styles.header}
-      >
-        Forum
-      </Typography>
-      <Divider sx={{ maxWidth: "90%", margin: "auto", mb: "40px" }} />
-      {!loading && data && (
+      {!loading && data?.forumPosts && (
         <Box sx={styles.container}>
-          {data.forumPosts.map((post) => (
+          {data?.forumPosts.map((post) => (
             <ForumPreviewCard
               id={post.id}
               text={post.postText.slice(0, 100)}
@@ -80,19 +89,11 @@ export const ForumBoardPage = () => {
         </Box>
       )}
 
-      {!loading && !data && (
-        <Box sx={{ height: "75vh" }}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            component="h1"
-            align="center"
-            sx={styles.header}
-          >
-            There are currently no forum posts.
-          </Typography>
-        </Box>
+      {!loading && !data?.forumPosts.length !== 0 && (
+        <Alert icon={false} severity="info" sx={alertContainer}>
+          There are currently no forum posts.
+        </Alert>
       )}
-    </>
+    </Container>
   );
 };

@@ -26,3 +26,15 @@ export const loginForm = {
     textAlign: "center",
   },
 };
+
+export const alertContainer = {
+  justifyContent: "center",
+  p: 4,
+};
+
+export const pageHeader = {
+  mt: 6,
+  mb: 3,
+  justifyContent: "center",
+  width: "100%",
+};
