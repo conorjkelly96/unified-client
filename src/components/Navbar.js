@@ -32,7 +32,9 @@ export const Navbar = () => {
     },
     link: {
       textDecoration: "none",
-      fontSize: "20px",
+      color: "#fff",
+      border: "1px solid #009FFD",
+      p: 1,
       "&:hover": {
         border: "1px solid white",
       },
@@ -43,12 +45,9 @@ export const Navbar = () => {
     navContainer: {
       backgroundColor: "#E57A44",
     },
-    link: {
-      color: "#009FFD",
-    },
     button: {
       backgroundColor: "#009FFD",
-      color: "#E57A44",
+      color: "#fff",
       marginLeft: "10px",
       "&:hover": {
         border: "1px solid white",
@@ -62,8 +61,17 @@ export const Navbar = () => {
     navContainer: {
       backgroundColor: "#009FFD",
     },
-    link: {
-      color: "#E57A44",
+
+    button: {
+      border: "none",
+      backgroundColor: "#009FFD",
+      color: "#fff",
+      marginLeft: "10px",
+      "&:hover": {
+        border: "1px solid white",
+        backgroundColor: "#009FFD",
+        color: "white",
+      },
     },
   };
 
@@ -71,9 +79,7 @@ export const Navbar = () => {
     navContainer: {
       backgroundColor: "white",
     },
-    link: {
-      color: "black",
-    },
+
     button: {
       backgroundColor: "#009FFD",
       color: "",
@@ -153,14 +159,18 @@ export const Navbar = () => {
       label: "Marketplace",
       path: "marketplace",
     },
+    {
+      label: "Jobs",
+      path: "jobs",
+    },
+    {
+      label: "Forum Board",
+      path: "forum-board",
+    },
   ];
 
   const renderLogout = () => (
-    <Button
-      variant="outlined"
-      sx={handleNavStyles("button")}
-      onClick={handleLogout}
-    >
+    <Button variant="text" sx={handleNavStyles("link")} onClick={handleLogout}>
       Logout
     </Button>
   );
