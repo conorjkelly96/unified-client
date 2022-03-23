@@ -62,3 +62,33 @@ export const altButton = {
     boxShadow: "none",
   },
 };
+
+const navbarBackgroundColors = {
+  staff: "orange",
+  student: "green",
+  public: "#fff",
+};
+
+const navbarTextColors = {
+  staff: "#fff",
+  student: "#fff",
+  public: "#000",
+};
+
+export const getNavbarStyles = (user) => {
+  return {
+    navContainer: {
+      backgroundColor: navbarBackgroundColors[user] || "#fff",
+    },
+    button: {
+      border: "none",
+      backgroundColor: navbarBackgroundColors[user] || "#fff",
+      color: navbarTextColors[user] || "#000",
+      marginLeft: "10px",
+      "&:hover": {
+        border: `1px solid ${navbarTextColors[user] || "#000"}`,
+        color: navbarTextColors[user] || "#000",
+      },
+    },
+  };
+};

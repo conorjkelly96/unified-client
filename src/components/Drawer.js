@@ -27,16 +27,55 @@ const useStyles = makeStyles(() => ({
 }));
 
 export const DrawerComponent = () => {
-  const classes = useStyles();
   const { isLoggedIn, user, setUser, setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
 
   //hook to display drawer component
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const handleNavigation = (path) => () => {
-    navigate(path, { replace: true });
+  const styles = {
+    navContainer: {
+      backgroundColor: "#fff",
+    },
+    navLinks: {
+      display: "flex",
+      flexGrow: 1,
+      justifyContent: "flex-end",
+    },
+    logo: {
+      display: "flex",
+      alignContent: "center",
+    },
+    link: {
+      textDecoration: "none",
+      color: "#000",
+      border: "1px solid #fff",
+      m: 1,
+      "&:hover": {
+        border: "1px solid #E57A44",
+      },
+    },
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    setUser();
+    setIsLoggedIn(false);
+
+    navigate("login", { replace: true });
+  };
+
+  const renderLogout = () => (
+    <Button
+      variant="text"
+      sx={{ ...styles.link, mt: 3, textTransform: "none", fontSize: "16px" }}
+      onClick={handleLogout}
+    >
+      Logout
+    </Button>
+  );
 
   return (
     <>
@@ -45,39 +84,39 @@ export const DrawerComponent = () => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-        <List className={classes.drawer}>
+        <List sx={styles.navContainer}>
           {!isLoggedIn &&
             publicLinks.map((link) => (
-              <ListItem onClick={() => setOpenDrawer(false)}>
-                <ListItemText>
-                  <Link to={link.path} className={classes.link}>
-                    {link.label}
-                  </Link>
-                </ListItemText>
-              </ListItem>
+              <Link to={link.path} style={styles.link}>
+                <ListItem onClick={() => setOpenDrawer(false)}>
+                  <ListItemText>{link.label}</ListItemText>
+                </ListItem>
+              </Link>
             ))}
-          {isLoggedIn &&
-            user?.type === "staff" &&
-            staffLinks.map((link) => (
-              <ListItem onClick={() => setOpenDrawer(false)}>
-                <ListItemText>
-                  <Link to={link.path} className={classes.link}>
-                    {link.label}
-                  </Link>
-                </ListItemText>
-              </ListItem>
-            ))}
-          {isLoggedIn &&
-            user?.type === "student" &&
-            studentLinks.map((link) => (
-              <ListItem onClick={() => setOpenDrawer(false)}>
-                <ListItemText>
-                  <Link to={link.path} className={classes.link}>
-                    {link.label}
-                  </Link>
-                </ListItemText>
-              </ListItem>
-            ))}
+          {isLoggedIn && user?.type === "staff" && (
+            <>
+              {staffLinks.map((link) => (
+                <Link to={link.path} style={styles.link}>
+                  <ListItem onClick={() => setOpenDrawer(false)}>
+                    <ListItemText>{link.label}</ListItemText>
+                  </ListItem>
+                </Link>
+              ))}
+              {renderLogout()}
+            </>
+          )}
+          {isLoggedIn && user?.type === "student" && (
+            <>
+              {studentLinks.map((link) => (
+                <Link to={link.path} style={styles.link}>
+                  <ListItem onClick={() => setOpenDrawer(false)}>
+                    <ListItemText>{link.label}</ListItemText>
+                  </ListItem>
+                </Link>
+              ))}
+              {renderLogout()}
+            </>
+          )}
         </List>
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>

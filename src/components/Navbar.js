@@ -21,6 +21,7 @@ export const Navbar = () => {
     navContainer: {
       alignContent: "center",
       height: "10vh",
+      backgroundColor: "#fff",
     },
     navLinks: {
       display: "flex",
@@ -33,86 +34,13 @@ export const Navbar = () => {
     },
     link: {
       textDecoration: "none",
-      color: "#fff",
-      border: "1px solid #009FFD",
-      p: 1,
+      color: "#000",
+      border: "1px solid #fff",
+      m: 1,
       "&:hover": {
-        border: "1px solid white",
+        border: "1px solid #E57A44",
       },
     },
-  };
-
-  const staffStyles = {
-    navContainer: {
-      backgroundColor: "#E57A44",
-    },
-    button: {
-      backgroundColor: "#009FFD",
-      color: "#fff",
-      marginLeft: "10px",
-      "&:hover": {
-        border: "1px solid white",
-        backgroundColor: "#009FFD",
-        color: "white",
-      },
-    },
-  };
-
-  const studentStyles = {
-    navContainer: {
-      backgroundColor: "#009FFD",
-    },
-
-    button: {
-      border: "none",
-      backgroundColor: "#009FFD",
-      color: "#fff",
-      marginLeft: "10px",
-      "&:hover": {
-        border: "1px solid white",
-        backgroundColor: "#009FFD",
-        color: "white",
-      },
-    },
-  };
-
-  const publicStyles = {
-    navContainer: {
-      backgroundColor: "white",
-    },
-
-    button: {
-      backgroundColor: "#009FFD",
-      color: "",
-      marginLeft: "",
-      "&:hover": {
-        border: "1px solid black",
-        backgroundColor: "#009FFD",
-        color: "black",
-      },
-    },
-  };
-
-  const handleNavStyles = (element) => {
-    if (isLoggedIn && user?.type === "student") {
-      return {
-        ...styles[element],
-        ...studentStyles[element],
-      };
-    }
-
-    if (isLoggedIn && user?.type === "staff") {
-      return {
-        ...styles[element],
-        ...staffStyles[element],
-      };
-    }
-    if (!isLoggedIn) {
-      return {
-        ...styles[element],
-        ...publicStyles[element],
-      };
-    }
   };
 
   const handleNavigation = (path) => () => {
@@ -130,7 +58,7 @@ export const Navbar = () => {
   };
 
   const renderLogout = () => (
-    <Button variant="text" sx={handleNavStyles("link")} onClick={handleLogout}>
+    <Button variant="text" sx={styles.link} onClick={handleLogout}>
       Logout
     </Button>
   );
@@ -138,14 +66,10 @@ export const Navbar = () => {
   return (
     <AppBar position="static">
       <CssBaseline />
-      <Toolbar sx={handleNavStyles("navContainer")}>
+      <Toolbar sx={styles.navContainer}>
         <Box sx={styles.logo}>
           <img
-            src={
-              isLoggedIn
-                ? "./images/unified-private-nav.png"
-                : "./images/unified-public-nav.png"
-            }
+            src="./images/unified-public-nav.png"
             alt="Unified Logo"
             style={{
               width: "140px",
@@ -164,10 +88,10 @@ export const Navbar = () => {
                   <Button
                     key={link.label}
                     variant="text"
-                    sx={handleNavStyles("link")}
+                    sx={styles.link}
                     onClick={handleNavigation(link.path)}
                   >
-                    {"link.label"}
+                    {link.label}
                   </Button>
                 ))}
               </>
@@ -179,13 +103,12 @@ export const Navbar = () => {
                   <Button
                     variant="text"
                     key={link.label}
-                    sx={handleNavStyles("link")}
+                    sx={styles.link}
                     onClick={handleNavigation(link.path)}
                   >
                     {link.label}
                   </Button>
                 ))}
-                {renderLogout()}
               </>
             )}
 
@@ -195,7 +118,7 @@ export const Navbar = () => {
                   <Button
                     variant="text"
                     key={link.label}
-                    sx={handleNavStyles("link")}
+                    sx={styles.link}
                     onClick={handleNavigation(link.path)}
                   >
                     {link.label}
