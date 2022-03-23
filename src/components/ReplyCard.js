@@ -7,9 +7,11 @@ import IconButton from "@mui/material/IconButton";
 import { useMutation } from "@apollo/client";
 import ErrorIcon from "@mui/icons-material/Error";
 import PendingIcon from "@mui/icons-material/Pending";
+import Avatar from "@mui/material/Avatar";
 
 import { DELETE_FORUM_REPLY } from "../mutations";
 import { GET_FORUM_POST } from "../queries";
+import { Stack } from "@mui/material";
 
 export const ReplyCard = ({ id, username, replies }) => {
   const [executeDeleteReply, { loading, error }] = useMutation(
@@ -43,13 +45,15 @@ export const ReplyCard = ({ id, username, replies }) => {
           <Typography id={reply.id} sx={{ mt: 2 }}>
             {reply.text}
           </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-            {"— "}
-            {reply.user.username}
-            {" posted "}
-            {reply.createdAt}
-          </Typography>
-          {username === reply.user && (
+          <Stack direction="row">
+            <Avatar alt="" src="" sx={{ marginRight: 1 }} />
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+              {reply.user.username}
+              {" posted "}
+              {reply.createdAt}
+            </Typography>
+          </Stack>
+          {username === reply.user.username && (
             <>
               <IconButton
                 id={reply.id}
