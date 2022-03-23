@@ -89,7 +89,7 @@ export const ForumBoardPage = () => {
         </Box>
       )}
 
-      {!loading && !data?.forumPosts.length !== 0 && (
+      {!loading && !data?.forumPosts.length === 0 && (
         <Alert icon={false} severity="info" sx={alertContainer}>
           There are currently no forum posts.
         </Alert>
