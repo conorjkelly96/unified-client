@@ -1,5 +1,9 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 import { LoginPage } from "../pages/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
@@ -7,64 +11,84 @@ import { AboutUsPage } from "../pages/AboutUsPage";
 import { Marketplace } from "../pages/Marketplace";
 import { ForumBoardPage } from "../pages/ForumBoardPage";
 import { ViewSavedJobs } from "../pages/ViewSavedJobs";
-import { useAuth } from "../contexts/AppProvider";
-import { Error } from "../pages/Error";
 import { CreateItemPage } from "../pages/CreateItemPage";
 import { SingleItemPage } from "../pages/SingleItemPage";
-import { Navbar } from "./Navbar";
 import { CreateJobPage } from "../pages/CreateJobPage";
 import { ViewJobsPage } from "../pages/ViewJobsPage";
-import { Footer } from "../components/Footer";
 import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 import { CreatePostPage } from "../pages/CreatePostPage";
 import { ViewForumPostPage } from "../pages/ViewForumPostPage";
-// import { JobBoardPage } from "../pages/JobBoardPage";
 import { EditItemPage } from "../pages/EditItemPage";
 import { PurchaseRequestsPage } from "../pages/PurchaseRequestsPage";
+import { useAuth } from "../contexts/AppProvider";
 
 export const AppRouter = () => {
-  // TODO: wrap routes with isLoggedIn and user type
   const { isLoggedIn, user } = useAuth();
 
+  const location = useLocation();
+
   return (
-    <>
+    <Stack sx={{ minHeight: "100vh" }}>
       <Navbar />
+      <Box sx={{ minHeight: "75vh" }}>
+        <Routes>
+          <Route path="/about-us" element={<AboutUsPage />} />
+          <Route
+            path="/login"
+            element={
+              !isLoggedIn ? (
+                <LoginPage />
+              ) : (
+                <Navigate state={{ from: location }} to="/dashboard" replace />
+              )
+            }
+          />
+          <Route
+            path="/sign-up"
+            element={
+              !isLoggedIn ? (
+                <SignUpPage />
+              ) : (
+                <Navigate state={{ from: location }} to="/dashboard" replace />
+              )
+            }
+          />
 
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
+          {isLoggedIn && (
+            <>
+              <Route path="/dashboard" element={<DashboardPage />} />
+            </>
+          )}
 
-        {isLoggedIn && user?.__typename === "Student" && (
-          <>
-            <Route path="/jobs" element={<ViewJobsPage />} />
-            <Route path="/job-board" element={<ViewSavedJobs />} />
-            <Route path={"/forum/:id"} element={<ViewForumPostPage />} />
-          </>
-        )}
+          {isLoggedIn && user?.__typename === "Student" && (
+            <>
+              <Route path={`/listing/:id`} element={<SingleItemPage />} />
+              <Route path="/create-item" element={<CreateItemPage />} />
+              <Route path={`/edit-item/:id`} element={<EditItemPage />} />
+              <Route path="/create-post" element={<CreatePostPage />} />
+              <Route path="/forum-board" element={<ForumBoardPage />} />
+              <Route path="/marketplace" element={<Marketplace />} />
+              <Route
+                path="/purchase-requests"
+                element={<PurchaseRequestsPage />}
+              />
+              <Route path={"/forum/:id"} element={<ViewForumPostPage />} />
+              <Route path="/jobs" element={<ViewJobsPage />} />
+              <Route path="/job-board" element={<ViewSavedJobs />} />
+            </>
+          )}
 
-        {isLoggedIn ? (
-          <>
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/about-us" element={<AboutUsPage />} />
-            <Route path="/marketplace" element={<Marketplace />} />
-            <Route path="/forum-board" element={<ForumBoardPage />} />
-            <Route
-              path="/purchase-requests"
-              element={<PurchaseRequestsPage />}
-            />
-            <Route path="/create-job" element={<CreateJobPage />} />
-            <Route path="/create-item" element={<CreateItemPage />} />
-            <Route path={`/listing/:id`} element={<SingleItemPage />} />
-            <Route path={`/edit-item/:id`} element={<EditItemPage />} />
-            <Route path="/create-post" element={<CreatePostPage />} />
-            <Route path="/my-jobs" element={<ViewCreatedJobs />} />
-          </>
-        ) : (
+          {isLoggedIn && user?.__typename === "Staff" && (
+            <>
+              <Route path="/my-jobs" element={<ViewCreatedJobs />} />
+              <Route path="/create-job" element={<CreateJobPage />} />
+            </>
+          )}
+
           <Route path="*" element={<Navigate to="/login" />} />
-        )}
-      </Routes>
-
+        </Routes>
+      </Box>
       <Footer />
-    </>
+    </Stack>
   );
 };

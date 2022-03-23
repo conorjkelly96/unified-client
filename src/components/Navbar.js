@@ -19,6 +19,7 @@ export const Navbar = () => {
   const styles = {
     navContainer: {
       alignContent: "center",
+      height: "10vh",
     },
     navLinks: {
       display: "flex",

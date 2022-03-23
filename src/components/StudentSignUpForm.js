@@ -130,6 +130,9 @@ export const StudentSignUpForm = () => {
       textAlign: "center",
     },
   };
+
+  console.log(errors);
+
   return (
     <Box sx={styles.container}>
       {(universitiesLoading || universityLoading) && <Spinner />}
@@ -284,7 +287,8 @@ export const StudentSignUpForm = () => {
           name="bio"
           variant="outlined"
           fullWidth
-          {...register("bio", { required: true })}
+          helperText="Maximum 2000 characters"
+          {...register("bio", { required: true, maxLength: 2000 })}
           error={!!errors.bio}
           disabled={loading}
         />
