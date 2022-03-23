@@ -79,8 +79,6 @@ export const ForumPostCard = ({
 
   const { user } = useAuth();
 
-  console.log(text);
-
   return (
     <Card sx={{ minWidth: 275, mb: "25px", p: 3 }}>
       <CardContent>
