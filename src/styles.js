@@ -42,7 +42,8 @@ export const pageHeader = {
   width: "100%",
 };
 
-// Theme colors: blue(009ffd), light grey(e8e9f3), black(272635), orange(e57a44), red(c1292e)
+// Unified Theme colors: blue(009ffd), light grey(e8e9f3), black(272635), orange(e57a44), red(c1292e)
+
 export const postButton = {
   color: "#fff",
   backgroundColor: "#e57a44",
