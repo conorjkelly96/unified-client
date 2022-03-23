@@ -81,15 +81,15 @@ export const DrawerComponent = () => {
           </ListItem>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
-              <Link to="/buy-sell" className={classes.link}>
-                Buy/Sell
+              <Link to="/marketplace" className={classes.link}>
+                Marketplace
               </Link>
             </ListItemText>
           </ListItem>
           <ListItem onClick={() => setOpenDrawer(false)}>
             <ListItemText>
               <Link to="/forum-board" className={classes.link}>
-                Forum Board
+                Forum
               </Link>
             </ListItemText>
           </ListItem>
