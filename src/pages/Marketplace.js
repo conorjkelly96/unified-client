@@ -17,6 +17,7 @@ import {
 import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
 import { FilterByCategoryComponent } from "../components/FilterByCategoryComponent";
+import { NoItemResults } from "../components/NoItemResults";
 
 export const Marketplace = () => {
   const navigate = useNavigate();
@@ -53,6 +54,10 @@ export const Marketplace = () => {
     if (selectedCategoryValue) {
       await refetch({ category: selectedCategoryValue });
       setItemsToDisplay(itemData?.viewAllItems);
+      if (!itemData?.viewAllItems) {
+        console.log("No Results");
+        return <NoItemResults />;
+      }
     }
   }, [itemData, selectedValue, selectedCategoryValue]);
 
