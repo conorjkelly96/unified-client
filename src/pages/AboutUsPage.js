@@ -18,6 +18,7 @@ import Link from "@mui/material/Link";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Content from "../components/TeamContent";
 
 const cards = [1, 2, 3, 4, 5, 6];
 
@@ -36,7 +37,7 @@ export const AboutUsPage = () => {
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="lg">
             <Typography
               component="h1"
               variant="h2"
@@ -107,46 +108,29 @@ export const AboutUsPage = () => {
             </Stack>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md" align="center">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      // 16:9
-                      pt: "56.25%",
-                    }}
-                    image="https://avatars.githubusercontent.com/u/87938352?v=4"
-                    alt="Matthew Palmer"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Matthew Palmer
-                    </Typography>
-                    <Typography>VA Grad / Coding Bootcamp</Typography>
-                  </CardContent>
-                  <CardActions style={{ justifyContent: "center" }}>
-                    <Button size="small">
-                      <GitHubIcon color="#E57A44"></GitHubIcon>
-                    </Button>
-                    <Button size="small">
-                      <LinkedInIcon></LinkedInIcon>
-                    </Button>
-                  </CardActions>
-                </Card>
+        <box>
+          <Typography
+            variant="h2"
+            component="h2"
+            textAlign={"center"}
+            padding="20px"
+          >
+            Meet the Team
+          </Typography>
+          ;
+          <Container sx={{ py: 10 }} maxWidth="lg" align="center">
+            {/* End hero unit */}
+            <Grid container direction="column">
+              <Grid item container>
+                <Grid sm={2} xs={0} />
+                <Grid xs={12} sm={8}>
+                  <Content sx={{ padding: "10px" }} />
+                </Grid>
+                <Grid item xs={6} />
               </Grid>
-            ))}
-          </Grid>
-        </Container>
+            </Grid>
+          </Container>
+        </box>
       </main>
     </ThemeProvider>
   );
