@@ -107,6 +107,7 @@ export const GET_FORUM_POSTS = gql`
       }
       createdAt
       replyCount
+      tags
     }
   }
 `;
@@ -192,6 +193,14 @@ export const GET_COMMENTS_ON_MY_ITEMS = gql`
         commentBody
         username
       }
+    }
+  }
+`;
+
+export const TAGS = gql`
+  query Query {
+    tags {
+      name
     }
   }
 `;
