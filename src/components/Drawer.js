@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
+import { useAuth } from "../contexts/AppProvider";
+import { publicLinks, staffLinks, studentLinks } from "./links";
 
 //css styling
 const useStyles = makeStyles(() => ({
@@ -25,6 +27,7 @@ const useStyles = makeStyles(() => ({
 
 export const DrawerComponent = () => {
   const classes = useStyles();
+  const { isLoggedIn, user, setUser, setIsLoggedIn } = useAuth();
 
   //hook to display drawer component
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -37,69 +40,38 @@ export const DrawerComponent = () => {
         onClose={() => setOpenDrawer(false)}
       >
         <List className={classes.drawer}>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/" className={classes.link}>
-                Home
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/about" className={classes.link}>
-                About Us
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/sign-up" className={classes.link}>
-                Sign Up
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/login" className={classes.link}>
-                Login
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/dashboard" className={classes.link}>
-                Dashboard
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/jobs" className={classes.link}>
-                Job Board
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/marketplace" className={classes.link}>
-                Marketplace
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/forum-board" className={classes.link}>
-                Forum
-              </Link>
-            </ListItemText>
-          </ListItem>
-          <ListItem onClick={() => setOpenDrawer(false)}>
-            <ListItemText>
-              <Link to="/edit-profile" className={classes.link}>
-                Edit Profile
-              </Link>
-            </ListItemText>
-          </ListItem>
+          {!isLoggedIn &&
+            publicLinks.map((link) => (
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to={link.path} className={classes.link}>
+                    {link.label}
+                  </Link>
+                </ListItemText>
+              </ListItem>
+            ))}
+          {isLoggedIn &&
+            user?.type === "staff" &&
+            staffLinks.map((link) => (
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to={link.path} className={classes.link}>
+                    {link.label}
+                  </Link>
+                </ListItemText>
+              </ListItem>
+            ))}
+          {isLoggedIn &&
+            user?.type === "student" &&
+            studentLinks.map((link) => (
+              <ListItem onClick={() => setOpenDrawer(false)}>
+                <ListItemText>
+                  <Link to={link.path} className={classes.link}>
+                    {link.label}
+                  </Link>
+                </ListItemText>
+              </ListItem>
+            ))}
         </List>
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>

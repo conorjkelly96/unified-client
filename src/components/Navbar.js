@@ -9,6 +9,7 @@ import { useTheme, useMediaQuery } from "@mui/material";
 
 import { DrawerComponent } from "./Drawer";
 import { useAuth } from "../contexts/AppProvider";
+import { publicLinks, staffLinks, studentLinks } from "./links";
 
 export const Navbar = () => {
   const theme = useTheme();
@@ -128,47 +129,6 @@ export const Navbar = () => {
     navigate("login", { replace: true });
   };
 
-  const publicLinks = [
-    {
-      label: "Login",
-      path: "login",
-    },
-    {
-      label: "Sign Up",
-      path: "sign-up",
-    },
-  ];
-
-  const staffLinks = [
-    {
-      label: "Dashboard",
-      path: "dashboard",
-    },
-    {
-      label: "Jobs",
-      path: "jobs",
-    },
-  ];
-
-  const studentLinks = [
-    {
-      label: "Dashboard",
-      path: "dashboard",
-    },
-    {
-      label: "Marketplace",
-      path: "marketplace",
-    },
-    {
-      label: "Jobs",
-      path: "jobs",
-    },
-    {
-      label: "Forum Board",
-      path: "forum-board",
-    },
-  ];
-
   const renderLogout = () => (
     <Button variant="text" sx={handleNavStyles("link")} onClick={handleLogout}>
       Logout
@@ -180,28 +140,19 @@ export const Navbar = () => {
       <CssBaseline />
       <Toolbar sx={handleNavStyles("navContainer")}>
         <Box sx={styles.logo}>
-          {isLoggedIn ? (
-            <img
-              src="./images/unified-private-nav.png"
-              alt="Unified Logo"
-              style={{
-                width: "140px",
-                height: "100%",
-                padding: "10px",
-              }}
-            />
-          ) : (
-            // TODO: Add public landing image here
-            <img
-              src="./images/unified-public-nav.png"
-              alt="Unified Logo"
-              style={{
-                width: "140px",
-                height: "100%",
-                padding: "10px",
-              }}
-            />
-          )}
+          <img
+            src={
+              isLoggedIn
+                ? "./images/unified-private-nav.png"
+                : "./images/unified-public-nav.png"
+            }
+            alt="Unified Logo"
+            style={{
+              width: "140px",
+              height: "100%",
+              padding: "10px",
+            }}
+          />
         </Box>
         {isMobile ? (
           <DrawerComponent />
