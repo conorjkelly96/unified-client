@@ -18,6 +18,7 @@ import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
 import { FilterByCategoryComponent } from "../components/FilterByCategoryComponent";
 import { NoItemResults } from "../components/NoItemResults";
+import { postButton } from "../styles";
 
 export const Marketplace = () => {
   const navigate = useNavigate();
@@ -113,7 +114,26 @@ export const Marketplace = () => {
   const userId = user.id;
 
   const styles = {
-    container: { textAlign: "center" },
+    container: {
+      backgroundColor: "#fff",
+    },
+    header: {
+      paddingTop: 3,
+      paddingBottom: 2,
+    },
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: 4,
+      paddingTop: 3,
+    },
+    loadingButton: { marginTop: 3, marginBottom: 2 },
+    errorContainer: {
+      marginTop: 2,
+      color: "#d32f2f",
+      textAlign: "center",
+    },
   };
 
   return (
@@ -134,6 +154,7 @@ export const Marketplace = () => {
             <Button
               endIcon={<SellIcon />}
               color="secondary"
+              sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
               href="/create-item"
             >
               Sell an item today!

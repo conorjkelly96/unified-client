@@ -1,3 +1,5 @@
+import { hover } from "@testing-library/user-event/dist/hover";
+
 export const mainContainer = {
   my: 3,
   backgroundColor: "#fff",
@@ -30,6 +32,7 @@ export const loginForm = {
 export const alertContainer = {
   justifyContent: "center",
   p: 4,
+  m: 4,
 };
 
 export const pageHeader = {
@@ -37,4 +40,15 @@ export const pageHeader = {
   mb: 3,
   justifyContent: "center",
   width: "100%",
+};
+
+// Theme colors: blue(009ffd), light grey(e8e9f3), black(272635), orange(e57a44), red(c1292e)
+export const postButton = {
+  color: "#fff",
+  backgroundColor: "#e57a44",
+  fontWeight: "bold",
+  "&:hover": {
+    backgroundColor: "#f75707",
+    boxShadow: "none",
+  },
 };

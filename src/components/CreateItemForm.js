@@ -16,6 +16,7 @@ import { SuccessfulItemModal } from "./SuccessfulItemModal";
 import { useState } from "react";
 import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
+import { postButton } from "../styles";
 
 export const CreateItemForm = () => {
   const [executeCreateItem, { loading, error }] = useMutation(CREATE_ITEM);
@@ -235,9 +236,8 @@ export const CreateItemForm = () => {
               loading={loading}
               loadingIndicator="Loading..."
               variant="contained"
-              fullWidth
               type="submit"
-              sx={styles.loadingButton}
+              sx={loading ? styles.loadingButton : { ...postButton, mt: 2 }}
               startIcon={error && <ErrorIcon />}
               color={error ? "error" : "primary"}
               onClick={onSubmitItemForm}

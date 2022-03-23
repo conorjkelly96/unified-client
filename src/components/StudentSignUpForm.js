@@ -17,6 +17,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { postButton } from "../styles";
 
 import { SIGNUP_STUDENT } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
@@ -383,7 +384,7 @@ export const StudentSignUpForm = () => {
           variant="contained"
           fullWidth
           type="submit"
-          sx={styles.loadingButton}
+          sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >

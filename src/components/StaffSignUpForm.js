@@ -16,6 +16,7 @@ import { SIGNUP_STAFF } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
 import { Spinner } from "./Spinner";
 import { useState } from "react";
+import { postButton } from "../styles";
 
 export const StaffSignUpForm = () => {
   const [executeSignUp, { loading, error }] = useMutation(SIGNUP_STAFF);
@@ -256,7 +257,7 @@ export const StaffSignUpForm = () => {
           variant="contained"
           fullWidth
           type="submit"
-          sx={styles.loadingButton}
+          sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >

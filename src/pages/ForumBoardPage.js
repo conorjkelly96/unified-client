@@ -12,7 +12,7 @@ import { GET_FORUM_POSTS } from "../queries";
 import { Spinner } from "../components/Spinner";
 import { ForumPreviewCard } from "../components/ForumPreviewCard";
 import { Error } from "./Error";
-import { alertContainer, mainContainer } from "../styles";
+import { alertContainer, mainContainer, postButton } from "../styles";
 
 export const ForumBoardPage = () => {
   const { data, loading, error } = useQuery(GET_FORUM_POSTS);
@@ -53,10 +53,15 @@ export const ForumBoardPage = () => {
             sx={{
               display: "flex",
               flexDirection: "row",
-              justifyContent: isMobile ? "center" : "flex-end",
+              justifyContent: "center",
             }}
           >
-            <Button variant="contained" component="a" href="/create-post">
+            <Button
+              sx={{ ...postButton }}
+              variant="contained"
+              component="a"
+              href="/create-post"
+            >
               Post Question
             </Button>
           </Box>

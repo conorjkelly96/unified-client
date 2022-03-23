@@ -8,6 +8,8 @@ import { JobCard } from "../components/JobCard";
 import { JOBS } from "../queries";
 import { Error } from "./Error";
 import { Spinner } from "../components/Spinner";
+import { Alert } from "@mui/material";
+import { alertContainer } from "../styles";
 
 export const ViewJobsPage = () => {
   const { data, loading, error } = useQuery(JOBS);
@@ -61,7 +63,7 @@ export const ViewJobsPage = () => {
         </Box>
       )}
 
-      {!loading && data?.jobs.length && (
+      {!loading && data?.jobs.length ? (
         <>
           <Typography
             variant="h4"
@@ -97,6 +99,12 @@ export const ViewJobsPage = () => {
               );
             })}
           </Box>
+        </>
+      ) : (
+        <>
+          <Alert icon={false} severity="info" sx={alertContainer}>
+            There are currently no job listings.
+          </Alert>
         </>
       )}
     </Box>

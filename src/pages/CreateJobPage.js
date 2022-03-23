@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { JobCard } from "../components/JobCard";
 import { useNavigate } from "react-router-dom";
+import { postButton } from "../styles";
 // import { useAuth } from "../contexts/AppProvider";
 
 export const CreateJobPage = () => {
@@ -203,7 +204,7 @@ export const CreateJobPage = () => {
               variant="contained"
               fullWidth
               type="submit"
-              sx={styles.loadingButton}
+              sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
               startIcon={error && <ErrorIcon />}
               color={error ? "error" : "primary"}
             >

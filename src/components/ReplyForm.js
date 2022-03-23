@@ -12,6 +12,7 @@ import { GET_FORUM_POST } from "../queries";
 import { useParams } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
+import { postButton } from "../styles";
 
 export const ReplyForm = () => {
   let { id } = useParams();
@@ -98,7 +99,7 @@ export const ReplyForm = () => {
           loadingIndicator="Loading..."
           variant="contained"
           type="submit"
-          sx={styles.loadingButton}
+          sx={loading ? styles.loadingButton : { ...postButton }}
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >

@@ -11,7 +11,7 @@ import Divider from "@mui/material/Divider";
 
 import { LOGIN_STUDENT } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
-import { loginForm } from "../styles";
+import { loginForm, postButton } from "../styles";
 
 export const StudentLoginForm = () => {
   const { setIsLoggedIn, setUser } = useAuth();
@@ -103,7 +103,7 @@ export const StudentLoginForm = () => {
           variant="contained"
           fullWidth
           type="submit"
-          sx={loginForm.loadingButton}
+          sx={loading ? loginForm.loadingButton : { ...postButton, m: 2 }}
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >
