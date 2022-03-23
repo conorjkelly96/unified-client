@@ -3,12 +3,13 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import { useAuth } from "../contexts/AppProvider";
 import { publicLinks, staffLinks, studentLinks } from "./links";
+import { Button } from "@mui/material";
 
 //css styling
 const useStyles = makeStyles(() => ({
@@ -28,9 +29,14 @@ const useStyles = makeStyles(() => ({
 export const DrawerComponent = () => {
   const classes = useStyles();
   const { isLoggedIn, user, setUser, setIsLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   //hook to display drawer component
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const handleNavigation = (path) => () => {
+    navigate(path, { replace: true });
+  };
 
   return (
     <>

@@ -39,6 +39,6 @@ export const studentLinks = [
   },
   {
     label: "Forum Board",
-    path: "forum-board",
+    path: "forum",
   },
 ];
