@@ -2,6 +2,7 @@ import { Box, Button } from "@mui/material";
 import PreviewIcon from "@mui/icons-material/Preview";
 import BoltIcon from "@mui/icons-material/Bolt";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+import { altButton } from "../styles";
 
 export const BuyerButtonOptions = ({
   id,
@@ -15,8 +16,7 @@ export const BuyerButtonOptions = ({
         variant="contained"
         size="small"
         endIcon={<PreviewIcon />}
-        color="success"
-        sx={{ marginLeft: "8px" }}
+        sx={{ ...altButton, marginLeft: "8px" }}
         href={`/listing/${id}`}
       >
         View Listing

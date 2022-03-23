@@ -52,3 +52,13 @@ export const postButton = {
     boxShadow: "none",
   },
 };
+
+export const altButton = {
+  color: "#fff",
+  backgroundColor: "#009ffd",
+  fontWeight: "bold",
+  "&:hover": {
+    backgroundColor: "#0069fd",
+    boxShadow: "none",
+  },
+};

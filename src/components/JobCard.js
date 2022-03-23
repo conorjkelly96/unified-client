@@ -9,6 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useAuth } from "../contexts/AppProvider";
+import { altButton } from "../styles";
 
 export const JobCard = ({
   id,
@@ -90,8 +91,7 @@ export const JobCard = ({
                 variant="contained"
                 size="small"
                 endIcon={<EditIcon />}
-                color="info"
-                sx={{ marginLeft: "8px" }}
+                sx={{ ...altButton, marginLeft: "8px" }}
                 onClick={onAdd}
               >
                 Save job
@@ -100,14 +100,7 @@ export const JobCard = ({
           )}
           {user?.__typename === "Student" && alreadySaved && (
             <Box sx={{ marginBottom: "10px" }}>
-              <Button
-                id={id}
-                variant="contained"
-                size="small"
-                // endIcon={<EditIcon />}
-                color="success"
-                sx={{ marginLeft: "8px" }}
-              >
+              <Button id={id} variant="contained" size="small" color="info">
                 Saved
               </Button>
             </Box>
