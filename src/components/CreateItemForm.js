@@ -1,13 +1,14 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink, Navigate, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
-import { Select } from "@mui/material";
+import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
+import { ItemCard } from "./ItemCard";
 
 // import { Spinner } from "./Spinner";
 import { CREATE_ITEM } from "../mutations";
@@ -34,7 +35,17 @@ export const CreateItemForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    getValues,
+    watch,
   } = useForm();
+
+  const itemName = watch("itemName", "");
+  const itemDescription = watch("itemDescription", "");
+  const category = watch("category", "");
+  const condition = watch("condition", "");
+  const price = watch("price", "");
+  const quantity = watch("quantity", "");
 
   const onSubmit = async ({
     itemName,
@@ -62,7 +73,7 @@ export const CreateItemForm = () => {
       if (data) {
         console.log("success");
         // setNoBackEndModal(true);
-        navigate("/create-item", { replace: true });
+        navigate("/marketplace", { replace: true });
       }
     } catch (err) {
       console.log(err);
@@ -92,115 +103,173 @@ export const CreateItemForm = () => {
   };
 
   return (
-    <Box sx={styles.container}>
-      {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
-      <Typography
-        variant="h4"
-        gutterBottom
-        component="h1"
-        align="center"
-        sx={styles.header}
-      >
-        Sell your item today!
-      </Typography>
-      <Divider sx={{ marginTop: "50px", marginBottom: "25px" }}></Divider>
-      <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          margin="normal"
-          id="itemName"
-          label="Item Name"
-          name="itemName"
-          variant="outlined"
-          fullWidth
-          {...register("itemName", { required: true })}
-          error={!!errors.itemName}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="itemDescription"
-          label="Item Description"
-          name="itemDescription"
-          variant="outlined"
-          fullWidth
-          {...register("itemDescription", { required: false })}
-          error={!!errors.itemDescription}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="category"
-          label="Category"
-          name="category"
-          variant="outlined"
-          fullWidth
-          {...register("category", { required: true })}
-          error={!!errors.category}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="condition"
-          label="Condition"
-          name="condition"
-          variant="outlined"
-          fullWidth
-          {...register("condition", { required: true })}
-          error={!!errors.condition}
-          disabled={loading}
-        />
-        <TextField
-          margin="normal"
-          id="price"
-          label="Item Price"
-          name="price"
-          variant="outlined"
-          fullWidth
-          {...register("price", {
-            required: true,
-            validate: (value) => {
-              const regex = new RegExp(/^\d*\.?\d*$/);
-              return regex.test(value);
-            },
-          })}
-          error={!!errors.price}
-          disabled={loading}
-        />
-        <TextField
-          type="number"
-          margin="normal"
-          id="quantity"
-          label="Quantity"
-          name="quantity"
-          variant="outlined"
-          fullWidth
-          {...register("quantity", {
-            required: true,
-          })}
-          defaultValue={1}
-          error={!!errors.quantity}
-          disabled={loading}
-        />
-        <MultiImageUploader
-          uploadedImages={uploadedImages}
-          setUploadedImages={setUploadedImages}
-          username={user.username}
-        />
+    <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+      <Grid item xs={12} lg={6}>
+        <Box sx={styles.container}>
+          {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Sell your item today!
+          </Typography>
+          <Divider />
+          <Box
+            component="form"
+            sx={styles.form}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <TextField
+              margin="normal"
+              id="itemName"
+              label="Item Name"
+              name="itemName"
+              variant="outlined"
+              fullWidth
+              {...register("itemName", { required: true })}
+              error={!!errors.itemName}
+              disabled={loading}
+            />
+            <TextField
+              margin="normal"
+              id="itemDescription"
+              label="Item Description"
+              name="itemDescription"
+              variant="outlined"
+              fullWidth
+              {...register("itemDescription", { required: false })}
+              error={!!errors.itemDescription}
+              disabled={loading}
+            />
 
-        <LoadingButton
-          loading={loading}
-          loadingIndicator="Loading..."
-          variant="contained"
-          fullWidth
-          type="submit"
-          sx={styles.loadingButton}
-          startIcon={error && <ErrorIcon />}
-          color={error ? "error" : "primary"}
-          onClick={onSubmitItemForm}
-        >
-          Create Item
-        </LoadingButton>
-      </Box>
-    </Box>
+            <FormControl fullWidth>
+              <InputLabel id="category" sx={{ margin: "16px 0px" }}>
+                Category
+              </InputLabel>
+              <Select
+                id="category"
+                label="Category"
+                name="category"
+                variant="outlined"
+                fullWidth
+                {...register("category", { required: true })}
+                error={!!errors.category}
+                disabled={loading}
+                sx={{ margin: "16px 0px" }}
+              >
+                <MenuItem value={"Clothing & Accessories"}>
+                  Clothing & Accessories
+                </MenuItem>
+                <MenuItem value={"Sporting Goods"}>Sporting Goods</MenuItem>
+                <MenuItem value={"Electronics"}>Electronics</MenuItem>
+                <MenuItem value={"Academic Materials"}>
+                  Academic Materials
+                </MenuItem>
+                <MenuItem value={"Other"}>Other</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth>
+              <InputLabel id="condition" sx={{ margin: "16px 0px" }}>
+                Condition
+              </InputLabel>
+              <Select
+                id="condition"
+                label="Condition"
+                name="condition"
+                variant="outlined"
+                fullWidth
+                {...register("condition", { required: true })}
+                error={!!errors.condition}
+                disabled={loading}
+                sx={{ margin: "16px 0px" }}
+              >
+                <MenuItem value={"New"}>New</MenuItem>
+                <MenuItem value={"Fair"}>Fair</MenuItem>
+                <MenuItem value={"Like New"}>Like New</MenuItem>
+                <MenuItem value={"Used"}>Used</MenuItem>
+              </Select>
+            </FormControl>
+
+            <TextField
+              margin="normal"
+              id="price"
+              label="Item Price"
+              name="price"
+              variant="outlined"
+              fullWidth
+              {...register("price", {
+                required: true,
+                validate: (value) => {
+                  const regex = new RegExp(/^\d*\.?\d*$/);
+                  return regex.test(value);
+                },
+              })}
+              error={!!errors.price}
+              disabled={loading}
+            />
+            <TextField
+              type="number"
+              margin="normal"
+              id="quantity"
+              label="Quantity"
+              name="quantity"
+              variant="outlined"
+              fullWidth
+              {...register("quantity", {
+                required: true,
+              })}
+              defaultValue={1}
+              error={!!errors.quantity}
+              disabled={loading}
+            />
+            <MultiImageUploader
+              uploadedImages={uploadedImages}
+              setUploadedImages={setUploadedImages}
+              username={user.username}
+            />
+            <LoadingButton
+              loading={loading}
+              loadingIndicator="Loading..."
+              variant="contained"
+              fullWidth
+              type="submit"
+              sx={styles.loadingButton}
+              startIcon={error && <ErrorIcon />}
+              color={error ? "error" : "primary"}
+              onClick={onSubmitItemForm}
+            >
+              Create Item
+            </LoadingButton>
+          </Box>
+        </Box>
+
+        <Grid item xs={12} lg={6}>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Preview
+          </Typography>
+          <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+          <Box sx={{ px: "32px", paddingTop: "40px" }}>
+            <ItemCard
+              itemName={itemName}
+              itemDescription={itemDescription}
+              category={category}
+              condition={condition}
+              price={price}
+              quantity={quantity}
+            />
+          </Box>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
