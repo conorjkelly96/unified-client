@@ -18,8 +18,11 @@ import {
   ListItemText,
   Stack,
 } from "@mui/material";
+import { useAuth } from "../contexts/AppProvider";
 
 export const ReplyCard = ({ id, username, replies }) => {
+  const { user } = useAuth();
+
   const [executeDeleteReply, { loading, error }] = useMutation(
     DELETE_FORUM_REPLY,
     { refetchQueries: [GET_FORUM_POST] }
@@ -44,46 +47,17 @@ export const ReplyCard = ({ id, username, replies }) => {
     }
   };
 
+  console.log(user.username, replies[0].user.username);
   return (
-    // <Card sx={{ minWidth: 275, maxHeight: "300px", overflow: "auto" }}>
-    //   {replies.map((reply) => (
-    //     <Box key={reply.id} sx={{ px: 2 }}>
-    //       <Typography id={reply.id} sx={{ mt: 2 }}>
-    //         {reply.text}
-    //       </Typography>
-    //       <Stack direction="row">
-    //         <Avatar alt="" src="" sx={{ marginRight: 1 }} />
-    //         <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-    //           {reply.user.username}
-    //           {" posted "}
-    //           {reply.createdAt}
-    //         </Typography>
-    //       </Stack>
-    //       {username === reply.user.username && (
-    //         <>
-    //           <IconButton
-    //             id={reply.id}
-    //             size="small"
-    //             color="error"
-    //             sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
-    //             onClick={onReplyDelete}
-    //           >
-    //             {!loading && error && <ErrorIcon />}
-    //             {loading && <PendingIcon />}
-    //             {!loading && !error && <DeleteIcon />}
-    //           </IconButton>
-    //         </>
-    //       )}
-    //       <Divider />
-    //     </Box>
-    //   ))}
-    // </Card>
     <List sx={{ width: "100%", maxWidth: 720, bgcolor: "background.paper" }}>
       {replies.map((reply) => {
         return (
-          <ListItem alignItems="flex-start">
+          <ListItem key={reply.id} alignItems="flex-start">
             <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src={reply.user.profileImageUrl} />
+              <Avatar
+                alt={`${reply.user.username}`}
+                src={reply.user.profileImageUrl}
+              />
             </ListItemAvatar>
             <ListItemText
               primary={reply.text}
@@ -100,6 +74,19 @@ export const ReplyCard = ({ id, username, replies }) => {
                 </>
               }
             />
+            {user.username === reply.user.username && (
+              <IconButton
+                id={reply.id}
+                size="small"
+                color="error"
+                sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
+                onClick={onReplyDelete}
+              >
+                {!loading && error && <ErrorIcon />}
+                {loading && <PendingIcon />}
+                {!loading && !error && <DeleteIcon />}
+              </IconButton>
+            )}
           </ListItem>
         );
       })}
