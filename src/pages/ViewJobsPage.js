@@ -15,7 +15,7 @@ export const ViewJobsPage = () => {
     useMutation(SAVE_JOB);
 
   const { data: studentJobsData } = useQuery(GET_STUDENT_JOBS);
-
+  console.log(studentJobsData);
   let navigate = useNavigate();
 
   const onAdd = async (event) => {
