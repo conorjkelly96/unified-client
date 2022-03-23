@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { BuyerButtonOptions } from "./BuyerButtonOptions";
 import { SellerButtonOptions } from "./SellerButtonOptions";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
 export const ItemCard = ({
   id,
@@ -26,7 +28,7 @@ export const ItemCard = ({
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
-        <Box
+        {/* <Box
           component="img"
           sx={{
             height: 233,
@@ -35,10 +37,30 @@ export const ItemCard = ({
             maxWidth: { xs: 350, md: 250 },
           }}
           alt={`${itemDescription}`}
-          src={`https://unified-resources.s3.eu-west-2.amazonaws.com/${seller}/images/${images}`}
-        />
+          src={`https://unified-resources.s3.eu-west-2.amazonaws.com/${seller}/images/${imageId}`}
+        /> */}
+        <ImageList cols={3} gap={8}>
+          {images.map((image) => {
+            const imageId = /[^/]*$/.exec(image)[0];
+
+            return (
+              <ImageListItem key={id}>
+                <img
+                  src={`https://unified-resources.s3.eu-west-2.amazonaws.com/${seller}/images/${imageId}`}
+                />
+              </ImageListItem>
+            );
+            console.log(id, seller, imageId);
+          })}
+          {/* <ImageListItem key={id}>
+          <img
+            src={`https://unified-resources.s3.eu-west-2.amazonaws.com/brunomars/images/7c77afeb-c914-4368-ac93-74fe3580b214`}
+          />
+        </ImageListItem> */}
+        </ImageList>
+
         <Typography variant="h5" component="div">
-          {itemName || "Item Name"}
+          {itemName || "Item Name:"}
         </Typography>
 
         <Typography color="text.secondary">
@@ -48,26 +70,27 @@ export const ItemCard = ({
         <Typography sx={{ mb: 1.5 }}>{category || "Category"}</Typography>
 
         <Typography variant="body2" sx={{ mb: "15px" }}>
-          {status || "Status"}
+          {"Listing status: "}
+          {status}
         </Typography>
 
         <Typography>
-          {"Condition"}
+          {"Condition: "}
           {condition}
         </Typography>
 
         <Typography>
-          {"Price"}
+          {"Price: £"}
           {price}
         </Typography>
 
         <Typography>
-          {"Quantity"}
+          {"Quantity: "}
           {quantity}
         </Typography>
 
         <Typography>
-          {"Seller"}
+          {"Seller: "}
           {seller}
         </Typography>
       </CardContent>

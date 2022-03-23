@@ -188,6 +188,7 @@ export const Marketplace = () => {
                 status={item.status}
                 condition={item.condition}
                 price={item.price}
+                images={item.images}
                 quantity={item.quantity}
                 seller={item.seller.username}
                 sellerId={item.seller.id}
