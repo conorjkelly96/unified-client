@@ -44,7 +44,7 @@ export const Navbar = () => {
   };
 
   const handleNavigation = (path) => () => {
-    navigate(`/${path}`, { replace: true });
+    navigate(path, { replace: true });
   };
 
   const handleLogout = () => {

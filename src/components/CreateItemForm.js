@@ -1,14 +1,17 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
-import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
-import { ItemCard } from "./ItemCard";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
 
 // import { Spinner } from "./Spinner";
 import { CREATE_ITEM } from "../mutations";
@@ -16,6 +19,7 @@ import { SuccessfulItemModal } from "./SuccessfulItemModal";
 import { useState } from "react";
 import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
+import { ItemCard } from "./ItemCard";
 import { postButton } from "../styles";
 
 export const CreateItemForm = () => {
@@ -29,6 +33,8 @@ export const CreateItemForm = () => {
   const onSubmitItemForm = () => {
     setNoBackEndModal(true);
   };
+
+  console.log(user);
 
   const handleClose = () => setNoBackEndModal(false);
 
@@ -266,6 +272,9 @@ export const CreateItemForm = () => {
               condition={condition}
               price={price}
               quantity={quantity}
+              images={uploadedImages}
+              seller={user.username}
+              isPreview={true}
             />
           </Box>
         </Grid>

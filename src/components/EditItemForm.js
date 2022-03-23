@@ -11,7 +11,7 @@ import { ItemCard } from "./ItemCard";
 // import { Spinner } from "./Spinner";
 import { UPDATE_ITEM } from "../mutations";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
 import { GET_SINGLE_ITEM_DATA } from "../queries";
@@ -40,18 +40,32 @@ export const EditItemForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async ({
-    itemName,
-    itemDescription,
-    category,
-    condition,
-    price,
-    quantity,
-  }) => {
+  const itemName = watch("itemName");
+  const itemDescription = watch("itemDescription");
+  const category = watch("category");
+  const condition = watch("condition");
+  const price = watch("price");
+  const quantity = watch("quantity");
+
+  useEffect(() => {
+    if (itemData) {
+      setValue("itemName", itemData.getSingleItemData.itemName);
+      setValue("itemDescription", itemData.getSingleItemData.itemDescription);
+      setValue("category", itemData.getSingleItemData.category);
+      setValue("condition", itemData.getSingleItemData.condition);
+      setValue("price", itemData.getSingleItemData.price);
+      setValue("images", uploadedImages);
+    }
+  }, [itemData]);
+
+  const onSubmit = async () => {
     try {
+      console.log(itemName);
       const { data } = await executeUpdateItem({
         variables: {
           itemId: id,
@@ -61,12 +75,11 @@ export const EditItemForm = () => {
             category: category.trim(),
             condition: condition.trim(),
             price: parseFloat(price),
-            quantity: parseInt(quantity.trim(), 10),
+            quantity: parseInt(quantity, 10),
+            images: uploadedImages,
           },
         },
       });
-
-      console.log(data);
 
       if (data) {
         console.log("success");
@@ -101,16 +114,20 @@ export const EditItemForm = () => {
   };
 
   if (itemLoading) {
-    <Spinner />;
+    return <Spinner loading={itemLoading} />;
   }
 
   if (itemError) {
     console.log(itemError);
+    return <h1>Error</h1>;
   }
+
+  console.log(itemName);
 
   return (
     !itemLoading &&
-    !itemError && (
+    !itemError &&
+    itemData?.getSingleItemData && (
       <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
         <Grid item xs={12} lg={6}>
           <Box sx={styles.container}>
@@ -133,55 +150,68 @@ export const EditItemForm = () => {
               <TextField
                 margin="normal"
                 id="itemName"
-                label={itemData.getSingleItemData.itemName}
+                label="Item Name"
                 name="itemName"
                 variant="outlined"
                 fullWidth
-                {...register("itemName", { required: true })}
+                {...register("itemName", {
+                  required: true,
+                  value: itemData.getSingleItemData.itemName,
+                })}
                 error={!!errors.itemName}
                 disabled={loading}
               />
               <TextField
                 margin="normal"
                 id="itemDescription"
-                label={itemData.getSingleItemData.itemDescription}
+                label="Item Description"
                 name="itemDescription"
                 variant="outlined"
                 fullWidth
-                {...register("itemDescription", { required: false })}
+                {...register("itemDescription", {
+                  required: false,
+                  value: itemData.getSingleItemData.itemDescription,
+                })}
                 error={!!errors.itemDescription}
                 disabled={loading}
               />
               <TextField
                 margin="normal"
                 id="category"
-                label={itemData.getSingleItemData.category}
+                label="Category"
                 name="category"
                 variant="outlined"
                 fullWidth
-                {...register("category", { required: true })}
+                {...register("category", {
+                  required: true,
+                  value: itemData.getSingleItemData.category,
+                })}
                 error={!!errors.category}
                 disabled={loading}
               />
               <TextField
                 margin="normal"
                 id="condition"
-                label={itemData.getSingleItemData.condition}
+                label="Condition"
                 variant="outlined"
                 fullWidth
-                {...register("condition", { required: true })}
+                {...register("condition", {
+                  required: true,
+                  value: itemData.getSingleItemData.condition,
+                })}
                 error={!!errors.condition}
                 disabled={loading}
               />
               <TextField
                 margin="normal"
                 id="price"
-                label={itemData.getSingleItemData.price}
+                label="Price"
                 name="price"
                 variant="outlined"
                 fullWidth
                 {...register("price", {
                   required: true,
+                  value: itemData.getSingleItemData.price,
                   validate: (value) => {
                     const regex = new RegExp(/^\d*\.?\d*$/);
                     return regex.test(value);
@@ -199,8 +229,8 @@ export const EditItemForm = () => {
                 fullWidth
                 {...register("quantity", {
                   required: true,
+                  value: itemData.getSingleItemData.quantity,
                 })}
-                defaultValue={1}
                 error={!!errors.quantity}
                 disabled={loading}
               />
@@ -237,12 +267,19 @@ export const EditItemForm = () => {
             <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
             <Box sx={{ px: "32px", paddingTop: "40px" }}>
               <ItemCard
-                itemName={itemData.getSingleItemData.itemName}
-                itemDescription={itemData.getSingleItemData.itemDescription}
-                category={itemData.getSingleItemData.category}
-                condition={itemData.getSingleItemData.condition}
-                price={itemData.getSingleItemData.price}
-                quantity={itemData.getSingleItemData.quantity}
+                itemName={itemName}
+                itemDescription={itemDescription}
+                category={category}
+                condition={condition}
+                price={price}
+                quantity={quantity}
+                images={
+                  uploadedImages.length
+                    ? [...uploadedImages, ...itemData.getSingleItemData.images]
+                    : itemData.getSingleItemData.images
+                }
+                isPreview={true}
+                seller={user.username}
               />
             </Box>
           </Grid>

@@ -25,7 +25,7 @@ import { useAuth } from "../contexts/AppProvider";
 export const AppRouter = () => {
   const { isLoggedIn, user } = useAuth();
 
-  const location = useLocation();
+  console.log(user);
 
   return (
     <Stack sx={{ minHeight: "100vh" }}>
@@ -33,26 +33,8 @@ export const AppRouter = () => {
       <Box sx={{ minHeight: "75vh" }}>
         <Routes>
           <Route path="/about-us" element={<AboutUsPage />} />
-          <Route
-            path="/login"
-            element={
-              !isLoggedIn ? (
-                <LoginPage />
-              ) : (
-                <Navigate state={{ from: location }} to="/dashboard" replace />
-              )
-            }
-          />
-          <Route
-            path="/sign-up"
-            element={
-              !isLoggedIn ? (
-                <SignUpPage />
-              ) : (
-                <Navigate state={{ from: location }} to="/dashboard" replace />
-              )
-            }
-          />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
 
           {isLoggedIn && (
             <>
@@ -60,11 +42,11 @@ export const AppRouter = () => {
             </>
           )}
 
-          {isLoggedIn && user?.__typename === "Student" && (
+          {isLoggedIn && user?.type === "student" && (
             <>
-              <Route path={`/listing/:id`} element={<SingleItemPage />} />
+              <Route path="/listing/:id" element={<SingleItemPage />} />
               <Route path="/create-item" element={<CreateItemPage />} />
-              <Route path={`/edit-item/:id`} element={<EditItemPage />} />
+              <Route path="/edit-item/:id" element={<EditItemPage />} />
               <Route path="/create-post" element={<CreatePostPage />} />
               <Route path="/forum" element={<ForumBoardPage />} />
               <Route path="/marketplace" element={<Marketplace />} />
@@ -78,7 +60,7 @@ export const AppRouter = () => {
             </>
           )}
 
-          {isLoggedIn && user?.__typename === "Staff" && (
+          {isLoggedIn && user?.type === "staff" && (
             <>
               <Route path="/my-jobs" element={<ViewCreatedJobs />} />
               <Route path="/create-job" element={<CreateJobPage />} />

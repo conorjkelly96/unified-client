@@ -59,7 +59,7 @@ export const JobCard = ({
           >
             "Learn More & Apply"
           </Button>
-          {user?.__typename === "Staff" && (
+          {user?.type === "staff" && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
                 variant="contained"
@@ -84,7 +84,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" && !alreadySaved && (
+          {user?.type === "student" && !alreadySaved && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
                 id={id}
@@ -98,7 +98,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" && alreadySaved && (
+          {user?.type === "student" && alreadySaved && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button id={id} variant="contained" size="small" color="info">
                 Saved

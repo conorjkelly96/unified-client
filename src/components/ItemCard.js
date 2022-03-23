@@ -24,6 +24,7 @@ export const ItemCard = ({
   sellerId,
   userId,
   handleClickOpen,
+  isPreview,
 }) => {
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
@@ -40,17 +41,12 @@ export const ItemCard = ({
           src={`https://unified-resources.s3.eu-west-2.amazonaws.com/${seller}/images/${imageId}`}
         /> */}
         <ImageList cols={3} gap={8}>
-          {images.map((image) => {
-            const imageId = /[^/]*$/.exec(image)[0];
-
+          {images.map((image, index) => {
             return (
-              <ImageListItem key={id}>
-                <img
-                  src={`https://unified-resources.s3.eu-west-2.amazonaws.com/${seller}/images/${imageId}`}
-                />
+              <ImageListItem key={index}>
+                <img src={image} />
               </ImageListItem>
             );
-            console.log(id, seller, imageId);
           })}
           {/* <ImageListItem key={id}>
           <img
@@ -94,19 +90,21 @@ export const ItemCard = ({
           {seller}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Box>
-          {sellerId !== userId ? (
-            <BuyerButtonOptions
-              id={id}
-              onAddItemToInterested={onAddItemToInterested}
-              handleClickOpen={handleClickOpen}
-            />
-          ) : (
-            <SellerButtonOptions id={id} onDelete={onDelete} />
-          )}
-        </Box>
-      </CardActions>
+      {!isPreview && (
+        <CardActions>
+          <Box>
+            {sellerId !== userId ? (
+              <BuyerButtonOptions
+                id={id}
+                onAddItemToInterested={onAddItemToInterested}
+                handleClickOpen={handleClickOpen}
+              />
+            ) : (
+              <SellerButtonOptions id={id} onDelete={onDelete} />
+            )}
+          </Box>
+        </CardActions>
+      )}
     </Card>
   );
 };

@@ -18,7 +18,8 @@ import { ADD_TO_MY_ITEMS, DELETE_ITEM } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
 import { FilterByCategoryComponent } from "../components/FilterByCategoryComponent";
 import { NoItemResults } from "../components/NoItemResults";
-import { postButton } from "../styles";
+import { mainContainer, postButton } from "../styles";
+import { Spinner } from "../components/Spinner";
 
 export const Marketplace = () => {
   const navigate = useNavigate();
@@ -113,93 +114,97 @@ export const Marketplace = () => {
   // Pass this down with the seller id so we can match them off and conditionally render buttons on the item card
   const userId = user.id;
 
-  const styles = {
-    container: {
-      backgroundColor: "#fff",
-    },
-    header: {
-      paddingTop: 3,
-      paddingBottom: 2,
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: 4,
-      paddingTop: 3,
-    },
-    loadingButton: { marginTop: 3, marginBottom: 2 },
-    errorContainer: {
-      marginTop: 2,
-      color: "#d32f2f",
-      textAlign: "center",
-    },
-  };
-
   return (
     <>
-      <Container component={"main"} maxWidth={"xs"} sx={styles.container}>
-        <ToggleButtonGroup
-          color="primary"
-          value={selectedValue}
-          exclusive
-          onChange={handleItemViewChange}
-          sx={{ margin: "25px" }}
+      <Container
+        component={"main"}
+        maxWidth={"xs"}
+        sx={{ ...mainContainer, boxShadow: "none" }}
+      >
+        <Spinner loading={itemLoading} />
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
         >
-          <ToggleButton value="myItems">My Items</ToggleButton>
-          <ToggleButton value="allItems">All Items</ToggleButton>
-        </ToggleButtonGroup>
+          <ToggleButtonGroup
+            color="primary"
+            value={selectedValue}
+            exclusive
+            onChange={handleItemViewChange}
+          >
+            <ToggleButton value="myItems">My Items</ToggleButton>
+            <ToggleButton value="allItems">All Items</ToggleButton>
+          </ToggleButtonGroup>
+        </Box>
+
         {selectedValue === "myItems" && (
-          <Box sx={{ px: "32px", padding: "20px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
             <Button
               endIcon={<SellIcon />}
               color="secondary"
-              sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
-              href="/create-item"
+              sx={{ ...postButton, m: 2 }}
+              onClick={() => {
+                navigate("/create-item", { replace: true });
+              }}
             >
               Sell an item today!
             </Button>
             <Button
               endIcon={<StoreIcon />}
               color="secondary"
-              href="/purchase-requests"
+              onClick={() => {
+                navigate("/purchase-requests", { replace: true });
+              }}
             >
               View Purchase Requests
             </Button>
           </Box>
         )}
+
         {selectedValue === "allItems" && (
           <FilterByCategoryComponent
             handleCategoryViewChange={handleCategoryViewChange}
           />
         )}
+
+        <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+
+        <Box sx={{ px: "32px", paddingTop: "40px" }}>
+          {!myItemsLoading &&
+            !itemLoading &&
+            itemsToDisplay?.map((item) => {
+              return (
+                <ItemCard
+                  id={item.id}
+                  itemName={item.itemName}
+                  itemDescription={item.itemDescription}
+                  category={item.category}
+                  status={item.status}
+                  condition={item.condition}
+                  price={item.price}
+                  images={item.images}
+                  quantity={item.quantity}
+                  seller={item.seller.username}
+                  sellerId={item.seller.id}
+                  userId={userId}
+                  onDelete={onDelete}
+                  key={item.id}
+                  onAddItemToInterested={onAddItemToInterested}
+                />
+              );
+            })}
+        </Box>
       </Container>
-      <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
-      <Box sx={{ px: "32px", paddingTop: "40px" }}>
-        {!myItemsLoading &&
-          !itemLoading &&
-          itemsToDisplay?.map((item) => {
-            return (
-              <ItemCard
-                id={item.id}
-                itemName={item.itemName}
-                itemDescription={item.itemDescription}
-                category={item.category}
-                status={item.status}
-                condition={item.condition}
-                price={item.price}
-                images={item.images}
-                quantity={item.quantity}
-                seller={item.seller.username}
-                sellerId={item.seller.id}
-                userId={userId}
-                onDelete={onDelete}
-                key={item.id}
-                onAddItemToInterested={onAddItemToInterested}
-              />
-            );
-          })}
-      </Box>
     </>
   );
 };

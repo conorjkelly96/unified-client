@@ -74,8 +74,8 @@ export const VIEW_ALL_ITEMS = gql`
 `;
 
 export const VIEW_MY_ITEMS_FOR_SALE = gql`
-  query Query($category: String) {
-    viewAllItems(category: $category) {
+  query Query {
+    viewMyItems {
       id
       itemName
       itemDescription
@@ -150,6 +150,10 @@ export const GET_SINGLE_ITEM_DATA = gql`
       condition
       price
       quantity
+      images
+      seller {
+        username
+      }
     }
   }
 `;

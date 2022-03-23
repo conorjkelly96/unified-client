@@ -81,11 +81,13 @@ export const ViewSingleItemForm = () => {
             category={itemData.getSingleItemData.category}
             condition={itemData.getSingleItemData.condition}
             price={itemData.getSingleItemData.price}
-            quantity={itemData.getSingleItemData.price}
+            quantity={itemData.getSingleItemData.quantity}
             id={itemData.getSingleItemData.id}
             userId={userId}
             onAddItemToInterested={onAddItemToInterested}
             handleClickOpen={handleClickOpen}
+            images={itemData.getSingleItemData.images}
+            seller={itemData.getSingleItemData.seller.username}
           />
         </Box>
       </Grid>
