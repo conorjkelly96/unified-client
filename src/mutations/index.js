@@ -31,7 +31,6 @@ export const LOGIN_STAFF = gql`
           name
         }
         college
-        type
       }
     }
   }
@@ -102,6 +101,14 @@ export const DELETE_JOB_LISTING = gql`
 export const DELETE_ITEM = gql`
   mutation Mutation($itemId: String!) {
     deleteItem(itemId: $itemId) {
+      id
+    }
+  }
+`;
+
+export const REMOVE_SAVED_JOB = gql`
+  mutation Mutation($jobId: ID!) {
+    removeSavedJobs(jobId: $jobId) {
       id
     }
   }
