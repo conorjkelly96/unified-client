@@ -68,8 +68,9 @@ export const Navbar = () => {
       <CssBaseline />
       <Toolbar sx={styles.navContainer}>
         <Box sx={styles.logo}>
+          {/* WARNING: THE LOGO IS UNSTABLE */}
           <img
-            src="./images/unified-public-nav.png"
+            src="/images/unified-public-nav.png"
             alt="Unified Logo"
             style={{
               width: "140px",
