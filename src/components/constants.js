@@ -29,7 +29,7 @@ export default [
     description: "lorem10",
     imageUrl: "https://avatars.githubusercontent.com/u/89305781?v=4",
     gitLink: "https://github.com/SumaiaSorna",
-    linkedLink: "",
+    linkedLink: "https://www.linkedin.com/in/sumaia-salahuddin-519521218/",
   },
   {
     title: "Yashemabeth Mcleod",
@@ -45,6 +45,6 @@ export default [
     description: "lorem10",
     imageUrl: "https://avatars.githubusercontent.com/u/77942076?v=4",
     gitLink: "https://github.com/lianavaleria15",
-    linkedLink: "",
+    linkedLink: "https://www.linkedin.com/in/lianalaurentiu05/",
   },
 ];
