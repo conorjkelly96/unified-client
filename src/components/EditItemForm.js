@@ -14,7 +14,6 @@ import FormControl from "@mui/material/FormControl";
 
 // import { Spinner } from "./Spinner";
 import { UPDATE_ITEM } from "../mutations";
-
 import { useEffect, useState } from "react";
 import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
@@ -100,7 +99,7 @@ export const EditItemForm = () => {
       backgroundColor: "#fff",
     },
     header: {
-      paddingTop: 2,
+      paddingTop: 3,
       paddingBottom: 2,
     },
     form: {
@@ -108,6 +107,7 @@ export const EditItemForm = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      paddingTop: 3,
     },
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
