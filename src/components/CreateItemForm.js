@@ -94,6 +94,7 @@ export const CreateItemForm = () => {
       alignItems: "center",
       padding: 4,
       paddingTop: 3,
+      border: "5px solid red",
     },
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
@@ -106,7 +107,7 @@ export const CreateItemForm = () => {
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
       <Grid item xs={12} lg={6}>
-        <Box sx={styles.container}>
+        <Box>
           <Typography
             variant="h4"
             gutterBottom
@@ -247,32 +248,32 @@ export const CreateItemForm = () => {
             </LoadingButton>
           </Box>
         </Box>
+      </Grid>
 
-        <Grid item xs={12} lg={6}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            component="h1"
-            align="center"
-            sx={styles.header}
-          >
-            Preview
-          </Typography>
-          <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
-          <Box sx={{ px: "32px", paddingTop: "40px" }}>
-            <ItemCard
-              itemName={itemName}
-              itemDescription={itemDescription}
-              category={category}
-              condition={condition}
-              price={price}
-              quantity={quantity}
-              images={uploadedImages}
-              seller={user.username}
-              isPreview={true}
-            />
-          </Box>
-        </Grid>
+      <Grid item xs={12} lg={6}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          component="h1"
+          align="center"
+          sx={styles.header}
+        >
+          Preview
+        </Typography>
+        <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+        <Box sx={{ px: "32px", paddingTop: "40px" }}>
+          <ItemCard
+            itemName={itemName}
+            itemDescription={itemDescription}
+            category={category}
+            condition={condition}
+            price={price}
+            quantity={quantity}
+            images={uploadedImages}
+            seller={user.username}
+            isPreview={true}
+          />
+        </Box>
       </Grid>
     </Grid>
   );
