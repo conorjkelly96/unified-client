@@ -116,11 +116,7 @@ export const Marketplace = () => {
 
   return (
     <>
-      <Container
-        component={"main"}
-        maxWidth="1200"
-        sx={{ ...mainContainer, boxShadow: "none" }}
-      >
+      <Container sx={{ ...mainContainer, boxShadow: "none" }}>
         <Spinner loading={itemLoading} />
 
         <Box

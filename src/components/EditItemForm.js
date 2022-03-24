@@ -126,8 +126,6 @@ export const EditItemForm = () => {
     return <h1>Error</h1>;
   }
 
-  console.log(uploadedImages);
-
   return (
     !itemLoading &&
     !itemError &&
