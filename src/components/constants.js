@@ -4,6 +4,8 @@ export default [
     subtitle: "VA Grad / UoB Coding Bootcamp",
     description: "lorem10",
     imageUrl: "https://avatars.githubusercontent.com/u/87938352?v=4",
+    gitLink: "https://github.com/tigerbath",
+    linkedLink: "https://www.linkedin.com/in/matthew-palmer-a13aab156/",
   },
   {
     title: "Kayle Rieger Paton",

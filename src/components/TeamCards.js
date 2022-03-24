@@ -9,7 +9,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 const TeamCard = (props) => {
-  const { title, subtitle, imageUrl } = props;
+  const { title, subtitle, imageUrl, gitLink, linkedLink } = props;
   return (
     <Card>
       <CardMedia
@@ -25,11 +25,11 @@ const TeamCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions style={{ justifyContent: "center", padding: "20px" }}>
-        <Button size="small">
-          <LinkedInIcon />
+        <Button size="small" href={linkedLink}>
+          <LinkedInIcon sx={{ color: "#E79118" }} />
         </Button>
-        <Button size="small">
-          <GitHubIcon />
+        <Button size="small" href={gitLink}>
+          <GitHubIcon sx={{ color: "#21B9E3" }} />
         </Button>
       </CardActions>
     </Card>
