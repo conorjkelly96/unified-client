@@ -6,66 +6,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { Container } from "@mui/material";
 
-export const CommentCard = ({ username, comments }) => {
-  const styles = {
-    container: { textAlign: "center" },
-  };
-
+export const CommentCard = ({ comment }) => {
+  console.log(comment);
   return (
     <Container>
       <Card sx={{ minWidth: 275, maxHeight: "300px", overflow: "auto" }}>
-        {comments.map((comment) => (
-          <Box sx={{ px: 2 }}>
-            <Typography sx={{ mt: 2 }}>{comment.text}</Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-              {"— "}
-              {comment.user}
-              {" posted "}
-              {comment.createdAt}
-            </Typography>
-            {username === comment.user && (
-              <>
-                <IconButton
-                  size="small"
-                  color="error"
-                  sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </>
-            )}
-            <Divider />
-          </Box>
-        ))}
+        <Box sx={{ px: 2 }}>
+          <Typography sx={{ mt: 2 }}>{comment?.commentBody}</Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mt: 2 }}
+          ></Typography>
+          <Divider />
+        </Box>
       </Card>
     </Container>
   );
 };
-
-// card should contain DELETE & EDIT reply buttons (for signed-in reply owner)
-
-// <Card sx={{ minWidth: 275, maxHeight: "300px", overflow: "auto" }}>
-//       {comments.map((comment) => (
-//         <Box sx={{ px: 2 }}>
-//           <Typography sx={{ mt: 2 }}>{comment.text}</Typography>
-//           <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-//             {"— "}
-//             {comment.user}
-//             {" posted "}
-//             {comment.createdAt}
-//           </Typography>
-//           {username === comment.user && (
-//             <>
-//               <IconButton
-//                 size="small"
-//                 color="error"
-//                 sx={{ mt: 2, mb: 1.5, marginLeft: 1, border: "1px solid" }}
-//               >
-//                 <DeleteIcon />
-//               </IconButton>
-//             </>
-//           )}
-//           <Divider />
-//         </Box>
-//       ))}
-//     </Card>

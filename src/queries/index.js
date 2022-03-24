@@ -191,11 +191,14 @@ export const GET_ITEMS_BY_CATEGORY = gql`
 export const GET_COMMENTS_ON_MY_ITEMS = gql`
   query Query {
     getCommentsOnMyItems {
+      id
       itemName
       comments {
         commentId
         commentBody
-        username
+        username {
+          id
+        }
       }
     }
   }

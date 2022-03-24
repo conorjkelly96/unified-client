@@ -26,8 +26,6 @@ import { useAuth } from "../contexts/AppProvider";
 export const AppRouter = () => {
   const { isLoggedIn, user } = useAuth();
 
-  console.log(user);
-
   return (
     <Stack sx={{ minHeight: "100vh" }}>
       <Navbar />
