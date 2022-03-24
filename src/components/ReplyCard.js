@@ -47,7 +47,6 @@ export const ReplyCard = ({ id, username, replies }) => {
     }
   };
 
-  console.log(user.username, replies[0].user.username);
   return (
     <List sx={{ width: "100%", maxWidth: 720, bgcolor: "background.paper" }}>
       {replies.map((reply) => {

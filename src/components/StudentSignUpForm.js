@@ -132,8 +132,6 @@ export const StudentSignUpForm = () => {
     },
   };
 
-  console.log(errors);
-
   return (
     <Box sx={styles.container}>
       {(universitiesLoading || universityLoading) && <Spinner />}

@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 
 export const CommentCard = ({ comment }) => {
-  console.log(comment);
   return (
     <List sx={{ width: "100%", maxWidth: 720, bgcolor: "background.paper" }}>
       <ListItem key={comment.commentId} alignItems="flex-start">

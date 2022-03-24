@@ -35,6 +35,8 @@ export const StaffLoginForm = () => {
       },
     });
 
+    console.log(data);
+
     if (data) {
       const { token, user } = data.loginStaff;
 
@@ -53,7 +55,7 @@ export const StaffLoginForm = () => {
         type: user.type,
       });
 
-      navigate("/dashboard", { replace: true });
+      navigate("/create-job", { replace: true });
     }
   };
 

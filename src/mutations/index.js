@@ -31,6 +31,7 @@ export const LOGIN_STAFF = gql`
           name
         }
         college
+        type
       }
     }
   }

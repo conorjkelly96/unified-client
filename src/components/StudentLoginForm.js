@@ -53,7 +53,7 @@ export const StudentLoginForm = () => {
         type: user.type,
       });
 
-      navigate("/dashboard", { replace: true });
+      navigate("/forum", { replace: true });
     }
   };
 

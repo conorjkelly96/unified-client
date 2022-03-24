@@ -59,7 +59,6 @@ export const Marketplace = () => {
       await refetch({ category: selectedCategoryValue });
       setItemsToDisplay(itemData?.viewAllItems);
       if (!itemData?.viewAllItems) {
-        console.log("No Results");
         return <NoItemResults />;
       }
     }
@@ -115,8 +114,6 @@ export const Marketplace = () => {
 
   // Pass this down with the seller id so we can match them off and conditionally render buttons on the item card
   const userId = user.id;
-
-  console.log(itemsToDisplay);
 
   return (
     <>

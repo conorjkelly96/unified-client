@@ -53,7 +53,6 @@ export const ViewSingleItemForm = () => {
   };
 
   if (itemError) {
-    console.log(itemError);
     return <Error />;
   }
 
@@ -62,8 +61,6 @@ export const ViewSingleItemForm = () => {
   }
 
   const userId = user.id;
-
-  console.log(itemData.getSingleItemData);
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>

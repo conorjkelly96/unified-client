@@ -96,8 +96,6 @@ export const CreateForumPostForm = () => {
     return <Error />;
   }
 
-  console.log(tagsArray);
-
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <TextField

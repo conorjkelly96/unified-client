@@ -68,7 +68,6 @@ export const EditItemForm = () => {
 
   const onSubmit = async () => {
     try {
-      console.log(itemName);
       const { data } = await executeUpdateItem({
         variables: {
           itemId: id,
@@ -85,7 +84,6 @@ export const EditItemForm = () => {
       });
 
       if (data) {
-        console.log("success");
         // setNoBackEndModal(true);
         navigate("/marketplace", { replace: true });
       }

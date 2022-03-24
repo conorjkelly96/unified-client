@@ -79,7 +79,7 @@ export const ViewJobsPage = () => {
         </Box>
       )}
 
-      {!loading && jobData?.jobs.length && (
+      {!loading && jobData?.jobs.length ? (
         <>
           <Typography
             variant="h4"

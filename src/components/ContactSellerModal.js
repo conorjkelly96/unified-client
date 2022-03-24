@@ -26,7 +26,6 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
 
   const onSubmit = async ({ commentBody }) => {
     try {
-      console.log(itemId);
       const { data } = await executeComment({
         variables: {
           input: {
@@ -37,7 +36,6 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
       });
 
       if (data) {
-        console.log("success");
         navigate("/marketplace", { replace: true });
       }
     } catch (err) {

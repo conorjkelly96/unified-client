@@ -36,12 +36,6 @@ export const AppRouter = () => {
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/" element={<HomePage />} />
 
-          {isLoggedIn && (
-            <>
-              <Route path="/dashboard" element={<DashboardPage />} />
-            </>
-          )}
-
           {isLoggedIn && user?.type === "student" && (
             <>
               <Route path="/listing/:id" element={<SingleItemPage />} />
