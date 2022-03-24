@@ -23,15 +23,10 @@ import { postButton } from "../styles";
 
 export const CreateItemForm = () => {
   const [executeCreateItem, { loading, error }] = useMutation(CREATE_ITEM);
-  const [showNoBackEndModal, setNoBackEndModal] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
 
   const { user } = useAuth();
   const navigate = useNavigate();
-
-  const onSubmitItemForm = () => {
-    setNoBackEndModal(true);
-  };
 
   const {
     register,
@@ -71,8 +66,6 @@ export const CreateItemForm = () => {
       });
 
       if (data) {
-        console.log("success");
-        // setNoBackEndModal(true);
         navigate("/marketplace", { replace: true });
       }
     } catch (err) {
@@ -241,7 +234,6 @@ export const CreateItemForm = () => {
               sx={loading ? styles.loadingButton : { ...postButton, mt: 2 }}
               startIcon={error && <ErrorIcon />}
               color={error ? "error" : "primary"}
-              onClick={onSubmitItemForm}
             >
               Create Item
             </LoadingButton>

@@ -79,7 +79,7 @@ export const EditItemForm = () => {
             condition: condition.trim(),
             price: parseFloat(price),
             quantity: parseInt(quantity, 10),
-            images: uploadedImages,
+            images: [...uploadedImages, ...itemData.getSingleItemData.images],
           },
         },
       });
@@ -126,7 +126,7 @@ export const EditItemForm = () => {
     return <h1>Error</h1>;
   }
 
-  console.log(itemName);
+  console.log(uploadedImages);
 
   return (
     !itemLoading &&
@@ -281,40 +281,40 @@ export const EditItemForm = () => {
                 color={error ? "error" : "primary"}
                 onClick={onSubmit}
               >
-                Edit Item
+                Save Item
               </LoadingButton>
             </Box>
           </Box>
+        </Grid>
 
-          <Grid item xs={12} lg={6}>
-            <Typography
-              variant="h4"
-              gutterBottom
-              component="h1"
-              align="center"
-              sx={styles.header}
-            >
-              Preview
-            </Typography>
-            <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
-            <Box sx={{ px: "32px", paddingTop: "40px" }}>
-              <ItemCard
-                itemName={itemName}
-                itemDescription={itemDescription}
-                category={category}
-                condition={condition}
-                price={price}
-                quantity={quantity}
-                images={
-                  uploadedImages.length
-                    ? [...uploadedImages, ...itemData.getSingleItemData.images]
-                    : itemData.getSingleItemData.images
-                }
-                isPreview={true}
-                seller={user.username}
-              />
-            </Box>
-          </Grid>
+        <Grid item xs={12} lg={6}>
+          <Typography
+            variant="h4"
+            gutterBottom
+            component="h1"
+            align="center"
+            sx={styles.header}
+          >
+            Preview
+          </Typography>
+          <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+          <Box sx={{ px: "32px", paddingTop: "40px" }}>
+            <ItemCard
+              itemName={itemName}
+              itemDescription={itemDescription}
+              category={category}
+              condition={condition}
+              price={price}
+              quantity={quantity}
+              images={
+                uploadedImages.length
+                  ? [...uploadedImages, ...itemData.getSingleItemData.images]
+                  : itemData.getSingleItemData.images
+              }
+              isPreview={true}
+              seller={user.username}
+            />
+          </Box>
         </Grid>
       </Grid>
     )

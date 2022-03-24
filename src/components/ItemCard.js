@@ -26,6 +26,8 @@ export const ItemCard = ({
   handleClickOpen,
   isPreview,
 }) => {
+  console.log(images);
+
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
