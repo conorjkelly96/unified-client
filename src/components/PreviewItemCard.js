@@ -5,37 +5,89 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import PreviewIcon from "@mui/icons-material/Preview";
 import { Button } from "@mui/material";
+import { CommentCard } from "./CommentCard";
 
-export const PreviewItemCard = ({ id, itemName, itemDescription, status }) => {
+export const PreviewItemCard = ({ item }) => {
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
         <Typography variant="h5" component="div">
-          {itemName || "Item Name"}
-        </Typography>
-
-        <Typography color="text.secondary">
-          {itemDescription || "Item Description"}
-        </Typography>
-
-        <Typography variant="body2" sx={{ mb: "15px" }}>
-          {status || "Status"}
+          {item.itemName || "Item Name"}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Box sx={{ marginBottom: "10px" }}>
-          <Button
-            id={id}
-            variant="contained"
-            size="small"
-            endIcon={<PreviewIcon />}
-            color=""
-            sx={{ marginLeft: "8px" }}
-          >
-            Review Comments
-          </Button>
-        </Box>
-      </CardActions>
+      <Box>
+        {item.comments.length &&
+          item.comments.map((comment) => (
+            <CommentCard key={comment.id} comment={comment} />
+          ))}
+      </Box>
     </Card>
   );
 };
+
+{
+  /* <Card sx={{ minWidth: 275, mb: "25px" }}>
+      <CardContent>
+        <ImageList cols={3} gap={8}>
+          {images.map((image, index) => {
+            return (
+              <ImageListItem key={index}>
+                <img src={image} />
+              </ImageListItem>
+            );
+          })}
+        </ImageList>
+
+        <Typography variant="h5" component="div">
+          {itemName}
+        </Typography>
+
+        <Typography color="text.secondary">{itemDescription}</Typography>
+
+        <Typography
+          variant="body2"
+          sx={{ mb: "15px" }}
+        >{`Category: ${category}`}</Typography>
+
+        <Typography variant="body2" sx={{ mb: "15px" }}>
+          {"Listing Status:"}
+          {status}
+        </Typography>
+
+        <Typography>
+          {"Condition: "}
+          {condition}
+        </Typography>
+
+        <Typography>
+          {"Price: £"}
+          {price}
+        </Typography>
+
+        <Typography>
+          {"Quantity: "}
+          {quantity}
+        </Typography>
+
+        <Typography>
+          {"Seller: "}
+          {seller}
+        </Typography>
+      </CardContent>
+      {!isPreview && (
+        <CardActions>
+          <Box>
+            {sellerId !== userId ? (
+              <BuyerButtonOptions
+                id={id}
+                onAddItemToInterested={onAddItemToInterested}
+                handleClickOpen={handleClickOpen}
+              />
+            ) : (
+              <SellerButtonOptions id={id} onDelete={onDelete} />
+            )}
+          </Box>
+        </CardActions>
+      )}
+    </Card> */
+}

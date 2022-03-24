@@ -1,14 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useTheme, useMediaQuery } from "@mui/material";
 
 import { DrawerComponent } from "./Drawer";
 import { useAuth } from "../contexts/AppProvider";
+import { publicLinks, staffLinks, studentLinks } from "./links";
 
 export const Navbar = () => {
   const theme = useTheme();
@@ -19,6 +18,8 @@ export const Navbar = () => {
   const styles = {
     navContainer: {
       alignContent: "center",
+      height: "10vh",
+      backgroundColor: "#fff",
     },
     navLinks: {
       display: "flex",
@@ -31,90 +32,13 @@ export const Navbar = () => {
     },
     link: {
       textDecoration: "none",
-      fontSize: "20px",
+      color: "#000",
+      border: "1px solid #fff",
+      m: 1,
       "&:hover": {
-        border: "1px solid white",
+        border: "1px solid #E57A44",
       },
     },
-  };
-
-  const staffStyles = {
-    navContainer: {
-      backgroundColor: "#E57A44",
-    },
-    link: {
-      color: "white",
-    },
-    button: {
-      backgroundColor: "#009FFD",
-      color: "white",
-      marginLeft: "10px",
-      "&:hover": {
-        border: "1px solid white",
-        backgroundColor: "#009FFD",
-        color: "white",
-      },
-    },
-  };
-
-  const studentStyles = {
-    navContainer: {
-      backgroundColor: "#009FFD",
-    },
-    link: {
-      color: "white",
-    },
-    button: {
-      backgroundColor: "#E57A44",
-      color: "white",
-      marginLeft: "10px",
-      "&:hover": {
-        border: "1px solid white",
-        backgroundColor: "#009FFD",
-        color: "white",
-      },
-    },
-  };
-
-  const publicStyles = {
-    navContainer: {
-      backgroundColor: "white",
-    },
-    link: {
-      color: "black",
-    },
-    button: {
-      backgroundColor: "#009FFD",
-      color: "",
-      marginLeft: "",
-      "&:hover": {
-        border: "1px solid black",
-        backgroundColor: "#009FFD",
-        color: "black",
-      },
-    },
-  };
-
-  const handleNavStyles = (element) => {
-    if (isLoggedIn && user?.type === "student") {
-      return {
-        ...styles[element],
-        ...studentStyles[element],
-      };
-    }
-
-    if (isLoggedIn && user?.type === "staff") {
-      return {
-        ...styles[element],
-        ...staffStyles[element],
-      };
-    }
-    if (!isLoggedIn) {
-      return {
-        ...styles[element],
-        ...publicStyles[element],
-      };
-    }
   };
 
   const handleNavigation = (path) => () => {
@@ -131,76 +55,26 @@ export const Navbar = () => {
     navigate("login", { replace: true });
   };
 
-  const publicLinks = [
-    {
-      label: "Login",
-      path: "login",
-    },
-    {
-      label: "Sign Up",
-      path: "sign-up",
-    },
-  ];
-
-  const staffLinks = [
-    {
-      label: "Dashboard",
-      path: "dashboard",
-    },
-    {
-      label: "Jobs",
-      path: "jobs",
-    },
-  ];
-
-  const studentLinks = [
-    {
-      label: "Dashboard",
-      path: "dashboard",
-    },
-    {
-      label: "Marketplace",
-      path: "marketplace",
-    },
-  ];
-
   const renderLogout = () => (
-    <Button
-      variant="outlined"
-      sx={handleNavStyles("button")}
-      onClick={handleLogout}
-    >
+    <Button variant="text" sx={styles.link} onClick={handleLogout}>
       Logout
     </Button>
   );
 
   return (
     <AppBar position="static">
-      <CssBaseline />
-      <Toolbar sx={handleNavStyles("navContainer")}>
+      <Toolbar sx={styles.navContainer}>
         <Box sx={styles.logo}>
-          {isLoggedIn ? (
-            <img
-              src="./images/unified-private-nav.png"
-              alt="Unified Logo"
-              style={{
-                width: "140px",
-                height: "100%",
-                padding: "10px",
-              }}
-            />
-          ) : (
-            // TODO: Add public landing image here
-            <img
-              src="./images/unified-public-nav.png"
-              alt="Unified Logo"
-              style={{
-                width: "140px",
-                height: "100%",
-                padding: "10px",
-              }}
-            />
-          )}
+          {/* WARNING: THE LOGO IS UNSTABLE */}
+          <img
+            src="/images/unified-public-nav.png"
+            alt="Unified Logo"
+            style={{
+              width: "140px",
+              height: "100%",
+              padding: "10px",
+            }}
+          />
         </Box>
         {isMobile ? (
           <DrawerComponent />
@@ -212,10 +86,10 @@ export const Navbar = () => {
                   <Button
                     key={link.label}
                     variant="text"
-                    sx={handleNavStyles("link")}
+                    sx={styles.link}
                     onClick={handleNavigation(link.path)}
                   >
-                    {"link.label"}
+                    {link.label}
                   </Button>
                 ))}
               </>
@@ -227,7 +101,7 @@ export const Navbar = () => {
                   <Button
                     variant="text"
                     key={link.label}
-                    sx={handleNavStyles("link")}
+                    sx={styles.link}
                     onClick={handleNavigation(link.path)}
                   >
                     {link.label}
@@ -243,7 +117,7 @@ export const Navbar = () => {
                   <Button
                     variant="text"
                     key={link.label}
-                    sx={handleNavStyles("link")}
+                    sx={styles.link}
                     onClick={handleNavigation(link.path)}
                   >
                     {link.label}

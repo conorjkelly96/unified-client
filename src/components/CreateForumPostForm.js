@@ -15,11 +15,16 @@ import { CREATE_FORUM_POST } from "../mutations";
 import { TAGS } from "../queries";
 import { Spinner } from "./Spinner";
 import { Error } from "../pages/Error";
+import { useState } from "react";
+import { postButton } from "../styles";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export const CreateForumPostForm = () => {
+  const [tagsValue, setTagsValue] = useState("");
+  const [tagsArray, setTagsArray] = useState([]);
+
   const {
     data: tagsData,
     loading: tagsLoading,
@@ -34,17 +39,16 @@ export const CreateForumPostForm = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async ({ postText, tags }) => {
+  const onSubmit = async ({ postText }) => {
     try {
       const { data } = await executeCreateForumPost({
         variables: {
           forumPost: {
             postText,
-            tags,
+            tags: tagsArray,
           },
         },
       });
@@ -92,8 +96,6 @@ export const CreateForumPostForm = () => {
     return <Error />;
   }
 
-  const options = tagsData?.tags.map((tag) => tag.name);
-
   return (
     <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <TextField
@@ -106,46 +108,29 @@ export const CreateForumPostForm = () => {
         minRows={5}
         fullWidth
         autoFocus
-        helperText={"Limit 2000 characters"}
+        helperText={"Maximum 2000 characters"}
         {...register("postText", { required: true, maxLength: 2000 })}
         error={!!errors.postText}
         disabled={loading}
       />
-      <Controller
-        control={control}
+      <TextField
+        margin="normal"
+        id="tags"
+        label="Tags"
         name="tags"
-        render={({ field: { onChange, value } }) => (
-          <Autocomplete
-            multiple
-            fullWidth
-            options={options}
-            disableCloseOnSelect
-            getOptionLabel={(option) => option}
-            renderOption={(props, option, { selected }) => (
-              <li {...props}>
-                <Checkbox
-                  icon={icon}
-                  checkedIcon={checkedIcon}
-                  style={{ marginRight: 8 }}
-                  checked={selected}
-                />
-                {option}
-              </li>
-            )}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Tags"
-                margin="normal"
-                variant="outlined"
-                onChange={onChange}
-                value={value}
-              />
-            )}
-            onChange={(event, values, reason) => onChange(values)}
-            value={value || []}
-          />
-        )}
+        variant="outlined"
+        fullWidth
+        onChange={(event) => {
+          setTagsValue(event.target.value);
+        }}
+        onBlur={() => {
+          if (tagsValue) {
+            setTagsArray([...tagsValue.split(" ")]);
+          } else {
+            setTagsArray([]);
+          }
+        }}
+        value={tagsValue}
       />
       <LoadingButton
         loading={loading}
@@ -153,7 +138,7 @@ export const CreateForumPostForm = () => {
         variant="contained"
         fullWidth
         type="submit"
-        sx={styles.loadingButton}
+        sx={loading ? styles.loadingButton : { ...postButton }}
         startIcon={error && <ErrorIcon />}
         color={error ? "error" : "primary"}
       >

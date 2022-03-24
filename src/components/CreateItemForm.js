@@ -1,42 +1,37 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
-import { FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
-import { ItemCard } from "./ItemCard";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
 
 // import { Spinner } from "./Spinner";
 import { CREATE_ITEM } from "../mutations";
-import { SuccessfulItemModal } from "./SuccessfulItemModal";
 import { useState } from "react";
 import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
+import { ItemCard } from "./ItemCard";
+import { postButton } from "../styles";
 
 export const CreateItemForm = () => {
   const [executeCreateItem, { loading, error }] = useMutation(CREATE_ITEM);
-  const [showNoBackEndModal, setNoBackEndModal] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
 
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const onSubmitItemForm = () => {
-    setNoBackEndModal(true);
-  };
-
-  const handleClose = () => setNoBackEndModal(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    getValues,
     watch,
   } = useForm();
 
@@ -71,8 +66,6 @@ export const CreateItemForm = () => {
       });
 
       if (data) {
-        console.log("success");
-        // setNoBackEndModal(true);
         navigate("/marketplace", { replace: true });
       }
     } catch (err) {
@@ -85,7 +78,7 @@ export const CreateItemForm = () => {
       backgroundColor: "#fff",
     },
     header: {
-      paddingTop: 2,
+      paddingTop: 3,
       paddingBottom: 2,
     },
     form: {
@@ -93,6 +86,7 @@ export const CreateItemForm = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      paddingTop: 3,
     },
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
@@ -105,8 +99,7 @@ export const CreateItemForm = () => {
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
       <Grid item xs={12} lg={6}>
-        <Box sx={styles.container}>
-          {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
+        <Box>
           <Typography
             variant="h4"
             gutterBottom
@@ -129,6 +122,7 @@ export const CreateItemForm = () => {
               name="itemName"
               variant="outlined"
               fullWidth
+              autoFocus
               {...register("itemName", { required: true })}
               error={!!errors.itemName}
               disabled={loading}
@@ -140,6 +134,7 @@ export const CreateItemForm = () => {
               name="itemDescription"
               variant="outlined"
               fullWidth
+              autoFocus
               {...register("itemDescription", { required: false })}
               error={!!errors.itemDescription}
               disabled={loading}
@@ -235,40 +230,41 @@ export const CreateItemForm = () => {
               loading={loading}
               loadingIndicator="Loading..."
               variant="contained"
-              fullWidth
               type="submit"
-              sx={styles.loadingButton}
+              sx={loading ? styles.loadingButton : { ...postButton, mt: 2 }}
               startIcon={error && <ErrorIcon />}
               color={error ? "error" : "primary"}
-              onClick={onSubmitItemForm}
             >
               Create Item
             </LoadingButton>
           </Box>
         </Box>
+      </Grid>
 
-        <Grid item xs={12} lg={6}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            component="h1"
-            align="center"
-            sx={styles.header}
-          >
-            Preview
-          </Typography>
-          <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
-          <Box sx={{ px: "32px", paddingTop: "40px" }}>
-            <ItemCard
-              itemName={itemName}
-              itemDescription={itemDescription}
-              category={category}
-              condition={condition}
-              price={price}
-              quantity={quantity}
-            />
-          </Box>
-        </Grid>
+      <Grid item xs={12} lg={6}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          component="h1"
+          align="center"
+          sx={styles.header}
+        >
+          Preview
+        </Typography>
+        <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
+        <Box sx={{ px: "32px", paddingTop: "40px" }}>
+          <ItemCard
+            itemName={itemName}
+            itemDescription={itemDescription}
+            category={category}
+            condition={condition}
+            price={price}
+            quantity={quantity}
+            images={uploadedImages}
+            seller={user.username}
+            isPreview={true}
+          />
+        </Box>
       </Grid>
     </Grid>
   );

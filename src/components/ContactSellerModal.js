@@ -11,6 +11,7 @@ import { COMMENT_ON_ITEM } from "../mutations";
 import { useMutation } from "@apollo/client";
 import { Box } from "@mui/system";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../contexts/AppProvider";
 
 export const ContactSellerModal = ({ handleClose, open, itemId }) => {
   const [executeComment, { loading: commentLoading, error: commentError }] =
@@ -25,7 +26,6 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
 
   const onSubmit = async ({ commentBody }) => {
     try {
-      console.log(itemId);
       const { data } = await executeComment({
         variables: {
           input: {
@@ -36,7 +36,6 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
       });
 
       if (data) {
-        console.log("success");
         navigate("/marketplace", { replace: true });
       }
     } catch (err) {

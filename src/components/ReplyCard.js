@@ -11,9 +11,18 @@ import Avatar from "@mui/material/Avatar";
 
 import { DELETE_FORUM_REPLY } from "../mutations";
 import { GET_FORUM_POST } from "../queries";
-import { Stack } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Stack,
+} from "@mui/material";
+import { useAuth } from "../contexts/AppProvider";
 
 export const ReplyCard = ({ id, username, replies }) => {
+  const { user } = useAuth();
+
   const [executeDeleteReply, { loading, error }] = useMutation(
     DELETE_FORUM_REPLY,
     { refetchQueries: [GET_FORUM_POST] }
@@ -39,22 +48,32 @@ export const ReplyCard = ({ id, username, replies }) => {
   };
 
   return (
-    <Card sx={{ minWidth: 275, maxHeight: "300px", overflow: "auto" }}>
-      {replies.map((reply) => (
-        <Box key={reply.id} sx={{ px: 2 }}>
-          <Typography id={reply.id} sx={{ mt: 2 }}>
-            {reply.text}
-          </Typography>
-          <Stack direction="row">
-            <Avatar alt="" src="" sx={{ marginRight: 1 }} />
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-              {reply.user.username}
-              {" posted "}
-              {reply.createdAt}
-            </Typography>
-          </Stack>
-          {username === reply.user.username && (
-            <>
+    <List sx={{ width: "100%", maxWidth: 720, bgcolor: "background.paper" }}>
+      {replies.map((reply) => {
+        return (
+          <ListItem key={reply.id} alignItems="flex-start">
+            <ListItemAvatar>
+              <Avatar
+                alt={`${reply.user.username}`}
+                src={reply.user.profileImageUrl}
+              />
+            </ListItemAvatar>
+            <ListItemText
+              primary={reply.text}
+              secondary={
+                <>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  >
+                    {reply.user.username}
+                  </Typography>
+                </>
+              }
+            />
+            {user.username === reply.user.username && (
               <IconButton
                 id={reply.id}
                 size="small"
@@ -66,12 +85,11 @@ export const ReplyCard = ({ id, username, replies }) => {
                 {loading && <PendingIcon />}
                 {!loading && !error && <DeleteIcon />}
               </IconButton>
-            </>
-          )}
-          <Divider />
-        </Box>
-      ))}
-    </Card>
+            )}
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 

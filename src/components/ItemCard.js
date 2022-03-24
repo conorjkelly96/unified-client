@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { BuyerButtonOptions } from "./BuyerButtonOptions";
 import { SellerButtonOptions } from "./SellerButtonOptions";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
 export const ItemCard = ({
   id,
@@ -22,68 +24,72 @@ export const ItemCard = ({
   sellerId,
   userId,
   handleClickOpen,
+  isPreview,
 }) => {
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
-        <Box
-          component="img"
-          sx={{
-            height: 233,
-            width: 350,
-            maxHeight: { xs: 233, md: 167 },
-            maxWidth: { xs: 350, md: 250 },
-          }}
-          alt={`${itemDescription}`}
-          src={`https://unified-resources.s3.eu-west-2.amazonaws.com/${seller}/images/${images}`}
-        />
+        <ImageList cols={3} gap={8}>
+          {images.map((image, index) => {
+            return (
+              <ImageListItem key={index}>
+                <img src={image} />
+              </ImageListItem>
+            );
+          })}
+        </ImageList>
+
         <Typography variant="h5" component="div">
-          {itemName || "Item Name"}
+          {itemName}
         </Typography>
 
-        <Typography color="text.secondary">
-          {itemDescription || "Item Description"}
-        </Typography>
+        <Typography color="text.secondary">{itemDescription}</Typography>
 
-        <Typography sx={{ mb: 1.5 }}>{category || "Category"}</Typography>
+        <Typography
+          variant="body2"
+          sx={{ mb: "15px" }}
+        >{`Category: ${category}`}</Typography>
 
         <Typography variant="body2" sx={{ mb: "15px" }}>
-          {status || "Status"}
+          {"Listing Status:"}
+          {status}
         </Typography>
 
         <Typography>
-          {"Condition"}
+          {"Condition: "}
           {condition}
         </Typography>
 
         <Typography>
-          {"Price"}
+          {"Price: £"}
           {price}
         </Typography>
 
         <Typography>
-          {"Quantity"}
+          {"Quantity: "}
           {quantity}
         </Typography>
 
         <Typography>
-          {"Seller"}
+          {"Seller: "}
           {seller}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Box>
-          {sellerId !== userId ? (
-            <BuyerButtonOptions
-              id={id}
-              onAddItemToInterested={onAddItemToInterested}
-              handleClickOpen={handleClickOpen}
-            />
-          ) : (
-            <SellerButtonOptions id={id} onDelete={onDelete} />
-          )}
-        </Box>
-      </CardActions>
+      {!isPreview && (
+        <CardActions>
+          <Box>
+            {sellerId !== userId ? (
+              <BuyerButtonOptions
+                id={id}
+                onAddItemToInterested={onAddItemToInterested}
+                handleClickOpen={handleClickOpen}
+              />
+            ) : (
+              <SellerButtonOptions id={id} onDelete={onDelete} />
+            )}
+          </Box>
+        </CardActions>
+      )}
     </Card>
   );
 };

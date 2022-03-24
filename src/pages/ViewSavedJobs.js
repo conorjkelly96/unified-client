@@ -46,8 +46,6 @@ export const ViewSavedJobs = () => {
       }
 
       if (removeData) {
-        console.log("success");
-
         setJobsData();
         refetch();
       }

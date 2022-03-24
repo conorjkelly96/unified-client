@@ -53,7 +53,6 @@ export const ViewSingleItemForm = () => {
   };
 
   if (itemError) {
-    console.log(itemError);
     return <Error />;
   }
 
@@ -62,8 +61,6 @@ export const ViewSingleItemForm = () => {
   }
 
   const userId = user.id;
-
-  console.log(itemData.getSingleItemData);
 
   return (
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
@@ -81,11 +78,13 @@ export const ViewSingleItemForm = () => {
             category={itemData.getSingleItemData.category}
             condition={itemData.getSingleItemData.condition}
             price={itemData.getSingleItemData.price}
-            quantity={itemData.getSingleItemData.price}
+            quantity={itemData.getSingleItemData.quantity}
             id={itemData.getSingleItemData.id}
             userId={userId}
             onAddItemToInterested={onAddItemToInterested}
             handleClickOpen={handleClickOpen}
+            images={itemData.getSingleItemData.images}
+            seller={itemData.getSingleItemData.seller.username}
           />
         </Box>
       </Grid>

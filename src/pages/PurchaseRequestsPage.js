@@ -22,18 +22,11 @@ export const PurchaseRequestsPage = () => {
 
   // get all the items from back end
 
-  console.log(itemData);
-
-  // const itemDataArray = itemData.getCommentsOnMyItems;
-  // console.log(itemDataArray.itemName);
-
-  // const itemCommentsArray = itemDataArray.map((item) => item.comments);
-
-  // const comments = itemCommentsArray.map((item) => item.commentBody);
-
-  // console.log(itemDataArray);
-
-  // send it down and iterate within the card
-
-  return <h1>PurchaseRequestsPage</h1>;
+  return (
+    itemData &&
+    !itemLoading &&
+    itemData.getCommentsOnMyItems.map((item) => (
+      <PreviewItemCard key={item.id} item={item} />
+    ))
+  );
 };

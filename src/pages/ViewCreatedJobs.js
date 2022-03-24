@@ -10,6 +10,7 @@ import { DELETE_JOB_LISTING } from "../mutations";
 import { GET_STAFF_JOBS } from "../queries";
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
+import { postButton } from "../styles";
 
 export const ViewCreatedJobs = () => {
   const [executeGetStaffJobs, { loading: staffJobsLoading }] =
@@ -75,6 +76,7 @@ export const ViewCreatedJobs = () => {
       maxWidth: 750,
       margin: "auto",
     },
+    loadingButton: { marginTop: 3, marginBottom: 2 },
   };
 
   return (
@@ -97,7 +99,12 @@ export const ViewCreatedJobs = () => {
             You have no open job listings
           </Typography>
           <Stack direction={"row"} sx={{ justifyContent: "center" }}>
-            <Button component="a" href="/create-job" variant="contained">
+            <Button
+              component="a"
+              sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
+              href="/create-job"
+              variant="contained"
+            >
               List a job
             </Button>
           </Stack>
@@ -116,19 +123,22 @@ export const ViewCreatedJobs = () => {
             Your Job Listings
           </Typography>
           <Box sx={styles.container}>
-            {jobsData.map((staffJob) => (
-              <JobCard
-                id={staffJob.id}
-                title={staffJob.title}
-                description={staffJob.description}
-                company={staffJob.company}
-                url={staffJob.url}
-                salary={staffJob.salary}
-                date={new Date(staffJob.closingDate)}
-                key={staffJob.id}
-                onDelete={onDelete}
-              />
-            ))}
+            {jobsData.map((staffJob) => {
+              return (
+                <JobCard
+                  id={staffJob.id}
+                  title={staffJob.title}
+                  description={staffJob.description}
+                  company={staffJob.company}
+                  url={staffJob.url}
+                  salary={staffJob.salary}
+                  // TODO: FIX THE BELOW
+                  // closingDate={new Date(staffJob.closingDate)}
+                  key={staffJob.id}
+                  onDelete={onDelete}
+                />
+              );
+            })}
           </Box>
         </>
       ) : null}

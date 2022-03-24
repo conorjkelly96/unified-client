@@ -17,6 +17,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { postButton } from "../styles";
 
 import { SIGNUP_STUDENT } from "../mutations";
 import { COLLEGES, UNIVERSITIES } from "../queries";
@@ -130,6 +131,7 @@ export const StudentSignUpForm = () => {
       textAlign: "center",
     },
   };
+
   return (
     <Box sx={styles.container}>
       {(universitiesLoading || universityLoading) && <Spinner />}
@@ -284,7 +286,8 @@ export const StudentSignUpForm = () => {
           name="bio"
           variant="outlined"
           fullWidth
-          {...register("bio", { required: true })}
+          helperText="Maximum 2000 characters"
+          {...register("bio", { required: true, maxLength: 2000 })}
           error={!!errors.bio}
           disabled={loading}
         />
@@ -379,7 +382,7 @@ export const StudentSignUpForm = () => {
           variant="contained"
           fullWidth
           type="submit"
-          sx={styles.loadingButton}
+          sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >

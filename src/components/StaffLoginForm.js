@@ -11,6 +11,7 @@ import Divider from "@mui/material/Divider";
 
 import { LOGIN_STAFF } from "../mutations";
 import { useAuth } from "../contexts/AppProvider";
+import { loginForm, postButton } from "../styles";
 
 export const StaffLoginForm = () => {
   const { setIsLoggedIn, setUser } = useAuth();
@@ -34,6 +35,8 @@ export const StaffLoginForm = () => {
       },
     });
 
+    console.log(data);
+
     if (data) {
       const { token, user } = data.loginStaff;
 
@@ -52,45 +55,27 @@ export const StaffLoginForm = () => {
         type: user.type,
       });
 
-      navigate("/dashboard", { replace: true });
+      navigate("/create-job", { replace: true });
     }
   };
 
-  const styles = {
-    container: {
-      backgroundColor: "#fff",
-    },
-    header: {
-      paddingTop: 3,
-      paddingBottom: 2,
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: 4,
-    },
-    loadingButton: { marginTop: 3, marginBottom: 2 },
-    errorContainer: {
-      marginTop: 2,
-      color: "#d32f2f",
-      textAlign: "center",
-    },
-  };
-
   return (
-    <Box sx={styles.container}>
+    <Box sx={loginForm.container}>
       <Typography
         variant="h4"
         gutterBottom
         component="h1"
         align="center"
-        sx={styles.header}
+        sx={loginForm.header}
       >
         Staff Login
       </Typography>
       <Divider />
-      <Box component="form" sx={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <Box
+        component="form"
+        sx={loginForm.form}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TextField
           margin="normal"
           id="email"
@@ -120,7 +105,7 @@ export const StaffLoginForm = () => {
           variant="contained"
           fullWidth
           type="submit"
-          sx={styles.loadingButton}
+          sx={loading ? loginForm.loadingButton : { ...postButton, m: 2 }}
           startIcon={error && <ErrorIcon />}
           color={error ? "error" : "primary"}
         >
@@ -139,7 +124,7 @@ export const StaffLoginForm = () => {
             variant="subtitle2"
             gutterBottom
             component="div"
-            sx={styles.errorContainer}
+            sx={loginForm.errorContainer}
           >
             Failed to login, please enter valid email address and/or password.
           </Typography>

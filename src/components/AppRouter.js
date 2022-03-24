@@ -1,5 +1,9 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 import { HomePage } from "../pages/Home";
 import { LoginPage } from "../pages/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage";
@@ -8,65 +12,59 @@ import { AboutUsPage } from "../pages/AboutUsPage";
 import { Marketplace } from "../pages/Marketplace";
 import { ForumBoardPage } from "../pages/ForumBoardPage";
 import { ViewSavedJobs } from "../pages/ViewSavedJobs";
-import { useAuth } from "../contexts/AppProvider";
-import { Error } from "../pages/Error";
 import { CreateItemPage } from "../pages/CreateItemPage";
 import { SingleItemPage } from "../pages/SingleItemPage";
-import { Navbar } from "./Navbar";
 import { CreateJobPage } from "../pages/CreateJobPage";
 import { ViewJobsPage } from "../pages/ViewJobsPage";
-import { Footer } from "../components/Footer";
 import { ViewCreatedJobs } from "../pages/ViewCreatedJobs";
 import { CreatePostPage } from "../pages/CreatePostPage";
 import { ViewForumPostPage } from "../pages/ViewForumPostPage";
-// import { JobBoardPage } from "../pages/JobBoardPage";
 import { EditItemPage } from "../pages/EditItemPage";
 import { PurchaseRequestsPage } from "../pages/PurchaseRequestsPage";
+import { useAuth } from "../contexts/AppProvider";
 
 export const AppRouter = () => {
-  // TODO: wrap routes with isLoggedIn and user type
   const { isLoggedIn, user } = useAuth();
 
   return (
-    <>
+    <Stack sx={{ minHeight: "100vh" }}>
       <Navbar />
+      <Box sx={{ minHeight: "75vh" }}>
+        <Routes>
+          <Route path="/about-us" element={<AboutUsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/" element={<HomePage />} />
 
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/" element={<HomePage />} />
+          {isLoggedIn && user?.type === "student" && (
+            <>
+              <Route path="/listing/:id" element={<SingleItemPage />} />
+              <Route path="/create-item" element={<CreateItemPage />} />
+              <Route path="/edit-item/:id" element={<EditItemPage />} />
+              <Route path="/create-post" element={<CreatePostPage />} />
+              <Route path="/forum" element={<ForumBoardPage />} />
+              <Route path="/marketplace" element={<Marketplace />} />
+              <Route
+                path="/purchase-requests"
+                element={<PurchaseRequestsPage />}
+              />
+              <Route path={"/forum/:id"} element={<ViewForumPostPage />} />
+              <Route path="/jobs" element={<ViewJobsPage />} />
+              <Route path="/job-board" element={<ViewSavedJobs />} />
+            </>
+          )}
 
-        {isLoggedIn && user?.__typename === "Student" && (
-          <>
-            <Route path="/jobs" element={<ViewJobsPage />} />
-            <Route path="/job-board" element={<ViewSavedJobs />} />
-            <Route path={"/forum/:id"} element={<ViewForumPostPage />} />
-          </>
-        )}
+          {isLoggedIn && user?.type === "staff" && (
+            <>
+              <Route path="/my-jobs" element={<ViewCreatedJobs />} />
+              <Route path="/create-job" element={<CreateJobPage />} />
+            </>
+          )}
 
-        {isLoggedIn ? (
-          <>
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/about-us" element={<AboutUsPage />} />
-            <Route path="/marketplace" element={<Marketplace />} />
-            <Route path="/forum-board" element={<ForumBoardPage />} />
-            <Route
-              path="/purchase-requests"
-              element={<PurchaseRequestsPage />}
-            />
-            <Route path="/create-job" element={<CreateJobPage />} />
-            <Route path="/create-item" element={<CreateItemPage />} />
-            <Route path={`/listing/:id`} element={<SingleItemPage />} />
-            <Route path={`/edit-item/:id`} element={<EditItemPage />} />
-            <Route path="/create-post" element={<CreatePostPage />} />
-            <Route path="/my-jobs" element={<ViewCreatedJobs />} />
-          </>
-        ) : (
-          <Route path="*" element={<Navigate to="/" />} />
-        )}
-      </Routes>
-
+          <Route path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </Box>
       <Footer />
-    </>
+    </Stack>
   );
 };
