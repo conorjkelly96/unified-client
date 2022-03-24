@@ -35,7 +35,7 @@ export const CommentCard = ({ comment }) => {
                 variant="body2"
                 color="text.primary"
               >
-                {comment?.username.id}
+                {comment?.username.username}
               </Typography>
             </>
           }
