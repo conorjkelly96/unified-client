@@ -179,11 +179,7 @@ export const DELETE_FORUM_POST = gql`
 export const COMMENT_ON_ITEM = gql`
   mutation Mutation($input: ItemCommentInput) {
     addCommentToItem(input: $input) {
-      comments {
-        commentId
-        commentBody
-        username
-      }
+      id
     }
   }
 `;

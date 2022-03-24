@@ -11,11 +11,14 @@ import { COMMENT_ON_ITEM } from "../mutations";
 import { useMutation } from "@apollo/client";
 import { Box } from "@mui/system";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../contexts/AppProvider";
 
 export const ContactSellerModal = ({ handleClose, open, itemId }) => {
   const [executeComment, { loading: commentLoading, error: commentError }] =
     useMutation(COMMENT_ON_ITEM);
   const navigate = useNavigate();
+
+  const { user } = useAuth();
 
   const {
     register,
