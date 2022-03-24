@@ -18,8 +18,6 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
     useMutation(COMMENT_ON_ITEM);
   const navigate = useNavigate();
 
-  const { user } = useAuth();
-
   const {
     register,
     handleSubmit,
