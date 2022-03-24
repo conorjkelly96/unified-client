@@ -15,7 +15,6 @@ import Grid from "@mui/material/Grid";
 
 // import { Spinner } from "./Spinner";
 import { CREATE_ITEM } from "../mutations";
-import { SuccessfulItemModal } from "./SuccessfulItemModal";
 import { useState } from "react";
 import { MultiImageUploader } from "./MultiImageUploader";
 import { useAuth } from "../contexts/AppProvider";
@@ -34,16 +33,10 @@ export const CreateItemForm = () => {
     setNoBackEndModal(true);
   };
 
-  console.log(user);
-
-  const handleClose = () => setNoBackEndModal(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    getValues,
     watch,
   } = useForm();
 
@@ -92,7 +85,7 @@ export const CreateItemForm = () => {
       backgroundColor: "#fff",
     },
     header: {
-      paddingTop: 2,
+      paddingTop: 3,
       paddingBottom: 2,
     },
     form: {
@@ -100,6 +93,7 @@ export const CreateItemForm = () => {
       flexDirection: "column",
       alignItems: "center",
       padding: 4,
+      paddingTop: 3,
     },
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
@@ -113,7 +107,6 @@ export const CreateItemForm = () => {
     <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
       <Grid item xs={12} lg={6}>
         <Box sx={styles.container}>
-          {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
           <Typography
             variant="h4"
             gutterBottom
@@ -136,6 +129,7 @@ export const CreateItemForm = () => {
               name="itemName"
               variant="outlined"
               fullWidth
+              autoFocus
               {...register("itemName", { required: true })}
               error={!!errors.itemName}
               disabled={loading}
@@ -147,6 +141,7 @@ export const CreateItemForm = () => {
               name="itemDescription"
               variant="outlined"
               fullWidth
+              autoFocus
               {...register("itemDescription", { required: false })}
               error={!!errors.itemDescription}
               disabled={loading}

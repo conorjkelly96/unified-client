@@ -5,8 +5,12 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { Grid, Select } from "@mui/material";
 import { ItemCard } from "./ItemCard";
+import Select from "@mui/material/Select";
+import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
 // import { Spinner } from "./Spinner";
 import { UPDATE_ITEM } from "../mutations";
@@ -131,7 +135,6 @@ export const EditItemForm = () => {
       <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
         <Grid item xs={12} lg={6}>
           <Box sx={styles.container}>
-            {/* <SuccessfulItemModal show={showNoBackEndModal} onClose={handleClose} />; */}
             <Typography
               variant="h4"
               gutterBottom
@@ -175,33 +178,62 @@ export const EditItemForm = () => {
                 error={!!errors.itemDescription}
                 disabled={loading}
               />
-              <TextField
-                margin="normal"
-                id="category"
-                label="Category"
-                name="category"
-                variant="outlined"
-                fullWidth
-                {...register("category", {
-                  required: true,
-                  value: itemData.getSingleItemData.category,
-                })}
-                error={!!errors.category}
-                disabled={loading}
-              />
-              <TextField
-                margin="normal"
-                id="condition"
-                label="Condition"
-                variant="outlined"
-                fullWidth
-                {...register("condition", {
-                  required: true,
-                  value: itemData.getSingleItemData.condition,
-                })}
-                error={!!errors.condition}
-                disabled={loading}
-              />
+
+              <FormControl fullWidth>
+                <InputLabel id="category" sx={{ margin: "16px 0px" }}>
+                  Category
+                </InputLabel>
+                <Select
+                  id="category"
+                  label="Category"
+                  name="category"
+                  variant="outlined"
+                  fullWidth
+                  {...register("category", {
+                    required: true,
+                    value: "Other",
+                  })}
+                  error={!!errors.category}
+                  disabled={loading}
+                  sx={{ margin: "16px 0px" }}
+                >
+                  <MenuItem value={"Clothing & Accessories"}>
+                    Clothing & Accessories
+                  </MenuItem>
+                  <MenuItem value={"Sporting Goods"}>Sporting Goods</MenuItem>
+                  <MenuItem value={"Electronics"}>Electronics</MenuItem>
+                  <MenuItem value={"Academic Materials"}>
+                    Academic Materials
+                  </MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl fullWidth>
+                <InputLabel id="condition" sx={{ margin: "16px 0px" }}>
+                  Condition
+                </InputLabel>
+                <Select
+                  id="condition"
+                  label="Condition"
+                  name="condition"
+                  variant="outlined"
+                  fullWidth
+                  {...register("condition", {
+                    required: true,
+                    value: itemData.getSingleItemData.condition,
+                  })}
+                  error={!!errors.condition}
+                  disabled={loading}
+                  sx={{ margin: "16px 0px" }}
+                >
+                  <MenuItem value={"New"}>New</MenuItem>
+                  <MenuItem value={"Fair"}>Fair</MenuItem>
+                  <MenuItem value={"Like New"}>Like New</MenuItem>
+                  <MenuItem value={"Used"}>Used</MenuItem>
+                </Select>
+              </FormControl>
+
               <TextField
                 margin="normal"
                 id="price"
