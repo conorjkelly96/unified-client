@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { GET_STUDENT_JOBS } from "../queries";
@@ -15,8 +15,8 @@ export const ViewJobsPage = () => {
     useMutation(SAVE_JOB);
 
   const { data: studentJobsData } = useQuery(GET_STUDENT_JOBS);
-  console.log(studentJobsData);
-  let navigate = useNavigate();
+
+  // let navigate = useNavigate();
 
   const onAdd = async (event) => {
     const jobId = event.target.id;
@@ -31,7 +31,7 @@ export const ViewJobsPage = () => {
       }
 
       if (addData) {
-        navigate("/job-board", { replace: true });
+        // navigate("/job-board", { replace: true });
       }
     } catch (error) {
       console.log(error);
