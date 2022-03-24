@@ -1,5 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 
+import { HomePage } from "../pages/Home";
 import { LoginPage } from "../pages/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
@@ -33,6 +34,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/home" element={<HomePage />} />
 
         {isLoggedIn && user?.__typename === "Student" && (
           <>
