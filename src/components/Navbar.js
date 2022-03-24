@@ -107,6 +107,7 @@ export const Navbar = () => {
                     {link.label}
                   </Button>
                 ))}
+                {renderLogout()}
               </>
             )}
 

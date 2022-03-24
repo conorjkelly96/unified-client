@@ -241,7 +241,8 @@ export const CreateJobPage = () => {
             company={company}
             url={url}
             salary={salary}
-            date={date}
+            closingDate={date}
+            isPreview={true}
           />
         </Box>
       </Grid>

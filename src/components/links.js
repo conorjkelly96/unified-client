@@ -15,20 +15,12 @@ export const publicLinks = [
 
 export const staffLinks = [
   {
-    label: "Dashboard",
-    path: "dashboard",
-  },
-  {
     label: "Jobs",
     path: "my-jobs",
   },
 ];
 
 export const studentLinks = [
-  {
-    label: "Dashboard",
-    path: "dashboard",
-  },
   {
     label: "Marketplace",
     path: "marketplace",

@@ -123,19 +123,22 @@ export const ViewCreatedJobs = () => {
             Your Job Listings
           </Typography>
           <Box sx={styles.container}>
-            {jobsData.map((staffJob) => (
-              <JobCard
-                id={staffJob.id}
-                title={staffJob.title}
-                description={staffJob.description}
-                company={staffJob.company}
-                url={staffJob.url}
-                salary={staffJob.salary}
-                date={new Date(staffJob.closingDate)}
-                key={staffJob.id}
-                onDelete={onDelete}
-              />
-            ))}
+            {jobsData.map((staffJob) => {
+              return (
+                <JobCard
+                  id={staffJob.id}
+                  title={staffJob.title}
+                  description={staffJob.description}
+                  company={staffJob.company}
+                  url={staffJob.url}
+                  salary={staffJob.salary}
+                  // TODO: FIX THE BELOW
+                  // closingDate={new Date(staffJob.closingDate)}
+                  key={staffJob.id}
+                  onDelete={onDelete}
+                />
+              );
+            })}
           </Box>
         </>
       ) : null}

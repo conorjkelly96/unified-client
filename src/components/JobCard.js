@@ -23,6 +23,7 @@ export const JobCard = ({
   onAdd,
   alreadySaved,
   deleteBtn,
+  isPreview,
 }) => {
   const { user } = useAuth();
 
@@ -36,7 +37,7 @@ export const JobCard = ({
         <Typography color="text.secondary">{company || "COMPANY"}</Typography>
 
         <Typography sx={{ mb: 1.5 }}>
-          {"Starting salary: £"}
+          {"Starting salary: "}
           {salary}
         </Typography>
 
@@ -60,18 +61,8 @@ export const JobCard = ({
           >
             "Learn More & Apply"
           </Button>
-          {user?.type === "staff" && (
+          {user?.type === "staff" && !isPreview && (
             <Box sx={{ marginBottom: "10px" }}>
-              <Button
-                variant="contained"
-                size="small"
-                endIcon={<EditIcon />}
-                color="info"
-                sx={{ marginLeft: 1 }}
-                // onClick={}
-              >
-                Edit
-              </Button>
               <Button
                 id={id}
                 variant="contained"
@@ -85,20 +76,23 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" && !alreadySaved && !deleteBtn && (
-            <Box sx={{ marginBottom: "10px" }}>
-              <Button
-                id={id}
-                variant="contained"
-                size="small"
-                endIcon={<EditIcon />}
-                sx={{ ...altButton, marginLeft: "8px" }}
-                onClick={onAdd}
-              >
-                Save job
-              </Button>
-            </Box>
-          )}
+          {user?.__typename === "Student" &&
+            !alreadySaved &&
+            !deleteBtn &&
+            !isPreview && (
+              <Box sx={{ marginBottom: "10px" }}>
+                <Button
+                  id={id}
+                  variant="contained"
+                  size="small"
+                  endIcon={<EditIcon />}
+                  sx={{ ...altButton, marginLeft: "8px" }}
+                  onClick={onAdd}
+                >
+                  Save job
+                </Button>
+              </Box>
+            )}
           {user?.type === "student" && alreadySaved && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button id={id} variant="contained" size="small" color="info">
@@ -106,7 +100,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" && deleteBtn && (
+          {user?.__typename === "Student" && deleteBtn && !isPreview && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
                 id={id}

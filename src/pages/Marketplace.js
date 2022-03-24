@@ -175,7 +175,7 @@ export const Marketplace = () => {
         <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
 
         <Box sx={{ px: "32px", paddingTop: "40px" }}>
-          {!myItemsLoading && !itemLoading && itemsToDisplay.length ? (
+          {!myItemsLoading && !itemLoading && itemsToDisplay?.length ? (
             itemsToDisplay?.map((item) => {
               return (
                 <ItemCard
