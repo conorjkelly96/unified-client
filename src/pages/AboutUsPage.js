@@ -1,47 +1,34 @@
-import { Navbar } from "../components/Navbar";
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Button from "@mui/material/Button";
-import CameraIcon from "@mui/icons-material/PhotoCamera";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const cards = [1, 2, 3, 4, 5, 6];
+import Content from "../components/TeamContent";
 
 const theme = createTheme({});
 
 export const AboutUsPage = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <main>
         {/* Hero unit */}
         <Box
           sx={{
-            bgcolor: "background.paper",
             pt: 8,
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
+          <Container maxWidth="lg">
             <Typography
               component="h1"
               variant="h2"
               align="center"
-              color="text.primary"
+              color="primary"
               gutterBottom
             >
               <img
@@ -57,7 +44,7 @@ export const AboutUsPage = () => {
             <Typography
               variant="h5"
               align="center"
-              color="text.secondary"
+              sx={{ color: "black" }}
               paragraph
             >
               The team here at Unified are made up of like-minded individuals
@@ -88,12 +75,7 @@ export const AboutUsPage = () => {
                   About Page
                 </Link>
               </Button>
-              <Button
-                variant="outlined"
-                sx={{
-                  bgcolor: "white",
-                }}
-              >
+              <Button variant="outlined">
                 <Link
                   to="https://github.com/conorjkelly96/unified-client"
                   sx={{
@@ -107,47 +89,30 @@ export const AboutUsPage = () => {
             </Stack>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md" align="center">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    sx={{
-                      // 16:9
-                      pt: "56.25%",
-                    }}
-                    image="https://avatars.githubusercontent.com/u/87938352?v=4"
-                    alt="Matthew Palmer"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Matthew Palmer
-                    </Typography>
-                    <Typography>VA Grad / Coding Bootcamp</Typography>
-                  </CardContent>
-                  <CardActions style={{ justifyContent: "center" }}>
-                    <Button size="small">
-                      <GitHubIcon color="#E57A44"></GitHubIcon>
-                    </Button>
-                    <Button size="small">
-                      <LinkedInIcon></LinkedInIcon>
-                    </Button>
-                  </CardActions>
-                </Card>
+        <box>
+          <Typography
+            variant="h2"
+            component="h2"
+            textAlign={"center"}
+            padding="20px"
+          >
+            Meet the Team
+          </Typography>
+          ;
+          <Container sx={{ py: 10 }} maxWidth="lg" align="center">
+            {/* End hero unit */}
+            <Grid container direction="column">
+              <Grid item container>
+                <Grid sm={2} xs={0} />
+                <Grid xs={12} sm={8}>
+                  <Content sx={{ padding: "10px" }} />
+                </Grid>
+                <Grid item xs={6} />
               </Grid>
-            ))}
-          </Grid>
-        </Container>
+            </Grid>
+          </Container>
+        </box>
       </main>
-    </ThemeProvider>
+    </>
   );
 };

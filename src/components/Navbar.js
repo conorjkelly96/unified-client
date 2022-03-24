@@ -43,11 +43,11 @@ export const Navbar = () => {
       backgroundColor: "#E57A44",
     },
     link: {
-      color: "#009FFD",
+      color: "white",
     },
     button: {
       backgroundColor: "#009FFD",
-      color: "#E57A44",
+      color: "white",
       marginLeft: "10px",
       "&:hover": {
         border: "1px solid white",
@@ -62,7 +62,17 @@ export const Navbar = () => {
       backgroundColor: "#009FFD",
     },
     link: {
-      color: "#E57A44",
+      color: "white",
+    },
+    button: {
+      backgroundColor: "#E57A44",
+      color: "white",
+      marginLeft: "10px",
+      "&:hover": {
+        border: "1px solid white",
+        backgroundColor: "#009FFD",
+        color: "white",
+      },
     },
   };
 
