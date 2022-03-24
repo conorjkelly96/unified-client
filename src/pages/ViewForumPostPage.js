@@ -1,8 +1,6 @@
 import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 
@@ -23,6 +21,7 @@ export const ViewForumPostPage = () => {
     variables: {
       postId: id,
     },
+    pollInterval: 5000,
   });
 
   const styles = {
@@ -55,17 +54,6 @@ export const ViewForumPostPage = () => {
     <>
       {!postLoading && postData?.getForumPost && (
         <>
-          {/* <Box>
-            <Stack
-              direction="row"
-              justifyContent="start"
-              sx={{ mt: 4, mx: 2, mb: 2 }}
-            >
-              <Button variant="contained" component="a" href="/forum">
-                Back
-              </Button>
-            </Stack>
-          </Box> */}
           <Typography
             variant="h4"
             gutterBottom

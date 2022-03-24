@@ -21,7 +21,6 @@ export const ForumBoardPage = () => {
   if (error) {
     return <Error />;
   }
-  console.log(data);
 
   const styles = {
     header: {
@@ -74,7 +73,7 @@ export const ForumBoardPage = () => {
               username={post.postedBy.username}
               college={post.postedBy.college}
               createdAt={post.createdAt}
-              replies={post.replies}
+              replyCount={post.replyCount}
               key={post.id}
             />
           ))}

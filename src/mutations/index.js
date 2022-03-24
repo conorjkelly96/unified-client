@@ -99,9 +99,9 @@ export const DELETE_JOB_LISTING = gql`
   }
 `;
 
-export const SAVE_JOB = gql`
-  mutation Mutation($jobId: ID!) {
-    saveJob(jobId: $jobId) {
+export const DELETE_ITEM = gql`
+  mutation Mutation($itemId: String!) {
+    deleteItem(itemId: $itemId) {
       id
     }
   }
@@ -115,7 +115,15 @@ export const CREATE_FORUM_POST = gql`
         id
       }
       createdAt
-      replies
+      tags
+    }
+  }
+`;
+
+export const ADD_TO_MY_ITEMS = gql`
+  mutation Mutation($itemId: String!) {
+    saveToMyItems(itemId: $itemId) {
+      id
     }
   }
 `;
@@ -128,12 +136,26 @@ export const CREATE_FORUM_REPLY = gql`
   }
 `;
 
-//* export const DELETE_FORUM_REPLY = gql``;
+export const DELETE_FORUM_REPLY = gql`
+  mutation Mutation($postId: ID!, $replyId: ID!) {
+    deleteForumReply(postId: $postId, replyId: $replyId) {
+      id
+      replies {
+        id
+        text
+      }
+    }
+  }
+`;
 
 export const EDIT_FORUM_POST = gql`
   mutation Mutation($updateForumPostId: ID!, $input: ForumPostInput!) {
     updateForumPost(id: $updateForumPostId, input: $input) {
       id
+      replies {
+        id
+        text
+      }
     }
   }
 `;
@@ -149,6 +171,44 @@ export const UPDATE_FORUM_POST = gql`
 export const DELETE_FORUM_POST = gql`
   mutation Mutation($deleteForumPostId: ID!) {
     deleteForumPost(id: $deleteForumPostId) {
+      id
+    }
+  }
+`;
+
+export const COMMENT_ON_ITEM = gql`
+  mutation Mutation($input: ItemCommentInput) {
+    addCommentToItem(input: $input) {
+      comments {
+        commentId
+        commentBody
+        username
+      }
+    }
+  }
+`;
+
+export const UPDATE_ITEM = gql`
+  mutation Mutation($itemId: String!, $input: UpdateItemInput!) {
+    updateItem(itemId: $itemId, input: $input) {
+      itemName
+      itemDescription
+      category
+      status
+      condition
+      quantity
+      price
+      seller {
+        id
+        firstName
+      }
+    }
+  }
+`;
+
+export const SAVE_JOB = gql`
+  mutation Mutation($jobId: ID!) {
+    saveJob(jobId: $jobId) {
       id
     }
   }

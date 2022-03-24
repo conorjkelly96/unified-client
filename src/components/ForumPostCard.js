@@ -145,7 +145,7 @@ export const ForumPostCard = ({
         </Typography>
         <ReplyForm />
         {replies?.length > 0 ? (
-          <ReplyCard replies={replies} username={username} />
+          <ReplyCard replies={replies} username={username} id={id} />
         ) : (
           <Typography>No replies</Typography>
         )}

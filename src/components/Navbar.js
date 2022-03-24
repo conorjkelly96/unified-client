@@ -190,7 +190,7 @@ export const Navbar = () => {
               }}
             />
           ) : (
-            // TO DO: Add public landing image here
+            // TODO: Add public landing image here
             <img
               src="./images/unified-public-nav.png"
               alt="Unified Logo"
@@ -215,7 +215,7 @@ export const Navbar = () => {
                     sx={handleNavStyles("link")}
                     onClick={handleNavigation(link.path)}
                   >
-                    {link.label}
+                    {"link.label"}
                   </Button>
                 ))}
               </>
