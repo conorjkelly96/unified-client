@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useTheme, useMediaQuery } from "@mui/material";
@@ -65,7 +63,6 @@ export const Navbar = () => {
 
   return (
     <AppBar position="static">
-      <CssBaseline />
       <Toolbar sx={styles.navContainer}>
         <Box sx={styles.logo}>
           {/* WARNING: THE LOGO IS UNSTABLE */}
