@@ -94,7 +94,6 @@ export const CreateItemForm = () => {
       alignItems: "center",
       padding: 4,
       paddingTop: 3,
-      border: "5px solid red",
     },
     loadingButton: { marginTop: 3, marginBottom: 2 },
     errorContainer: {
