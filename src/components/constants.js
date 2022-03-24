@@ -37,7 +37,7 @@ export default [
     description: "lorem10",
     imageUrl: "https://avatars.githubusercontent.com/u/79544778?v=4",
     gitLink: "https://github.com/Yashemabeth",
-    linkedLink: "",
+    linkedLink: "https://uk.linkedin.com/in/yashemamcleod",
   },
   {
     title: "Liana Laurentiu",
