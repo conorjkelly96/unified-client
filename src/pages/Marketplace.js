@@ -20,6 +20,8 @@ import { FilterByCategoryComponent } from "../components/FilterByCategoryCompone
 import { NoItemResults } from "../components/NoItemResults";
 import { mainContainer, postButton } from "../styles";
 import { Spinner } from "../components/Spinner";
+import { Alert } from "@mui/material";
+import { alertContainer } from "../styles";
 
 export const Marketplace = () => {
   const navigate = useNavigate();
@@ -114,11 +116,11 @@ export const Marketplace = () => {
   // Pass this down with the seller id so we can match them off and conditionally render buttons on the item card
   const userId = user.id;
 
+  console.log(itemsToDisplay);
+
   return (
     <>
       <Container sx={{ ...mainContainer, boxShadow: "none" }}>
-        <Spinner loading={itemLoading} />
-
         <Box
           sx={{
             display: "flex",
@@ -176,8 +178,7 @@ export const Marketplace = () => {
         <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
 
         <Box sx={{ px: "32px", paddingTop: "40px" }}>
-          {!myItemsLoading &&
-            !itemLoading &&
+          {!myItemsLoading && !itemLoading && itemsToDisplay.length ? (
             itemsToDisplay?.map((item) => {
               return (
                 <ItemCard
@@ -198,7 +199,14 @@ export const Marketplace = () => {
                   onAddItemToInterested={onAddItemToInterested}
                 />
               );
-            })}
+            })
+          ) : (
+            <>
+              <Alert icon={false} severity="info" sx={alertContainer}>
+                There are currently no items on display.
+              </Alert>
+            </>
+          )}
         </Box>
       </Container>
     </>
