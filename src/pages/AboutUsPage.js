@@ -14,13 +14,11 @@ const theme = createTheme({});
 
 export const AboutUsPage = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <main>
         {/* Hero unit */}
         <Box
           sx={{
-            bgcolor: "background.paper",
             pt: 8,
             pb: 6,
           }}
@@ -30,7 +28,7 @@ export const AboutUsPage = () => {
               component="h1"
               variant="h2"
               align="center"
-              color="text.primary"
+              color="primary"
               gutterBottom
             >
               <img
@@ -46,7 +44,7 @@ export const AboutUsPage = () => {
             <Typography
               variant="h5"
               align="center"
-              color="text.secondary"
+              sx={{ color: "black" }}
               paragraph
             >
               The team here at Unified are made up of like-minded individuals
@@ -77,12 +75,7 @@ export const AboutUsPage = () => {
                   About Page
                 </Link>
               </Button>
-              <Button
-                variant="outlined"
-                sx={{
-                  bgcolor: "white",
-                }}
-              >
+              <Button variant="outlined">
                 <Link
                   to="https://github.com/conorjkelly96/unified-client"
                   sx={{
@@ -120,6 +113,6 @@ export const AboutUsPage = () => {
           </Container>
         </box>
       </main>
-    </ThemeProvider>
+    </>
   );
 };

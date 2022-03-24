@@ -34,7 +34,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
 
         {isLoggedIn && user?.__typename === "Student" && (
           <>
@@ -62,7 +62,7 @@ export const AppRouter = () => {
             <Route path="/my-jobs" element={<ViewCreatedJobs />} />
           </>
         ) : (
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         )}
       </Routes>
 
