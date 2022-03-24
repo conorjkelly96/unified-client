@@ -25,8 +25,8 @@ export const PurchaseRequestsPage = () => {
   return (
     itemData &&
     !itemLoading &&
-    itemData.getCommentsOnMyItems.map((item, index) => (
-      <PreviewItemCard key={index} item={item} />
+    itemData.getCommentsOnMyItems.map((item) => (
+      <PreviewItemCard key={item.id} item={item} />
     ))
   );
 };

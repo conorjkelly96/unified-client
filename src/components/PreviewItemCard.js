@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import { CommentCard } from "./CommentCard";
 
 export const PreviewItemCard = ({ item }) => {
+  console.log(item);
   return (
     <Card sx={{ minWidth: 275, mb: "25px" }}>
       <CardContent>
