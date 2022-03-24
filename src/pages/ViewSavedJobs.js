@@ -90,7 +90,7 @@ export const ViewSavedJobs = () => {
           </Typography>
           <Stack direction={"row"} sx={{ justifyContent: "center" }}>
             <Button component="a" href="/jobs" variant="contained">
-              List a job
+              View Listed Jobs
             </Button>
           </Stack>
         </Box>
