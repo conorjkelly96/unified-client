@@ -47,7 +47,8 @@ function LandingHeroLayout(props) {
           loadAsBackgroundImage={false}
           opacityTransition={3}
           src="./images/unified-private-nav.png"
-          width="350px"
+          width="400px"
+          height="auto"
         />
         {children}
         <Box
