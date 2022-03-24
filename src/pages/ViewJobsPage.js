@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
+import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { GET_STUDENT_JOBS } from "../queries";
@@ -10,26 +10,42 @@ import { Error } from "./Error";
 import { Spinner } from "../components/Spinner";
 
 export const ViewJobsPage = () => {
-  const { data, loading, error } = useQuery(JOBS);
+  const [jobData, setJobData] = useState();
+  const [myJobs, setMyJobs] = useState();
+
+  const [getAllJobs, { loading, error }] = useLazyQuery(JOBS);
+
+  const [getMyJobs] = useLazyQuery(GET_STUDENT_JOBS);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data: allJobs } = await getAllJobs();
+      setJobData(allJobs);
+      const { data: studentJobsData } = await getMyJobs();
+      setMyJobs(studentJobsData);
+    }
+    fetchData();
+  }, [getAllJobs, jobData, myJobs]);
+
   const [executeSaveJob, { loading: saveJobLoading, error: saveJobError }] =
     useMutation(SAVE_JOB);
 
-  const { data: studentJobsData } = useQuery(GET_STUDENT_JOBS);
-
-  const navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const onAdd = async (event) => {
     const jobId = event.target.id;
 
     try {
-      const { data: addData, error: addError } = await executeSaveJob({
+      const { data: addData } = await executeSaveJob({
         variables: { jobId },
       });
-      if (addError) {
+
+      if (saveJobError) {
         throw new Error("Something went wrong!");
       }
+
       if (addData) {
-        navigate("/job-board", { replace: true });
+        // navigate("/job-board", { replace: true });
       }
     } catch (error) {
       console.log(error);
@@ -61,7 +77,7 @@ export const ViewJobsPage = () => {
         </Box>
       )}
 
-      {!loading && data?.jobs.length && (
+      {!loading && jobData?.jobs.length && (
         <>
           <Typography
             variant="h4"
@@ -74,12 +90,10 @@ export const ViewJobsPage = () => {
           </Typography>
 
           <Box sx={styles.container}>
-            {data?.jobs?.map((job) => {
-              const alreadySaved = studentJobsData?.getStudentJobs.some(
-                (each) => {
-                  return each.id === job.id;
-                }
-              );
+            {jobData?.jobs?.map((job) => {
+              const alreadySaved = myJobs?.getStudentJobs.some((each) => {
+                return each.id === job.id;
+              });
 
               return (
                 <JobCard

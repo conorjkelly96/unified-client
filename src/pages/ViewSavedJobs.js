@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -8,15 +8,53 @@ import { JobCard } from "../components/JobCard";
 import { Spinner } from "../components/Spinner";
 
 import { GET_STUDENT_JOBS } from "../queries";
+import { REMOVE_SAVED_JOB } from "../mutations";
+
 import { Error } from "./Error";
 import { useEffect, useState } from "react";
 
 export const ViewSavedJobs = () => {
-  const {
-    data: studentJobsData,
-    error: studentJobsError,
-    loading: studentJobsLoading,
-  } = useQuery(GET_STUDENT_JOBS);
+  const [
+    getStudentJobs,
+    { error: studentJobsError, loading: studentJobsLoading, refetch },
+  ] = useLazyQuery(GET_STUDENT_JOBS);
+
+  const [removeSavedJob, { loading: removeJobLoading, error: removeJobError }] =
+    useMutation(REMOVE_SAVED_JOB);
+
+  const [jobsData, setJobsData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data: studentJobsData } = await getStudentJobs();
+
+      setJobsData(studentJobsData.getStudentJobs);
+    }
+    fetchData();
+  }, [getStudentJobs, jobsData]);
+
+  const onDelete = async (event) => {
+    const jobId = event.target.id;
+
+    try {
+      const { data: removeData } = await removeSavedJob({
+        variables: { jobId },
+      });
+
+      if (removeJobError) {
+        throw new Error("Something went wrong!");
+      }
+
+      if (removeData) {
+        console.log("success");
+
+        setJobsData();
+        refetch();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const styles = {
     header: {
@@ -39,7 +77,7 @@ export const ViewSavedJobs = () => {
         </Box>
       )}
 
-      {!studentJobsLoading && !studentJobsData?.getStudentJobs.length ? (
+      {!studentJobsLoading && !jobsData?.length ? (
         <Box sx={{ height: "75vh" }}>
           <Typography
             variant="h4"
@@ -52,13 +90,13 @@ export const ViewSavedJobs = () => {
           </Typography>
           <Stack direction={"row"} sx={{ justifyContent: "center" }}>
             <Button component="a" href="/jobs" variant="contained">
-              List a job
+              View Listed Jobs
             </Button>
           </Stack>
         </Box>
       ) : null}
 
-      {!studentJobsLoading && studentJobsData?.getStudentJobs.length ? (
+      {!studentJobsLoading && jobsData?.length ? (
         <>
           <Typography
             variant="h4"
@@ -70,7 +108,7 @@ export const ViewSavedJobs = () => {
             Your Job Listings
           </Typography>
           <Box sx={styles.container}>
-            {studentJobsData.getStudentJobs.map((studentJob) => (
+            {jobsData?.map((studentJob) => (
               <JobCard
                 id={studentJob.id}
                 title={studentJob.title}
@@ -80,6 +118,8 @@ export const ViewSavedJobs = () => {
                 salary={studentJob.salary}
                 date={new Date(studentJob.closingDate)}
                 key={studentJob.id}
+                deleteBtn={true}
+                onDelete={onDelete}
               />
             ))}
           </Box>
