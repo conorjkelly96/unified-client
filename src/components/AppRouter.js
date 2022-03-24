@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { HomePage } from "../pages/Home";
 import { LoginPage } from "../pages/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage";
 import { DashboardPage } from "../pages/DashboardPage";
@@ -35,6 +36,7 @@ export const AppRouter = () => {
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/" element={<HomePage />} />
 
           {isLoggedIn && (
             <>
