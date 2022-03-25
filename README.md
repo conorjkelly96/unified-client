@@ -1,70 +1,150 @@
-# Getting Started with Create React App
+# UNIFIED
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table Of Contents
 
-## Available Scripts
+- [UNIFIED](#unified)
+  - [Table Of Contents](#table-of-contents)
+  - [Project Link](#project-link)
+  - [Contributors](#contributors)
+  - [About The Project](#about-the-project)
+  - [Tool & Technologies Used](#tool--technologies-used)
+    - [Technical](#technical)
+    - [Non Technical](#non-technical)
+  - [User Flow](#user-flow)
+- [Wireframes](#wireframes)
+  - [User Journey](#user-journey)
+    - [Buy/Sell Items](#buysell-items)
+    - [Job Board](#job-board)
+    - [Forum Board](#forum-board)
+- [Screenshots](#screenshots)
+  - [Logo-Unified](#logo-unified)
+  - [Deployed app screenshots](#deployed-app-screenshots)
+  - [Plans For Improvement](#plans-for-improvement)
+  - [Deployed link to application](#deployed-link-to-application)
 
-In the project directory, you can run:
+## Project Link
 
-### `npm start`
+Click [here](https://github.com/conorjkelly96/unified-server) to view the project on Github pages.
+_Sever Repo_
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Click [here](https://github.com/conorjkelly96/unified-client) to view the project on Github pages. _Client Repo_
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Contributors
 
-### `npm test`
+- [Kayle Rieger Patton](https://github.com/kayleriegerpatton)
+- [Conor Kelly](https://github.com/conorjkelly96)
+- [Liana Laurentiu](https://github.com/lianavaleria15)
+- [Matt Palmer](https://github.com/tigerbath)
+- [Yashemabeth Mcleod](https://github.com/Yashemabeth)
+- [Sumaia Sorna](https://github.com/SumaiaSorna)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## About The Project
 
-### `npm run build`
+- One-stop-shop where students can find career development opportunities, engage with each other, and make environmentally and financially sustainable choices.
+- Contemporary student values, modern presentation
+- Organic, community driven social engagement
+- Focus on sustainability
+- Finances (loan-aversion, off-campus living)
+- Skills development & career preparation
+- Social media engagement
+- Simple app, compact design
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tool & Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Technical
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- AWS
+- React
+- Apollo Client
+- Material UI
+- JavaScript
+- GraphQL
+- Apollo Server
+- Mongoose & MongoDB
+- JSONWebToken
+- bcrypt
+- Authentication Sensitive API key
+- Date-fns .env
+- Queries Mutations
+- Heroku deployment
 
-### `npm run eject`
+### Non Technical
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Asana
+- Slack & Zoom
+- GitHub
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## User Flow
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Data Model
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<img src="./public/images/data-model.png">
 
-## Learn More
+# Wireframes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<img src="./public/images/landing-page.png">
+<img src="./public/images/dashboard.png">
+<img src="./public/images/about-us.png">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## User Journey
 
-### Code Splitting
+### Buy/Sell Items
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- As a user I should be able to upload university items to sell to students
+- As a user I should be able to search for items on sale
+- As a potential buyer of a product I should be able to post my questions
+- As a user I should be able to purchase a product via a payment gateway
+- As a user I should be able to view all my purchases
+- As a seller I should be able to view all my posted items
+- As a buyer I should be able to view my order status
+- As a seller/buyer I should be able to update the order status upon collection of the item
+- As a buyer I should be able to leave a rating for the seller
+- As a seller I should be able to update my item to sell
 
-### Analyzing the Bundle Size
+### Job Board
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- As a university staff member I should be able to create a new job advert
+- As a student I should be able to view all job postings
+- As a student I should be able to add a job to my saved jobs
+- As a student I should be able to view all my saved jobs
+- As a university staff member I should be able to update my job advert
 
-### Making a Progressive Web App
+### Forum Board
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- As a student I should be able to post a question in the forum
+- As a student I should be able to view all questions
+- As a student I should be able to post a reply for a specific question
+- As a student I should be able to react to one of the replies
+- As a student I should be able to delete my reply
+- As a student I should be able to delete my question
+- As a student I should be able to edit my reply
+- As a student I should be able to edit my question
+- As a student I should be able to view my questions
 
-### Advanced Configuration
+# Screenshots
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Logo-Unified
 
-### Deployment
+<img src="./public/images/unified-navbar-logo.png">
+<img src="./public/images/unified-private-nav.png">
+<img src="./public/images/unified-public-nav.png">
+<img src="./public/images/unifiedlogo.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Deployed app screenshots
 
-### `npm run build` fails to minify
+<img src="./public/images/deployed-app.png">
+<img src="./public/images/sign-up-page.png">
+<img src="./public/images/login-page.png">
+<img src="./public/images/jobs-page.png">
+<img src="./public/images/forum-page.png">
+<img src="./public/images/market-place.png">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Plans For Improvement
+
+- Marketplace - “Borrow” feature , Online payment feature.
+- UX/UI- Dashboard - edit user feature; edit/delete feature for marketplace & forum.
+- Technicality - Reduce component duplicates.
+
+## Deployed link to application
+
+https://unified-education.herokuapp.com/
