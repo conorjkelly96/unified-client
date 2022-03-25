@@ -11,6 +11,7 @@ import { JOBS } from "../queries";
 import { Error } from "./Error";
 import { Spinner } from "../components/Spinner";
 import { alertContainer } from "../styles";
+import { format } from "date-fns";
 
 export const ViewJobsPage = () => {
   const [jobData, setJobData] = useState();
@@ -100,7 +101,9 @@ export const ViewJobsPage = () => {
                   company={job.company}
                   url={job.url}
                   salary={job.salary}
-                  date={new Date(job.closingDate)}
+                  closingDate={new Date(
+                    new Date(parseInt(job.closingDate))
+                  ).toLocaleString()}
                   key={job.id}
                   onAdd={onAdd}
                   alreadySaved={alreadySaved}
