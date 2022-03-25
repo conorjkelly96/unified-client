@@ -114,7 +114,8 @@ export const ViewSavedJobs = () => {
                 company={studentJob.company}
                 url={studentJob.url}
                 salary={studentJob.salary}
-                date={new Date(studentJob.closingDate)}
+                // date={new Date(parseInt(studentJob.closingDate))}
+                closingDate={new Date(parseInt(studentJob.closingDate))}
                 key={studentJob.id}
                 deleteBtn={true}
                 onDelete={onDelete}

@@ -40,12 +40,9 @@ export const CreateJobPage = () => {
   const value = getValues("closingDate");
 
   useEffect(() => {
-    register("closingDate");
-  }, [register]);
-
-  useEffect(() => {
     setClosingDate(value || null);
-  }, [setClosingDate, value]);
+    register("closingDate");
+  }, [setClosingDate, value, register]);
 
   const onSubmit = async ({
     title,

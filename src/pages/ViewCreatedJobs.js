@@ -40,10 +40,6 @@ export const ViewCreatedJobs = () => {
     getStaffJobsData();
   }, [jobsData, executeGetStaffJobs]);
 
-  // if (staffJobsError) {
-  //   return <Error />;
-  // }
-
   const onDelete = async (event) => {
     const jobId = event.target.id;
     try {
@@ -131,7 +127,7 @@ export const ViewCreatedJobs = () => {
                   url={staffJob.url}
                   salary={staffJob.salary}
                   // TODO: FIX THE BELOW
-                  // closingDate={new Date(staffJob.closingDate)}
+                  closingDate={new Date(parseInt(staffJob.closingDate))}
                   key={staffJob.id}
                   onDelete={onDelete}
                 />

@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { format } from "date-fns";
 
 import { useAuth } from "../contexts/AppProvider";
 import { altButton } from "../styles";
@@ -46,7 +47,9 @@ export const JobCard = ({
 
         <Typography>
           {"Closing Date: "}
-          {closingDate ? closingDate : "CLOSING DATE"}
+          {closingDate
+            ? format(new Date(closingDate), "dd/MM/yyyy")
+            : "CLOSING DATE"}
         </Typography>
       </CardContent>
       <CardActions>

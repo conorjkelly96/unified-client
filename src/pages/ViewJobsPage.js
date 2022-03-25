@@ -118,9 +118,7 @@ export const ViewJobsPage = () => {
                   company={job.company}
                   url={job.url}
                   salary={job.salary}
-                  closingDate={new Date(
-                    new Date(parseInt(job.closingDate))
-                  ).toLocaleString()}
+                  closingDate={new Date(parseInt(job.closingDate))}
                   key={job.id}
                   onAdd={onAdd}
                   alreadySaved={alreadySaved}

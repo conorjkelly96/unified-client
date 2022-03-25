@@ -13,6 +13,8 @@ export const DatePicker = ({
   name,
   label,
 }) => {
+  console.log(date);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DesktopDatePicker
@@ -20,8 +22,9 @@ export const DatePicker = ({
         inputFormat="MM/dd/yyyy"
         value={date}
         onChange={(value) => {
-          setDate(value);
-          setValue(name, value, {
+          console.log(value);
+          setDate(value.toDateString());
+          setValue(name, value.toDateString(), {
             shouldValidate: true,
             shouldDirty: true,
           });

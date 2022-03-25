@@ -37,8 +37,6 @@ export const ForumBoardPage = () => {
     },
   };
 
-  console.log(data?.forumPosts);
-
   return (
     <Container
       component="main"
