@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { format, parseISO } from "date-fns";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -76,7 +75,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.type === "Student" &&
+          {user?.type === "student" &&
             !alreadySaved &&
             !deleteBtn &&
             !isPreview && (
@@ -100,7 +99,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" && deleteBtn && !isPreview && (
+          {user?.type === "student" && deleteBtn && !isPreview && (
             <Box sx={{ marginBottom: "10px" }}>
               <Button
                 id={id}

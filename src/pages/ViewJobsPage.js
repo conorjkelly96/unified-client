@@ -10,8 +10,9 @@ import { JobCard } from "../components/JobCard";
 import { JOBS } from "../queries";
 import { Error } from "./Error";
 import { Spinner } from "../components/Spinner";
-import { alertContainer } from "../styles";
+import { alertContainer, postButton } from "../styles";
 import { format } from "date-fns";
+import { Button } from "@mui/material";
 
 export const ViewJobsPage = () => {
   const [jobData, setJobData] = useState();
@@ -77,6 +78,22 @@ export const ViewJobsPage = () => {
 
       {!loading && jobData?.jobs.length ? (
         <>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              sx={{ ...postButton, mt: 3 }}
+              variant="contained"
+              component="a"
+              href="/job-board"
+            >
+              View Saved Jobs
+            </Button>
+          </Box>
           <Typography
             variant="h4"
             gutterBottom
