@@ -66,7 +66,7 @@ export const AboutUsPage = () => {
               }}
               variant="contained"
               component="a"
-              href="/create-post"
+              href="https://github.com/conorjkelly96/unified-server"
             >
               GitHub Server
             </Button>
@@ -75,7 +75,7 @@ export const AboutUsPage = () => {
               sx={{ ...altButton }}
               variant="contained"
               component="a"
-              href="/create-post"
+              href="https://github.com/conorjkelly96/unified-client"
             >
               GitHub Client
             </Button>
