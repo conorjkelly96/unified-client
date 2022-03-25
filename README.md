@@ -12,6 +12,8 @@
     - [Technical](#technical)
     - [Non Technical](#non-technical)
   - [User Flow](#user-flow)
+    - [Data Model](#data-model)
+  - [User Journey](#user-journey)
     - [Buy/Sell Items](#buysell-items)
     - [Job Board](#job-board)
     - [Forum Board](#forum-board)
@@ -74,6 +76,12 @@ A
 - GitHub
 
 ## User Flow
+
+### Data Model
+
+<img src="./public/images/data-model.png">
+
+## User Journey
 
 ### Buy/Sell Items
 
