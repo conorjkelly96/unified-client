@@ -72,6 +72,8 @@ export const ViewForumPostPage = () => {
               college={postData.getForumPost.postedBy.college}
               createdAt={postData.getForumPost.createdAt}
               replies={postData.getForumPost.replies}
+              tags={postData.getForumPost.tags}
+              profileImageUrl={postData.getForumPost.profileImageUrl}
               refetch={refetch}
             />
           </Box>

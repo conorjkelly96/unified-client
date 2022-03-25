@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 
@@ -7,7 +7,7 @@ import { Footer } from "./Footer";
 import { HomePage } from "../pages/Home";
 import { LoginPage } from "../pages/LoginPage";
 import { SignUpPage } from "../pages/SignUpPage";
-import { DashboardPage } from "../pages/DashboardPage";
+// import { DashboardPage } from "../pages/DashboardPage";
 import { AboutUsPage } from "../pages/AboutUsPage";
 import { Marketplace } from "../pages/Marketplace";
 import { ForumBoardPage } from "../pages/ForumBoardPage";
