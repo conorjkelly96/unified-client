@@ -97,7 +97,7 @@ export const CreateItemForm = () => {
   };
 
   return (
-    <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+    <Grid container spacing={2} sx={{ margin: "auto" }}>
       <Grid item xs={12} lg={6}>
         <Box>
           <Typography
