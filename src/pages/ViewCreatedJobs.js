@@ -40,8 +40,6 @@ export const ViewCreatedJobs = () => {
     getStaffJobsData();
   }, [jobsData, executeGetStaffJobs]);
 
-  // TODO: onEdit button direct to edit-job page or change JobCard into editable form??
-
   // if (staffJobsError) {
   //   return <Error />;
   // }
