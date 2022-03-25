@@ -59,7 +59,7 @@ export const JobCard = ({
             href={url}
             sx={{ marginBottom: 2 }}
           >
-            "Learn More & Apply"
+            Learn More & Apply
           </Button>
           {user?.type === "staff" && !isPreview && (
             <Box sx={{ marginBottom: "10px" }}>
@@ -76,7 +76,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" &&
+          {user?.type === "Student" &&
             !alreadySaved &&
             !deleteBtn &&
             !isPreview && (
