@@ -120,7 +120,6 @@ export const EditItemForm = () => {
   }
 
   if (itemError) {
-    console.log(itemError);
     return <h1>Error</h1>;
   }
 

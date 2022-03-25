@@ -63,13 +63,14 @@ export const ViewSingleItemForm = () => {
   const userId = user.id;
 
   return (
-    <Grid container spacing={2} sx={{ maxWidth: 1200, margin: "auto" }}>
+    <>
       <ContactSellerModal
         handleClose={handleClose}
         open={open}
         itemId={itemData.getSingleItemData.id}
       />
-      <Grid item xs={12} lg={6}>
+      <Grid container spacing={1}>
+        {/* <Grid item xs={12} lg={6}> */}
         <Divider sx={{ maxWidth: "90%", margin: "auto" }} />
         <Box sx={{ px: "32px", paddingTop: "40px" }}>
           <ItemCard
@@ -87,7 +88,8 @@ export const ViewSingleItemForm = () => {
             seller={itemData.getSingleItemData.seller.username}
           />
         </Box>
+        {/* </Grid> */}
       </Grid>
-    </Grid>
+    </>
   );
 };

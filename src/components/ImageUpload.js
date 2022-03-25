@@ -52,8 +52,6 @@ export const ImageUpload = ({ imageUrl, setImageUrl, fileName }) => {
     try {
       const s3Data = await ReactS3Client.deleteFile(s3FileName);
 
-
-
       if (s3Data.status === 204) {
         setImageUrl();
         setImages([]);

@@ -103,7 +103,7 @@ export const ViewSavedJobs = () => {
             align="center"
             sx={styles.header}
           >
-            Your Job Listings
+            Your Saved Jobs
           </Typography>
           <Box sx={styles.container}>
             {jobsData?.map((studentJob) => (

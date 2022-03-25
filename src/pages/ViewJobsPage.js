@@ -1,15 +1,18 @@
-import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
+
 import { GET_STUDENT_JOBS } from "../queries";
 import { SAVE_JOB } from "../mutations";
 import { JobCard } from "../components/JobCard";
 import { JOBS } from "../queries";
 import { Error } from "./Error";
 import { Spinner } from "../components/Spinner";
-import { Alert } from "@mui/material";
-import { alertContainer } from "../styles";
+import { alertContainer, postButton } from "../styles";
+import { format } from "date-fns";
+import { Button } from "@mui/material";
 
 export const ViewJobsPage = () => {
   const [jobData, setJobData] = useState();
@@ -32,8 +35,6 @@ export const ViewJobsPage = () => {
   const [executeSaveJob, { loading: saveJobLoading, error: saveJobError }] =
     useMutation(SAVE_JOB);
 
-  // let navigate = useNavigate();
-
   const onAdd = async (event) => {
     const jobId = event.target.id;
 
@@ -44,10 +45,6 @@ export const ViewJobsPage = () => {
 
       if (saveJobError) {
         throw new Error("Something went wrong!");
-      }
-
-      if (addData) {
-        // navigate("/job-board", { replace: true });
       }
     } catch (error) {
       console.log(error);
@@ -81,6 +78,22 @@ export const ViewJobsPage = () => {
 
       {!loading && jobData?.jobs.length ? (
         <>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              sx={{ ...postButton, mt: 3 }}
+              variant="contained"
+              component="a"
+              href="/job-board"
+            >
+              View Saved Jobs
+            </Button>
+          </Box>
           <Typography
             variant="h4"
             gutterBottom
@@ -105,10 +118,14 @@ export const ViewJobsPage = () => {
                   company={job.company}
                   url={job.url}
                   salary={job.salary}
-                  date={new Date(job.closingDate)}
+                  closingDate={new Date(
+                    new Date(parseInt(job.closingDate))
+                  ).toLocaleString()}
                   key={job.id}
                   onAdd={onAdd}
                   alreadySaved={alreadySaved}
+                  // deleteBtn={deleteBtn}
+                  isPreview={false}
                 />
               );
             })}

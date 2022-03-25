@@ -25,7 +25,7 @@ export const PurchaseRequestsPage = () => {
     itemData &&
     !itemLoading &&
     itemData.getCommentsOnMyItems.map((item) => (
-      <Box sx={{ height: "75vh" }}>
+      <Box sx={{ height: "75vh", maxWidth: "75%", m: "auto", mt: 4 }}>
         <PreviewItemCard key={item.id} item={item} />
       </Box>
     ))

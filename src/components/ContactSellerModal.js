@@ -65,7 +65,6 @@ export const ContactSellerModal = ({ handleClose, open, itemId }) => {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Subscribe</DialogTitle>
       <DialogContent>
         <DialogContentText>
           Let the seller know your questions below:

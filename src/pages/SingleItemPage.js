@@ -1,9 +1,16 @@
 import { Container } from "@mui/material";
 import { ViewSingleItemForm } from "../components/ViewSingleItemForm";
+import { mainContainer } from "../styles";
 
 export const SingleItemPage = () => {
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      sx={{
+        ...mainContainer,
+        boxShadow: "none",
+        backgroundColor: "none",
+      }}
+    >
       <ViewSingleItemForm />
     </Container>
   );
