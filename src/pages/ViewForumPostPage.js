@@ -49,7 +49,6 @@ export const ViewForumPostPage = () => {
       </Box>
     );
   }
-  console.log(postData?.getForumPost);
 
   return (
     <>
