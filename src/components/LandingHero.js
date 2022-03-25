@@ -30,15 +30,26 @@ export const LandingHero = () => {
         Sell and buy items between students - Converse with your mates - Apply
         for jobs before the public
       </Typography>
-      <Button
-        variant="contained"
-        size="large"
-        component="a"
-        href="/sign-up/"
-        sx={{ minWidth: 200, backgroundColor: "#E57A44" }}
-      >
-        Register
-      </Button>
+      <grid>
+        <Button
+          variant="contained"
+          size="large"
+          component="a"
+          href="/sign-up/"
+          sx={{ minWidth: 200, backgroundColor: "#E57A44", m: 2 }}
+        >
+          Register
+        </Button>
+        <Button
+          variant="contained"
+          size="large"
+          component="a"
+          href="/about-us/"
+          sx={{ minWidth: 200, backgroundColor: "#E57A44", m: 2 }}
+        >
+          About Us
+        </Button>
+      </grid>
     </LandingHeroLayout>
   );
 };
