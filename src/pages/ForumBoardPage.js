@@ -87,6 +87,8 @@ export const ForumBoardPage = () => {
               createdAt={post.createdAt}
               replyCount={post.replyCount}
               key={post.id}
+              tags={post.tags}
+              profileImageUrl={post.profileImageUrl}
             />
           ))}
         </Box>
