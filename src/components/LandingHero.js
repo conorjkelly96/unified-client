@@ -1,6 +1,7 @@
-import * as React from "react";
-import { Button } from "@mui/material";
-import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+
 import LandingHeroLayout from "./LandingHeroLayout";
 
 const backgroundImage =
@@ -30,7 +31,7 @@ export const LandingHero = () => {
         Sell and buy items between students - Converse with your mates - Apply
         for jobs before the public
       </Typography>
-      <grid>
+      <Grid>
         <Button
           variant="contained"
           size="large"
@@ -49,7 +50,7 @@ export const LandingHero = () => {
         >
           About Us
         </Button>
-      </grid>
+      </Grid>
     </LandingHeroLayout>
   );
 };
