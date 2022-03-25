@@ -37,6 +37,8 @@ export const ForumBoardPage = () => {
     },
   };
 
+  console.log(data?.forumPosts);
+
   return (
     <Container
       component="main"
@@ -88,7 +90,7 @@ export const ForumBoardPage = () => {
               replyCount={post.replyCount}
               key={post.id}
               tags={post.tags}
-              profileImageUrl={post.profileImageUrl}
+              profileImageUrl={post.postedBy.profileImageUrl}
             />
           ))}
         </Box>

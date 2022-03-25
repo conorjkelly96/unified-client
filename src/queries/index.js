@@ -121,6 +121,7 @@ export const GET_FORUM_POST = gql`
         id
         username
         college
+        profileImageUrl
       }
       createdAt
       replies {

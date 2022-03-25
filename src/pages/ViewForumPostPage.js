@@ -49,6 +49,7 @@ export const ViewForumPostPage = () => {
       </Box>
     );
   }
+  console.log(postData?.getForumPost);
 
   return (
     <>
@@ -73,7 +74,7 @@ export const ViewForumPostPage = () => {
               createdAt={postData.getForumPost.createdAt}
               replies={postData.getForumPost.replies}
               tags={postData.getForumPost.tags}
-              profileImageUrl={postData.getForumPost.profileImageUrl}
+              profileImageUrl={postData.getForumPost.postedBy.profileImageUrl}
               refetch={refetch}
             />
           </Box>
