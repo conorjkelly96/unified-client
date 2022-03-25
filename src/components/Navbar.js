@@ -64,7 +64,7 @@ export const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar sx={styles.navContainer}>
-        <Box sx={styles.logo}>
+        <Box component="a" href="/" sx={styles.logo}>
           {/* WARNING: THE LOGO IS UNSTABLE */}
           <img
             src="/images/unified-public-nav.png"
