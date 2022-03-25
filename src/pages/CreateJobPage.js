@@ -7,14 +7,13 @@ import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 import ErrorIcon from "@mui/icons-material/Error";
 import Divider from "@mui/material/Divider";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import { CREATE_JOB } from "../mutations";
-import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { JobCard } from "../components/JobCard";
-import { useNavigate } from "react-router-dom";
 import { postButton } from "../styles";
-// import { useAuth } from "../contexts/AppProvider";
 
 export const CreateJobPage = () => {
   const [executeCreateJob, { loading, error }] = useMutation(CREATE_JOB);

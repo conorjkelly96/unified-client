@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -47,7 +47,7 @@ export const JobCard = ({
 
         <Typography>
           {"Closing Date: "}
-          {closingDate ? format(closingDate, "MM/dd/yyyy") : "CLOSING DATE"}
+          {closingDate ? closingDate : "CLOSING DATE"}
         </Typography>
       </CardContent>
       <CardActions>
@@ -59,7 +59,7 @@ export const JobCard = ({
             href={url}
             sx={{ marginBottom: 2 }}
           >
-            "Learn More & Apply"
+            Learn More & Apply
           </Button>
           {user?.type === "staff" && !isPreview && (
             <Box sx={{ marginBottom: "10px" }}>
@@ -76,7 +76,7 @@ export const JobCard = ({
               </Button>
             </Box>
           )}
-          {user?.__typename === "Student" &&
+          {user?.type === "Student" &&
             !alreadySaved &&
             !deleteBtn &&
             !isPreview && (
