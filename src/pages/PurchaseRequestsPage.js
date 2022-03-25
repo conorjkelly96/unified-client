@@ -4,6 +4,7 @@ import { GET_COMMENTS_ON_MY_ITEMS } from "../queries";
 import { useQuery } from "@apollo/client";
 import { Spinner } from "../components/Spinner";
 import { PreviewItemCard } from "../components/PreviewItemCard";
+import Box from "@mui/material/Box";
 
 export const PurchaseRequestsPage = () => {
   const {
@@ -20,13 +21,13 @@ export const PurchaseRequestsPage = () => {
     return <Spinner />;
   }
 
-  // get all the items from back end
-
   return (
     itemData &&
     !itemLoading &&
     itemData.getCommentsOnMyItems.map((item) => (
-      <PreviewItemCard key={item.id} item={item} />
+      <Box sx={{ height: "75vh" }}>
+        <PreviewItemCard key={item.id} item={item} />
+      </Box>
     ))
   );
 };
