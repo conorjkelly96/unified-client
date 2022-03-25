@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,8 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { COMMENT_ON_ITEM } from "../mutations";
 import { useMutation } from "@apollo/client";
 import { Box } from "@mui/system";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../contexts/AppProvider";
+import { useNavigate } from "react-router-dom";
 
 export const ContactSellerModal = ({ handleClose, open, itemId }) => {
   const [executeComment, { loading: commentLoading, error: commentError }] =

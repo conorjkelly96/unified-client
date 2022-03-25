@@ -1,4 +1,3 @@
-import React from "react";
 import TeamCard from "../components/TeamCards";
 import { Grid } from "@material-ui/core";
 import teamList from "./constants";
