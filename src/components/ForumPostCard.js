@@ -4,8 +4,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useTheme } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { useMutation } from "@apollo/client";
+import ListItemText from "@mui/material/ListItemText";
+import { useMediaQuery, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
@@ -13,7 +18,6 @@ import { useState } from "react";
 import { ReplyForm } from "../components/ReplyForm";
 import { ReplyCard } from "../components/ReplyCard";
 import { useAuth } from "../contexts/AppProvider";
-import { useMutation } from "@apollo/client";
 import { DELETE_FORUM_POST, UPDATE_FORUM_POST } from "../mutations";
 import { EditableTextField } from "./EditableTextField";
 
@@ -24,6 +28,8 @@ export const ForumPostCard = ({
   college,
   createdAt,
   replies,
+  tags,
+  profileImageUrl,
   refetch,
 }) => {
   const theme = useTheme();
@@ -86,13 +92,34 @@ export const ForumPostCard = ({
           <Typography component="p" variant="h6" id={id}>
             {text}
           </Typography>
-          <Typography color="text.secondary" sx={{ mt: 2, mb: "5px" }}>
-            {user.username === username ? "You" : username}
-            {college ? ", " : ""}
-            {college || " "}
-            {" posted "}
-            {createdAt}
-          </Typography>
+
+          <List
+            sx={{
+              width: "100%",
+              maxWidth: 720,
+            }}
+          >
+            <ListItem alignItems="flex-start" sx={{ paddingLeft: "0px" }}>
+              <ListItemAvatar>
+                <Avatar alt={`${username} profile`} src={profileImageUrl} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={user.username === username ? "You" : username}
+                secondary={
+                  <>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    ></Typography>
+                    {"Posted "}
+                    {createdAt}
+                  </>
+                }
+              />
+            </ListItem>
+          </List>
 
           {!isEditable && user.username === username && (
             <Stack

@@ -5,6 +5,12 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+
 import { useAuth } from "../contexts/AppProvider";
 
 export const ForumPreviewCard = ({
@@ -14,6 +20,8 @@ export const ForumPreviewCard = ({
   college,
   createdAt,
   replyCount,
+  tags,
+  profileImageUrl,
 }) => {
   const { user } = useAuth();
 
@@ -25,13 +33,33 @@ export const ForumPreviewCard = ({
           {"..."}
         </Typography>
 
-        <Typography color="text.secondary" sx={{ mt: 1, mb: "5px" }}>
-          {user.username === username ? "You" : username}
-          {college ? ", " : ""}
-          {college || " "}
-          {" posted "}
-          {createdAt}
-        </Typography>
+        <List
+          sx={{
+            width: "100%",
+            maxWidth: 720,
+          }}
+        >
+          <ListItem alignItems="flex-start" sx={{ paddingLeft: "0px" }}>
+            <ListItemAvatar>
+              <Avatar alt={`${username} profile`} src={profileImageUrl} />
+            </ListItemAvatar>
+            <ListItemText
+              primary={user.username === username ? "You" : username}
+              secondary={
+                <>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  ></Typography>
+                  {"Posted "}
+                  {createdAt}
+                </>
+              }
+            />
+          </ListItem>
+        </List>
 
         <Typography variant="body2">
           {replyCount} {"replies"}
