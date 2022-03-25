@@ -1,27 +1,25 @@
-# Unified
+# UNIFIED
 
 ## Table Of Contents
 
-- [Unified](#unified)
+- [UNIFIED](#unified)
   - [Table Of Contents](#table-of-contents)
   - [Project Link](#project-link)
-  - [Getting Started](#getting-started)
   - [Contributors](#contributors)
   - [About The Project](#about-the-project)
   - [Tool & Technologies Used](#tool--technologies-used)
     - [Technical](#technical)
     - [Non Technical](#non-technical)
   - [User Flow](#user-flow)
-    - [Data Model](#data-model)
+- [Wireframes](#wireframes)
   - [User Journey](#user-journey)
     - [Buy/Sell Items](#buysell-items)
     - [Job Board](#job-board)
     - [Forum Board](#forum-board)
-- [Wireframes](#wireframes)
-  - [Plans For Improvement](#plans-for-improvement)
-  - [Screenshots](#screenshots)
+- [Screenshots](#screenshots)
   - [Logo-Unified](#logo-unified)
   - [Deployed app screenshots](#deployed-app-screenshots)
+  - [Plans For Improvement](#plans-for-improvement)
   - [Deployed link to application](#deployed-link-to-application)
 
 ## Project Link
@@ -30,15 +28,6 @@ Click [here](https://github.com/conorjkelly96/unified-server) to view the projec
 _Sever Repo_
 
 Click [here](https://github.com/conorjkelly96/unified-client) to view the project on Github pages. _Client Repo_
-
-## Getting Started
-
--
--
-
-```
-npm run start
-```
 
 ## Contributors
 
@@ -51,7 +40,14 @@ npm run start
 
 ## About The Project
 
-A
+- One-stop-shop where students can find career development opportunities, engage with each other, and make environmentally and financially sustainable choices.
+- Contemporary student values, modern presentation
+- Organic, community driven social engagement
+- Focus on sustainability
+- Finances (loan-aversion, off-campus living)
+- Skills development & career preparation
+- Social media engagement
+- Simple app, compact design
 
 ## Tool & Technologies Used
 
@@ -61,13 +57,16 @@ A
 - React
 - Apollo Client
 - Material UI
-- Date-fns
 - JavaScript
 - GraphQL
 - Apollo Server
 - Mongoose & MongoDB
 - JSONWebToken
 - bcrypt
+- Authentication Sensitive API key
+- Date-fns .env
+- Queries Mutations
+- Heroku deployment
 
 ### Non Technical
 
@@ -77,9 +76,15 @@ A
 
 ## User Flow
 
-### Data Model
+- Data Model
 
 <img src="./public/images/data-model.png">
+
+# Wireframes
+
+<img src="./public/images/landing-page.png">
+<img src="./public/images/dashboard.png">
+<img src="./public/images/about-us.png">
 
 ## User Journey
 
@@ -116,28 +121,7 @@ A
 - As a student I should be able to edit my question
 - As a student I should be able to view my questions
 
-###
-
--
--
--
--
--
--
-
-# Wireframes
-
-<img src="./public/images/landing-page.png">
-<img src="./public/images/dashboard.png">
-<img src="./public/images/about-us.png">
-
-## Plans For Improvement
-
--
--
--
-
-## Screenshots
+# Screenshots
 
 ## Logo-Unified
 
@@ -148,4 +132,19 @@ A
 
 ## Deployed app screenshots
 
+<img src="./public/images/deployed-app.png">
+<img src="./public/images/sign-up-page.png">
+<img src="./public/images/login-page.png">
+<img src="./public/images/jobs-page.png">
+<img src="./public/images/forum-page.png">
+<img src="./public/images/market-place.png">
+
+## Plans For Improvement
+
+- Marketplace - “Borrow” feature , Online payment feature.
+- UX/UI- Dashboard - edit user feature; edit/delete feature for marketplace & forum.
+- Technicality - Reduce component duplicates.
+
 ## Deployed link to application
+
+https://unified-education.herokuapp.com/
