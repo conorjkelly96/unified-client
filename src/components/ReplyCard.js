@@ -1,6 +1,3 @@
-import Card from "@mui/material/Card";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
@@ -8,16 +5,13 @@ import { useMutation } from "@apollo/client";
 import ErrorIcon from "@mui/icons-material/Error";
 import PendingIcon from "@mui/icons-material/Pending";
 import Avatar from "@mui/material/Avatar";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
 
 import { DELETE_FORUM_REPLY } from "../mutations";
 import { GET_FORUM_POST } from "../queries";
-import {
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Stack,
-} from "@mui/material";
 import { useAuth } from "../contexts/AppProvider";
 
 export const ReplyCard = ({ id, username, replies }) => {

@@ -92,7 +92,6 @@ export const AboutUsPage = () => {
       </Typography>
       ;
       <Container sx={{ py: 10 }} maxWidth="lg" align="center">
-        {/* End hero unit */}
         <Grid container direction="column">
           <Grid item container>
             <Grid sm={2} xs={0} />

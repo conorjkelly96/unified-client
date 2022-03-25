@@ -1,7 +1,9 @@
-import { Box, Button } from "@mui/material";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import PreviewIcon from "@mui/icons-material/Preview";
 import BoltIcon from "@mui/icons-material/Bolt";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
+
 import { altButton } from "../styles";
 
 export const BuyerButtonOptions = ({
