@@ -116,6 +116,16 @@ export const ViewCreatedJobs = () => {
           >
             Your Job Listings
           </Typography>
+          <Stack direction={"row"} sx={{ justifyContent: "center" }}>
+            <Button
+              component="a"
+              sx={loading ? styles.loadingButton : { ...postButton, m: 2 }}
+              href="/create-job"
+              variant="contained"
+            >
+              List a job
+            </Button>
+          </Stack>
           <Box sx={styles.container}>
             {jobsData.map((staffJob) => {
               return (
