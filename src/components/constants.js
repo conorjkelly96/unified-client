@@ -8,8 +8,8 @@ export default [
     linkedLink: "https://www.linkedin.com/in/matthew-palmer-a13aab156/",
   },
   {
-    title: "Kayle Rieger Paton",
-    subtitle: "Massive Legend / UoB Coding Bootcamp",
+    title: "Kayle Rieger Patton",
+    subtitle: "Artist, Analyst, Advocate / UoB Coding Bootcamp",
     description: "working",
     imageUrl: "https://avatars.githubusercontent.com/u/86710295?v=4",
     gitLink: "https://github.com/kayleriegerpatton",
